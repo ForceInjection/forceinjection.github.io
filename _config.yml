@@ -43,6 +43,11 @@ defaults:
 markdown: kramdown
 highlighter: rouge
 
+# LaTeX formula support via MathJax 3
+kramdown:
+  math_engine: mathjax
+  math_engine_opts: {}
+
 # Suppress Liquid errors from code examples in content files
 liquid:
   error_mode: lax
