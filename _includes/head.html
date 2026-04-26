@@ -30,6 +30,17 @@
   <!-- Mermaid: diagram rendering -->
   <script type="module">
     import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
-    mermaid.initialize({ startOnLoad: true, theme: 'default' });
+    mermaid.initialize({ startOnLoad: false, theme: 'default' });
+    document.addEventListener('DOMContentLoaded', () => {
+      // Kramdown renders ```mermaid as <pre><code class="language-mermaid">,
+      // but Mermaid expects <div class="mermaid">. Convert them here.
+      document.querySelectorAll('pre code.language-mermaid').forEach(el => {
+        const div = document.createElement('div');
+        div.className = 'mermaid';
+        div.textContent = el.textContent;
+        el.parentElement.replaceWith(div);
+      });
+      mermaid.run();
+    });
   </script>
 </head>
