@@ -13,7 +13,7 @@ title: AI Fundamentals — 完整的 AI 基础设施知识体系
 
 /* ─── Hero ─── */
 .hp-hero {
-  background: linear-gradient(145deg, #0a0e27 0%, #0d1b6e 45%, #0a3d8f 100%);
+  background: linear-gradient(145deg, #001A3A 0%, #003B6F 45%, #0072B9 100%);
   color: #fff;
   padding: 90px 24px 72px;
   text-align: center;
@@ -25,15 +25,15 @@ title: AI Fundamentals — 完整的 AI 基础设施知识体系
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse 80% 60% at 50% 0%, rgba(79,142,247,.18) 0%, transparent 70%),
-    radial-gradient(ellipse 40% 40% at 80% 80%, rgba(147,51,234,.12) 0%, transparent 60%);
+    radial-gradient(ellipse 80% 60% at 50% 0%, rgba(0,114,185,.22) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 40% at 80% 80%, rgba(0,94,184,.14) 0%, transparent 60%);
   pointer-events: none;
 }
 .hp-badge {
   display: inline-block;
-  background: rgba(79,142,247,.18);
-  border: 1px solid rgba(79,142,247,.4);
-  color: #90caf9;
+  background: rgba(0,125,184,.18);
+  border: 1px solid rgba(0,125,184,.45);
+  color: #B3D9F0;
   padding: 5px 16px;
   border-radius: 999px;
   font-size: 12.5px;
@@ -46,7 +46,7 @@ title: AI Fundamentals — 完整的 AI 基础设施知识体系
   font-weight: 800;
   margin: 0 0 6px;
   letter-spacing: -1.5px;
-  background: linear-gradient(100deg, #fff 30%, #90caf9 100%);
+  background: linear-gradient(100deg, #fff 30%, #4CB8E4 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -54,14 +54,14 @@ title: AI Fundamentals — 完整的 AI 基础设施知识体系
 }
 .hp-hero .sub {
   font-size: clamp(1em, 2vw, 1.2em);
-  color: #90a4ae;
+  color: #B3D9F0;
   margin: 0 0 10px;
   font-weight: 400;
   position: relative; z-index: 1;
 }
 .hp-hero-desc {
   font-size: 1em;
-  color: #b0bec5;
+  color: #A0C8DF;
   max-width: 580px;
   margin: 0 auto 36px;
   line-height: 1.75;
@@ -75,7 +75,7 @@ title: AI Fundamentals — 完整的 AI 基础设施知识体系
   margin-bottom: 38px;
   position: relative; z-index: 1;
 }
-.hp-stat-num  { display: block; font-size: 2em; font-weight: 800; color: #4f8ef7; line-height: 1.1; }
+.hp-stat-num  { display: block; font-size: 2em; font-weight: 800; color: #4CB8E4; line-height: 1.1; }
 .hp-stat-lbl  { font-size: .82em; color: #78909c; }
 .hp-actions {
   display: flex;
@@ -94,25 +94,25 @@ title: AI Fundamentals — 完整的 AI 基础设施知识体系
   transition: all .2s;
 }
 .hp-btn-solid {
-  background: #4f8ef7;
+  background: #007DB8;
   color: #fff;
 }
 .hp-btn-solid:hover {
-  background: #1976d2;
+  background: #005EB8;
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(79,142,247,.45);
+  box-shadow: 0 8px 24px rgba(0,125,184,.45);
   color: #fff;
   text-decoration: none;
 }
 .hp-btn-outline {
   background: transparent;
-  color: #90caf9;
-  border: 1.5px solid rgba(79,142,247,.45);
+  color: #B3D9F0;
+  border: 1.5px solid rgba(0,125,184,.5);
 }
 .hp-btn-outline:hover {
-  background: rgba(79,142,247,.1);
-  border-color: #4f8ef7;
-  color: #90caf9;
+  background: rgba(0,125,184,.12);
+  border-color: #007DB8;
+  color: #B3D9F0;
   text-decoration: none;
 }
 
@@ -129,7 +129,7 @@ title: AI Fundamentals — 完整的 AI 基础设施知识体系
 .hp-section-hd h2 {
   font-size: 1.85em;
   font-weight: 800;
-  color: #1a237e;
+  color: #003B6F;
   margin: 0 0 8px;
 }
 .hp-section-hd p {
@@ -146,7 +146,7 @@ title: AI Fundamentals — 完整的 AI 基础设施知识体系
 }
 .hp-card {
   background: #fff;
-  border: 1.5px solid #e8eaf6;
+  border: 1.5px solid #D6E8F5;
   border-radius: 14px;
   padding: 24px 22px 20px;
   text-decoration: none;
@@ -163,27 +163,27 @@ title: AI Fundamentals — 完整的 AI 基础设施知识体系
   position: absolute;
   top: 0; left: 0; right: 0;
   height: 3.5px;
-  background: var(--ac, #4f8ef7);
+  background: var(--ac, #007DB8);
   transform: scaleX(0);
   transform-origin: left;
   transition: transform .22s ease;
 }
 .hp-card:hover::before  { transform: scaleX(1); }
 .hp-card:hover {
-  border-color: #c5cae9;
-  box-shadow: 0 10px 36px rgba(26,35,126,.11);
+  border-color: #A8D0E8;
+  box-shadow: 0 10px 36px rgba(0,59,111,.12);
   transform: translateY(-4px);
   text-decoration: none;
   color: inherit;
 }
 .hp-card-icon  { font-size: 1.9em; margin-bottom: 10px; line-height: 1; }
 .hp-card-num   { font-size: 10.5px; font-weight: 700; color: #9e9e9e; letter-spacing: 1.2px; text-transform: uppercase; margin-bottom: 5px; }
-.hp-card-title { font-size: 1.08em; font-weight: 700; color: #1a237e; margin-bottom: 9px; }
+.hp-card-title { font-size: 1.08em; font-weight: 700; color: #003B6F; margin-bottom: 9px; }
 .hp-card-desc  { font-size: .86em; color: #546e7a; line-height: 1.65; flex: 1; margin-bottom: 14px; }
 .hp-tags       { display: flex; flex-wrap: wrap; gap: 5px; margin-top: auto; }
 .hp-tag {
-  background: #ede7f6;
-  color: #4527a0;
+  background: #D6EAF5;
+  color: #004B87;
   padding: 2px 8px;
   border-radius: 4px;
   font-size: 11px;
@@ -192,17 +192,17 @@ title: AI Fundamentals — 完整的 AI 基础设施知识体系
 
 /* ─── Footer CTA strip ─── */
 .hp-cta {
-  background: linear-gradient(135deg, #f5f7ff 0%, #ede7f6 100%);
-  border-top: 1px solid #e8eaf6;
+  background: linear-gradient(135deg, #F0F7FC 0%, #D6EAF5 100%);
+  border-top: 1px solid #C5DFF0;
   padding: 60px 24px;
   text-align: center;
 }
-.hp-cta h2  { font-size: 1.65em; font-weight: 800; color: #1a237e; margin: 0 0 10px; }
+.hp-cta h2  { font-size: 1.65em; font-weight: 800; color: #003B6F; margin: 0 0 10px; }
 .hp-cta p   { color: #607d8b; margin: 0 0 28px; font-size: 1.02em; }
 
 /* ─── Author strip ─── */
 .hp-author {
-  background: #0a0e27;
+  background: #001A3A;
   padding: 28px 24px;
   text-align: center;
 }
@@ -211,7 +211,7 @@ title: AI Fundamentals — 完整的 AI 基础设施知识体系
   font-size: .88em;
   margin: 0;
 }
-.hp-author a { color: #4f8ef7; }
+.hp-author a { color: #4CB8E4; }
 
 /* ─── Responsive ─── */
 @media (max-width: 640px) {
