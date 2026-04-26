@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nccl-config
+  labels:
+    app: nccl-multinode
+data:
+  nccl.conf: |
+    # NCCL 基础配置 - 由 nccl_benchmark.sh 脚本负责网络检测和配置
+    # 只设置基础调试级别，网络配置交给脚本自动检测
+    NCCL_DEBUG=INFO
+  
+  test-params.env: |
+    # 测试参数配置
+    TEST_SIZE=100M
+    TEST_DURATION=60
+    NETWORK_BACKEND=auto
+    LOG_LEVEL=INFO
