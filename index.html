@@ -54,18 +54,20 @@ render_with_liquid: true
   position: relative; z-index: 1;
 }
 .hp-hero .sub {
-  font-size: clamp(1em, 2vw, 1.2em);
+  font-family: 'Ma Shan Zheng', cursive;
+  font-size: clamp(1.2em, 2.5vw, 1.6em);
   color: #B3D9F0;
   margin: 0 0 10px;
   font-weight: 400;
   position: relative; z-index: 1;
 }
 .hp-hero-desc {
-  font-size: 1em;
+  font-family: 'Ma Shan Zheng', cursive;
+  font-size: 1.25em;
   color: #A0C8DF;
-  max-width: 580px;
+  max-width: 620px;
   margin: 0 auto 36px;
-  line-height: 1.75;
+  line-height: 1.9;
   position: relative; z-index: 1;
 }
 .hp-stats {
@@ -191,28 +193,7 @@ render_with_liquid: true
   font-weight: 600;
 }
 
-/* ─── Footer CTA strip ─── */
-.hp-cta {
-  background: linear-gradient(135deg, #F0F7FC 0%, #D6EAF5 100%);
-  border-top: 1px solid #C5DFF0;
-  padding: 60px 24px;
-  text-align: center;
-}
-.hp-cta h2  { font-size: 1.65em; font-weight: 800; color: #003B6F; margin: 0 0 10px; }
-.hp-cta p   { color: #607d8b; margin: 0 0 28px; font-size: 1.02em; }
-
-/* ─── Author strip ─── */
-.hp-author {
-  background: #001A3A;
-  padding: 28px 24px;
-  text-align: center;
-}
-.hp-author p {
-  color: #546e7a;
-  font-size: .88em;
-  margin: 0;
-}
-.hp-author a { color: #4CB8E4; }
+/* Footer handled by _includes/footer.html + _sass/custom.scss */
 
 /* ─── Responsive ─── */
 @media (max-width: 640px) {
@@ -261,7 +242,7 @@ render_with_liquid: true
 <!-- ═══ MODULES GRID ═══ -->
 <div class="hp-section" id="modules">
   <div class="hp-section-hd">
-    <h2>📚 知识模块</h2>
+    <h2>知识模块</h2>
     <p>系统化 AI 技术体系，从芯片底层到智能应用，深入每个技术层次</p>
   </div>
 
@@ -390,9 +371,4 @@ render_with_liquid: true
   </div>
 </div>
 
-<!-- ═══ FOOTER CTA ═══ -->
-<section class="hp-cta">
-  <h2>持续更新，与技术同步</h2>
-  <p>内容来自一线工程师的实践总结，持续追踪 AI 技术最新进展。<br>欢迎 Star、Fork 或提交 PR 一起完善。</p>
-  <a href="https://github.com/ForceInjection/AI-fundermentals" class="hp-btn hp-btn-solid">在 GitHub 上关注 ↗</a>
-</section>
+

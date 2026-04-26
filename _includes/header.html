@@ -1,1 +1,171 @@
-<!-- header removed: hero section serves as page header -->
+<nav class="site-nav" id="site-nav">
+  <div class="site-nav__inner">
+
+    <!-- Brand / Home link -->
+    <a href="{{ "/" | relative_url }}" class="site-nav__brand">
+      <img class="site-nav__logo" src="https://avatars.githubusercontent.com/u/46103187?s=40&u=ad99438a6616b82e50faa33930e7e065469cb4f3&v=4" alt="ForceInjection logo" width="32" height="32">
+      AI Fundamentals
+    </a>
+
+    <!-- Desktop: Modules dropdown button -->
+    <button class="site-nav__modules-btn"
+            id="nav-modules-btn"
+            aria-haspopup="true"
+            aria-expanded="false">
+      知识模块
+      <span class="site-nav__caret" aria-hidden="true">▾</span>
+    </button>
+
+    <!-- GitHub repo link -->
+    <a href="https://github.com/ForceInjection/AI-fundermentals"
+       class="site-nav__github"
+       target="_blank" rel="noopener noreferrer"
+       aria-label="View source on GitHub">
+      <svg class="site-nav__github-icon" viewBox="0 0 16 16" width="20" height="20" aria-hidden="true">
+        <path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
+      </svg>
+    </a>
+
+    <!-- Mobile: Hamburger -->
+    <button class="site-nav__hamburger"
+            id="nav-hamburger"
+            aria-label="打开模块菜单"
+            aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+
+  </div><!-- /.site-nav__inner -->
+
+  <!-- Desktop dropdown (full-width) -->
+  <div class="site-nav__dropdown" id="nav-dropdown" aria-hidden="true">
+    <div class="site-nav__dropdown-grid">
+
+      <a href="/01_hardware_architecture/" class="site-nav__item">
+        <span class="site-nav__item-icon">⚡</span>
+        <span class="site-nav__item-text">01 · 硬件架构</span>
+      </a>
+
+      <a href="/02_gpu_programming/" class="site-nav__item">
+        <span class="site-nav__item-icon">🔧</span>
+        <span class="site-nav__item-text">02 · GPU 编程</span>
+      </a>
+
+      <a href="/03_ai_cluster_ops/" class="site-nav__item">
+        <span class="site-nav__item-icon">🖧</span>
+        <span class="site-nav__item-text">03 · AI 集群运维</span>
+      </a>
+
+      <a href="/04_cloud_native_ai_platform/" class="site-nav__item">
+        <span class="site-nav__item-icon">☁️</span>
+        <span class="site-nav__item-text">04 · 云原生 AI 平台</span>
+      </a>
+
+      <a href="/05_model_training_and_fine_tuning/" class="site-nav__item">
+        <span class="site-nav__item-icon">🎯</span>
+        <span class="site-nav__item-text">05 · 模型训练与微调</span>
+      </a>
+
+      <a href="/06_llm_theory_and_fundamentals/" class="site-nav__item">
+        <span class="site-nav__item-icon">🧠</span>
+        <span class="site-nav__item-text">06 · LLM 理论与基础</span>
+      </a>
+
+      <a href="/07_rag_and_tools/" class="site-nav__item">
+        <span class="site-nav__item-icon">🔍</span>
+        <span class="site-nav__item-text">07 · RAG 与工具</span>
+      </a>
+
+      <a href="/08_agentic_system/" class="site-nav__item">
+        <span class="site-nav__item-icon">🤖</span>
+        <span class="site-nav__item-text">08 · 智能体系统</span>
+      </a>
+
+      <a href="/09_inference_system/" class="site-nav__item">
+        <span class="site-nav__item-icon">⚙️</span>
+        <span class="site-nav__item-text">09 · 推理系统</span>
+      </a>
+
+      <a href="/10_ai_related_course/" class="site-nav__item">
+        <span class="site-nav__item-icon">🎓</span>
+        <span class="site-nav__item-text">10 · AI 相关课程</span>
+      </a>
+
+      <a href="/98_llm_programming/" class="site-nav__item">
+        <span class="site-nav__item-icon">💻</span>
+        <span class="site-nav__item-text">98 · LLM 编程</span>
+      </a>
+
+      <a href="/99_misc/" class="site-nav__item">
+        <span class="site-nav__item-icon">🛠️</span>
+        <span class="site-nav__item-text">99 · 实用工具与杂项</span>
+      </a>
+
+    </div>
+  </div><!-- /.site-nav__dropdown -->
+
+  <!-- Mobile menu (stacks below nav bar) -->
+  <div class="site-nav__mobile-menu" id="nav-mobile-menu" aria-hidden="true">
+    <a href="/01_hardware_architecture/"><span>⚡</span> 01 · 硬件架构</a>
+    <a href="/02_gpu_programming/"><span>🔧</span> 02 · GPU 编程</a>
+    <a href="/03_ai_cluster_ops/"><span>🖧</span> 03 · AI 集群运维</a>
+    <a href="/04_cloud_native_ai_platform/"><span>☁️</span> 04 · 云原生 AI 平台</a>
+    <a href="/05_model_training_and_fine_tuning/"><span>🎯</span> 05 · 模型训练与微调</a>
+    <a href="/06_llm_theory_and_fundamentals/"><span>🧠</span> 06 · LLM 理论与基础</a>
+    <a href="/07_rag_and_tools/"><span>🔍</span> 07 · RAG 与工具</a>
+    <a href="/08_agentic_system/"><span>🤖</span> 08 · 智能体系统</a>
+    <a href="/09_inference_system/"><span>⚙️</span> 09 · 推理系统</a>
+    <a href="/10_ai_related_course/"><span>🎓</span> 10 · AI 相关课程</a>
+    <a href="/98_llm_programming/"><span>💻</span> 98 · LLM 编程</a>
+    <a href="/99_misc/"><span>🛠️</span> 99 · 实用工具与杂项</a>
+  </div>
+
+</nav>
+
+<script>
+(function () {
+  var btn  = document.getElementById('nav-modules-btn');
+  var dd   = document.getElementById('nav-dropdown');
+  var ham  = document.getElementById('nav-hamburger');
+  var mob  = document.getElementById('nav-mobile-menu');
+  var nav  = document.getElementById('site-nav');
+
+  function closeAll() {
+    dd.classList.remove('is-open');
+    mob.classList.remove('is-open');
+    btn.setAttribute('aria-expanded', 'false');
+    ham.setAttribute('aria-expanded', 'false');
+    dd.setAttribute('aria-hidden', 'true');
+    mob.setAttribute('aria-hidden', 'true');
+  }
+
+  btn.addEventListener('click', function (e) {
+    e.stopPropagation();
+    var open = dd.classList.toggle('is-open');
+    btn.setAttribute('aria-expanded', String(open));
+    dd.setAttribute('aria-hidden', String(!open));
+    if (open) {
+      mob.classList.remove('is-open');
+      ham.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  ham.addEventListener('click', function (e) {
+    e.stopPropagation();
+    var open = mob.classList.toggle('is-open');
+    ham.setAttribute('aria-expanded', String(open));
+    mob.setAttribute('aria-hidden', String(!open));
+    if (open) {
+      dd.classList.remove('is-open');
+      btn.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  document.addEventListener('click', function (e) {
+    if (!nav.contains(e.target)) { closeAll(); }
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') { closeAll(); }
+  });
+}());
+</script>
