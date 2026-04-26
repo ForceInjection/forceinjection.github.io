@@ -1,0 +1,340 @@
+// ═══════════════════════════════════════════════════════
+//  Geek Theme — content page styles for forceinjection.github.io
+//  Applies only to .post-content / .page-content (MD rendered pages)
+//  Homepage (index.html) has its own inline CSS, unaffected.
+// ═══════════════════════════════════════════════════════
+
+// ── Color tokens ──────────────────────────────────────
+$dell-navy:    #001A3A;
+$dell-dark:    #003B6F;
+$dell-blue:    #007DB8;
+$dell-mid:     #005EB8;
+$dell-light:   #4CB8E4;
+$dell-pale:    #D6EAF5;
+
+$code-bg:      #0d1117;   // GitHub dark
+$code-fg:      #e6edf3;
+$code-border:  #30363d;
+
+$page-bg:      #fafbfc;
+$content-bg:   #ffffff;
+$border-color: #e8ecf0;
+$text-primary: #1a2332;
+$text-muted:   #5a6a7a;
+$text-code:    #0a6694;
+
+// ── Body & page chrome ────────────────────────────────
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background-color: $page-bg;
+  color: $text-primary;
+  line-height: 1.75;
+}
+
+// ── Site-wide link color → Dell blue ─────────────────
+a {
+  color: $dell-blue;
+  &:hover { color: $dell-mid; }
+  &:visited { color: $dell-dark; }
+}
+
+// ── Site footer ───────────────────────────────────────
+.site-footer {
+  background: $dell-navy;
+  color: #8da0b3;
+  border-top: none;
+  padding: 28px 0;
+
+  a { color: $dell-light; &:hover { color: #fff; } }
+  .footer-col-wrapper { color: #8da0b3; }
+}
+
+// ═══════════════════════════════════════════════════════
+//  MARKDOWN CONTENT — the geek magic lives here
+// ═══════════════════════════════════════════════════════
+.post-content,
+.page-content > .wrapper > :not(.hp-hero):not(.hp-modules):not(.hp-cta):not(.hp-author),
+article.post {
+
+  // ── Typography ──────────────────────────────────────
+  font-size: 15.5px;
+  line-height: 1.8;
+  color: $text-primary;
+
+  // ── Headings ────────────────────────────────────────
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    color: $dell-navy;
+    margin-top: 2em;
+    margin-bottom: .5em;
+    line-height: 1.3;
+  }
+
+  h1 {
+    font-size: 1.9em;
+    border-bottom: 2px solid $dell-pale;
+    padding-bottom: .3em;
+  }
+
+  h2 {
+    font-size: 1.45em;
+    border-bottom: 1px solid $border-color;
+    padding-bottom: .25em;
+    position: relative;
+    padding-left: 14px;
+    &::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 4px; bottom: 4px;
+      width: 4px;
+      background: $dell-blue;
+      border-radius: 2px;
+    }
+  }
+
+  h3 {
+    font-size: 1.18em;
+    color: $dell-dark;
+    padding-left: 28px;
+    position: relative;
+    &::before {
+      content: '##';
+      position: absolute;
+      left: 0;
+      color: $dell-light;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .75em;
+      top: 3px;
+      opacity: .7;
+    }
+  }
+
+  h4 {
+    font-size: 1.02em;
+    font-family: 'JetBrains Mono', monospace;
+    color: $dell-mid;
+    font-weight: 600;
+    letter-spacing: .3px;
+  }
+
+  // ── Inline code ─────────────────────────────────────
+  code:not(pre code) {
+    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+    font-size: .875em;
+    background: #eef5fb;
+    color: $text-code;
+    padding: 2px 6px;
+    border-radius: 4px;
+    border: 1px solid #c8dff0;
+    white-space: nowrap;
+  }
+
+  // ── Code blocks ─────────────────────────────────────
+  pre {
+    background: $code-bg !important;
+    border: 1px solid $code-border;
+    border-radius: 8px;
+    padding: 18px 20px;
+    overflow-x: auto;
+    position: relative;
+    margin: 1.5em 0;
+    box-shadow: 0 4px 16px rgba(0,0,0,.18);
+
+    // top-bar decoration (terminal dots)
+    &::before {
+      content: '● ● ●';
+      display: block;
+      font-size: 10px;
+      color: #4a5568;
+      letter-spacing: 4px;
+      margin-bottom: 12px;
+      margin-top: -4px;
+    }
+
+    code {
+      font-family: 'JetBrains Mono', 'Fira Code', monospace !important;
+      font-size: .875em;
+      color: $code-fg;
+      background: none !important;
+      border: none !important;
+      padding: 0;
+      white-space: pre;
+    }
+  }
+
+  // Rouge highlighter dark override
+  .highlight {
+    background: $code-bg;
+    border-radius: 8px;
+    border: 1px solid $code-border;
+    margin: 1.5em 0;
+    box-shadow: 0 4px 16px rgba(0,0,0,.18);
+
+    pre { border: none; box-shadow: none; margin: 0; }
+
+    // Token colors (GitHub dark style)
+    .c, .c1, .cm, .cs  { color: #8b949e; font-style: italic; }  // comments
+    .k, .kd, .kn, .kp, .kr { color: #ff7b72; }                  // keywords
+    .s, .s1, .s2, .sb, .sc, .sd, .se, .si, .ss { color: #a5d6ff; } // strings
+    .n, .na, .nb        { color: $code-fg; }                     // names
+    .nf, .nc            { color: #d2a8ff; }                      // func/class
+    .mi, .mf, .mo, .mh  { color: #79c0ff; }                     // numbers
+    .o, .ow             { color: #ff7b72; }                      // operators
+    .p                  { color: #c9d1d9; }                      // punctuation
+    .nt                 { color: #7ee787; }                      // tag names
+    .nv, .vi            { color: #ffa657; }                      // variables
+    .ge                 { font-style: italic; }
+    .gs                 { font-weight: bold; }
+  }
+
+  // ── Blockquotes ─────────────────────────────────────
+  blockquote {
+    margin: 1.5em 0;
+    padding: 14px 20px;
+    border-left: 4px solid $dell-blue;
+    background: #f0f7fc;
+    border-radius: 0 6px 6px 0;
+    color: $text-muted;
+    font-style: normal;
+
+    p { margin: 0; }
+
+    // ⚠ NOTE / TIP styled blockquote
+    &.note   { border-color: #f0ad4e; background: #fffdf0; }
+    &.tip    { border-color: #28a745; background: #f0fff4; }
+    &.warn   { border-color: #dc3545; background: #fff5f5; }
+  }
+
+  // ── Tables ──────────────────────────────────────────
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5em 0;
+    font-size: .93em;
+    border: 1px solid $border-color;
+    border-radius: 8px;
+    overflow: hidden;
+
+    thead {
+      background: $dell-navy;
+      color: #fff;
+      th {
+        padding: 11px 16px;
+        text-align: left;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: .85em;
+        letter-spacing: .5px;
+        font-weight: 600;
+        border: none;
+      }
+    }
+
+    tbody {
+      tr {
+        border-bottom: 1px solid $border-color;
+        &:nth-child(even) { background: #f5f9fc; }
+        &:hover { background: #eef5fb; }
+      }
+      td {
+        padding: 9px 16px;
+        vertical-align: top;
+        border: none;
+      }
+    }
+  }
+
+  // ── Horizontal rule ─────────────────────────────────
+  hr {
+    border: none;
+    border-top: 1px solid $border-color;
+    margin: 2.5em 0;
+    position: relative;
+    &::after {
+      content: '◆';
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%) translateY(-50%);
+      background: $page-bg;
+      color: $dell-light;
+      padding: 0 8px;
+      font-size: 11px;
+    }
+  }
+
+  // ── Lists ───────────────────────────────────────────
+  ul, ol {
+    padding-left: 1.6em;
+    li {
+      margin-bottom: .3em;
+      &::marker { color: $dell-blue; }
+
+      // kramdown parses "- text | text2" as a pipe table.
+      // Re-render those in-list tables as inline pipe-separated text.
+      > table, > p > table {
+        display: inline;
+        width: auto;
+        margin: 0;
+        border: none;
+        border-radius: 0;
+        box-shadow: none;
+        overflow: visible;
+        font-size: inherit;
+
+        thead, tbody, tr { display: inline; }
+
+        th, td {
+          display: inline;
+          padding: 0;
+          border: none;
+          background: transparent !important;
+          vertical-align: baseline;
+
+          &::after { content: ' | '; color: $text-muted; }
+          &:last-child::after { content: ''; }
+        }
+      }
+    }
+  }
+
+  // ── Images ──────────────────────────────────────────
+  img {
+    max-width: 100%;
+    border-radius: 6px;
+    box-shadow: 0 2px 12px rgba(0,0,0,.1);
+    margin: .5em 0;
+  }
+
+  // ── Strong / em ─────────────────────────────────────
+  strong { color: $dell-navy; font-weight: 700; }
+}
+
+// ═══════════════════════════════════════════════════════
+//  POST / PAGE WRAPPER layout
+// ═══════════════════════════════════════════════════════
+.post-header {
+  border-bottom: 2px solid $dell-pale;
+  padding-bottom: 16px;
+  margin-bottom: 32px;
+
+  .post-title {
+    font-family: 'Inter', sans-serif;
+    font-weight: 800;
+    color: $dell-navy;
+  }
+  .post-meta { color: $text-muted; font-size: .9em; }
+}
+
+// Breadcrumb-style page title bar
+.page-content > .wrapper {
+  max-width: 860px;
+  padding-top: 40px;
+}
+
+// ═══════════════════════════════════════════════════════
+//  Scrollbar (WebKit) — subtle geek touch
+// ═══════════════════════════════════════════════════════
+pre::-webkit-scrollbar { height: 6px; }
+pre::-webkit-scrollbar-track { background: #161b22; }
+pre::-webkit-scrollbar-thumb { background: #30363d; border-radius: 3px; }
+pre::-webkit-scrollbar-thumb:hover { background: $dell-blue; }

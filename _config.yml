@@ -24,10 +24,20 @@ minima:
   social_links:
     - { platform: github,  user_url: "https://github.com/grissomsh" }
 
-# Disable optional-front-matter plugin to prevent Liquid processing
-# of content files that contain Python f-strings / template syntax
+# Re-enable optional-front-matter so .md files get a layout + CSS.
+# render_with_liquid: false in defaults prevents Liquid from parsing
+# content (avoids Python f-string crashes) while still applying the layout.
 optional_front_matter:
-  enabled: false
+  enabled: true
+
+# Apply default layout + disable Liquid rendering to all content pages.
+# index.html overrides render_with_liquid: true in its own front matter.
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: "page"
+      render_with_liquid: false
 
 # 构建设置
 markdown: kramdown
@@ -60,3 +70,13 @@ exclude:
   - "**/venv/"
   - "**/node_modules/"
   - "*/.DS_Store"
+  # Files with Liquid-incompatible syntax (Python f-strings, template vars)
+  - 10_ai_related_course/multi_agent_system/multi_agent_training/05-应用实践/05-应用实践与部署运维.md
+  - 98_llm_programming/java_ai/spring_ai_cn.md
+  - 06_llm_theory_and_fundamentals/deep_research/research_agents/building_research_agents_for_tech_insights.md
+  - 06_llm_theory_and_fundamentals/workflow/n8n_multi_agent_guide.md
+  - 08_agentic_system/agent_design/coreference-resolution-dialogue-system.md
+  - 08_agentic_system/agent_design/writing-agentic-agent.md
+  - 08_agentic_system/concepts/12-factor-agents-intro.md
+  - 08_agentic_system/memory/research/case-studies/claude-code-memory-analysis.md
+  - 09_inference_system/reference_design/09-安全性与合规性.md
