@@ -1,0 +1,58 @@
+# Jekyll 站点配置
+title: AI Fundamentals
+email: wang.tianqing.cn@gmail.com
+description: >-
+  AI 基础知识 - GPU 架构、CUDA 编程、大模型基础及AI Agent 相关知识。
+
+# GitHub Pages 官方支持的主题
+theme: minima
+
+# 站点基础配置
+baseurl: ""
+url: "https://ForceInjection.github.io"
+
+# 作者信息
+author:
+  name: Grissom Wang
+
+# 社交媒体链接（Minima 主题支持）
+minima:
+  social_links:
+    - { platform: github,  user_url: "https://github.com/grissomsh" }
+
+# Disable optional-front-matter plugin to prevent Liquid processing
+# of content files that contain Python f-strings / template syntax
+optional_front_matter:
+  enabled: false
+
+# 构建设置
+markdown: kramdown
+highlighter: rouge
+
+# Suppress Liquid errors from code examples in content files
+liquid:
+  error_mode: lax
+  strict_filters: false
+  strict_variables: false
+
+# 插件
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+
+# 包含的文件和目录
+include:
+  - README.md
+  - AGENTS.md
+
+# 排除的文件和目录
+exclude:
+  - .git/
+  - .gitignore
+  - .qoder/
+  - .trae/
+  - .DS_Store
+  - .venv/
+  - "**/venv/"
+  - "**/node_modules/"
+  - "*/.DS_Store"
