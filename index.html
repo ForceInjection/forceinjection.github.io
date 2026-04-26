@@ -1,0 +1,397 @@
+---
+layout: default
+title: AI Fundamentals — 完整的 AI 基础设施知识体系
+---
+
+<style>
+/* ─── Override minima wrapper for full-width sections ─── */
+.page-content > .wrapper {
+  max-width: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* ─── Hero ─── */
+.hp-hero {
+  background: linear-gradient(145deg, #0a0e27 0%, #0d1b6e 45%, #0a3d8f 100%);
+  color: #fff;
+  padding: 90px 24px 72px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.hp-hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 0%, rgba(79,142,247,.18) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 40% at 80% 80%, rgba(147,51,234,.12) 0%, transparent 60%);
+  pointer-events: none;
+}
+.hp-badge {
+  display: inline-block;
+  background: rgba(79,142,247,.18);
+  border: 1px solid rgba(79,142,247,.4);
+  color: #90caf9;
+  padding: 5px 16px;
+  border-radius: 999px;
+  font-size: 12.5px;
+  letter-spacing: .6px;
+  margin-bottom: 22px;
+  position: relative; z-index: 1;
+}
+.hp-hero h1 {
+  font-size: clamp(2em, 5vw, 3.4em);
+  font-weight: 800;
+  margin: 0 0 6px;
+  letter-spacing: -1.5px;
+  background: linear-gradient(100deg, #fff 30%, #90caf9 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  position: relative; z-index: 1;
+}
+.hp-hero .sub {
+  font-size: clamp(1em, 2vw, 1.2em);
+  color: #90a4ae;
+  margin: 0 0 10px;
+  font-weight: 400;
+  position: relative; z-index: 1;
+}
+.hp-hero-desc {
+  font-size: 1em;
+  color: #b0bec5;
+  max-width: 580px;
+  margin: 0 auto 36px;
+  line-height: 1.75;
+  position: relative; z-index: 1;
+}
+.hp-stats {
+  display: flex;
+  justify-content: center;
+  gap: clamp(24px, 5vw, 56px);
+  flex-wrap: wrap;
+  margin-bottom: 38px;
+  position: relative; z-index: 1;
+}
+.hp-stat-num  { display: block; font-size: 2em; font-weight: 800; color: #4f8ef7; line-height: 1.1; }
+.hp-stat-lbl  { font-size: .82em; color: #78909c; }
+.hp-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+  position: relative; z-index: 1;
+}
+.hp-btn {
+  display: inline-block;
+  padding: 12px 28px;
+  border-radius: 9px;
+  font-weight: 700;
+  font-size: 14.5px;
+  text-decoration: none;
+  transition: all .2s;
+}
+.hp-btn-solid {
+  background: #4f8ef7;
+  color: #fff;
+}
+.hp-btn-solid:hover {
+  background: #1976d2;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(79,142,247,.45);
+  color: #fff;
+  text-decoration: none;
+}
+.hp-btn-outline {
+  background: transparent;
+  color: #90caf9;
+  border: 1.5px solid rgba(79,142,247,.45);
+}
+.hp-btn-outline:hover {
+  background: rgba(79,142,247,.1);
+  border-color: #4f8ef7;
+  color: #90caf9;
+  text-decoration: none;
+}
+
+/* ─── Section wrapper ─── */
+.hp-section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 64px 28px;
+}
+.hp-section-hd {
+  text-align: center;
+  margin-bottom: 50px;
+}
+.hp-section-hd h2 {
+  font-size: 1.85em;
+  font-weight: 800;
+  color: #1a237e;
+  margin: 0 0 8px;
+}
+.hp-section-hd p {
+  color: #607d8b;
+  font-size: 1.02em;
+  margin: 0;
+}
+
+/* ─── Module cards grid ─── */
+.hp-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+  gap: 22px;
+}
+.hp-card {
+  background: #fff;
+  border: 1.5px solid #e8eaf6;
+  border-radius: 14px;
+  padding: 24px 22px 20px;
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  position: relative;
+  transition: all .22s ease;
+  overflow: hidden;
+}
+.hp-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3.5px;
+  background: var(--ac, #4f8ef7);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .22s ease;
+}
+.hp-card:hover::before  { transform: scaleX(1); }
+.hp-card:hover {
+  border-color: #c5cae9;
+  box-shadow: 0 10px 36px rgba(26,35,126,.11);
+  transform: translateY(-4px);
+  text-decoration: none;
+  color: inherit;
+}
+.hp-card-icon  { font-size: 1.9em; margin-bottom: 10px; line-height: 1; }
+.hp-card-num   { font-size: 10.5px; font-weight: 700; color: #9e9e9e; letter-spacing: 1.2px; text-transform: uppercase; margin-bottom: 5px; }
+.hp-card-title { font-size: 1.08em; font-weight: 700; color: #1a237e; margin-bottom: 9px; }
+.hp-card-desc  { font-size: .86em; color: #546e7a; line-height: 1.65; flex: 1; margin-bottom: 14px; }
+.hp-tags       { display: flex; flex-wrap: wrap; gap: 5px; margin-top: auto; }
+.hp-tag {
+  background: #ede7f6;
+  color: #4527a0;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+/* ─── Footer CTA strip ─── */
+.hp-cta {
+  background: linear-gradient(135deg, #f5f7ff 0%, #ede7f6 100%);
+  border-top: 1px solid #e8eaf6;
+  padding: 60px 24px;
+  text-align: center;
+}
+.hp-cta h2  { font-size: 1.65em; font-weight: 800; color: #1a237e; margin: 0 0 10px; }
+.hp-cta p   { color: #607d8b; margin: 0 0 28px; font-size: 1.02em; }
+
+/* ─── Author strip ─── */
+.hp-author {
+  background: #0a0e27;
+  padding: 28px 24px;
+  text-align: center;
+}
+.hp-author p {
+  color: #546e7a;
+  font-size: .88em;
+  margin: 0;
+}
+.hp-author a { color: #4f8ef7; }
+
+/* ─── Responsive ─── */
+@media (max-width: 640px) {
+  .hp-hero { padding: 64px 16px 52px; }
+  .hp-stats { gap: 20px; }
+  .hp-grid  { grid-template-columns: 1fr; }
+  .hp-section { padding: 48px 16px; }
+}
+</style>
+
+<!-- ═══ HERO ═══ -->
+<section class="hp-hero">
+  <div class="hp-badge">🚀 AI Infrastructure Knowledge Base</div>
+  <h1>AI Fundamentals</h1>
+  <p class="sub">完整的人工智能基础设施知识体系</p>
+  <p class="hp-hero-desc">
+    覆盖从 GPU 硬件架构、CUDA 并行编程，到大模型训练、推理优化、RAG、
+    Agent 系统的全链路技术栈，来自一线工程师的实践总结。
+  </p>
+
+  <div class="hp-stats">
+    <div>
+      <span class="hp-stat-num">12</span>
+      <span class="hp-stat-lbl">知识模块</span>
+    </div>
+    <div>
+      <span class="hp-stat-num">800+</span>
+      <span class="hp-stat-lbl">技术文章</span>
+    </div>
+    <div>
+      <span class="hp-stat-num">5</span>
+      <span class="hp-stat-lbl">专业课程</span>
+    </div>
+    <div>
+      <span class="hp-stat-num">持续</span>
+      <span class="hp-stat-lbl">追踪更新</span>
+    </div>
+  </div>
+
+  <div class="hp-actions">
+    <a href="#modules" class="hp-btn hp-btn-solid">开始探索 →</a>
+    <a href="https://github.com/ForceInjection/AI-fundermentals" class="hp-btn hp-btn-outline">GitHub ↗</a>
+  </div>
+</section>
+
+<!-- ═══ MODULES GRID ═══ -->
+<div class="hp-section" id="modules">
+  <div class="hp-section-hd">
+    <h2>📚 知识模块</h2>
+    <p>系统化 AI 技术体系，从芯片底层到智能应用，深入每个技术层次</p>
+  </div>
+
+  <div class="hp-grid">
+
+    <a href="/01_hardware_architecture/" class="hp-card" style="--ac:#e53935">
+      <span class="hp-card-icon">⚡</span>
+      <div class="hp-card-num">Module 01</div>
+      <div class="hp-card-title">硬件架构</div>
+      <p class="hp-card-desc">深入理解 AI 训练与推理的硬件基础，GPU/TPU 内部架构、片内互联、PCIe 拓扑与 GPUDirect。</p>
+      <div class="hp-tags">
+        <span class="hp-tag">GPU</span><span class="hp-tag">TPU</span><span class="hp-tag">NVLink</span><span class="hp-tag">PCIe</span>
+      </div>
+    </a>
+
+    <a href="/02_gpu_programming/" class="hp-card" style="--ac:#8e24aa">
+      <span class="hp-card-icon">🔧</span>
+      <div class="hp-card-num">Module 02</div>
+      <div class="hp-card-title">GPU 编程</div>
+      <p class="hp-card-desc">从 CUDA 基础到高性能 Kernel 编写，掌握 GPU 并行计算、TileLang/Triton 以及性能调优实战。</p>
+      <div class="hp-tags">
+        <span class="hp-tag">CUDA</span><span class="hp-tag">Triton</span><span class="hp-tag">TileLang</span><span class="hp-tag">Profiling</span>
+      </div>
+    </a>
+
+    <a href="/03_ai_cluster_ops/" class="hp-card" style="--ac:#00897b">
+      <span class="hp-card-icon">🖧</span>
+      <div class="hp-card-num">Module 03</div>
+      <div class="hp-card-title">AI 集群运维</div>
+      <p class="hp-card-desc">大规模 AI 集群的构建、高速网络配置与运维管理，保障分布式训练任务的稳定高效运行。</p>
+      <div class="hp-tags">
+        <span class="hp-tag">InfiniBand</span><span class="hp-tag">NCCL</span><span class="hp-tag">GPU Ops</span>
+      </div>
+    </a>
+
+    <a href="/04_cloud_native_ai_platform/" class="hp-card" style="--ac:#f57c00">
+      <span class="hp-card-icon">☁️</span>
+      <div class="hp-card-num">Module 04</div>
+      <div class="hp-card-title">云原生 AI 平台</div>
+      <p class="hp-card-desc">基于 Kubernetes 的企业级 AI 基础设施，GPU 虚拟化、弹性调度、HAMi/KAI 资源管理实践。</p>
+      <div class="hp-tags">
+        <span class="hp-tag">Kubernetes</span><span class="hp-tag">HAMi</span><span class="hp-tag">GPU 虚拟化</span>
+      </div>
+    </a>
+
+    <a href="/05_model_training_and_fine_tuning/" class="hp-card" style="--ac:#2e7d32">
+      <span class="hp-card-icon">🎯</span>
+      <div class="hp-card-num">Module 05</div>
+      <div class="hp-card-title">模型训练与微调</div>
+      <p class="hp-card-desc">大模型全流程训练、SFT 指令微调、LoRA/QLoRA 方法与 AI Ops 工程最佳实践总结。</p>
+      <div class="hp-tags">
+        <span class="hp-tag">SFT</span><span class="hp-tag">LoRA</span><span class="hp-tag">AI Ops</span>
+      </div>
+    </a>
+
+    <a href="/06_llm_theory_and_fundamentals/" class="hp-card" style="--ac:#1565c0">
+      <span class="hp-card-icon">🧠</span>
+      <div class="hp-card-num">Module 06</div>
+      <div class="hp-card-title">LLM 理论与基础</div>
+      <p class="hp-card-desc">大语言模型核心理论：模型量化、MoE 稀疏架构、Embedding 原理与 Deep Research 方法论。</p>
+      <div class="hp-tags">
+        <span class="hp-tag">量化</span><span class="hp-tag">MoE</span><span class="hp-tag">Embedding</span>
+      </div>
+    </a>
+
+    <a href="/07_rag_and_tools/" class="hp-card" style="--ac:#6a1b9a">
+      <span class="hp-card-icon">🔍</span>
+      <div class="hp-card-num">Module 07</div>
+      <div class="hp-card-title">RAG 与工具</div>
+      <p class="hp-card-desc">检索增强生成（RAG）系统全链路设计，知识图谱与 LLM 协同、GraphRAG 与文档解析工具。</p>
+      <div class="hp-tags">
+        <span class="hp-tag">RAG</span><span class="hp-tag">知识图谱</span><span class="hp-tag">GraphRAG</span>
+      </div>
+    </a>
+
+    <a href="/08_agentic_system/" class="hp-card" style="--ac:#c62828">
+      <span class="hp-card-icon">🤖</span>
+      <div class="hp-card-num">Module 08</div>
+      <div class="hp-card-title">智能体系统</div>
+      <p class="hp-card-desc">AI Agent 设计模式、多智能体协作架构、MCP 协议解析与 Agent 长期记忆机制实现。</p>
+      <div class="hp-tags">
+        <span class="hp-tag">Agent</span><span class="hp-tag">多智能体</span><span class="hp-tag">MCP</span>
+      </div>
+    </a>
+
+    <a href="/09_inference_system/" class="hp-card" style="--ac:#00695c">
+      <span class="hp-card-icon">⚙️</span>
+      <div class="hp-card-num">Module 09</div>
+      <div class="hp-card-title">推理系统</div>
+      <p class="hp-card-desc">高性能 LLM 推理工程：vLLM 源码深度解析、KV Cache 压缩优化与 DeepSeek 推理实践。</p>
+      <div class="hp-tags">
+        <span class="hp-tag">vLLM</span><span class="hp-tag">KV Cache</span><span class="hp-tag">DeepSeek</span>
+      </div>
+    </a>
+
+    <a href="/10_ai_related_course/" class="hp-card" style="--ac:#ad1457">
+      <span class="hp-card-icon">🎓</span>
+      <div class="hp-card-num">Module 10</div>
+      <div class="hp-card-title">AI 相关课程</div>
+      <p class="hp-card-desc">系统化学习路径：AI Infra 入门课程、AI 编程实战、多智能体系统训练营与 Trae 编程实战。</p>
+      <div class="hp-tags">
+        <span class="hp-tag">AI Infra</span><span class="hp-tag">AI 编程</span><span class="hp-tag">多智能体</span>
+      </div>
+    </a>
+
+    <a href="/98_llm_programming/" class="hp-card" style="--ac:#4527a0">
+      <span class="hp-card-icon">💻</span>
+      <div class="hp-card-num">Module 98</div>
+      <div class="hp-card-title">LLM 编程</div>
+      <p class="hp-card-desc">大模型应用开发实战：LangGraph 框架深度应用、Java Spring AI 集成与 Harness Engineering。</p>
+      <div class="hp-tags">
+        <span class="hp-tag">LangGraph</span><span class="hp-tag">Spring AI</span><span class="hp-tag">Java</span>
+      </div>
+    </a>
+
+    <a href="/99_misc/" class="hp-card" style="--ac:#37474f">
+      <span class="hp-card-icon">🛠️</span>
+      <div class="hp-card-num">Module 99</div>
+      <div class="hp-card-title">实用工具与杂项</div>
+      <p class="hp-card-desc">前沿工具上手实践：Mac 本地部署 DeepSeek R1、Ollama 配置指南与开源模型基准测试。</p>
+      <div class="hp-tags">
+        <span class="hp-tag">DeepSeek</span><span class="hp-tag">Ollama</span><span class="hp-tag">本地部署</span>
+      </div>
+    </a>
+
+  </div>
+</div>
+
+<!-- ═══ FOOTER CTA ═══ -->
+<section class="hp-cta">
+  <h2>持续更新，与技术同步</h2>
+  <p>内容来自一线工程师的实践总结，持续追踪 AI 技术最新进展。<br>欢迎 Star、Fork 或提交 PR 一起完善。</p>
+  <a href="https://github.com/ForceInjection/AI-fundermentals" class="hp-btn hp-btn-solid">在 GitHub 上关注 ↗</a>
+</section>
