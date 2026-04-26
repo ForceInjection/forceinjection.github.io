@@ -11,6 +11,10 @@ theme: minima
 baseurl: ""
 url: "https://ForceInjection.github.io"
 
+# Only show these pages in the top nav bar.
+# Empty list = site title only, no nav links (homepage cards serve as nav).
+header_pages: []
+
 # 作者信息
 author:
   name: Grissom Wang
