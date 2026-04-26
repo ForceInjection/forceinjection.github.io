@@ -23,7 +23,192 @@ $text-primary: #1a2332;
 $text-muted:   #5a6a7a;
 $text-code:    #0a6694;
 
-// ── Body & page chrome ────────────────────────────────
+// ═══════════════════════════════════════════════════════
+//  Site Navigation Bar
+// ═══════════════════════════════════════════════════════
+.site-nav {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: #007DB8;
+  border-bottom: 1px solid rgba(255, 255, 255, .15);
+  box-shadow: 0 2px 14px rgba(0, 94, 184, .35);
+
+  &__inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    gap: 12px;
+  }
+
+  &__brand {
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: .95em;
+    color: #fff !important;
+    text-decoration: none !important;
+    letter-spacing: -.01em;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    flex-shrink: 0;
+    &:hover { color: rgba(255,255,255,.75) !important; }
+  }
+
+  &__logo {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1.5px solid rgba(255, 255, 255, .5);
+    flex-shrink: 0;
+  }
+
+  &__home-icon { font-size: 1.05em; }
+
+  &__modules-btn {
+    margin-left: auto;
+    background: none;
+    border: 1px solid rgba(255, 255, 255, .45);
+    color: #fff;
+    font-family: 'Inter', sans-serif;
+    font-size: .85em;
+    font-weight: 500;
+    padding: 6px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: background .15s, border-color .15s;
+    flex-shrink: 0;
+    &:hover,
+    &[aria-expanded="true"] {
+      background: rgba(255, 255, 255, .18);
+      border-color: rgba(255, 255, 255, .8);
+    }
+  }
+
+  &__caret {
+    font-size: .72em;
+    display: inline-block;
+    transition: transform .2s;
+  }
+
+  &__github {
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    border-radius: 6px;
+    color: rgba(255, 255, 255, .85) !important;
+    text-decoration: none !important;
+    flex-shrink: 0;
+    transition: color .15s, background .15s;
+    &:hover {
+      color: #fff !important;
+      background: rgba(255, 255, 255, .18);
+    }
+  }
+
+  &__github-icon { fill: currentColor; display: block; }
+
+  &__hamburger {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 6px;
+    flex-direction: column;
+    gap: 5px;
+    span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: rgba(255, 255, 255, .9);
+      border-radius: 2px;
+      transition: transform .22s ease, opacity .22s ease;
+    }
+    &[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    &[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+    &[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  }
+
+  // ── Desktop dropdown
+  &__dropdown {
+    display: none;
+    position: absolute;
+    left: 0;
+    right: 0;
+    background: #fff;
+    border-bottom: 2px solid $dell-blue;
+    box-shadow: 0 8px 28px rgba(0, 94, 184, .18);
+    z-index: 999;
+    &.is-open { display: block; }
+  }
+
+  &__dropdown-grid {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    padding: 14px 20px;
+    gap: 4px;
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    padding: 9px 11px;
+    border-radius: 7px;
+    text-decoration: none !important;
+    color: $dell-dark !important;
+    font-size: .83em;
+    font-weight: 500;
+    transition: background .12s, color .12s;
+    &:hover {
+      background: $dell-pale;
+      color: $dell-mid !important;
+    }
+  }
+
+  &__item-icon { font-size: 1.1em; flex-shrink: 0; }
+  &__item-text { line-height: 1.3; }
+
+  // ── Mobile menu
+  &__mobile-menu {
+    display: none;
+    background: #005EB8;
+    border-top: 1px solid rgba(255, 255, 255, .18);
+    max-height: 70vh;
+    overflow-y: auto;
+    &.is-open { display: block; }
+    a {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 11px 20px;
+      color: rgba(255,255,255,.9) !important;
+      font-size: .9em;
+      text-decoration: none !important;
+      border-bottom: 1px solid rgba(255, 255, 255, .1);
+      &:hover { background: rgba(255, 255, 255, .12); color: #fff !important; }
+    }
+  }
+
+  // ── Responsive
+  @media (max-width: 768px) {
+    &__modules-btn { display: none; }
+    &__hamburger   { display: flex; margin-left: auto; }
+    &__dropdown    { display: none !important; }
+  }
+}
+
+// ── Body & page chrome ─────────────────────────────
 body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   background-color: $page-bg;
@@ -70,6 +255,9 @@ article.post {
     margin-bottom: .5em;
     line-height: 1.3;
   }
+
+  // Chinese brush font for major headings
+  h1, h2 { font-family: 'Ma Shan Zheng', cursive; }
 
   h1 {
     font-size: 1.9em;
@@ -329,6 +517,78 @@ article.post {
 .page-content > .wrapper {
   max-width: 860px;
   padding-top: 40px;
+}
+
+// ═══════════════════════════════════════════════════════
+//  Quote Footer — sitewide bottom strip
+// ═══════════════════════════════════════════════════════
+.quote-footer {
+  background: linear-gradient(180deg, #007DB8 0%, #005EB8 100%);
+  padding: 64px 24px 52px;
+  text-align: center;
+  border-top: 1px solid rgba(255, 255, 255, .2);
+
+  &__inner {
+    max-width: 740px;
+    margin: 0 auto;
+  }
+
+  // Decorative opening quotation mark
+  &__mark {
+    display: block;
+    font-family: 'Georgia', 'Times New Roman', serif;
+    font-size: 5.5em;
+    line-height: .85;
+    color: rgba(255, 255, 255, .28);
+    margin-bottom: -8px;
+    user-select: none;
+  }
+
+  // Primary quoted line
+  &__primary {
+    font-family: 'Ma Shan Zheng', cursive;
+    font-size: 1.6em;
+    font-weight: 400;
+    font-style: normal;
+    color: #ffffff;
+    letter-spacing: .02em;
+    line-height: 1.6;
+    margin: 0 0 14px;
+  }
+
+  // Attribution
+  &__cite {
+    display: block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: .78em;
+    color: rgba(255, 255, 255, .8);
+    font-style: normal;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    margin-bottom: 32px;
+  }
+
+  // Thin divider line
+  &__divider {
+    width: 48px;
+    height: 1px;
+    background: rgba(255, 255, 255, .35);
+    margin: 0 auto 28px;
+  }
+
+  // Closing paragraph
+  &__body {
+    color: rgba(255, 255, 255, .8);
+    font-size: .95em;
+    line-height: 1.85;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  &__brand {
+    color: #ffffff;
+    font-weight: 700;
+  }
 }
 
 // ═══════════════════════════════════════════════════════
