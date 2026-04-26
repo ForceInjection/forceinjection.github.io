@@ -115,9 +115,14 @@ render_with_liquid: true
 .hp-btn-outline:hover {
   background: rgba(0,125,184,.12);
   border-color: #007DB8;
-  color: #B3D9F0;
-  text-decoration: none;
 }
+.hp-hit-counter {
+  margin-top: 20px;
+  opacity: .75;
+  transition: opacity .2s;
+}
+.hp-hit-counter:hover { opacity: 1; }
+.hp-hit-counter img { height: 20px; border-radius: 4px; }
 
 /* ─── Section wrapper ─── */
 .hp-section {
@@ -236,6 +241,13 @@ render_with_liquid: true
   <div class="hp-actions">
     <a href="#modules" class="hp-btn hp-btn-solid">开始探索 →</a>
     <a href="https://github.com/ForceInjection/AI-fundermentals" class="hp-btn hp-btn-outline">GitHub ↗</a>
+  </div>
+
+  <div class="hp-hit-counter">
+    <a href="https://hits.sh/forceinjection.github.io/" target="_blank" rel="noopener noreferrer">
+      <img src="https://hits.sh/forceinjection.github.io.svg?label=Visits&style=flat-square&color=007DB8&labelColor=001A3A"
+           alt="Visitor counter" loading="lazy">
+    </a>
   </div>
 </section>
 
