@@ -492,6 +492,10 @@
     "url": "/08_agentic_system/"
   },
   {
+    "title": "All Agentic Architectures 深入详解",
+    "url": "/08_agentic_system/agent_design/all-agentic-architectures-deep-dive.html"
+  },
+  {
     "title": "多轮指代消解对话系统",
     "url": "/08_agentic_system/agent_design/coref-dialogue-system/"
   },
