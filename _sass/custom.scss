@@ -205,6 +205,106 @@ $text-code:    #0a6694;
     &__modules-btn { display: none; }
     &__hamburger   { display: flex; margin-left: auto; }
     &__dropdown    { display: none !important; }
+    &__search      { display: none !important; }
+  }
+
+  // ── Search box
+  &__search {
+    position: relative;
+    flex: 1 1 auto;
+    max-width: 320px;
+    margin: 0 12px;
+    display: flex;
+    align-items: center;
+
+    &-icon {
+      position: absolute;
+      left: 10px;
+      color: rgba(255,255,255,.65);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    &-input {
+      width: 100%;
+      background: rgba(255,255,255,.12);
+      border: 1px solid rgba(255,255,255,.25);
+      border-radius: 6px;
+      padding: 5px 10px 5px 30px;
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+      font-size: .85em;
+      outline: none;
+      transition: background .15s, border-color .15s;
+
+      &::placeholder { color: rgba(255,255,255,.5); }
+
+      &:focus {
+        background: rgba(255,255,255,.22);
+        border-color: rgba(255,255,255,.6);
+      }
+    }
+
+    &-results {
+      position: absolute;
+      top: calc(100% + 6px);
+      left: 0;
+      right: 0;
+      background: #fff;
+      border: 1px solid $border-color;
+      border-radius: 8px;
+      box-shadow: 0 8px 28px rgba(0,0,0,.12);
+      max-height: 340px;
+      overflow-y: auto;
+      margin: 0;
+      padding: 6px 0;
+      list-style: none;
+      z-index: 1001;
+
+      li {
+        padding: 0;
+        margin: 0;
+        &[data-index] {
+          cursor: pointer;
+          &.is-selected,
+          &:hover {
+            background: $dell-pale;
+          }
+        }
+      }
+    }
+
+    &-link {
+      display: block;
+      padding: 7px 14px;
+      color: $dell-dark !important;
+      font-size: .85em;
+      font-weight: 500;
+      text-decoration: none !important;
+      line-height: 1.4;
+      mark {
+        background: #ffec99;
+        color: inherit;
+        font-weight: 700;
+        padding: 0 1px;
+        border-radius: 2px;
+      }
+    }
+
+    &-url {
+      display: block;
+      padding: 0 14px 6px;
+      color: $text-muted;
+      font-size: .75em;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    &-no-results {
+      padding: 10px 14px;
+      color: $text-muted;
+      font-size: .85em;
+      text-align: center;
+    }
   }
 }
 

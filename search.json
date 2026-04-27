@@ -1,0 +1,1498 @@
+[
+  {
+    "title": "AI Fundamentals — 完整的 AI 基础设施知识体系",
+    "url": "/"
+  },
+  {
+    "title": "硬件架构与互连技术",
+    "url": "/01_hardware_architecture/"
+  },
+  {
+    "title": "NVIDIA GPUDirect RDMA 与 Storage 技术详解",
+    "url": "/01_hardware_architecture/gpudirect/01_gpudirect_technology.html"
+  },
+  {
+    "title": "NVIDIA GPUDirect P2P 技术详解：节点内 GPU 高速互联",
+    "url": "/01_hardware_architecture/gpudirect/02_gpudirect_p2p.html"
+  },
+  {
+    "title": "NVIDIA 硬件架构与算力解析",
+    "url": "/01_hardware_architecture/nvidia/"
+  },
+  {
+    "title": "GPGPU vs NPU：大模型推理与训练的算力选择指南",
+    "url": "/01_hardware_architecture/nvidia/GPGPU_vs_NPU_大模型推理训练对比.html"
+  },
+  {
+    "title": "GPU 架构深入理解",
+    "url": "/01_hardware_architecture/nvidia/understand_gpu_architecture/"
+  },
+  {
+    "title": "GPU Characteristics（GPU 特性）",
+    "url": "/01_hardware_architecture/nvidia/understand_gpu_architecture/01_gpu_characteristics.html"
+  },
+  {
+    "title": "GPU Memory (GPU 内存)",
+    "url": "/01_hardware_architecture/nvidia/understand_gpu_architecture/02_gpu_memory.html"
+  },
+  {
+    "title": "GPU Example: Tesla V100",
+    "url": "/01_hardware_architecture/nvidia/understand_gpu_architecture/03_tesla_v100.html"
+  },
+  {
+    "title": "GPU Example: RTX 5000",
+    "url": "/01_hardware_architecture/nvidia/understand_gpu_architecture/04_rtx_5000.html"
+  },
+  {
+    "title": "Exercise: Device Query",
+    "url": "/01_hardware_architecture/nvidia/understand_gpu_architecture/05_exer_device_query.html"
+  },
+  {
+    "title": "Exercise: Device Bandwidth",
+    "url": "/01_hardware_architecture/nvidia/understand_gpu_architecture/06_exer_device_bandwidth.html"
+  },
+  {
+    "title": "NVLink 技术入门",
+    "url": "/01_hardware_architecture/nvlink/nvlink_intro.html"
+  },
+  {
+    "title": "PCIe 总线技术大全",
+    "url": "/01_hardware_architecture/pcie/01_pcie_comprehensive_guide.html"
+  },
+  {
+    "title": "Linux PCIe P2PDMA 技术介绍",
+    "url": "/01_hardware_architecture/pcie/02_p2pdma_technology.html"
+  },
+  {
+    "title": "AI 基础设施延迟金字塔",
+    "url": "/01_hardware_architecture/performance/ai_latency_pyramid.html"
+  },
+  {
+    "title": "NVIDIA GB300 NVL72 架构解析与性能测试报告",
+    "url": "/01_hardware_architecture/superchips/nvidia_gb300.html"
+  },
+  {
+    "title": "NVLink-C2C 技术详解：构建 AI Superchip 的关键互连技术",
+    "url": "/01_hardware_architecture/superchips/nvlink_c2c.html"
+  },
+  {
+    "title": "Google TPU 101",
+    "url": "/01_hardware_architecture/tpu/tpu 101.html"
+  },
+  {
+    "title": "DPU 编程",
+    "url": "/02_dpu_programming/"
+  },
+  {
+    "title": "DOCA 编程入门",
+    "url": "/02_dpu_programming/doca/01_doca_programming_guide.html"
+  },
+  {
+    "title": "GPU 编程",
+    "url": "/02_gpu_programming/"
+  },
+  {
+    "title": "NVIDIA GPU 容器环境：原理与构建指南",
+    "url": "/02_gpu_programming/01_environment/01_nvidia_container_setup.html"
+  },
+  {
+    "title": "大模型训练与推理框架的 GPU 镜像构建深度解析",
+    "url": "/02_gpu_programming/01_environment/02_cuda_image_build_analysis.html"
+  },
+  {
+    "title": "CUDA 编程 (CUDA Programming)",
+    "url": "/02_gpu_programming/02_cuda/"
+  },
+  {
+    "title": "GPU Architecture and Programming — An Introduction",
+    "url": "/02_gpu_programming/02_cuda/01_gpu_programming_introduction.html"
+  },
+  {
+    "title": "深入了解 Nvidia CUDA 核心",
+    "url": "/02_gpu_programming/02_cuda/02_cuda_cores.html"
+  },
+  {
+    "title": "CUDA Streams 介绍",
+    "url": "/02_gpu_programming/02_cuda/03_cuda_streams.html"
+  },
+  {
+    "title": "从 SIMT 到 Tile-Based：GPU 编程范式的演进与实战解析 —— 以矩阵乘法为例",
+    "url": "/02_gpu_programming/02_cuda/04_simt_vs_tile_based.html"
+  },
+  {
+    "title": "Tile-Based 编程",
+    "url": "/02_gpu_programming/03_tilelang/"
+  },
+  {
+    "title": "TileLang 快速入门",
+    "url": "/02_gpu_programming/03_tilelang/01_tilelang_quick_start.html"
+  },
+  {
+    "title": "AI 系统性能分析",
+    "url": "/02_gpu_programming/04_profiling/"
+  },
+  {
+    "title": "nvbandwidth 深度解析：NVIDIA GPU 带宽测量工具全指南",
+    "url": "/02_gpu_programming/04_profiling/01_nvbandwidth_best_practices.html"
+  },
+  {
+    "title": "AI 集群运维与通信 (AI Cluster Operations & Communication)",
+    "url": "/03_ai_cluster_ops/"
+  },
+  {
+    "title": "AI 系统运维与监控",
+    "url": "/03_ai_cluster_ops/01_gpu_ops/"
+  },
+  {
+    "title": "查询 GPU 卡详细参数",
+    "url": "/03_ai_cluster_ops/01_gpu_ops/01_device_query.html"
+  },
+  {
+    "title": "GPU 利用率是一个误导性指标",
+    "url": "/03_ai_cluster_ops/01_gpu_ops/02_gpu_utilization_myth.html"
+  },
+  {
+    "title": "nvidia-smi 快速入门",
+    "url": "/03_ai_cluster_ops/01_gpu_ops/03_nvidia_smi_guide.html"
+  },
+  {
+    "title": "nvtop 快速入门",
+    "url": "/03_ai_cluster_ops/01_gpu_ops/04_nvtop_guide.html"
+  },
+  {
+    "title": "InfiniBand 高性能网络技术",
+    "url": "/03_ai_cluster_ops/02_infiniband/"
+  },
+  {
+    "title": "InfiniBand 网络理论与实践",
+    "url": "/03_ai_cluster_ops/02_infiniband/01_ib_network_theory.html"
+  },
+  {
+    "title": "InfiniBand 网卡健康检查脚本使用说明",
+    "url": "/03_ai_cluster_ops/02_infiniband/health/"
+  },
+  {
+    "title": "InfiniBand 网络带宽监控脚本使用说明",
+    "url": "/03_ai_cluster_ops/02_infiniband/monitor/"
+  },
+  {
+    "title": "NCCL 分布式通信测试套件",
+    "url": "/03_ai_cluster_ops/03_nccl/"
+  },
+  {
+    "title": "NCCL 测试验证工具说明文档",
+    "url": "/03_ai_cluster_ops/03_nccl/01_nccl_tutorial.html"
+  },
+  {
+    "title": "NCCL Kubernetes 部署指南",
+    "url": "/03_ai_cluster_ops/03_nccl/k8s/"
+  },
+  {
+    "title": "NCCL Benchmark 测试套件",
+    "url": "/03_ai_cluster_ops/03_nccl/test/"
+  },
+  {
+    "title": "云原生 AI 平台",
+    "url": "/04_cloud_native_ai_platform/"
+  },
+  {
+    "title": "GPU 管理技术深度解析",
+    "url": "/04_cloud_native_ai_platform/gpu_manager/"
+  },
+  {
+    "title": "GPU 管理技术代码库",
+    "url": "/04_cloud_native_ai_platform/gpu_manager/code/"
+  },
+  {
+    "title": "GPU内存虚拟化技术增强模块",
+    "url": "/04_cloud_native_ai_platform/gpu_manager/code/memory/"
+  },
+  {
+    "title": "GPU 管理器配置文件目录",
+    "url": "/04_cloud_native_ai_platform/gpu_manager/configs/"
+  },
+  {
+    "title": "Nvidia KAI Scheduler 功能架构解析",
+    "url": "/04_cloud_native_ai_platform/gpu_manager/hami/KAI_vs_HAMi_Comparison.html"
+  },
+  {
+    "title": "GPU-Virtual-Service 深度剖析：CUDA 劫持机制、全链路流程与 HAMi-Core 对比",
+    "url": "/04_cloud_native_ai_platform/gpu_manager/hami/flex_ai_intro.html"
+  },
+  {
+    "title": "HAMi-WebUI Prometheus 指标说明文档",
+    "url": "/04_cloud_native_ai_platform/gpu_manager/hami/hami-prometheus-metrics.html"
+  },
+  {
+    "title": "HAMi GPU 资源管理完整指南",
+    "url": "/04_cloud_native_ai_platform/gpu_manager/hami/hmai-gpu-resources-guide.html"
+  },
+  {
+    "title": "GPU 虚拟化与资源管理技术深度解析 - 第一部分：基础理论篇",
+    "url": "/04_cloud_native_ai_platform/gpu_manager/第一部分：基础理论篇.html"
+  },
+  {
+    "title": "GPU 虚拟化与资源管理技术深度解析 - 第三部分：资源管理与优化篇",
+    "url": "/04_cloud_native_ai_platform/gpu_manager/第三部分：资源管理与优化篇.html"
+  },
+  {
+    "title": "GPU 虚拟化与资源管理技术深度解析 - 第二部分：虚拟化技术篇",
+    "url": "/04_cloud_native_ai_platform/gpu_manager/第二部分：虚拟化技术篇.html"
+  },
+  {
+    "title": "GPU 虚拟化与资源管理技术深度解析 - 第四部分：实践应用篇",
+    "url": "/04_cloud_native_ai_platform/gpu_manager/第四部分：实践应用篇.html"
+  },
+  {
+    "title": "Kubernetes GPU 管理与 AI 工作负载技术文档集",
+    "url": "/04_cloud_native_ai_platform/k8s/"
+  },
+  {
+    "title": "NVIDIA Container Toolkit 原理分析与代码深度解析",
+    "url": "/04_cloud_native_ai_platform/k8s/01_nvidia_container_toolkit_analysis.html"
+  },
+  {
+    "title": "Nvidia K8s Device Plugin 原理解析和源码分析",
+    "url": "/04_cloud_native_ai_platform/k8s/02_nvidia_k8s_device_plugin_analysis.html"
+  },
+  {
+    "title": "Kueue + HAMi：Kubernetes 原生的 AI 工作负载管理与 GPU 虚拟化解决方案",
+    "url": "/04_cloud_native_ai_platform/k8s/03_kueue_hami_integration.html"
+  },
+  {
+    "title": "vLLM + LWS：Kubernetes 上的多机多卡推理方案",
+    "url": "/04_cloud_native_ai_platform/k8s/04_lws_intro.html"
+  },
+  {
+    "title": "云原生高性能分布式 LLM 推理框架 llm-d 介绍",
+    "url": "/04_cloud_native_ai_platform/k8s/05_llm_d_intro.html"
+  },
+  {
+    "title": "容易被忽略的 containerd 运行时日志",
+    "url": "/04_cloud_native_ai_platform/k8s/06_containerd_log_analysis.html"
+  },
+  {
+    "title": "设计笔记",
+    "url": "/04_cloud_native_ai_platform/storage/deepseek_3fs/01_deepseek_3fs_design_notes.html"
+  },
+  {
+    "title": "NVIDIA Inference Context Memory Storage：为长上下文与 Agentic AI 推理打造的 G3.5 上下文存储层",
+    "url": "/04_cloud_native_ai_platform/storage/inference_context_memory_storage/01_icms_architecture.html"
+  },
+  {
+    "title": "ICMS 软件定义存储栈：从块存储到 AI 原生 KV 缓存服务的演进",
+    "url": "/04_cloud_native_ai_platform/storage/inference_context_memory_storage/02_icms_update.html"
+  },
+  {
+    "title": "JuiceFS 分布式文件系统",
+    "url": "/04_cloud_native_ai_platform/storage/juicefs/"
+  },
+  {
+    "title": "JuiceFS 文件修改时 chunk/slice/block 更新机制分析",
+    "url": "/04_cloud_native_ai_platform/storage/juicefs/01_juicefs_file_modification_mechanism_analysis.html"
+  },
+  {
+    "title": "JuiceFS 后端存储变更手册",
+    "url": "/04_cloud_native_ai_platform/storage/juicefs/02_juicefs_backend_storage_migration_guide.html"
+  },
+  {
+    "title": "模型训练与微调",
+    "url": "/05_model_training_and_fine_tuning/"
+  },
+  {
+    "title": "构建 AIOps 大模型的思路与方案：后训练技术解析",
+    "url": "/05_model_training_and_fine_tuning/ai_ops_design/aiops_post_training.html"
+  },
+  {
+    "title": "Kubernetes AIOps 大模型基准测试生成框架",
+    "url": "/05_model_training_and_fine_tuning/ai_ops_design/kubernetes_aiops_benchmark_generation_framework.html"
+  },
+  {
+    "title": "Kubernetes AIOps 大模型能力评估框架",
+    "url": "/05_model_training_and_fine_tuning/ai_ops_design/kubernetes_model_evaluation_framework.html"
+  },
+  {
+    "title": "SFT 微调实战与指南",
+    "url": "/05_model_training_and_fine_tuning/sft_example/"
+  },
+  {
+    "title": "一文入门垂域模型 SFT 微调",
+    "url": "/05_model_training_and_fine_tuning/sft_example/一文入门垂域模型SFT微调.html"
+  },
+  {
+    "title": "LLM 理论与基础",
+    "url": "/06_llm_theory_and_fundamentals/"
+  },
+  {
+    "title": "深度研究 (Deep Research) 技术与应用",
+    "url": "/06_llm_theory_and_fundamentals/deep_research/"
+  },
+  {
+    "title": "DeepWiki 使用方法与技术原理深度分析",
+    "url": "/06_llm_theory_and_fundamentals/deep_research/deepwiki/deepwiki_usage_and_technical_analysis.html"
+  },
+  {
+    "title": "订单履约 Agent 需求分析",
+    "url": "/06_llm_theory_and_fundamentals/deep_research/design/order_fulfillment_agent_requirement_analysis.html"
+  },
+  {
+    "title": "订单履约 Agent 系统设计文档",
+    "url": "/06_llm_theory_and_fundamentals/deep_research/design/order_fulfillment_agent_system_design.html"
+  },
+  {
+    "title": "科研助手 Agent 需求与场景清单",
+    "url": "/06_llm_theory_and_fundamentals/deep_research/design/research_assistant.html"
+  },
+  {
+    "title": "《Building Research Agents for Tech Insights》深度解读",
+    "url": "/06_llm_theory_and_fundamentals/deep_research/research_agents/building_research_agents_for_tech_insights.html"
+  },
+  {
+    "title": "Cursor IDE 架构概览",
+    "url": "/06_llm_theory_and_fundamentals/deep_research/research_agents/cursor-deepsearch.html"
+  },
+  {
+    "title": "Databricks Assistant Data Science Agent 使用场景指南",
+    "url": "/06_llm_theory_and_fundamentals/deep_research/research_agents/databricks_data_agent.html"
+  },
+  {
+    "title": "深度解读「通义 DeepResearch」：ReAct 范式驱动的智能 Agent 架构",
+    "url": "/06_llm_theory_and_fundamentals/deep_research/research_agents/qwen_deepresearch_analysis.html"
+  },
+  {
+    "title": "大语言模型技术理论与基础",
+    "url": "/06_llm_theory_and_fundamentals/llm_basic_concepts/"
+  },
+  {
+    "title": "一文读懂思维链（Chain-of-Thought, CoT）",
+    "url": "/06_llm_theory_and_fundamentals/llm_basic_concepts/cot/chain_of_thought_cot_intro.html"
+  },
+  {
+    "title": "文本嵌入 (Text Embeddings) 技术指南",
+    "url": "/06_llm_theory_and_fundamentals/llm_basic_concepts/embedding/"
+  },
+  {
+    "title": "LLM 嵌入技术详解：图文指南",
+    "url": "/06_llm_theory_and_fundamentals/llm_basic_concepts/embedding/LLM_embeddings_explained_visual_guide.zh-CN.html"
+  },
+  {
+    "title": "大模型 Embedding 层与独立 Embedding 模型：区别与联系",
+    "url": "/06_llm_theory_and_fundamentals/llm_basic_concepts/embedding/embedding.html"
+  },
+  {
+    "title": "深入了解文本嵌入技术",
+    "url": "/06_llm_theory_and_fundamentals/llm_basic_concepts/embedding/text_embeddings_comprehensive_guide.html"
+  },
+  {
+    "title": "文本嵌入技术快速入门",
+    "url": "/06_llm_theory_and_fundamentals/llm_basic_concepts/embedding/text_embeddings_guide.html"
+  },
+  {
+    "title": "大模型文件格式完整指南",
+    "url": "/06_llm_theory_and_fundamentals/llm_basic_concepts/file_formats/llm_file_formats_complete_guide.html"
+  },
+  {
+    "title": "大模型的幻觉及其应对措施",
+    "url": "/06_llm_theory_and_fundamentals/llm_basic_concepts/hallucination/llm_hallucination_and_mitigation.html"
+  },
+  {
+    "title": "让用户\"说半句\"话也能懂：ChatBox 的意图识别与语义理解机制解析",
+    "url": "/06_llm_theory_and_fundamentals/llm_basic_concepts/intent_detection/chatbox_intent_recognition_and_semantic_understanding.html"
+  },
+  {
+    "title": "基于大型语言模型的意图检测",
+    "url": "/06_llm_theory_and_fundamentals/llm_basic_concepts/intent_detection/intent_detection_using_llm.zh-CN.html"
+  },
+  {
+    "title": "混合专家系统（MoE）图解指南",
+    "url": "/06_llm_theory_and_fundamentals/llm_basic_concepts/moe/mixture_of_experts_moe_visual_guide.zh-CN.html"
+  },
+  {
+    "title": "量化技术可视化指南",
+    "url": "/06_llm_theory_and_fundamentals/llm_basic_concepts/quantization/01_visual_guide_to_quantization.html"
+  },
+  {
+    "title": "LLM Token 技术指南",
+    "url": "/06_llm_theory_and_fundamentals/llm_basic_concepts/token/"
+  },
+  {
+    "title": "解密 LLM 中的 Tokens",
+    "url": "/06_llm_theory_and_fundamentals/llm_basic_concepts/token/llm_token_intro.html"
+  },
+  {
+    "title": "工作流编排与应用平台 (Workflow)",
+    "url": "/06_llm_theory_and_fundamentals/workflow/"
+  },
+  {
+    "title": "Coze 部署和配置手册",
+    "url": "/06_llm_theory_and_fundamentals/workflow/coze_deployment_and_configuration_guide.html"
+  },
+  {
+    "title": "使用 n8n 构建多智能体系统的实践指南",
+    "url": "/06_llm_theory_and_fundamentals/workflow/n8n_multi_agent_guide.html"
+  },
+  {
+    "title": "开源大模型应用编排平台：Dify、AnythingLLM、Ragflow、n8n 与 Coze Studio 的功能与商用许可对比分析",
+    "url": "/06_llm_theory_and_fundamentals/workflow/open_source_llm_orchestration_platforms_comparison.html"
+  },
+  {
+    "title": "检索增强生成与工具生态",
+    "url": "/07_rag_and_tools/"
+  },
+  {
+    "title": "Knowledge Graphs for RAG（GraphRAG）",
+    "url": "/07_rag_and_tools/graph_rag/graph_rag_learning_guide.html"
+  },
+  {
+    "title": "KAG：基于知识增强生成的大语言模型逻辑推理与问答框架",
+    "url": "/07_rag_and_tools/graph_rag/kag_introduction.html"
+  },
+  {
+    "title": "Neo4j Cypher 查询语言权威指南",
+    "url": "/07_rag_and_tools/knowledge_graph/neo4j_cypher_tutorial.html"
+  },
+  {
+    "title": "Neo4j Cypher 快速上手实战指南",
+    "url": "/07_rag_and_tools/knowledge_graph/neo4j_handson_guide.html"
+  },
+  {
+    "title": "深入探索：AI 驱动的 PDF 布局检测引擎源代码解析 (译)",
+    "url": "/07_rag_and_tools/pdf_tools/marker_zh_cn.html"
+  },
+  {
+    "title": "快速入门",
+    "url": "/07_rag_and_tools/pdf_tools/markitdown/markitdown_intro.html"
+  },
+  {
+    "title": "上海人工智能实验室开源工具 MinerU 助力复杂 PDF 高效解析提取",
+    "url": "/07_rag_and_tools/pdf_tools/miner_u_intro.html"
+  },
+  {
+    "title": "中文 RAG 系统 Embedding 模型选型技术文档",
+    "url": "/07_rag_and_tools/rag_basics/chinese_rag_embedding_model_selection.html"
+  },
+  {
+    "title": "Evaluating Chunking Strategies for Retrieval 总结",
+    "url": "/07_rag_and_tools/rag_basics/evaluating_chunking_strategies_summary.html"
+  },
+  {
+    "title": "Agentic RAG 对比",
+    "url": "/07_rag_and_tools/rag_basics/rag_comparison.html"
+  },
+  {
+    "title": "银行反电诈智能系统设计方案（Synergized LLMs + KGs）",
+    "url": "/07_rag_and_tools/synergized_llms_kgs/anti_fraud_design.html"
+  },
+  {
+    "title": "反电诈 Demo（synergized_llms_kgs）— Neo4j + Moonshot LLM",
+    "url": "/07_rag_and_tools/synergized_llms_kgs/demo/"
+  },
+  {
+    "title": "AI Agent 开发与实践",
+    "url": "/08_agentic_system/"
+  },
+  {
+    "title": "多轮指代消解对话系统",
+    "url": "/08_agentic_system/agent_design/coref-dialogue-system/"
+  },
+  {
+    "title": "支持多轮对话指代消解的 ChatBot 系统：架构设计与实现详解",
+    "url": "/08_agentic_system/agent_design/coreference-resolution-dialogue-system.html"
+  },
+  {
+    "title": "Cursor IDE ReAct Agent 技术架构深度分析",
+    "url": "/08_agentic_system/agent_design/react-agent.html"
+  },
+  {
+    "title": "TradingAgents-CN 多智能体设计与交互分析",
+    "url": "/08_agentic_system/agent_design/trading-agents-cn.html"
+  },
+  {
+    "title": "技术博客撰写 Agentic RAG Agent 系统设计",
+    "url": "/08_agentic_system/agent_design/writing-agentic-agent.html"
+  },
+  {
+    "title": "Agent Sandbox 的演进与设计范式",
+    "url": "/08_agentic_system/agent_infra/agent-sandbox-design.html"
+  },
+  {
+    "title": "AI Agent 基础设施——三个决定性层次：工具、数据、编排",
+    "url": "/08_agentic_system/agent_infra/ai-agent-infra-stack.html"
+  },
+  {
+    "title": "Claude Code Sandbox 安全隔离机制解析",
+    "url": "/08_agentic_system/agent_infra/claude-code-sandbox.html"
+  },
+  {
+    "title": "深度解析 Kagent：从零打造 Kubernetes 运维智能体",
+    "url": "/08_agentic_system/agent_infra/deep-dive-kagent-k8s-ops-agent.html"
+  },
+  {
+    "title": "云原生 AI Agent 基础设施：OpenClaw Operator 架构深度解析",
+    "url": "/08_agentic_system/agent_infra/openclaw-operator-deep-dive.html"
+  },
+  {
+    "title": "OpenHarness 深入浅出：解密开源智能体基础设施",
+    "url": "/08_agentic_system/agent_infra/openharness-deep-dive.html"
+  },
+  {
+    "title": "扩展托管智能体：让决策与执行解耦，各行其职",
+    "url": "/08_agentic_system/agent_infra/scaling-managed-agents.html"
+  },
+  {
+    "title": "AI Agent 基础设施的崛起",
+    "url": "/08_agentic_system/agent_infra/the-rise-of-ai-agent-infrastructure.html"
+  },
+  {
+    "title": "给 Claude 写本“标准操作手册”：Agent Skills 实战与深度解析",
+    "url": "/08_agentic_system/agent_skills/docs/claude_skills_guide.html"
+  },
+  {
+    "title": "PDF Translator Skill",
+    "url": "/08_agentic_system/agent_skills/pdf_translator/"
+  },
+  {
+    "title": "PDF Translator Skill",
+    "url": "/08_agentic_system/agent_skills/pdf_translator/SKILL.html"
+  },
+  {
+    "title": "PDF Text Extraction API Guide",
+    "url": "/08_agentic_system/agent_skills/pdf_translator/references/api_guide.html"
+  },
+  {
+    "title": "Translated Document",
+    "url": "/08_agentic_system/agent_skills/pdf_translator/test_output.html"
+  },
+  {
+    "title": "12-Factor Agents - 构建可靠 LLM 应用的原则",
+    "url": "/08_agentic_system/concepts/12-factor-agents-intro.html"
+  },
+  {
+    "title": "世界模型简介：智能体理解世界的内部引擎",
+    "url": "/08_agentic_system/concepts/world-model-introduction.html"
+  },
+  {
+    "title": "面向 AI 智能体的高效上下文工程",
+    "url": "/08_agentic_system/context/anthropic-context-engineering-zh.html"
+  },
+  {
+    "title": "Claude Code 上下文压缩机制深度解析",
+    "url": "/08_agentic_system/context/claude-code-context-compression.html"
+  },
+  {
+    "title": "上下文工程原理简介",
+    "url": "/08_agentic_system/context/context-engineering-intro.html"
+  },
+  {
+    "title": "上下文工程原理",
+    "url": "/08_agentic_system/context/context-engineering-principles.html"
+  },
+  {
+    "title": "基于上下文工程的 LangChain 智能体应用",
+    "url": "/08_agentic_system/context/langchain-with-context-engineering.html"
+  },
+  {
+    "title": "字节 OpenViking 深度剖析：AI Agent 的“第二大脑”与上下文革命",
+    "url": "/08_agentic_system/context/openviking-deep-dive.html"
+  },
+  {
+    "title": "企业级 Data Agent 敏捷落地规划：存量数据资产的 AI 智能化盘活",
+    "url": "/08_agentic_system/data-agent/data-agent-skill-mvp.html"
+  },
+  {
+    "title": "数据智能体：是重塑生产力的“自动驾驶”，还是换壳的平庸炒作？",
+    "url": "/08_agentic_system/data-agent/data-agent-survey.html"
+  },
+  {
+    "title": "企业级 Data Agent 产品需求文档",
+    "url": "/08_agentic_system/data-agent/enterprise-data-agent-prd.html"
+  },
+  {
+    "title": "深度解析 MCP 与 AI 工具化的未来",
+    "url": "/08_agentic_system/mcp/docs/01_deep_dive_into_mcp_and_the_future_of_ai_tooling.html"
+  },
+  {
+    "title": "MCP 智能体演示项目",
+    "url": "/08_agentic_system/mcp/mcp_demo/"
+  },
+  {
+    "title": "AI 智能体记忆系统",
+    "url": "/08_agentic_system/memory/"
+  },
+  {
+    "title": "LangChain 记忆功能演示",
+    "url": "/08_agentic_system/memory/langchain/code/"
+  },
+  {
+    "title": "使用 LangChain 实现智能对话机器人的记忆功能",
+    "url": "/08_agentic_system/memory/langchain/langchain_memory.html"
+  },
+  {
+    "title": "Claude Code 源码解析：基于 ReAct 循环与精准上下文捕获的智能体执行流程详解",
+    "url": "/08_agentic_system/memory/research/case-studies/claude-code-agent-execution-flow.html"
+  },
+  {
+    "title": "Claude Code 源码解析：基于 Markdown 文件的持久化记忆机制",
+    "url": "/08_agentic_system/memory/research/case-studies/claude-code-memory-analysis.html"
+  },
+  {
+    "title": "Claude-Mem: 为 Claude Code 构建持久化记忆系统",
+    "url": "/08_agentic_system/memory/research/case-studies/claude-mem-system-analysis.html"
+  },
+  {
+    "title": "Supermemory 架构与 Agent 集成解析",
+    "url": "/08_agentic_system/memory/research/case-studies/supermemory-agent-integration-analysis.html"
+  },
+  {
+    "title": "Hermes Agent 内存管理架构：源码解析与设计哲学",
+    "url": "/08_agentic_system/memory/research/systems/hermes-agent-memory-management.html"
+  },
+  {
+    "title": "AI 记忆系统 Mem0 快速入门",
+    "url": "/08_agentic_system/memory/research/systems/mem0-quickstart.html"
+  },
+  {
+    "title": "从硅谷杀出的 AI 记忆革命：MemMachine 如何重新定义智能体交互体验",
+    "url": "/08_agentic_system/memory/research/systems/memmachine-deep-dive.html"
+  },
+  {
+    "title": "MemoryOS 智能记忆系统架构设计与开发指南（2026-03）",
+    "url": "/08_agentic_system/memory/research/systems/memoryos-architecture-guide.html"
+  },
+  {
+    "title": "AI 智能体记忆系统：理论与实践",
+    "url": "/08_agentic_system/memory/research/theory/ai-agent-memory-theory.html"
+  },
+  {
+    "title": "大模型 Agent 记忆系统：理论基础与交互机制",
+    "url": "/08_agentic_system/memory/research/theory/llm-agent-memory-survey.html"
+  },
+  {
+    "title": "记忆系统已死，而记忆管理永存",
+    "url": "/08_agentic_system/memory/research/theory/memory-systems-are-dead.html"
+  },
+  {
+    "title": "多智能体AI系统基础：理论与框架",
+    "url": "/08_agentic_system/multi_agent/docs/part1_multi_agent_ai_fundamentals.html"
+  },
+  {
+    "title": "企业级多智能体 AI 系统构建实战",
+    "url": "/08_agentic_system/multi_agent/docs/part2_enterprise_multi_agent_system_implementation.html"
+  },
+  {
+    "title": "企业级多智能体 AI 系统",
+    "url": "/08_agentic_system/multi_agent/multi_agent_system/"
+  },
+  {
+    "title": "Agent 核心论文资源",
+    "url": "/08_agentic_system/papers/"
+  },
+  {
+    "title": "A Survey on Agent Workflow – Status and Future - 速览",
+    "url": "/08_agentic_system/papers/agent-workflow-survey.html"
+  },
+  {
+    "title": "论文解读：深度研究智能体（Deep Research Agents）的定义与核心能力",
+    "url": "/08_agentic_system/papers/deep-research-agent.html"
+  },
+  {
+    "title": "智能体工程现状",
+    "url": "/08_agentic_system/reports/langchain-state-of-agent-engineering.html"
+  },
+  {
+    "title": "推理优化技术方案",
+    "url": "/09_inference_system/"
+  },
+  {
+    "title": "每月花多少才不冤？2026 年国内外 11 款 Coding Plan 深度对比与避坑指南",
+    "url": "/09_inference_system/cost_analysis/coding_plan/coding_plan_report.html"
+  },
+  {
+    "title": "claude pricing",
+    "url": "/09_inference_system/cost_analysis/coding_plan/data/pricing_raw/2026-04-17/anthropic/claude-pricing.html"
+  },
+  {
+    "title": "amazon q pricing",
+    "url": "/09_inference_system/cost_analysis/coding_plan/data/pricing_raw/2026-04-17/aws/amazon-q-pricing.html"
+  },
+  {
+    "title": "cursor pricing",
+    "url": "/09_inference_system/cost_analysis/coding_plan/data/pricing_raw/2026-04-17/cursor/cursor-pricing.html"
+  },
+  {
+    "title": "copilot plans",
+    "url": "/09_inference_system/cost_analysis/coding_plan/data/pricing_raw/2026-04-17/github/copilot-plans.html"
+  },
+  {
+    "title": "jetbrains ai licensing",
+    "url": "/09_inference_system/cost_analysis/coding_plan/data/pricing_raw/2026-04-17/jetbrains/jetbrains-ai-licensing.html"
+  },
+  {
+    "title": "kimi code",
+    "url": "/09_inference_system/cost_analysis/coding_plan/data/pricing_raw/2026-04-17/kimi/kimi-code.html"
+  },
+  {
+    "title": "minimax token plan pricing",
+    "url": "/09_inference_system/cost_analysis/coding_plan/data/pricing_raw/2026-04-17/minimax/minimax-token-plan-pricing.html"
+  },
+  {
+    "title": "replit pricing",
+    "url": "/09_inference_system/cost_analysis/coding_plan/data/pricing_raw/2026-04-17/replit/replit-pricing.html"
+  },
+  {
+    "title": "aliyun bailian coding plan",
+    "url": "/09_inference_system/cost_analysis/coding_plan/data/pricing_raw/2026-04-17/snapshot/aliyun-bailian-coding-plan.html"
+  },
+  {
+    "title": "tencent coding plan",
+    "url": "/09_inference_system/cost_analysis/coding_plan/data/pricing_raw/2026-04-17/snapshot/tencent-coding-plan.html"
+  },
+  {
+    "title": "volcengine codingplan activity",
+    "url": "/09_inference_system/cost_analysis/coding_plan/data/pricing_raw/2026-04-17/snapshot/volcengine-codingplan-activity.html"
+  },
+  {
+    "title": "zhipu claw plan team",
+    "url": "/09_inference_system/cost_analysis/coding_plan/data/pricing_raw/2026-04-17/snapshot/zhipu-claw-plan-team.html"
+  },
+  {
+    "title": "zhipu glm coding",
+    "url": "/09_inference_system/cost_analysis/coding_plan/data/pricing_raw/2026-04-17/snapshot/zhipu-glm-coding.html"
+  },
+  {
+    "title": "windsurf pricing",
+    "url": "/09_inference_system/cost_analysis/coding_plan/data/pricing_raw/2026-04-17/windsurf/windsurf-pricing.html"
+  },
+  {
+    "title": "claude pricing",
+    "url": "/09_inference_system/cost_analysis/coding_plan/data/pricing_raw/2026-04-18/anthropic/claude-pricing.html"
+  },
+  {
+    "title": "amazon q pricing",
+    "url": "/09_inference_system/cost_analysis/coding_plan/data/pricing_raw/2026-04-18/aws/amazon-q-pricing.html"
+  },
+  {
+    "title": "cursor pricing",
+    "url": "/09_inference_system/cost_analysis/coding_plan/data/pricing_raw/2026-04-18/cursor/cursor-pricing.html"
+  },
+  {
+    "title": "copilot plans",
+    "url": "/09_inference_system/cost_analysis/coding_plan/data/pricing_raw/2026-04-18/github/copilot-plans.html"
+  },
+  {
+    "title": "jetbrains ai licensing",
+    "url": "/09_inference_system/cost_analysis/coding_plan/data/pricing_raw/2026-04-18/jetbrains/jetbrains-ai-licensing.html"
+  },
+  {
+    "title": "kimi code",
+    "url": "/09_inference_system/cost_analysis/coding_plan/data/pricing_raw/2026-04-18/kimi/kimi-code.html"
+  },
+  {
+    "title": "minimax token plan pricing",
+    "url": "/09_inference_system/cost_analysis/coding_plan/data/pricing_raw/2026-04-18/minimax/minimax-token-plan-pricing.html"
+  },
+  {
+    "title": "replit pricing",
+    "url": "/09_inference_system/cost_analysis/coding_plan/data/pricing_raw/2026-04-18/replit/replit-pricing.html"
+  },
+  {
+    "title": "aliyun bailian coding plan",
+    "url": "/09_inference_system/cost_analysis/coding_plan/data/pricing_raw/2026-04-18/snapshot/aliyun-bailian-coding-plan.html"
+  },
+  {
+    "title": "tencent coding plan",
+    "url": "/09_inference_system/cost_analysis/coding_plan/data/pricing_raw/2026-04-18/snapshot/tencent-coding-plan.html"
+  },
+  {
+    "title": "volcengine codingplan activity",
+    "url": "/09_inference_system/cost_analysis/coding_plan/data/pricing_raw/2026-04-18/snapshot/volcengine-codingplan-activity.html"
+  },
+  {
+    "title": "zhipu claw plan team",
+    "url": "/09_inference_system/cost_analysis/coding_plan/data/pricing_raw/2026-04-18/snapshot/zhipu-claw-plan-team.html"
+  },
+  {
+    "title": "zhipu glm coding",
+    "url": "/09_inference_system/cost_analysis/coding_plan/data/pricing_raw/2026-04-18/snapshot/zhipu-glm-coding.html"
+  },
+  {
+    "title": "windsurf pricing",
+    "url": "/09_inference_system/cost_analysis/coding_plan/data/pricing_raw/2026-04-18/windsurf/windsurf-pricing.html"
+  },
+  {
+    "title": "pricing table",
+    "url": "/09_inference_system/cost_analysis/coding_plan/data/pricing_table.html"
+  },
+  {
+    "title": "附录：2026 年国内外主流 Coding Plan 真实数据看板",
+    "url": "/09_inference_system/cost_analysis/coding_plan/objective_pricing_comparison.html"
+  },
+  {
+    "title": "大模型 API 定价策略定量分析框架",
+    "url": "/09_inference_system/cost_analysis/llm_api_pricing_analysis.html"
+  },
+  {
+    "title": "DeepSeek-V3 在 32 张 H20 GPU 集群上的部署方案【理论分析篇】",
+    "url": "/09_inference_system/inference_solutions/deepseek_v3_moe_vllm_h20_deployment.html"
+  },
+  {
+    "title": "Qwen2-VL-7B-Instruct 昇腾部署指南",
+    "url": "/09_inference_system/inference_solutions/qwen2_vl_7b_huawei.html"
+  },
+  {
+    "title": "NIXL (NVIDIA Inference Xfer Library) 简介",
+    "url": "/09_inference_system/infrastructure/nixl_introduction.html"
+  },
+  {
+    "title": "KV Cache 技术体系",
+    "url": "/09_inference_system/kv_cache/"
+  },
+  {
+    "title": "vLLM KV Offloading Connector 与 LMCacheConnector：架构设计与性能深度对比",
+    "url": "/09_inference_system/kv_cache/01_concepts/advanced/kv_offloading_analysis.html"
+  },
+  {
+    "title": "KV Cache 层级流水线并行",
+    "url": "/09_inference_system/kv_cache/01_concepts/advanced/layerwise_pipeline.html"
+  },
+  {
+    "title": "KV Cache 原理简介",
+    "url": "/09_inference_system/kv_cache/01_concepts/basic/kv_cache_原理简介.html"
+  },
+  {
+    "title": "GLM-5 模型 KV Cache 容量规划报告",
+    "url": "/09_inference_system/kv_cache/01_concepts/capacity_planning/glm5_kv_cache_capacity_planning.html"
+  },
+  {
+    "title": "【企业 AI Infra 决策者】大模型推理引入 `KV Cache` 收益评估分析",
+    "url": "/09_inference_system/kv_cache/01_concepts/capacity_planning/kv_cache_roi.html"
+  },
+  {
+    "title": "大模型 KV Cache 压缩技术详解：原理、架构与趋势",
+    "url": "/09_inference_system/kv_cache/01_concepts/compression/kv_cache_compression.html"
+  },
+  {
+    "title": "Claude 提示词缓存机制与源码实现深度分析",
+    "url": "/09_inference_system/kv_cache/01_concepts/prefix_caching/claude_prompt_caching.html"
+  },
+  {
+    "title": "Prefix Caching 技术详解：从原理到 vLLM/LMCache 实践",
+    "url": "/09_inference_system/kv_cache/01_concepts/prefix_caching/prefix_caching.html"
+  },
+  {
+    "title": "RadixAttention 技术详解：从原理到 SGLang 实践及 vLLM APC 对比",
+    "url": "/09_inference_system/kv_cache/01_concepts/prefix_caching/radix_attention.html"
+  },
+  {
+    "title": "KV Block Manager (KVBM) 深度解析",
+    "url": "/09_inference_system/kv_cache/02_systems/kvbm/KVBM_Analysis.html"
+  },
+  {
+    "title": "LMCache 源码分析指南",
+    "url": "/09_inference_system/kv_cache/02_systems/lmcache/"
+  },
+  {
+    "title": "CacheBlend 技术详解：RAG 场景下的 KV Cache 动态融合机制与源码剖析",
+    "url": "/09_inference_system/kv_cache/02_systems/lmcache/cache_blend.html"
+  },
+  {
+    "title": "CacheGen 技术详解：KV Cache 的高效压缩与流式传输",
+    "url": "/09_inference_system/kv_cache/02_systems/lmcache/cachegen.html"
+  },
+  {
+    "title": "GdsBackend 源码分析",
+    "url": "/09_inference_system/kv_cache/02_systems/lmcache/gds_backend.html"
+  },
+  {
+    "title": "LMCacheConnector (vLLM 集成) 代码分析",
+    "url": "/09_inference_system/kv_cache/02_systems/lmcache/lmcache_connector.html"
+  },
+  {
+    "title": "LMCache Controller (控制平面) 架构剖析",
+    "url": "/09_inference_system/kv_cache/02_systems/lmcache/lmcache_controller.html"
+  },
+  {
+    "title": "LMCacheEngine 核心引擎代码分析",
+    "url": "/09_inference_system/kv_cache/02_systems/lmcache/lmcache_engine.html"
+  },
+  {
+    "title": "LMCache 架构概览",
+    "url": "/09_inference_system/kv_cache/02_systems/lmcache/lmcache_overview.html"
+  },
+  {
+    "title": "LMCache Server 源码分析",
+    "url": "/09_inference_system/kv_cache/02_systems/lmcache/lmcache_server.html"
+  },
+  {
+    "title": "LMCache 分层存储架构与调度机制详解",
+    "url": "/09_inference_system/kv_cache/02_systems/lmcache/lmcache_storage_overview.html"
+  },
+  {
+    "title": "LocalCPUBackend 源码分析",
+    "url": "/09_inference_system/kv_cache/02_systems/lmcache/local_cpu_backend.html"
+  },
+  {
+    "title": "LocalDiskBackend 源码分析",
+    "url": "/09_inference_system/kv_cache/02_systems/lmcache/local_disk_backend.html"
+  },
+  {
+    "title": "NixlStorageBackend 源码分析",
+    "url": "/09_inference_system/kv_cache/02_systems/lmcache/nixl_backend.html"
+  },
+  {
+    "title": "P2PBackend 源码分析",
+    "url": "/09_inference_system/kv_cache/02_systems/lmcache/p2p_backend.html"
+  },
+  {
+    "title": "PDBackend (预填充-解码分离后端) 源码分析",
+    "url": "/09_inference_system/kv_cache/02_systems/lmcache/pd_backend.html"
+  },
+  {
+    "title": "Remote Connector (远程连接器) 源码分析",
+    "url": "/09_inference_system/kv_cache/02_systems/lmcache/remote_connector.html"
+  },
+  {
+    "title": "Mooncake 架构概览：以 KV Cache 为中心的高效 LLM 推理系统设计",
+    "url": "/09_inference_system/kv_cache/02_systems/mooncake/mooncake_architecture.html"
+  },
+  {
+    "title": "Tair KVCache 架构与设计深度分析",
+    "url": "/09_inference_system/kv_cache/02_systems/tair_kvcache/tair-kvcache-architecture-design.html"
+  },
+  {
+    "title": "LLM 模型推理显存占用深度的分析",
+    "url": "/09_inference_system/memory_calc/memory_analysis.html"
+  },
+  {
+    "title": "图解投机解码",
+    "url": "/09_inference_system/model_optimization/illustrated-speculative-decoding.html"
+  },
+  {
+    "title": "NVIDIA Model Optimizer 技术详解：功能、原理与实现",
+    "url": "/09_inference_system/model_optimization/nvidia_model_optimizer.html"
+  },
+  {
+    "title": "一、大模型推理优化：背景与目标",
+    "url": "/09_inference_system/reference_design/01-背景与目标.html"
+  },
+  {
+    "title": "二、大模型推理优化：集群规模分类与特征分析",
+    "url": "/09_inference_system/reference_design/02-集群规模分类与特征分析.html"
+  },
+  {
+    "title": "三、核心推理优化技术深度解析",
+    "url": "/09_inference_system/reference_design/03-核心推理优化技术深度解析.html"
+  },
+  {
+    "title": "四、不同集群规模的技术选型策略",
+    "url": "/09_inference_system/reference_design/04-不同集群规模的技术选型策略.html"
+  },
+  {
+    "title": "第五章：性能评估指标体系",
+    "url": "/09_inference_system/reference_design/05-性能评估指标体系.html"
+  },
+  {
+    "title": "第六章：推理服务架构设计",
+    "url": "/09_inference_system/reference_design/06-推理服务架构设计.html"
+  },
+  {
+    "title": "第七章：实施建议与最佳实践",
+    "url": "/09_inference_system/reference_design/07-实施建议与最佳实践.html"
+  },
+  {
+    "title": "第八章：参考资料与延伸阅读",
+    "url": "/09_inference_system/reference_design/08-参考资料与延伸阅读.html"
+  },
+  {
+    "title": "9. 安全性与合规性",
+    "url": "/09_inference_system/reference_design/09-安全性与合规性.html"
+  },
+  {
+    "title": "10. 多模态推理优化",
+    "url": "/09_inference_system/reference_design/10-多模态推理优化.html"
+  },
+  {
+    "title": "十一、边缘推理优化",
+    "url": "/09_inference_system/reference_design/11-边缘推理优化.html"
+  },
+  {
+    "title": "十二、常见问题解答 (FAQ)",
+    "url": "/09_inference_system/reference_design/12-场景问题解答.html"
+  },
+  {
+    "title": "十三、实施检查清单",
+    "url": "/09_inference_system/reference_design/13-实施检查清单.html"
+  },
+  {
+    "title": "十四、总结与展望",
+    "url": "/09_inference_system/reference_design/14-总结与展望.html"
+  },
+  {
+    "title": "面向推理执行图的异构调度系统架构设计",
+    "url": "/09_inference_system/reference_design/面向推理执行图的异构调度系统架构设计.html"
+  },
+  {
+    "title": "vLLM 推理系统优化与分析",
+    "url": "/09_inference_system/vllm/"
+  },
+  {
+    "title": "从 H200 到 Blackwell 的飞跃：vLLM 助力 DeepSeek 吞吐量飙升 5 倍的五大技术内幕",
+    "url": "/09_inference_system/vllm/hardware_optimization/vllm_deepseek_blackwell_wide_ep.html"
+  },
+  {
+    "title": "vLLM 注意力机制演进与支持全景：从 MHA 到 MLA 及其稀疏变体的架构解析",
+    "url": "/09_inference_system/vllm/module_analysis/vllm_attention_mha_mla_nsa.html"
+  },
+  {
+    "title": "CUDA Graphs 深度解析",
+    "url": "/09_inference_system/vllm/module_analysis/vllm_cuda_graph_deep_dive.html"
+  },
+  {
+    "title": "vLLM 中的 DeepSeek V4：高效长上下文注意力",
+    "url": "/09_inference_system/vllm/module_analysis/vllm_deepseek_v4.html"
+  },
+  {
+    "title": "Hybrid KV Cache Manager 深度解析",
+    "url": "/09_inference_system/vllm/module_analysis/vllm_hybrid_kv_cache_manager_deep_dive.html"
+  },
+  {
+    "title": "vLLM 内置 KV Cache Offloading 模块解析",
+    "url": "/09_inference_system/vllm/module_analysis/vllm_native_kv_offloading.html"
+  },
+  {
+    "title": "vLLM Router：高性能 LLM 推理网关",
+    "url": "/09_inference_system/vllm/related_module/vllm_router.html"
+  },
+  {
+    "title": "vLLM Semantic Router 深度剖析：重塑 LLM 流量分发的智能大脑",
+    "url": "/09_inference_system/vllm/related_module/vllm_semantic_router_deep_dive.html"
+  },
+  {
+    "title": "AI Agents for Beginners 课程之 AI Agent及使用场景简介",
+    "url": "/10_ai_related_course/AI Agents for Beginners 课程之 AI Agent及使用场景简介.html"
+  },
+  {
+    "title": "AI 编程入门",
+    "url": "/10_ai_related_course/ai_coding/"
+  },
+  {
+    "title": "AI 编程入门",
+    "url": "/10_ai_related_course/ai_coding/AI 编程入门.html"
+  },
+  {
+    "title": "page 1",
+    "url": "/10_ai_related_course/ai_coding/page_1.html"
+  },
+  {
+    "title": "page 10",
+    "url": "/10_ai_related_course/ai_coding/page_10.html"
+  },
+  {
+    "title": "page 11",
+    "url": "/10_ai_related_course/ai_coding/page_11.html"
+  },
+  {
+    "title": "page 12",
+    "url": "/10_ai_related_course/ai_coding/page_12.html"
+  },
+  {
+    "title": "page 13",
+    "url": "/10_ai_related_course/ai_coding/page_13.html"
+  },
+  {
+    "title": "page 14",
+    "url": "/10_ai_related_course/ai_coding/page_14.html"
+  },
+  {
+    "title": "page 15",
+    "url": "/10_ai_related_course/ai_coding/page_15.html"
+  },
+  {
+    "title": "page 16",
+    "url": "/10_ai_related_course/ai_coding/page_16.html"
+  },
+  {
+    "title": "page 17",
+    "url": "/10_ai_related_course/ai_coding/page_17.html"
+  },
+  {
+    "title": "page 18",
+    "url": "/10_ai_related_course/ai_coding/page_18.html"
+  },
+  {
+    "title": "page 19",
+    "url": "/10_ai_related_course/ai_coding/page_19.html"
+  },
+  {
+    "title": "page 2",
+    "url": "/10_ai_related_course/ai_coding/page_2.html"
+  },
+  {
+    "title": "page 20",
+    "url": "/10_ai_related_course/ai_coding/page_20.html"
+  },
+  {
+    "title": "page 21",
+    "url": "/10_ai_related_course/ai_coding/page_21.html"
+  },
+  {
+    "title": "page 22",
+    "url": "/10_ai_related_course/ai_coding/page_22.html"
+  },
+  {
+    "title": "page 23",
+    "url": "/10_ai_related_course/ai_coding/page_23.html"
+  },
+  {
+    "title": "page 24",
+    "url": "/10_ai_related_course/ai_coding/page_24.html"
+  },
+  {
+    "title": "page 25",
+    "url": "/10_ai_related_course/ai_coding/page_25.html"
+  },
+  {
+    "title": "page 26",
+    "url": "/10_ai_related_course/ai_coding/page_26.html"
+  },
+  {
+    "title": "page 3",
+    "url": "/10_ai_related_course/ai_coding/page_3.html"
+  },
+  {
+    "title": "page 4",
+    "url": "/10_ai_related_course/ai_coding/page_4.html"
+  },
+  {
+    "title": "page 5",
+    "url": "/10_ai_related_course/ai_coding/page_5.html"
+  },
+  {
+    "title": "page 6",
+    "url": "/10_ai_related_course/ai_coding/page_6.html"
+  },
+  {
+    "title": "page 7",
+    "url": "/10_ai_related_course/ai_coding/page_7.html"
+  },
+  {
+    "title": "page 8",
+    "url": "/10_ai_related_course/ai_coding/page_8.html"
+  },
+  {
+    "title": "page 9",
+    "url": "/10_ai_related_course/ai_coding/page_9.html"
+  },
+  {
+    "title": "AI 基础设施课程",
+    "url": "/10_ai_related_course/ai_infra_course/入门级/"
+  },
+  {
+    "title": "AI Infra 最新进展 - PPT 大纲设计（详尽素材版）",
+    "url": "/10_ai_related_course/ai_infra_course/入门级/AI Infra 课程 PPT 大纲.html"
+  },
+  {
+    "title": "page 1",
+    "url": "/10_ai_related_course/ai_infra_course/入门级/page_1.html"
+  },
+  {
+    "title": "page 10",
+    "url": "/10_ai_related_course/ai_infra_course/入门级/page_10.html"
+  },
+  {
+    "title": "page 11",
+    "url": "/10_ai_related_course/ai_infra_course/入门级/page_11.html"
+  },
+  {
+    "title": "page 12",
+    "url": "/10_ai_related_course/ai_infra_course/入门级/page_12.html"
+  },
+  {
+    "title": "page 13",
+    "url": "/10_ai_related_course/ai_infra_course/入门级/page_13.html"
+  },
+  {
+    "title": "page 14",
+    "url": "/10_ai_related_course/ai_infra_course/入门级/page_14.html"
+  },
+  {
+    "title": "page 15",
+    "url": "/10_ai_related_course/ai_infra_course/入门级/page_15.html"
+  },
+  {
+    "title": "page 16",
+    "url": "/10_ai_related_course/ai_infra_course/入门级/page_16.html"
+  },
+  {
+    "title": "page 17",
+    "url": "/10_ai_related_course/ai_infra_course/入门级/page_17.html"
+  },
+  {
+    "title": "page 18",
+    "url": "/10_ai_related_course/ai_infra_course/入门级/page_18.html"
+  },
+  {
+    "title": "page 19",
+    "url": "/10_ai_related_course/ai_infra_course/入门级/page_19.html"
+  },
+  {
+    "title": "page 2",
+    "url": "/10_ai_related_course/ai_infra_course/入门级/page_2.html"
+  },
+  {
+    "title": "page 20",
+    "url": "/10_ai_related_course/ai_infra_course/入门级/page_20.html"
+  },
+  {
+    "title": "page 21",
+    "url": "/10_ai_related_course/ai_infra_course/入门级/page_21.html"
+  },
+  {
+    "title": "page 22",
+    "url": "/10_ai_related_course/ai_infra_course/入门级/page_22.html"
+  },
+  {
+    "title": "page 23",
+    "url": "/10_ai_related_course/ai_infra_course/入门级/page_23.html"
+  },
+  {
+    "title": "page 24",
+    "url": "/10_ai_related_course/ai_infra_course/入门级/page_24.html"
+  },
+  {
+    "title": "page 25",
+    "url": "/10_ai_related_course/ai_infra_course/入门级/page_25.html"
+  },
+  {
+    "title": "page 26",
+    "url": "/10_ai_related_course/ai_infra_course/入门级/page_26.html"
+  },
+  {
+    "title": "page 27",
+    "url": "/10_ai_related_course/ai_infra_course/入门级/page_27.html"
+  },
+  {
+    "title": "page 28",
+    "url": "/10_ai_related_course/ai_infra_course/入门级/page_28.html"
+  },
+  {
+    "title": "page 29",
+    "url": "/10_ai_related_course/ai_infra_course/入门级/page_29.html"
+  },
+  {
+    "title": "page 3",
+    "url": "/10_ai_related_course/ai_infra_course/入门级/page_3.html"
+  },
+  {
+    "title": "page 30",
+    "url": "/10_ai_related_course/ai_infra_course/入门级/page_30.html"
+  },
+  {
+    "title": "page 31",
+    "url": "/10_ai_related_course/ai_infra_course/入门级/page_31.html"
+  },
+  {
+    "title": "page 32",
+    "url": "/10_ai_related_course/ai_infra_course/入门级/page_32.html"
+  },
+  {
+    "title": "page 33",
+    "url": "/10_ai_related_course/ai_infra_course/入门级/page_33.html"
+  },
+  {
+    "title": "page 34",
+    "url": "/10_ai_related_course/ai_infra_course/入门级/page_34.html"
+  },
+  {
+    "title": "page 35",
+    "url": "/10_ai_related_course/ai_infra_course/入门级/page_35.html"
+  },
+  {
+    "title": "page 4",
+    "url": "/10_ai_related_course/ai_infra_course/入门级/page_4.html"
+  },
+  {
+    "title": "page 5",
+    "url": "/10_ai_related_course/ai_infra_course/入门级/page_5.html"
+  },
+  {
+    "title": "page 6",
+    "url": "/10_ai_related_course/ai_infra_course/入门级/page_6.html"
+  },
+  {
+    "title": "page 7",
+    "url": "/10_ai_related_course/ai_infra_course/入门级/page_7.html"
+  },
+  {
+    "title": "page 8",
+    "url": "/10_ai_related_course/ai_infra_course/入门级/page_8.html"
+  },
+  {
+    "title": "page 9",
+    "url": "/10_ai_related_course/ai_infra_course/入门级/page_9.html"
+  },
+  {
+    "title": "AI Infra 最新进展：从模型到架构 - 演讲稿",
+    "url": "/10_ai_related_course/ai_infra_course/入门级/讲稿.html"
+  },
+  {
+    "title": "多智能体AI系统培训材料",
+    "url": "/10_ai_related_course/multi_agent_system/multi_agent_training/"
+  },
+  {
+    "title": "第一天：多智能体系统理论基础",
+    "url": "/10_ai_related_course/multi_agent_system/multi_agent_training/01-理论基础/01-多智能体系统概论.html"
+  },
+  {
+    "title": "第二天：LangGraph框架深度应用",
+    "url": "/10_ai_related_course/multi_agent_system/multi_agent_training/02-LangGraph框架/02-LangGraph深度应用.html"
+  },
+  {
+    "title": "第三天：LangSmith监控平台集成",
+    "url": "/10_ai_related_course/multi_agent_system/multi_agent_training/03-LangSmith监控/03-LangSmith监控平台集成.html"
+  },
+  {
+    "title": "第四天：企业级系统架构设计与实现",
+    "url": "/10_ai_related_course/multi_agent_system/multi_agent_training/04-企业级架构/04-企业级系统架构设计与实现.html"
+  },
+  {
+    "title": "第五天：应用实践与部署运维",
+    "url": "/10_ai_related_course/multi_agent_system/multi_agent_training/05-应用实践/05-应用实践与部署运维.html"
+  },
+  {
+    "title": "多智能体AI系统培训大纲",
+    "url": "/10_ai_related_course/multi_agent_system/multi_agent_training/Multi-Agent-AI-Training-Outline.html"
+  },
+  {
+    "title": "Trae 编程实战教程",
+    "url": "/10_ai_related_course/trae/"
+  },
+  {
+    "title": "《Trae 编程实战》课程提纲",
+    "url": "/10_ai_related_course/trae/《Trae 编程实战》课程提纲（对外）.html"
+  },
+  {
+    "title": "第一章 Trae 简介与环境配置",
+    "url": "/10_ai_related_course/trae/第一部分-Trae基础入门/第一章-Trae简介与环境配置.html"
+  },
+  {
+    "title": "第三章 实战练习：Hello World 项目",
+    "url": "/10_ai_related_course/trae/第一部分-Trae基础入门/第三章-实战练习-HelloWorld项目.html"
+  },
+  {
+    "title": "第二章 基础交互模式",
+    "url": "/10_ai_related_course/trae/第一部分-Trae基础入门/第二章-基础交互模式.html"
+  },
+  {
+    "title": "第四章 第一部分总结与进阶准备",
+    "url": "/10_ai_related_course/trae/第一部分-Trae基础入门/第四章-第一部分总结与进阶准备.html"
+  },
+  {
+    "title": "第十三章 DevOps与云原生",
+    "url": "/10_ai_related_course/trae/第三部分-高级应用场景/DevOps与云原生-备份.html"
+  },
+  {
+    "title": "第十二章 数据科学与机器学习",
+    "url": "/10_ai_related_course/trae/第三部分-高级应用场景/数据科学与机器学习-备份.html"
+  },
+  {
+    "title": "第九章 AI 模型集成与智能应用开发",
+    "url": "/10_ai_related_course/trae/第三部分-高级应用场景/第九章-AI模型集成与智能应用开发.html"
+  },
+  {
+    "title": "第十一章 数据分析与智能可视化",
+    "url": "/10_ai_related_course/trae/第三部分-高级应用场景/第十一章-数据分析与智能可视化.html"
+  },
+  {
+    "title": "第十二章 微服务架构与服务治理",
+    "url": "/10_ai_related_course/trae/第三部分-高级应用场景/第十二章-微服务架构与服务治理.html"
+  },
+  {
+    "title": "第十章 实时通信与消息系统",
+    "url": "/10_ai_related_course/trae/第三部分-高级应用场景/第十章-实时通信与消息系统.html"
+  },
+  {
+    "title": "第七章 数据库设计与优化",
+    "url": "/10_ai_related_course/trae/第二部分-常见编程场景实战/第七章-数据库设计与优化.html"
+  },
+  {
+    "title": "第五章 现代前端开发实战",
+    "url": "/10_ai_related_course/trae/第二部分-常见编程场景实战/第五章-现代前端开发实战.html"
+  },
+  {
+    "title": "第八章 安全认证与权限管理",
+    "url": "/10_ai_related_course/trae/第二部分-常见编程场景实战/第八章-安全认证与权限管理.html"
+  },
+  {
+    "title": "第六章 高性能后端 API 开发",
+    "url": "/10_ai_related_course/trae/第二部分-常见编程场景实战/第六章-高性能后端API开发.html"
+  },
+  {
+    "title": "第二十章 部署运维与生产优化",
+    "url": "/10_ai_related_course/trae/第五部分-综合项目实战/第二十章-部署运维.html"
+  },
+  {
+    "title": "第十七章 项目规划与系统架构设计",
+    "url": "/10_ai_related_course/trae/第五部分-综合项目实战/第十七章-项目规划与架构设计.html"
+  },
+  {
+    "title": "第十九章 高级功能与AI增强",
+    "url": "/10_ai_related_course/trae/第五部分-综合项目实战/第十九章-高级功能实现.html"
+  },
+  {
+    "title": "第十八章 核心业务功能开发",
+    "url": "/10_ai_related_course/trae/第五部分-综合项目实战/第十八章-核心功能开发.html"
+  },
+  {
+    "title": "第十七章 云平台部署与DevOps实践",
+    "url": "/10_ai_related_course/trae/第四部分-团队协作与最佳实践/第十七章-云平台部署与DevOps实践.html"
+  },
+  {
+    "title": "第十五章 版本控制与团队协作最佳实践",
+    "url": "/10_ai_related_course/trae/第四部分-团队协作与最佳实践/第十五章-项目管理与协作.html"
+  },
+  {
+    "title": "第十六章 性能优化与调试实战",
+    "url": "/10_ai_related_course/trae/第四部分-团队协作与最佳实践/第十六章-性能优化与调试.html"
+  },
+  {
+    "title": "第十四章 实战练习：代码质量管理",
+    "url": "/10_ai_related_course/trae/第四部分-团队协作与最佳实践/第十四章-代码质量管理.html"
+  },
+  {
+    "title": "大语言模型应用开发与编排",
+    "url": "/98_llm_programming/"
+  },
+  {
+    "title": "Agent First：软件工程的下一个范式转移",
+    "url": "/98_llm_programming/Agent_First.html"
+  },
+  {
+    "title": "驾驭工程：为什么你的 AI 编程助手总在失控？",
+    "url": "/98_llm_programming/Harness_Engineering.html"
+  },
+  {
+    "title": "Java AI 开发指南",
+    "url": "/98_llm_programming/java_ai/"
+  },
+  {
+    "title": "使用 Spring AI 构建高效 LLM 代理（第一部分）",
+    "url": "/98_llm_programming/java_ai/spring_ai_cn.html"
+  },
+  {
+    "title": "LangGraph 框架开发指南",
+    "url": "/98_llm_programming/langgraph/"
+  },
+  {
+    "title": "LangGraph 实战：用 Python 打造有状态智能体",
+    "url": "/98_llm_programming/langgraph/langgraph_intro.html"
+  },
+  {
+    "title": "在 Mac 上运行 DeepSeek-R1 模型",
+    "url": "/99_misc/mac-deepseek-r1.html"
+  },
+  {
+    "title": "Ollama",
+    "url": "/99_misc/ollama/"
+  }
+]
