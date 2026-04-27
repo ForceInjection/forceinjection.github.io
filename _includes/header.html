@@ -7,6 +7,22 @@
       AI Fundamentals
     </a>
 
+    <!-- Search box -->
+    <div class="site-nav__search">
+      <svg class="site-nav__search-icon" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true">
+        <path fill="currentColor" d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+      </svg>
+      <input type="text"
+             class="site-nav__search-input"
+             id="search-input"
+             placeholder="搜索文档…"
+             autocomplete="off"
+             aria-label="搜索文档"
+             aria-autocomplete="list"
+             aria-controls="search-results">
+      <ul class="site-nav__search-results" id="search-results" role="listbox" aria-hidden="true" hidden></ul>
+    </div>
+
     <!-- Desktop: Modules dropdown button -->
     <button class="site-nav__modules-btn"
             id="nav-modules-btn"
@@ -166,6 +182,145 @@
 
   document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape') { closeAll(); }
+  });
+}());
+
+/* ── Site Search ─────────────────────────────────────────── */
+(function () {
+  var input   = document.getElementById('search-input');
+  var results = document.getElementById('search-results');
+  var nav     = document.getElementById('site-nav');
+  var idx     = null;   // loaded index
+  var sel     = -1;     // keyboard selection index
+
+  if (!input || !results) return;
+
+  // Load index once
+  fetch('{{ "/search.json" | relative_url }}')
+    .then(function (r) { return r.json(); })
+    .then(function (data) { idx = data; })
+    .catch(function (e) { console.error('Search index load failed', e); });
+
+  function closeSearch() {
+    results.hidden = true;
+    results.setAttribute('aria-hidden', 'true');
+    sel = -1;
+  }
+
+  function openSearch() {
+    results.hidden = false;
+    results.setAttribute('aria-hidden', 'false');
+  }
+
+  function render(items, query) {
+    results.innerHTML = '';
+    sel = -1;
+    if (!items.length) {
+      var li = document.createElement('li');
+      li.className = 'site-nav__search-no-results';
+      li.textContent = '无搜索结果';
+      results.appendChild(li);
+      openSearch();
+      return;
+    }
+    items.forEach(function (item, i) {
+      var li = document.createElement('li');
+      li.setAttribute('role', 'option');
+      li.setAttribute('data-index', String(i));
+
+      var a = document.createElement('a');
+      a.href = item.url;
+      a.className = 'site-nav__search-link';
+
+      // Highlight matched parts
+      var title = item.title;
+      var q = query.toLowerCase();
+      var t = title.toLowerCase();
+      var pos = t.indexOf(q);
+      if (pos >= 0 && query) {
+        a.appendChild(document.createTextNode(title.slice(0, pos)));
+        var mark = document.createElement('mark');
+        mark.textContent = title.slice(pos, pos + query.length);
+        a.appendChild(mark);
+        a.appendChild(document.createTextNode(title.slice(pos + query.length)));
+      } else {
+        a.textContent = title;
+      }
+
+      var span = document.createElement('span');
+      span.className = 'site-nav__search-url';
+      span.textContent = item.url;
+
+      li.appendChild(a);
+      li.appendChild(span);
+      results.appendChild(li);
+    });
+    openSearch();
+  }
+
+  function doSearch() {
+    var q = input.value.trim();
+    if (!q || !idx) { closeSearch(); return; }
+    var ql = q.toLowerCase();
+
+    var scored = idx.map(function (p) {
+      var tl = p.title.toLowerCase();
+      var ul = p.url.toLowerCase();
+      var score = 0;
+      if (tl === ql) score = 100;
+      else if (tl.indexOf(ql) === 0) score = 80;
+      else if (tl.indexOf(ql) !== -1) score = 60;
+      else if (ul.indexOf(ql) !== -1) score = 30;
+      return { page: p, score: score };
+    }).filter(function (x) { return x.score > 0; });
+
+    scored.sort(function (a, b) { return b.score - a.score; });
+    render(scored.slice(0, 8).map(function (x) { return x.page; }), q);
+  }
+
+  function updateSelection() {
+    var lis = results.querySelectorAll('li[data-index]');
+    lis.forEach(function (li) { li.classList.remove('is-selected'); });
+    if (sel >= 0 && sel < lis.length) {
+      lis[sel].classList.add('is-selected');
+      lis[sel].scrollIntoView({ block: 'nearest' });
+    }
+  }
+
+  input.addEventListener('input', doSearch);
+
+  input.addEventListener('keydown', function (e) {
+    var lis = results.querySelectorAll('li[data-index]');
+    if (results.hidden || !lis.length) return;
+
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      sel = (sel + 1) % lis.length;
+      updateSelection();
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      sel = (sel - 1 + lis.length) % lis.length;
+      updateSelection();
+    } else if (e.key === 'Enter') {
+      e.preventDefault();
+      if (sel >= 0 && lis[sel]) {
+        var a = lis[sel].querySelector('a');
+        if (a) window.location.href = a.href;
+      } else if (lis[0]) {
+        var a0 = lis[0].querySelector('a');
+        if (a0) window.location.href = a0.href;
+      }
+    }
+  });
+
+  // Close when clicking outside
+  document.addEventListener('click', function (e) {
+    if (!nav.contains(e.target)) closeSearch();
+  });
+
+  // Close when pressing Escape
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') closeSearch();
   });
 }());
 </script>
