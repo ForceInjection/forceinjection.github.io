@@ -205,3 +205,7 @@ Gemfile.lock
 
 # Jupyter checkpoints (auto-generated)
 .ipynb_checkpoints/
+
+# LangGraph / LangChain memory demo runtime artifacts
+08_agentic_system/memory/langchain/code/sessions/*.sqlite
+08_agentic_system/memory/langchain/code/sessions/*.db
