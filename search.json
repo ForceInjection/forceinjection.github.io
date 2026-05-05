@@ -532,6 +532,10 @@
     "url": "/08_agentic_system/agent_infra/deep-dive-kagent-k8s-ops-agent.html"
   },
   {
+    "title": "DeepSeek-TUI 实战：榨干 DeepSeek V4 长上下文红利的命令行编程 Agent 实战指南",
+    "url": "/08_agentic_system/agent_infra/deepseek-tui-in-practice.html"
+  },
+  {
     "title": "云原生 AI Agent 基础设施：OpenClaw Operator 架构深度解析",
     "url": "/08_agentic_system/agent_infra/openclaw-operator-deep-dive.html"
   },
