@@ -300,6 +300,10 @@
     "url": "/05_model_training_and_fine_tuning/"
   },
   {
+    "title": "AIOps 大模型：后训练 · 评估 · 基准生成",
+    "url": "/05_model_training_and_fine_tuning/ai_ops_design/"
+  },
+  {
     "title": "构建 AIOps 大模型的思路与方案：后训练技术解析",
     "url": "/05_model_training_and_fine_tuning/ai_ops_design/aiops_post_training.html"
   },
@@ -324,7 +328,7 @@
     "url": "/06_llm_theory_and_fundamentals/"
   },
   {
-    "title": "深度研究 (Deep Research) 技术与应用",
+    "title": "深度研究（Deep Research）技术与应用",
     "url": "/06_llm_theory_and_fundamentals/deep_research/"
   },
   {
@@ -360,7 +364,7 @@
     "url": "/06_llm_theory_and_fundamentals/deep_research/research_agents/qwen_deepresearch_analysis.html"
   },
   {
-    "title": "大语言模型技术理论与基础",
+    "title": "LLM 基础概念",
     "url": "/06_llm_theory_and_fundamentals/llm_basic_concepts/"
   },
   {
@@ -368,7 +372,7 @@
     "url": "/06_llm_theory_and_fundamentals/llm_basic_concepts/cot/chain_of_thought_cot_intro.html"
   },
   {
-    "title": "文本嵌入 (Text Embeddings) 技术指南",
+    "title": "文本嵌入（Text Embeddings）技术指南",
     "url": "/06_llm_theory_and_fundamentals/llm_basic_concepts/embedding/"
   },
   {
@@ -420,7 +424,7 @@
     "url": "/06_llm_theory_and_fundamentals/llm_basic_concepts/token/llm_token_intro.html"
   },
   {
-    "title": "工作流编排与应用平台 (Workflow)",
+    "title": "工作流编排与应用平台（Workflow）",
     "url": "/06_llm_theory_and_fundamentals/workflow/"
   },
   {
@@ -436,8 +440,12 @@
     "url": "/06_llm_theory_and_fundamentals/workflow/open_source_llm_orchestration_platforms_comparison.html"
   },
   {
-    "title": "检索增强生成与工具生态",
+    "title": "RAG 与工具生态",
     "url": "/07_rag_and_tools/"
+  },
+  {
+    "title": "GraphRAG：图驱动的检索增强生成",
+    "url": "/07_rag_and_tools/graph_rag/"
   },
   {
     "title": "Knowledge Graphs for RAG（GraphRAG）",
@@ -448,6 +456,10 @@
     "url": "/07_rag_and_tools/graph_rag/kag_introduction.html"
   },
   {
+    "title": "知识图谱：Neo4j 与 Cypher",
+    "url": "/07_rag_and_tools/knowledge_graph/"
+  },
+  {
     "title": "Neo4j Cypher 查询语言权威指南",
     "url": "/07_rag_and_tools/knowledge_graph/neo4j_cypher_tutorial.html"
   },
@@ -456,8 +468,16 @@
     "url": "/07_rag_and_tools/knowledge_graph/neo4j_handson_guide.html"
   },
   {
+    "title": "文档智能解析工具",
+    "url": "/07_rag_and_tools/pdf_tools/"
+  },
+  {
     "title": "深入探索：AI 驱动的 PDF 布局检测引擎源代码解析 (译)",
     "url": "/07_rag_and_tools/pdf_tools/marker_zh_cn.html"
+  },
+  {
+    "title": "MarkItDown：Microsoft 通用文档转 Markdown",
+    "url": "/07_rag_and_tools/pdf_tools/markitdown/"
   },
   {
     "title": "快速入门",
@@ -466,6 +486,10 @@
   {
     "title": "上海人工智能实验室开源工具 MinerU 助力复杂 PDF 高效解析提取",
     "url": "/07_rag_and_tools/pdf_tools/miner_u_intro.html"
+  },
+  {
+    "title": "RAG 基础",
+    "url": "/07_rag_and_tools/rag_basics/"
   },
   {
     "title": "中文 RAG 系统 Embedding 模型选型技术文档",
@@ -478,6 +502,10 @@
   {
     "title": "Agentic RAG 对比",
     "url": "/07_rag_and_tools/rag_basics/rag_comparison.html"
+  },
+  {
+    "title": "LLM + 知识图谱协同：反电诈案例",
+    "url": "/07_rag_and_tools/synergized_llms_kgs/"
   },
   {
     "title": "银行反电诈智能系统设计方案（Synergized LLMs + KGs）",
@@ -628,11 +656,11 @@
     "url": "/08_agentic_system/memory/"
   },
   {
-    "title": "LangChain 记忆功能演示",
+    "title": "LangChain 记忆功能演示（LangChain 0.3+）",
     "url": "/08_agentic_system/memory/langchain/code/"
   },
   {
-    "title": "使用 LangChain 实现智能对话机器人的记忆功能",
+    "title": "使用 LangChain 实现智能对话机器人的记忆功能（LangChain 0.3+ / LangGraph 版）",
     "url": "/08_agentic_system/memory/langchain/langchain_memory.html"
   },
   {
@@ -710,6 +738,10 @@
   {
     "title": "推理优化技术方案",
     "url": "/09_inference_system/"
+  },
+  {
+    "title": "推理成本分析",
+    "url": "/09_inference_system/cost_analysis/"
   },
   {
     "title": "每月花多少才不冤？2026 年国内外 11 款 Coding Plan 深度对比与避坑指南",
@@ -840,6 +872,10 @@
     "url": "/09_inference_system/cost_analysis/llm_api_pricing_analysis.html"
   },
   {
+    "title": "模型部署实战",
+    "url": "/09_inference_system/inference_solutions/"
+  },
+  {
     "title": "DeepSeek-V3 在 32 张 H20 GPU 集群上的部署方案【理论分析篇】",
     "url": "/09_inference_system/inference_solutions/deepseek_v3_moe_vllm_h20_deployment.html"
   },
@@ -968,8 +1004,16 @@
     "url": "/09_inference_system/kv_cache/02_systems/tair_kvcache/tair-kvcache-architecture-design.html"
   },
   {
+    "title": "LLM 推理显存估算",
+    "url": "/09_inference_system/memory_calc/"
+  },
+  {
     "title": "LLM 模型推理显存占用深度的分析",
     "url": "/09_inference_system/memory_calc/memory_analysis.html"
+  },
+  {
+    "title": "模型优化技术",
+    "url": "/09_inference_system/model_optimization/"
   },
   {
     "title": "图解投机解码",
@@ -978,6 +1022,10 @@
   {
     "title": "NVIDIA Model Optimizer 技术详解：功能、原理与实现",
     "url": "/09_inference_system/model_optimization/nvidia_model_optimizer.html"
+  },
+  {
+    "title": "企业级 LLM 推理系统参考设计",
+    "url": "/09_inference_system/reference_design/"
   },
   {
     "title": "一、大模型推理优化：背景与目标",
