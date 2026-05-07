@@ -892,6 +892,10 @@
     "url": "/09_inference_system/inference_solutions/qwen2_vl_7b_huawei.html"
   },
   {
+    "title": "Scaling Pain：超大规模 Coding Agent 推理实践（Tech Deep Dive）",
+    "url": "/09_inference_system/inference_solutions/sglang_scaling_pain_case_study.html"
+  },
+  {
     "title": "NIXL (NVIDIA Inference Xfer Library) 简介",
     "url": "/09_inference_system/infrastructure/nixl_introduction.html"
   },
@@ -934,6 +938,10 @@
   {
     "title": "RadixAttention 技术详解：从原理到 SGLang 实践及 vLLM APC 对比",
     "url": "/09_inference_system/kv_cache/01_concepts/prefix_caching/radix_attention.html"
+  },
+  {
+    "title": "HiCache 深入详解",
+    "url": "/09_inference_system/kv_cache/02_systems/hicache/hicache_deep_dive.html"
   },
   {
     "title": "KV Block Manager (KVBM) 深度解析",
