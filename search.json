@@ -520,72 +520,72 @@
     "url": "/08_agentic_system/"
   },
   {
-    "title": "All Agentic Architectures 深入详解",
-    "url": "/08_agentic_system/agent_design/all-agentic-architectures-deep-dive.html"
-  },
-  {
     "title": "多轮指代消解对话系统",
     "url": "/08_agentic_system/agent_design/coref-dialogue-system/"
   },
   {
+    "title": "All Agentic Architectures 深入详解",
+    "url": "/08_agentic_system/agent_design/docs/all-agentic-architectures-deep-dive.html"
+  },
+  {
     "title": "支持多轮对话指代消解的 ChatBot 系统：架构设计与实现详解",
-    "url": "/08_agentic_system/agent_design/coreference-resolution-dialogue-system.html"
+    "url": "/08_agentic_system/agent_design/docs/coreference-resolution-dialogue-system.html"
   },
   {
     "title": "Cursor IDE ReAct Agent 技术架构深度分析",
-    "url": "/08_agentic_system/agent_design/react-agent.html"
+    "url": "/08_agentic_system/agent_design/docs/react-agent.html"
   },
   {
     "title": "TradingAgents-CN 多智能体设计与交互分析",
-    "url": "/08_agentic_system/agent_design/trading-agents-cn.html"
+    "url": "/08_agentic_system/agent_design/docs/trading-agents-cn.html"
   },
   {
     "title": "技术博客撰写 Agentic RAG Agent 系统设计",
-    "url": "/08_agentic_system/agent_design/writing-agentic-agent.html"
+    "url": "/08_agentic_system/agent_design/docs/writing-agentic-agent.html"
   },
   {
     "title": "Agent Sandbox 的演进与设计范式",
-    "url": "/08_agentic_system/agent_infra/agent-sandbox-design.html"
+    "url": "/08_agentic_system/agent_infra/docs/agent-sandbox-design.html"
   },
   {
     "title": "AI Agent 基础设施——三个决定性层次：工具、数据、编排",
-    "url": "/08_agentic_system/agent_infra/ai-agent-infra-stack.html"
+    "url": "/08_agentic_system/agent_infra/docs/ai-agent-infra-stack.html"
   },
   {
     "title": "Claude Code Sandbox 安全隔离机制解析",
-    "url": "/08_agentic_system/agent_infra/claude-code-sandbox.html"
+    "url": "/08_agentic_system/agent_infra/docs/claude-code-sandbox.html"
   },
   {
     "title": "深度解析 Kagent：从零打造 Kubernetes 运维智能体",
-    "url": "/08_agentic_system/agent_infra/deep-dive-kagent-k8s-ops-agent.html"
+    "url": "/08_agentic_system/agent_infra/docs/deep-dive-kagent-k8s-ops-agent.html"
   },
   {
     "title": "DeepSeek-TUI 实战：榨干 DeepSeek V4 长上下文红利的命令行编程 Agent 实战指南",
-    "url": "/08_agentic_system/agent_infra/deepseek-tui-in-practice.html"
+    "url": "/08_agentic_system/agent_infra/docs/deepseek-tui-in-practice.html"
   },
   {
     "title": "云原生 AI Agent 基础设施：OpenClaw Operator 架构深度解析",
-    "url": "/08_agentic_system/agent_infra/openclaw-operator-deep-dive.html"
+    "url": "/08_agentic_system/agent_infra/docs/openclaw-operator-deep-dive.html"
   },
   {
     "title": "OpenHarness 深入浅出：解密开源智能体基础设施",
-    "url": "/08_agentic_system/agent_infra/openharness-deep-dive.html"
+    "url": "/08_agentic_system/agent_infra/docs/openharness-deep-dive.html"
   },
   {
     "title": "扩展托管智能体：让决策与执行解耦，各行其职",
-    "url": "/08_agentic_system/agent_infra/scaling-managed-agents.html"
+    "url": "/08_agentic_system/agent_infra/docs/scaling-managed-agents.html"
   },
   {
     "title": "AI Agent 基础设施的崛起",
-    "url": "/08_agentic_system/agent_infra/the-rise-of-ai-agent-infrastructure.html"
+    "url": "/08_agentic_system/agent_infra/docs/the-rise-of-ai-agent-infrastructure.html"
   },
   {
     "title": "Implementing a virtual filesystem over Elasticsearch",
-    "url": "/08_agentic_system/agent_infra/virtual-filesystem-elasticsearch.html"
+    "url": "/08_agentic_system/agent_infra/docs/virtual-filesystem-elasticsearch.html"
   },
   {
     "title": "在 Elasticsearch 之上实现一个虚拟文件系统",
-    "url": "/08_agentic_system/agent_infra/virtual-filesystem-elasticsearch_zh.html"
+    "url": "/08_agentic_system/agent_infra/docs/virtual-filesystem-elasticsearch_zh.html"
   },
   {
     "title": "给 Claude 写本“标准操作手册”：Agent Skills 实战与深度解析",
@@ -641,15 +641,15 @@
   },
   {
     "title": "企业级 Data Agent 敏捷落地规划：存量数据资产的 AI 智能化盘活",
-    "url": "/08_agentic_system/data-agent/data-agent-skill-mvp.html"
+    "url": "/08_agentic_system/data_agent/data-agent-skill-mvp.html"
   },
   {
     "title": "数据智能体：是重塑生产力的“自动驾驶”，还是换壳的平庸炒作？",
-    "url": "/08_agentic_system/data-agent/data-agent-survey.html"
+    "url": "/08_agentic_system/data_agent/data-agent-survey.html"
   },
   {
     "title": "企业级 Data Agent 产品需求文档",
-    "url": "/08_agentic_system/data-agent/enterprise-data-agent-prd.html"
+    "url": "/08_agentic_system/data_agent/enterprise-data-agent-prd.html"
   },
   {
     "title": "深度解析 MCP 与 AI 工具化的未来",
