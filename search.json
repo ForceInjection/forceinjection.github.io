@@ -1112,6 +1112,10 @@
     "url": "/09_inference_system/vllm/hardware_optimization/vllm_deepseek_blackwell_wide_ep.html"
   },
   {
+    "title": "从 MLA 到 CSA + HCA：DeepSeek 注意力架构的进化之路",
+    "url": "/09_inference_system/vllm/module_analysis/deepseek_attention_evolution_mla_to_csa_hca.html"
+  },
+  {
     "title": "vLLM 注意力机制演进与支持全景：从 MHA 到 MLA 及其稀疏变体的架构解析",
     "url": "/09_inference_system/vllm/module_analysis/vllm_attention_mha_mla_nsa.html"
   },
