@@ -1,0 +1,51 @@
+<mxfile host="app.diagrams.net" modified="2026-05-09T00:00:00.000Z" agent="Trae" version="24.7.5" type="device">
+  <diagram id="L06" name="L06" compressed="false">
+    <mxGraphModel dx="1024" dy="768" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" math="0" shadow="0" background="none" defaultFontFamily="Noto Sans CJK SC">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <mxCell id="title" value="第 6 课：decode 批与 block_tables（padding 与 slot_mapping）" style="text;html=1;align=left;verticalAlign=middle;fontSize=18;fontStyle=1;fontColor=#111827;" vertex="1" parent="1">
+          <mxGeometry x="40" y="30" width="1020" height="30" as="geometry" />
+        </mxCell>
+
+        <mxCell id="in" value="输入：seqs（running 队列）&#xa;每个 seq 本 step 生成 1 token" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#B45309;strokeWidth=2;fillColor=#FFEDD5;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="60" y="120" width="360" height="90" as="geometry" />
+        </mxCell>
+
+        <mxCell id="prep" value="prepare_decode(seqs)&#xa;input_ids = [seq.last_token]（bs）&#xa;positions = [len(seq)-1]（bs）&#xa;context_lens = [len(seq)]（bs）&#xa;slot_mapping（bs）&#xa;block_tables = pad(block_table)（bs×max_len）" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#1D4ED8;strokeWidth=2;fillColor=#DBEAFE;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="470" y="120" width="570" height="170" as="geometry" />
+        </mxCell>
+
+        <mxCell id="pad" value="padding 规则&#xa;max_len = max(len(seq.block_table))&#xa;不足部分用 -1 填充" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#111827;strokeWidth=2;fillColor=#F9FAFB;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="470" y="320" width="570" height="80" as="geometry" />
+        </mxCell>
+
+        <mxCell id="ctx" value="set_context(is_prefill=False,&#xa;slot_mapping, context_lens, block_tables)" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#047857;strokeWidth=2;fillColor=#D1FAE5;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="470" y="430" width="570" height="80" as="geometry" />
+        </mxCell>
+
+        <mxCell id="attn" value="Attention.forward（decode 分支）&#xa;flash_attn_with_kvcache&#xa;cache_seqlens=context_lens&#xa;block_table=block_tables" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#6D28D9;strokeWidth=2;fillColor=#EDE9FE;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="470" y="540" width="570" height="110" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#111827;strokeWidth=2;html=1;endArrow=block;endFill=1;" edge="1" parent="1" source="in" target="prep">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#111827;strokeWidth=2;html=1;endArrow=block;endFill=1;" edge="1" parent="1" source="prep" target="pad">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#111827;strokeWidth=2;html=1;endArrow=block;endFill=1;" edge="1" parent="1" source="pad" target="ctx">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e4" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#111827;strokeWidth=2;html=1;endArrow=block;endFill=1;" edge="1" parent="1" source="ctx" target="attn">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="source_note" value="代码锚点：nanovllm/engine/model_runner.py（prepare_decode 与 prepare_block_tables）" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;fontColor=#374151;" vertex="1" parent="1">
+          <mxGeometry x="40" y="710" width="1020" height="20" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
