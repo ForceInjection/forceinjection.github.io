@@ -85,11 +85,15 @@
   },
   {
     "title": "DOCA 编程入门",
-    "url": "/02_dpu_programming/doca/01_doca_programming_guide.html"
+    "url": "/02_dpu_programming/doca/doca_programming_guide.html"
   },
   {
     "title": "GPU 编程",
     "url": "/02_gpu_programming/"
+  },
+  {
+    "title": "GPU 编程环境",
+    "url": "/02_gpu_programming/01_environment/"
   },
   {
     "title": "NVIDIA GPU 容器环境：原理与构建指南",
@@ -120,7 +124,7 @@
     "url": "/02_gpu_programming/02_cuda/04_simt_vs_tile_based.html"
   },
   {
-    "title": "Tile-Based 编程",
+    "title": "TileLang 与 Tile-Based 编程",
     "url": "/02_gpu_programming/03_tilelang/"
   },
   {
@@ -1610,5 +1614,9 @@
   {
     "title": "Ollama",
     "url": "/99_misc/ollama/"
+  },
+  {
+    "title": "CLAUDE.md",
+    "url": "/CLAUDE.html"
   }
 ]
