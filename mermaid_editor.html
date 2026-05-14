@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>AI 原力注入 - Mermaid 在线编辑器</title>
+    <style>
+        :root {
+            --bg: #f0f2f5;
+            --card-bg: #ffffff;
+            --text: #1a1a2e;
+            --btn-bg: #2f7d32;
+            --btn-hover: #256b28;
+            --btn-preview: #3a57af;
+            --btn-preview-hover: #2e4694;
+            --btn-download: #2f7d32;
+            --btn-download-hover: #256b28;
+            --border: #e0e0e0;
+            --shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+            --radius: 12px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background: var(--bg);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .main-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            max-width: 1400px;
+            width: 100%;
+            margin: auto;
+            align-items: stretch;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .editor-card {
+            flex: 1 1 400px;
+            min-width: 340px;
+        }
+
+        .preview-card {
+            flex: 2 1 600px;
+            min-width: 400px;
+            position: relative;
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 12px;
+        }
+        .card-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text);
+            letter-spacing: 0.3px;
+        }
+
+        textarea, #editor {
+            flex: 1;
+            width: 100%;
+            height: calc(100vh - 200px);
+            min-height: 600px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-family: 'Fira Code', 'Cascadia Code', 'Consolas', monospace;
+            font-size: 14px;
+            line-height: 1.5;
+            background: #fafafa;
+            color: #222;
+            outline: none;
+            transition: border 0.2s;
+        }
+        #editor {
+            position: relative;
+        }
+        textarea:focus {
+            border-color: #3a57af;
+            box-shadow: 0 0 0 2px rgba(58,87,175,0.15);
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 10px 18px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            letter-spacing: 0.3px;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+            color: #fff;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+        }
+        .btn:active {
+            transform: translateY(1px);
+        }
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            pointer-events: none;
+            filter: grayscale(30%);
+        }
+
+        .btn-preview {
+            background: var(--btn-preview);
+        }
+        .btn-preview:hover:not(:disabled) {
+            background: var(--btn-preview-hover);
+            box-shadow: 0 6px 16px rgba(58,87,175,0.3);
+        }
+
+        .btn-download {
+            background: var(--btn-download);
+        }
+        .btn-download:hover:not(:disabled) {
+            background: var(--btn-download-hover);
+            box-shadow: 0 6px 16px rgba(47,125,50,0.35);
+        }
+
+        .btn-icon {
+            width: 16px;
+            height: 16px;
+            flex-shrink: 0;
+            stroke: currentColor;
+            fill: none;
+            stroke-width: 2.2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .preview-area {
+            flex: 1;
+            min-height: 300px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 16px;
+            background: #fdfdfd;
+            overflow-x: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        #mermaid-preview {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 260px;
+        }
+        #mermaid-preview svg {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .placeholder {
+            color: #888;
+            font-size: 0.95rem;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .error-box {
+            color: #c0392b;
+            background: #fff5f5;
+            border: 1px solid #f5c6cb;
+            padding: 14px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            max-width: 100%;
+            word-break: break-word;
+            font-family: monospace;
+            white-space: pre-wrap;
+        }
+
+        .fallback {
+            color: #d6336c;
+            margin-top: 12px;
+            font-size: 0.9rem;
+            text-align: center;
+        }
+        .fallback a {
+            color: #0d6efd;
+            font-weight: 600;
+        }
+
+        /* Toast */
+        .toast {
+            position: fixed;
+            top: 24px;
+            left: 50%;
+            transform: translateX(-50%) translateY(-120px);
+            background: #1a1a2e;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            z-index: 9999;
+            pointer-events: none;
+            transition: transform 0.3s cubic-bezier(0.22, 0.61, 0.36, 1);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+        }
+        .toast.success {
+            background: #2f7d32;
+        }
+        .toast.error {
+            background: #c0392b;
+        }
+
+        @media (max-width: 800px) {
+            .main-container {
+                flex-direction: column;
+            }
+            .editor-card, .preview-card {
+                flex: 1 1 auto;
+                min-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <!-- 编辑器卡片 -->
+        <div class="card editor-card">
+            <div class="card-header">
+                <span class="card-title">✏️ Mermaid 源码</span>
+                <button id="btn-preview" class="btn btn-preview">
+                    <svg class="btn-icon" viewBox="0 0 24 24">
+                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                        <circle cx="12" cy="12" r="3"/>
+                    </svg>
+                    预览
+                </button>
+            </div>
+            <div id="editor">flowchart TD
+    P1["Phase 1<br>愿景 -> PRD"] --> P2["Phase 2<br>PRD -> UI/UX"]
+    P2 --> P3["Phase 3<br>PRD + UI/UX -> 领域模型"]
+    P3 --> P4["Phase 4<br>领域模型 -> 规格定义"]
+    P4 --> P5["Phase 5<br>规格 -> 实现与测试"]
+    P5 --> P6["Phase 6<br>质量保障与验收"]
+    P6 --> P7["Phase 7<br>部署与交付"]
+    P7 --> P8["Phase 8<br>变更与演进"]
+    P8 -. 反馈回路 .-> P4
+    P8 -. 反馈回路 .-> P5
+
+    classDef existing fill:#dff5e1,stroke:#2f7d32,color:#111;
+    classDef planned fill:#fff4d6,stroke:#b7791f,color:#111;
+
+    class P3,P4,P5,P8 existing;
+    class P1,P2,P6,P7 planned;</div>
+            <p class="fallback" id="fallback-msg" style="display:none;">
+                ⚠️ Mermaid 库加载失败，请刷新重试或使用
+                <a href="https://mermaid.live/" target="_blank" rel="noopener">Mermaid Live Editor</a>
+            </p>
+        </div>
+
+        <!-- 预览卡片 -->
+        <div class="card preview-card">
+            <div class="card-header">
+                <span class="card-title">📊 预览</span>
+                <button id="btn-download" class="btn btn-download" disabled title="请先成功预览图表">
+                    <svg class="btn-icon" viewBox="0 0 24 24">
+                        <rect x="3" y="3" width="18" height="18" rx="3" ry="3"/>
+                        <circle cx="8.5" cy="8.5" r="1.5"/>
+                        <polyline points="21 15 16 10 5 21"/>
+                    </svg>
+                    下载 PNG
+                </button>
+            </div>
+            <div class="preview-area">
+                <div id="mermaid-preview">
+                    <span class="placeholder">点击“预览”按钮查看图表</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div class="toast" id="toast"></div>
+
+    <!-- Ace Editor -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.2/ace.js"></script>
+
+    <!-- 多 CDN 后备加载 Mermaid -->
+    <script>
+        (function() {
+            // ---------- Ace Editor 初始化 ----------
+            const editor = ace.edit("editor");
+            editor.setTheme("ace/theme/chrome");
+            editor.session.setMode("ace/mode/yaml"); // 使用 yaml 模式以获得一些基础颜色
+            editor.setOptions({
+                fontSize: "14px",
+                showPrintMargin: false,
+                wrap: true,
+                useWorker: false
+            });
+
+            // ---------- CDN 加载 ----------
+            const cdns = [
+                'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js',
+                'https://unpkg.com/mermaid@10/dist/mermaid.min.js',
+                'https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.9.0/mermaid.min.js',
+            ];
+            let mermaidLoaded = false;
+
+            const fallbackMsg = document.getElementById('fallback-msg');
+            const previewArea = document.getElementById('mermaid-preview');
+            const btnPreview = document.getElementById('btn-preview');
+            const btnDownload = document.getElementById('btn-download');
+
+            // 渲染计数器，避免ID冲突
+            let renderCounter = 0;
+
+            function tryLoad(index) {
+                if (index >= cdns.length) {
+                    fallbackMsg.style.display = 'block';
+                    setButtonsEnabled(false);
+                    return;
+                }
+                const script = document.createElement('script');
+                script.src = cdns[index];
+                script.onload = () => {
+                    if (!mermaidLoaded) {
+                        mermaidLoaded = true;
+                        initMermaid();
+                    }
+                };
+                script.onerror = () => tryLoad(index + 1);
+                document.head.appendChild(script);
+            }
+
+            function initMermaid() {
+                if (typeof mermaid === 'undefined') {
+                    fallbackMsg.style.display = 'block';
+                    return;
+                }
+
+                mermaid.initialize({
+                    startOnLoad: false,       // 手动控制渲染
+                    theme: 'default',
+                    securityLevel: 'loose',
+                    flowchart: { useMaxWidth: true, htmlLabels: true, curve: 'basis' },
+                });
+
+                setButtonsEnabled(true);
+                // 自动预览默认内容
+                doPreview();
+            }
+
+            function setButtonsEnabled(ready) {
+                // 预览按钮始终可用，但如果Mermaid未加载则禁用
+                if (btnPreview) {
+                    btnPreview.disabled = !ready;
+                }
+                if (btnDownload) {
+                    btnDownload.disabled = true; // 下载按钮初始禁用，预览成功后启用
+                }
+            }
+
+            // ---------- Toast ----------
+            let toastTimer = null;
+            function showToast(msg, type = '') {
+                const toast = document.getElementById('toast');
+                if (toastTimer) clearTimeout(toastTimer);
+                toast.textContent = msg;
+                toast.className = 'toast ' + type + ' show';
+                toastTimer = setTimeout(() => toast.classList.remove('show'), 2500);
+            }
+
+            // ---------- 渲染逻辑 ----------
+            async function renderMermaidCode(code) {
+                if (!code || code.trim() === '') {
+                    throw new Error('请输入 Mermaid 代码');
+                }
+                // 每次使用唯一ID
+                renderCounter += 1;
+                const id = `mermaid-svg-${Date.now()}-${renderCounter}`;
+                const result = await mermaid.render(id, code.trim());
+                return result.svg;
+            }
+
+            async function doPreview() {
+                const code = editor.getValue();
+                if (!mermaidLoaded) {
+                    showToast('⚠️ Mermaid 库尚未加载，请稍后', 'error');
+                    return;
+                }
+
+                // 设置加载状态
+                btnPreview.disabled = true;
+                btnDownload.disabled = true;
+                previewArea.innerHTML = '<span class="placeholder">⏳ 正在渲染图表...</span>';
+
+                try {
+                    const svgString = await renderMermaidCode(code);
+                    previewArea.innerHTML = svgString;
+
+                    // 确保SVG占满宽度
+                    const svgEl = previewArea.querySelector('svg');
+                    if (svgEl) {
+                        svgEl.style.maxWidth = '100%';
+                        svgEl.style.height = 'auto';
+                    }
+
+                    btnDownload.disabled = false;
+                    showToast('✅ 渲染成功', 'success');
+                } catch (err) {
+                    console.error('渲染失败:', err);
+                    const errorMsg = err.message || '未知错误';
+                    previewArea.innerHTML = `<div class="error-box">❌ 渲染失败：${escapeHtml(errorMsg)}</div>`;
+                    btnDownload.disabled = true;
+                    showToast('❌ 渲染失败，请检查代码', 'error');
+                } finally {
+                    btnPreview.disabled = false;
+                }
+            }
+
+            function escapeHtml(text) {
+                const div = document.createElement('div');
+                div.textContent = text;
+                return div.innerHTML;
+            }
+
+            // ---------- 下载 PNG（复用优化后的导出逻辑） ----------
+            function replaceForeignObjectsWithText(svgElement) {
+                const clonedSvg = svgElement.cloneNode(true);
+                const foreignObjects = clonedSvg.querySelectorAll('foreignObject');
+
+                foreignObjects.forEach((fo) => {
+                    const div = fo.querySelector('div');
+                    let rawText = '';
+                    if (div) {
+                        rawText = extractTextFromDiv(div);
+                    } else {
+                        rawText = (fo.textContent || '').trim();
+                    }
+                    if (!rawText) {
+                        fo.remove();
+                        return;
+                    }
+
+                    const textEl = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                    const foX = parseFloat(fo.getAttribute('x')) || 0;
+                    const foY = parseFloat(fo.getAttribute('y')) || 0;
+                    const foW = parseFloat(fo.getAttribute('width')) || 100;
+                    const foH = parseFloat(fo.getAttribute('height')) || 40;
+
+                    // 尝试读取样式
+                    let textAnchor = 'middle';
+                    let anchorX = foX + foW / 2;
+                    if (div) {
+                        const style = div.getAttribute('style') || '';
+                        const textAlign = extractStyleValue(style, 'text-align');
+                        if (textAlign === 'left' || textAlign === 'start') {
+                            textAnchor = 'start';
+                            anchorX = foX + 4;
+                        } else if (textAlign === 'right' || textAlign === 'end') {
+                            textAnchor = 'end';
+                            anchorX = foX + foW - 4;
+                        }
+                    }
+
+                    const lines = rawText.split('\n').filter(l => l.trim().length > 0);
+                    const fontSize = div ? (extractStyleValue(div.getAttribute('style') || '', 'font-size') || '14px') : '14px';
+                    const fontFamily = div ? (extractStyleValue(div.getAttribute('style') || '', 'font-family') || 'sans-serif') : 'sans-serif';
+                    const color = div ? (extractStyleValue(div.getAttribute('style') || '', 'color') || '#333') : '#333';
+
+                    textEl.setAttribute('x', anchorX);
+                    textEl.setAttribute('fill', color);
+                    textEl.setAttribute('font-family', fontFamily);
+                    textEl.setAttribute('font-size', fontSize);
+                    textEl.setAttribute('text-anchor', textAnchor);
+
+                    if (lines.length === 1) {
+                        textEl.setAttribute('y', foY + foH / 2);
+                        textEl.setAttribute('dominant-baseline', 'central');
+                        textEl.textContent = lines[0];
+                    } else {
+                        const fsNum = parseFloat(fontSize) || 14;
+                        const lineHeight = fsNum * 1.35;
+                        const totalHeight = lines.length * lineHeight;
+                        const startY = foY + foH / 2 - totalHeight / 2 + lineHeight * 0.8;
+                        textEl.setAttribute('y', startY);
+                        lines.forEach((line, i) => {
+                            const tspan = document.createElementNS('http://www.w3.org/2000/svg', 'tspan');
+                            tspan.setAttribute('x', anchorX);
+                            if (i > 0) tspan.setAttribute('dy', lineHeight);
+                            tspan.textContent = line;
+                            textEl.appendChild(tspan);
+                        });
+                    }
+                    fo.parentNode.replaceChild(textEl, fo);
+                });
+
+                // 移除残留的 foreignObject
+                clonedSvg.querySelectorAll('foreignObject').forEach(fo => fo.remove());
+                return clonedSvg;
+            }
+
+            function extractTextFromDiv(div) {
+                const html = div.innerHTML || '';
+                const text = html
+                    .replace(/<br\s*\/?>/gi, '\n')
+                    .replace(/&nbsp;/gi, ' ')
+                    .replace(/<[^>]*>/g, '');
+                const txt = document.createElement('textarea');
+                txt.innerHTML = text;
+                return txt.value.trim();
+            }
+
+            function extractStyleValue(styleString, property) {
+                if (!styleString) return null;
+                const regex = new RegExp(property.replace(/-/g, '\\-') + '\\s*:\\s*([^;]+)', 'i');
+                const match = styleString.match(regex);
+                return match ? match[1].trim() : null;
+            }
+
+            function getSVGDimensions(svgElement) {
+                const viewBox = svgElement.getAttribute('viewBox');
+                if (viewBox) {
+                    const parts = viewBox.trim().split(/\s+/);
+                    if (parts.length >= 4) return { width: parseFloat(parts[2]), height: parseFloat(parts[3]) };
+                }
+                let w = parseFloat(svgElement.getAttribute('width'));
+                let h = parseFloat(svgElement.getAttribute('height'));
+                if (!isNaN(w) && !isNaN(h) && w > 0 && h > 0) return { width: w, height: h };
+                const rect = svgElement.getBoundingClientRect();
+                if (rect.width > 0 && rect.height > 0) return { width: rect.width, height: rect.height };
+                return { width: 800, height: 600 };
+            }
+
+            function serializeSVG(svgElement) {
+                let svgString = new XMLSerializer().serializeToString(svgElement);
+                if (!svgString.includes('xmlns="http://www.w3.org/2000/svg"')) {
+                    svgString = svgString.replace('<svg ', '<svg xmlns="http://www.w3.org/2000/svg" ');
+                }
+                if (!svgString.includes('xmlns:xlink')) {
+                    svgString = svgString.replace('<svg ', '<svg xmlns:xlink="http://www.w3.org/1999/xlink" ');
+                }
+                return svgString;
+            }
+
+            async function exportToPNG() {
+                const svgElement = previewArea.querySelector('svg');
+                if (!svgElement) {
+                    showToast('⚠️ 没有可导出的图表', 'error');
+                    return;
+                }
+
+                btnDownload.disabled = true;
+                const originalText = btnDownload.textContent;
+                btnDownload.textContent = '⏳ 导出中...';
+
+                try {
+                    const processedSvg = replaceForeignObjectsWithText(svgElement);
+                    const dims = getSVGDimensions(svgElement);
+                    const scale = Math.min(window.devicePixelRatio || 2, 3);
+                    const canvasWidth = Math.ceil(dims.width * scale);
+                    const canvasHeight = Math.ceil(dims.height * scale);
+                    const svgString = serializeSVG(processedSvg);
+                    const blob = new Blob([svgString], { type: 'image/svg+xml;charset=utf-8' });
+                    const url = URL.createObjectURL(blob);
+
+                    const img = new Image();
+                    img.width = canvasWidth;
+                    img.height = canvasHeight;
+                    await new Promise((resolve, reject) => {
+                        img.onload = resolve;
+                        img.onerror = () => reject(new Error('SVG 图片加载失败'));
+                        img.src = url;
+                        setTimeout(() => reject(new Error('SVG 加载超时')), 12000);
+                    });
+
+                    const canvas = document.createElement('canvas');
+                    canvas.width = canvasWidth;
+                    canvas.height = canvasHeight;
+                    const ctx = canvas.getContext('2d');
+                    ctx.fillStyle = '#ffffff';
+                    ctx.fillRect(0, 0, canvasWidth, canvasHeight);
+                    ctx.scale(scale, scale);
+                    ctx.drawImage(img, 0, 0, dims.width, dims.height);
+                    URL.revokeObjectURL(url);
+
+                    const link = document.createElement('a');
+                    link.href = canvas.toDataURL('image/png', 1.0);
+                    link.download = 'mermaid-图表.png';
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                    showToast('✅ PNG 下载成功', 'success');
+                } catch (err) {
+                    console.error('导出失败:', err);
+                    showToast('❌ 导出失败: ' + (err.message || '未知错误'), 'error');
+                } finally {
+                    btnDownload.disabled = false;
+                    btnDownload.textContent = originalText;
+                }
+            }
+
+            // ---------- 事件绑定 ----------
+            btnPreview.addEventListener('click', doPreview);
+            btnDownload.addEventListener('click', exportToPNG);
+
+            // 可选：Ctrl+Enter 快捷键预览
+            editor.commands.addCommand({
+                name: 'preview',
+                bindKey: {win: 'Ctrl-Enter',  mac: 'Command-Enter'},
+                exec: function(editor) {
+                    doPreview();
+                }
+            });
+
+            // 启动加载
+            tryLoad(0);
+        })();
+    </script>
+</body>
+</html>
