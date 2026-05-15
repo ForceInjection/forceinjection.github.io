@@ -1,0 +1,26 @@
+schema: spec-driven
+
+context: |
+  Project: ecommerce-mini - A minimal e-commerce system demonstrating OpenSpec Spec-Driven Development.
+  Dual-language implementation: Node.js (v20+, zero npm dependencies) and Python (FastAPI + Pydantic).
+  Architecture: Layered (HTTP -> Service -> Domain -> Repository), single-process monolith.
+  Storage: In-memory Map (dev), file-based JSON persistence (prod, Node.js only).
+  API: RESTful JSON over native Node.js http module / FastAPI.
+  Code paths: examples/ecommerce-mini/ (Node.js), examples/ecommerce-mini-python/ (Python).
+
+rules:
+  proposal:
+    - Include SLO targets (latency, concurrency, quality) when relevant
+    - State which language implementations are affected (Node.js / Python / both)
+    - Include Capabilities section mapping to spec folder names
+  specs:
+    - Use Given/When/Then (Gherkin) format for all Scenarios
+    - Every Requirement must include Priority (P0/P1/P2) and Rationale
+    - Use SHALL or MUST for normative requirement language
+  design:
+    - Include architecture diagrams (Mermaid or ASCII)
+    - Document key decisions with rationale and alternatives considered
+  tasks:
+    - Indicate which implementation(s) each task applies to (Node.js / Python / both)
+    - Break tasks into small checkboxes using - [ ] format
+    - Order tasks by dependency
