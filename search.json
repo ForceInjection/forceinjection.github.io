@@ -1460,7 +1460,7 @@
     "url": "/10_ai_related_course/ai_infra_course/入门级/讲稿.html"
   },
   {
-    "title": "多智能体AI系统培训材料",
+    "title": "多智能体 AI 系统培训材料",
     "url": "/10_ai_related_course/multi_agent_system/multi_agent_training/"
   },
   {
@@ -1482,10 +1482,6 @@
   {
     "title": "第五天：应用实践与部署运维",
     "url": "/10_ai_related_course/multi_agent_system/multi_agent_training/05-应用实践/05-应用实践与部署运维.html"
-  },
-  {
-    "title": "多智能体AI系统培训大纲",
-    "url": "/10_ai_related_course/multi_agent_system/multi_agent_training/Multi-Agent-AI-Training-Outline.html"
   },
   {
     "title": "Trae 编程实战教程",
@@ -1510,14 +1506,6 @@
   {
     "title": "第四章 第一部分总结与进阶准备",
     "url": "/10_ai_related_course/trae/第一部分-Trae基础入门/第四章-第一部分总结与进阶准备.html"
-  },
-  {
-    "title": "第十三章 DevOps与云原生",
-    "url": "/10_ai_related_course/trae/第三部分-高级应用场景/DevOps与云原生-备份.html"
-  },
-  {
-    "title": "第十二章 数据科学与机器学习",
-    "url": "/10_ai_related_course/trae/第三部分-高级应用场景/数据科学与机器学习-备份.html"
   },
   {
     "title": "第九章 AI 模型集成与智能应用开发",
@@ -1568,20 +1556,20 @@
     "url": "/10_ai_related_course/trae/第五部分-综合项目实战/第十八章-核心功能开发.html"
   },
   {
-    "title": "第十七章 云平台部署与DevOps实践",
-    "url": "/10_ai_related_course/trae/第四部分-团队协作与最佳实践/第十七章-云平台部署与DevOps实践.html"
+    "title": "第十三章 代码质量管理与自动化测试",
+    "url": "/10_ai_related_course/trae/第四部分-团队协作与最佳实践/第十三章-代码质量管理与自动化测试.html"
   },
   {
-    "title": "第十五章 版本控制与团队协作最佳实践",
-    "url": "/10_ai_related_course/trae/第四部分-团队协作与最佳实践/第十五章-项目管理与协作.html"
+    "title": "第十五章 云平台部署与 DevOps 实践",
+    "url": "/10_ai_related_course/trae/第四部分-团队协作与最佳实践/第十五章-云平台部署与DevOps实践.html"
   },
   {
-    "title": "第十六章 性能优化与调试实战",
-    "url": "/10_ai_related_course/trae/第四部分-团队协作与最佳实践/第十六章-性能优化与调试.html"
+    "title": "第十六章 安全最佳实践与性能优化",
+    "url": "/10_ai_related_course/trae/第四部分-团队协作与最佳实践/第十六章-安全最佳实践与性能优化.html"
   },
   {
-    "title": "第十四章 实战练习：代码质量管理",
-    "url": "/10_ai_related_course/trae/第四部分-团队协作与最佳实践/第十四章-代码质量管理.html"
+    "title": "第十四章 项目管理与团队协作",
+    "url": "/10_ai_related_course/trae/第四部分-团队协作与最佳实践/第十四章-项目管理与团队协作.html"
   },
   {
     "title": "Agent Skills (AI 技能)",
