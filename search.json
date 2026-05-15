@@ -1584,6 +1584,22 @@
     "url": "/10_ai_related_course/trae/第四部分-团队协作与最佳实践/第十四章-代码质量管理.html"
   },
   {
+    "title": "原力注入 Agent Skill 合集",
+    "url": "/11_agent_skills/awesome-skills/"
+  },
+  {
+    "title": "CUDA 代码技能库",
+    "url": "/11_agent_skills/cuda-code-skill/"
+  },
+  {
+    "title": "领域驱动设计 (DDD) Skill 全景图",
+    "url": "/11_agent_skills/domain-driven-design-skills/"
+  },
+  {
+    "title": "Domain-Driven Design (DDD) Skill Panorama",
+    "url": "/11_agent_skills/domain-driven-design-skills/README.en.html"
+  },
+  {
     "title": "大语言模型应用开发与编排",
     "url": "/98_llm_programming/"
   },
