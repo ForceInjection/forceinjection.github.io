@@ -233,8 +233,8 @@ render_with_liquid: true
 
   <div class="hp-stats">
     <div>
-      <span class="hp-stat-num">12</span>
-      <span class="hp-stat-lbl">知识模块</span>
+      <span class="hp-stat-num">13</span>
+      <span class="hp-stat-lbl">内容模块</span>
     </div>
     <div>
       <span class="hp-stat-num">800+</span>
@@ -267,7 +267,7 @@ render_with_liquid: true
 <!-- ═══ MODULES GRID ═══ -->
 <div class="hp-section" id="modules">
   <div class="hp-section-hd">
-    <h2>知识模块</h2>
+    <h2>核心知识体系</h2>
     <p>系统化 AI 技术体系，从芯片底层到智能应用，深入每个技术层次</p>
   </div>
 
@@ -283,15 +283,19 @@ render_with_liquid: true
       </div>
     </a>
 
-    <a href="/02_gpu_programming/" class="hp-card" style="--ac:#8e24aa">
+    <div class="hp-card" style="--ac:#8e24aa">
       <span class="hp-card-icon">🔧</span>
       <div class="hp-card-num">Module 02</div>
-      <div class="hp-card-title">GPU 编程</div>
-      <p class="hp-card-desc">从 CUDA 基础到高性能 Kernel 编写，掌握 GPU 并行计算、TileLang/Triton 以及性能调优实战。</p>
-      <div class="hp-tags">
-        <span class="hp-tag">CUDA</span><span class="hp-tag">Triton</span><span class="hp-tag">TileLang</span><span class="hp-tag">Profiling</span>
+      <div class="hp-card-title">异构编程 (GPU & DPU)</div>
+      <p class="hp-card-desc">从 CUDA 基础到高性能 Kernel 编写，掌握 GPU 并行计算与调优。同时包含 DOCA 基础，探索 DPU 数据面编程与网络卸载能力。</p>
+      <div style="margin-bottom: 14px; display: flex; gap: 16px; font-size: 13.5px; font-weight: 700;">
+        <a href="/02_gpu_programming/" style="color: #007DB8; text-decoration: none;">GPU 编程 ↗</a>
+        <a href="/02_dpu_programming/" style="color: #007DB8; text-decoration: none;">DPU 编程 ↗</a>
       </div>
-    </a>
+      <div class="hp-tags">
+        <span class="hp-tag">CUDA</span><span class="hp-tag">Triton</span><span class="hp-tag">DOCA</span><span class="hp-tag">DPU</span>
+      </div>
+    </div>
 
     <a href="/03_ai_cluster_ops/" class="hp-card" style="--ac:#00897b">
       <span class="hp-card-icon">🖧</span>
@@ -363,6 +367,15 @@ render_with_liquid: true
       </div>
     </a>
 
+  </div>
+
+  <div class="hp-section-hd" style="margin-top: 80px;" id="practice">
+    <h2>动手实践与扩展</h2>
+    <p>结合实际业务场景的编程指南、工具集合与系统化课程</p>
+  </div>
+
+  <div class="hp-grid">
+
     <a href="/10_ai_related_course/" class="hp-card" style="--ac:#ad1457">
       <span class="hp-card-icon">🎓</span>
       <div class="hp-card-num">Module 10</div>
@@ -370,6 +383,16 @@ render_with_liquid: true
       <p class="hp-card-desc">系统化学习路径：AI Infra 入门课程、AI 编程实战、多智能体系统训练营与 Trae 编程实战。</p>
       <div class="hp-tags">
         <span class="hp-tag">AI Infra</span><span class="hp-tag">AI 编程</span><span class="hp-tag">多智能体</span>
+      </div>
+    </a>
+
+    <a href="/11_agent_skills/" class="hp-card" style="--ac:#d81b60">
+      <span class="hp-card-icon">🧰</span>
+      <div class="hp-card-num">Module 11</div>
+      <div class="hp-card-title">Agent Skills</div>
+      <p class="hp-card-desc">探索各类 AI Agent 技能集合，包括领域驱动设计（DDD）、CUDA 编程辅助以及通用的 Agent Skills。</p>
+      <div class="hp-tags">
+        <span class="hp-tag">Skills</span><span class="hp-tag">DDD</span><span class="hp-tag">CUDA</span>
       </div>
     </a>
 
