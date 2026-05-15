@@ -1104,27 +1104,27 @@
     "url": "/09_inference_system/reference_design/04-不同集群规模的技术选型策略.html"
   },
   {
-    "title": "第五章：性能评估指标体系",
+    "title": "五、性能评估指标体系",
     "url": "/09_inference_system/reference_design/05-性能评估指标体系.html"
   },
   {
-    "title": "第六章：推理服务架构设计",
+    "title": "六、推理服务架构设计",
     "url": "/09_inference_system/reference_design/06-推理服务架构设计.html"
   },
   {
-    "title": "第七章：实施建议与最佳实践",
+    "title": "七、实施建议与最佳实践",
     "url": "/09_inference_system/reference_design/07-实施建议与最佳实践.html"
   },
   {
-    "title": "第八章：参考资料与延伸阅读",
+    "title": "八、参考资料与延伸阅读",
     "url": "/09_inference_system/reference_design/08-参考资料与延伸阅读.html"
   },
   {
-    "title": "9. 安全性与合规性",
+    "title": "九、安全性与合规性",
     "url": "/09_inference_system/reference_design/09-安全性与合规性.html"
   },
   {
-    "title": "10. 多模态推理优化",
+    "title": "十、多模态推理优化",
     "url": "/09_inference_system/reference_design/10-多模态推理优化.html"
   },
   {
