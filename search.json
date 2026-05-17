@@ -1592,6 +1592,18 @@
     "url": "/11_agent_skills/domain-driven-design-skills/README.en.html"
   },
   {
+    "title": "AI Native 全栈实践",
+    "url": "/11_ai_native_everything/"
+  },
+  {
+    "title": "ai native architecture diagram",
+    "url": "/11_ai_native_everything/ai_native_application/ai-native-architecture-diagram.html"
+  },
+  {
+    "title": "AI Native 应用架构：从一笔真实电力交易看起",
+    "url": "/11_ai_native_everything/ai_native_application/ai-native-architecture.html"
+  },
+  {
     "title": "OpenSpec Practise",
     "url": "/12_openspec_practise/"
   },
