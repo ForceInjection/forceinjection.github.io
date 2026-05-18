@@ -386,7 +386,7 @@ python3 scripts/ontology.py validate
 
 ## 3. `Agent Skill` 最佳实践
 
-从生产级目录组织到渐进式上下文加载，一套标准化的工程规范是确保智能体技能稳定运行的基石。以下实践均参考自 [给 Claude 写本“标准操作手册”：Agent Skills 实战与深度解析](https://github.com/ForceInjection/AI-fundamentals/blob/main/08_agentic_system/agent_skills/docs/claude_skills_guide.md) 文档。
+从生产级目录组织到渐进式上下文加载，一套标准化的工程规范是确保智能体技能稳定运行的基石。以下实践均参考自 [给 Claude 写本“标准操作手册”：Agent Skills 实战与深度解析](https://github.com/ForceInjection/AI-fundermentals/blob/main/08_agentic_system/agent_skills/docs/claude_skills_guide.md) 文档。
 
 ### 3.1 生产级目录结构
 
