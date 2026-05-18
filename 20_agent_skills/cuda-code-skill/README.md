@@ -1,6 +1,6 @@
 # CUDA 代码技能库
 
-本项目是一个面向 AI IDE（如 Claude Code、Trae、Qoder 等）的 CUDA 内核开发辅助项目，通过结合抓取自 NVIDIA 官方文档的**深度本地知识库**与**基于 Agent 的代码生成技能**，为底层 GPU 开发者提供准确、高效的自动化代码编写与查阅辅助。
+本项目是一个面向 AI IDE（如 Claude Code、Trae、Qoder 等）的 CUDA 内核开发辅助项目，通过结合抓取自 NVIDIA 官方文档的**深度本地知识库**、**官方代码范例索引**与**基于 Agent 的代码生成技能**，为底层 GPU 开发者提供准确、高效的自动化代码编写与查阅辅助。
 
 ---
 
@@ -8,7 +8,7 @@
 
 针对大模型在底层 GPU 编程中易产生幻觉的问题，本项目通过离线知识库与 Agent 技能的深度结合，提供了以下三大技术优势：
 
-- **基于知识增强的代码生成 (RAG)**：操作技能被专门指导去搜索本地的 `cuda-knowledge` 技能，以确保对复杂 API（如 cuBLASLt、Tensor Cores、PTX 等）的准确使用，从而避免 AI 产生幻觉。
+- **基于知识增强的代码生成 (RAG)**：操作技能被专门指导去搜索本地的 `cuda-knowledge`（API 文档）和 `cuda-samples`（代码范例）技能，以确保对复杂 API（如 cuBLASLt、Tensor Cores、PTX 等）的准确使用和代码模式参考，从而避免 AI 产生幻觉。
 - **全面的离线文档**：包含大量从 NVIDIA HTML 文档转换而来的、支持本地搜索的 Markdown 文件，涵盖了底层开发中最常用的官方参考资料。
 - **文档抓取流水线**：内置了一套完善的文档抓取工具，能够随时同步和更新最新的官方文档内容。
 
@@ -28,8 +28,8 @@
 | **cuda-samples**        | 范例索引 | 精选 50+ NVIDIA 官方 CUDA Samples，按模式（规约/扫描/GEMM/CUDA Graph 等）编排，含 GitHub 永久链接和关键代码片段。                |
 | **cuda-optimizer**      | 任务编排 | 负责主导核心性能分析与优化循环，负责协调并调度其他专项技能共同完成复杂的优化任务。                                               |
 | **cuda-code-generator** | 代码生成 | 用于生成和修改 `.cu` 代码文件，内置指令要求其在执行时必须查阅 `cuda-knowledge` 和 `cuda-samples` 以保证 API 和代码模式的准确性。 |
-| **ncu-rep-analyzer**    | 性能分析 | 负责解析 NCU（Nsight Compute）性能分析报告，并结合内置的性能陷阱指南（如 `performance-traps.md` ）进行深度的瓶颈诊断。           |
-| **kernel-benchmarker**  | 基准测试 | 负责内核代码的编译、正确性验证与基准测试，当遇到编译或运行错误时会利用调试指南（如 `debugging-tools.md` ）进行自动修复。         |
+| **ncu-rep-analyzer**    | 性能分析 | 负责解析 NCU（Nsight Compute）性能分析报告，并结合内置的性能陷阱指南（如 `performance-traps.md`）进行深度的瓶颈诊断。            |
+| **kernel-benchmarker**  | 基准测试 | 负责内核代码的编译、正确性验证与基准测试，当遇到编译或运行错误时会利用调试指南（如 `debugging-tools.md`）进行自动修复。          |
 
 ### 2.2 快速开始
 
