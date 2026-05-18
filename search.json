@@ -1572,26 +1572,6 @@
     "url": "/10_ai_related_course/trae/第四部分-团队协作与最佳实践/第十四章-项目管理与团队协作.html"
   },
   {
-    "title": "Agent Skills (AI 技能)",
-    "url": "/11_agent_skills/"
-  },
-  {
-    "title": "原力注入 Agent Skill 合集",
-    "url": "/11_agent_skills/awesome-skills/"
-  },
-  {
-    "title": "CUDA 代码技能库",
-    "url": "/11_agent_skills/cuda-code-skill/"
-  },
-  {
-    "title": "领域驱动设计 (DDD) Skill 全景图",
-    "url": "/11_agent_skills/domain-driven-design-skills/"
-  },
-  {
-    "title": "Domain-Driven Design (DDD) Skill Panorama",
-    "url": "/11_agent_skills/domain-driven-design-skills/README.en.html"
-  },
-  {
     "title": "AI Native 全栈实践",
     "url": "/11_ai_native_everything/"
   },
@@ -1604,96 +1584,116 @@
     "url": "/11_ai_native_everything/ai_native_application/ai-native-architecture.html"
   },
   {
-    "title": "OpenSpec Practise",
-    "url": "/12_openspec_practise/"
+    "title": "Agent Skills (AI 技能)",
+    "url": "/20_agent_skills/"
+  },
+  {
+    "title": "原力注入 Agent Skill 合集",
+    "url": "/20_agent_skills/awesome-skills/"
+  },
+  {
+    "title": "CUDA 代码技能库",
+    "url": "/20_agent_skills/cuda-code-skill/"
+  },
+  {
+    "title": "领域驱动设计 (DDD) Skill 全景图",
+    "url": "/20_agent_skills/domain-driven-design-skills/"
+  },
+  {
+    "title": "Domain-Driven Design (DDD) Skill Panorama",
+    "url": "/20_agent_skills/domain-driven-design-skills/README.en.html"
   },
   {
     "title": "OpenSpec Practise",
-    "url": "/12_openspec_practise/README-en.html"
+    "url": "/21_openspec_practise/"
+  },
+  {
+    "title": "OpenSpec Practise",
+    "url": "/21_openspec_practise/README-en.html"
   },
   {
     "title": "OpenSpec in Practice: A Deep Retrospective on AI-Assisted Full-Cycle Software Engineering",
-    "url": "/12_openspec_practise/docs-en/openspec-ai-workflow-analysis.html"
+    "url": "/21_openspec_practise/docs-en/openspec-ai-workflow-analysis.html"
   },
   {
     "title": "OpenSpec Practical Guide",
-    "url": "/12_openspec_practise/docs-en/openspec-practical-guide.html"
+    "url": "/21_openspec_practise/docs-en/openspec-practical-guide.html"
   },
   {
     "title": "OpenSpec User Manual",
-    "url": "/12_openspec_practise/docs-en/openspec-user-manual.html"
+    "url": "/21_openspec_practise/docs-en/openspec-user-manual.html"
   },
   {
     "title": "OpenSpec 实战指南：AI 辅助软件工程全流程深度复盘",
-    "url": "/12_openspec_practise/docs/openspec-ai-workflow-analysis.html"
+    "url": "/21_openspec_practise/docs/openspec-ai-workflow-analysis.html"
   },
   {
     "title": "OpenSpec 实战指南",
-    "url": "/12_openspec_practise/docs/openspec-practical-guide.html"
+    "url": "/21_openspec_practise/docs/openspec-practical-guide.html"
   },
   {
     "title": "OpenSpec 使用手册",
-    "url": "/12_openspec_practise/docs/openspec-user-manual.html"
+    "url": "/21_openspec_practise/docs/openspec-user-manual.html"
   },
   {
     "title": "Design: Ecommerce Mini Architecture",
-    "url": "/12_openspec_practise/examples/openspec/changes/v1-mvp/design.html"
+    "url": "/21_openspec_practise/examples/openspec/changes/v1-mvp/design.html"
   },
   {
     "title": "Proposal: Ecommerce Mini MVP",
-    "url": "/12_openspec_practise/examples/openspec/changes/v1-mvp/proposal.html"
+    "url": "/21_openspec_practise/examples/openspec/changes/v1-mvp/proposal.html"
   },
   {
     "title": "Cart Management Specification",
-    "url": "/12_openspec_practise/examples/openspec/changes/v1-mvp/specs/cart-management/spec.html"
+    "url": "/21_openspec_practise/examples/openspec/changes/v1-mvp/specs/cart-management/spec.html"
   },
   {
     "title": "Catalog Management Specification",
-    "url": "/12_openspec_practise/examples/openspec/changes/v1-mvp/specs/catalog-management/spec.html"
+    "url": "/21_openspec_practise/examples/openspec/changes/v1-mvp/specs/catalog-management/spec.html"
   },
   {
     "title": "Domain Model Specification",
-    "url": "/12_openspec_practise/examples/openspec/changes/v1-mvp/specs/domain-model/spec.html"
+    "url": "/21_openspec_practise/examples/openspec/changes/v1-mvp/specs/domain-model/spec.html"
   },
   {
     "title": "Error Handling Specification",
-    "url": "/12_openspec_practise/examples/openspec/changes/v1-mvp/specs/error-handling/spec.html"
+    "url": "/21_openspec_practise/examples/openspec/changes/v1-mvp/specs/error-handling/spec.html"
   },
   {
     "title": "Order Management Specification",
-    "url": "/12_openspec_practise/examples/openspec/changes/v1-mvp/specs/order-management/spec.html"
+    "url": "/21_openspec_practise/examples/openspec/changes/v1-mvp/specs/order-management/spec.html"
   },
   {
     "title": "Payment Specification",
-    "url": "/12_openspec_practise/examples/openspec/changes/v1-mvp/specs/payment/spec.html"
+    "url": "/21_openspec_practise/examples/openspec/changes/v1-mvp/specs/payment/spec.html"
   },
   {
     "title": "Implementation Tasks",
-    "url": "/12_openspec_practise/examples/openspec/changes/v1-mvp/tasks.html"
+    "url": "/21_openspec_practise/examples/openspec/changes/v1-mvp/tasks.html"
   },
   {
     "title": "Cart Management Specification",
-    "url": "/12_openspec_practise/examples/openspec/specs/cart-management/spec.html"
+    "url": "/21_openspec_practise/examples/openspec/specs/cart-management/spec.html"
   },
   {
     "title": "Catalog Management Specification",
-    "url": "/12_openspec_practise/examples/openspec/specs/catalog-management/spec.html"
+    "url": "/21_openspec_practise/examples/openspec/specs/catalog-management/spec.html"
   },
   {
     "title": "Domain Model Specification",
-    "url": "/12_openspec_practise/examples/openspec/specs/domain-model/spec.html"
+    "url": "/21_openspec_practise/examples/openspec/specs/domain-model/spec.html"
   },
   {
     "title": "Error Handling Specification",
-    "url": "/12_openspec_practise/examples/openspec/specs/error-handling/spec.html"
+    "url": "/21_openspec_practise/examples/openspec/specs/error-handling/spec.html"
   },
   {
     "title": "Order Management Specification",
-    "url": "/12_openspec_practise/examples/openspec/specs/order-management/spec.html"
+    "url": "/21_openspec_practise/examples/openspec/specs/order-management/spec.html"
   },
   {
     "title": "Payment Specification",
-    "url": "/12_openspec_practise/examples/openspec/specs/payment/spec.html"
+    "url": "/21_openspec_practise/examples/openspec/specs/payment/spec.html"
   },
   {
     "title": "大语言模型应用开发与编排",
