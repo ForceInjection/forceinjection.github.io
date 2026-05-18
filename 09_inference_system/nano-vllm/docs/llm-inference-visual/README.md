@@ -135,3 +135,41 @@ python example.py
 ```
 
 - 示例用法来源：[README.md §Quick Start](../../README.md#L35-L46) 与 [example.py](../../example.py)
+
+### 3.1 课内练习脚本
+
+每课提供独立的验证脚本（[scripts/](./scripts/)），在真实 nano-vllm 源码片段旁展示执行结果：
+
+```bash
+# 运行全部脚本（L01 需要 GPU + Qwen3-0.6B 模型）
+cd docs/llm-inference-visual/scripts/
+bash run_all.sh --all
+
+# 仅运行 CPU 脚本（L02-L08）
+bash run_all.sh
+
+# 运行指定课次
+bash run_all.sh L03 L05
+```
+
+| 脚本                                                         | 对应课次 | 依赖             | 说明                                                                              |
+| ------------------------------------------------------------ | -------- | ---------------- | --------------------------------------------------------------------------------- |
+| [L01_end_to_end.py](./scripts/L01_end_to_end.py)             | 第 1 课  | GPU + 模型       | 端到端推理链路：`LLM.generate` → `step` 三段式 → 返回结构                         |
+| [L02_sequence.py](./scripts/L02_sequence.py)                 | 第 2 课  | nano-vllm (CPU)  | Sequence 字段、block 切分公式、pickle 协议                                        |
+| [L03_scheduler.py](./scripts/L03_scheduler.py)               | 第 3 课  | nano-vllm (CPU)  | prefill 批拼接规则、chunked prefill 限制、decode + preempt，含真实 Scheduler 对比 |
+| [L04_block_manager.py](./scripts/L04_block_manager.py)       | 第 4 课  | nano-vllm (CPU)  | 链式哈希、prefix cache 命中、ref_count 引用计数                                   |
+| [L05_prefill_batching.py](./scripts/L05_prefill_batching.py) | 第 5 课  | torch + 模型路径 | cu_seqlens 展平拼接、slot_mapping 构造、Context 注入                              |
+| [L06_decode.py](./scripts/L06_decode.py)                     | 第 6 课  | torch + 模型路径 | decode slot 公式、may_append 触发条件、prefill/decode 张量对比                    |
+| [L07_attention.py](./scripts/L07_attention.py)               | 第 7 课  | torch + 模型路径 | -1 哨兵、算子分支决策树、prefix cache 触发、KV cache 张量写入                     |
+| [L08_optimizations.py](./scripts/L08_optimizations.py)       | 第 8 课  | 纯 Python        | CUDA Graph replay 条件、TP 广播流程、torch.compile 位置                           |
+
+每个脚本的结构：**真实源码片段** → **模拟或真实执行** → **断言验证**，在同一个终端内完成"代码阅读 → 行为验证"的闭环。
+
+另含两个辅助脚本：
+
+| 脚本                                               | 说明                                                                                                |
+| -------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
+| [verify_nanovllm.py](./scripts/verify_nanovllm.py) | nano-vllm 功能验证（6 个用例：Quick Start、多请求、token_ids、SamplingParams、Chat Template、吞吐） |
+| [benchmark.py](./scripts/benchmark.py)             | 性能基准测试（`--num-seqs`、`--max-input`、`--max-output`、`--no-cuda-graph`、`--tp`）              |
+
+模型路径通过命令行参数或 `NANOVLLM_MODEL_PATH` 环境变量指定，详见 [scripts/README.md](./scripts/README.md)。
