@@ -1048,6 +1048,10 @@
     "url": "/09_inference_system/nano-vllm/"
   },
   {
+    "title": "CLAUDE.md",
+    "url": "/09_inference_system/nano-vllm/CLAUDE.html"
+  },
+  {
     "title": "nano-vllm 实战课程",
     "url": "/09_inference_system/nano-vllm/docs/llm-inference-visual/"
   },

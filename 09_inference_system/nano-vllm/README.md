@@ -8,23 +8,27 @@
 
 # Nano-vLLM
 
-A lightweight vLLM implementation built from scratch.
+从零构建的轻量级 vLLM 实现。
 
-## Key Features
+## 关键特性
 
-- 🚀 **Fast offline inference** - Comparable inference speeds to vLLM
-- 📖 **Readable codebase** - Clean implementation in ~ 1,200 lines of Python code
-- ⚡ **Optimization Suite** - Prefix caching, Tensor Parallelism, Torch compilation, CUDA graph, etc.
+- 🚀 **快速离线推理** - 推理速度与 vLLM 相当
+- 📖 **可读性强的代码** - 约 1,200 行 Python 代码，结构清晰
+- ⚡ **优化套件** - 前缀缓存、张量并行、Torch 编译、CUDA Graph 等
 
-## Installation
+## 实战课程
+
+[nano-vllm 实战课程](docs/llm-inference-visual/) — 从源码走读 LLM 推理引擎：调度、KV cache、注意力、Tensor Parallel、CUDA Graph。8 课逐步展开，每课附带可运行的验证脚本。
+
+## 安装
 
 ```bash
 pip install git+https://github.com/GeeeekExplorer/nano-vllm.git
 ```
 
-## Model Download
+## 模型下载
 
-To download the model weights manually, use the following command:
+手动下载模型权重：
 
 ```bash
 huggingface-cli download --resume-download Qwen/Qwen3-0.6B \
@@ -32,9 +36,9 @@ huggingface-cli download --resume-download Qwen/Qwen3-0.6B \
   --local-dir-use-symlinks False
 ```
 
-## Quick Start
+## 快速开始
 
-See `example.py` for usage. The API mirrors vLLM's interface with minor differences in the `LLM.generate` method:
+参考 `example.py`。API 接口与 vLLM 一致，仅 `LLM.generate` 方法有细微差异：
 
 ```python
 from nanovllm import LLM, SamplingParams
@@ -45,23 +49,24 @@ outputs = llm.generate(prompts, sampling_params)
 outputs[0]["text"]
 ```
 
-## Benchmark
+## 性能测试
 
-See `bench.py` for benchmark.
+参见 `bench.py`。
 
-**Test Configuration:**
+**测试配置：**
 
-- Hardware: RTX 4070 Laptop (8GB)
-- Model: Qwen3-0.6B
-- Total Requests: 256 sequences
-- Input Length: Randomly sampled between 100–1024 tokens
-- Output Length: Randomly sampled between 100–1024 tokens
+- 硬件：RTX 4070 Laptop (8GB)
+- 模型：Qwen3-0.6B
+- 总请求数：256 条
+- 输入长度：100–1024 tokens 随机采样
+- 输出长度：100–1024 tokens 随机采样
 
-**Performance Results:**
-| Inference Engine | Output Tokens | Time (s) | Throughput (tokens/s) |
-|----------------|-------------|----------|-----------------------|
-| vLLM | 133,966 | 98.37 | 1361.84 |
-| Nano-vLLM | 133,966 | 93.41 | 1434.13 |
+**性能结果：**
+
+| 推理引擎  | 输出 Tokens | 耗时 (s) | 吞吐 (tokens/s) |
+| --------- | ----------- | -------- | --------------- |
+| vLLM      | 133,966     | 98.37    | 1361.84         |
+| Nano-vLLM | 133,966     | 93.41    | 1434.13         |
 
 ## Star History
 
