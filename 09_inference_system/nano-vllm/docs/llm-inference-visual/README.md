@@ -6,7 +6,7 @@
 
 本课程只要求读者具备 Python 编程基础。Transformer 与注意力机制等 LLM 原理知识将在课中逐步引入，无需提前掌握。
 
-> 更多大模型相关内容请参考：[AI Fundermentals](https://github.com/ForceInjection/AI-fundermentals) | [GitHubPages](https://forceinjection.github.io/)。
+> 更多大模型相关内容请参考：[AI Fundamentals](https://github.com/ForceInjection/AI-fundamentals) | [GitHubPages](https://forceinjection.github.io/)。
 
 本课程目标是基于 nano-vllm 的真实代码路径，建立对 LLM 推理引擎的整体认识：从 `LLM.generate` 的入口出发，理解调度（prefill/decode）、KV cache 的 block 管理、注意力算子分支、Tensor Parallel 与 CUDA Graph 等关键机制，并在关键环节用示意图将程序逻辑、数据结构和张量（多维数组）的形状呈现出来。
 
