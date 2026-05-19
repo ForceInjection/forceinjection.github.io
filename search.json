@@ -16,6 +16,10 @@
     "url": "/01_hardware_architecture/gpudirect/02_gpudirect_p2p.html"
   },
   {
+    "title": "GPU Direct Storage (GDS) 基础",
+    "url": "/01_hardware_architecture/gpudirect/03_gds_basics.html"
+  },
+  {
     "title": "NVIDIA 硬件架构与算力解析",
     "url": "/01_hardware_architecture/nvidia/"
   },
@@ -64,6 +68,38 @@
     "url": "/01_hardware_architecture/pcie/02_p2pdma_technology.html"
   },
   {
+    "title": "PCIe 拓扑可视化：从 sysfs 到 nvidia-smi",
+    "url": "/01_hardware_architecture/pcie/03_pcie_topology_visualization.html"
+  },
+  {
+    "title": "PCIe AER 错误监控与链路健康检查",
+    "url": "/01_hardware_architecture/pcie/04_pcie_aer_monitoring.html"
+  },
+  {
+    "title": "GPU BAR1 内存映射机制",
+    "url": "/01_hardware_architecture/pcie/05_bar1_memory_mapping.html"
+  },
+  {
+    "title": "PCIe 拓扑层次：Root Complex、Switch、Bridge 与 Device",
+    "url": "/01_hardware_architecture/pcie/06_pcie_topology_hierarchy.html"
+  },
+  {
+    "title": "PCIe Switch 识别与验证",
+    "url": "/01_hardware_architecture/pcie/07_pcie_switch_vs_bridge.html"
+  },
+  {
+    "title": "单卡 GPU 拓扑与 NUMA 深入分析",
+    "url": "/01_hardware_architecture/performance/02_single_gpu_topology_analysis.html"
+  },
+  {
+    "title": "CPU AMX vs GPU Tensor Core：混合计算场景分析",
+    "url": "/01_hardware_architecture/performance/03_amx_vs_tensorcore.html"
+  },
+  {
+    "title": "多 PCIe Domain 与 NUMA 映射",
+    "url": "/01_hardware_architecture/performance/04_pcie_domain_numa.html"
+  },
+  {
     "title": "AI 基础设施延迟金字塔",
     "url": "/01_hardware_architecture/performance/ai_latency_pyramid.html"
   },
@@ -104,6 +140,10 @@
     "url": "/02_gpu_programming/01_environment/02_cuda_image_build_analysis.html"
   },
   {
+    "title": "裸金属 CUDA 环境安装指南 (Ubuntu 22.04)",
+    "url": "/02_gpu_programming/01_environment/03_cuda_metal_install_guide.html"
+  },
+  {
     "title": "CUDA 编程 (CUDA Programming)",
     "url": "/02_gpu_programming/02_cuda/"
   },
@@ -124,6 +164,22 @@
     "url": "/02_gpu_programming/02_cuda/04_simt_vs_tile_based.html"
   },
   {
+    "title": "CUDA NUMA API 编程实践",
+    "url": "/02_gpu_programming/02_cuda/05_cuda_numa_api.html"
+  },
+  {
+    "title": "GPU 原子操作与 PCIe 能力查询",
+    "url": "/02_gpu_programming/02_cuda/06_device_attributes.html"
+  },
+  {
+    "title": "CUDA Streams 并发实战",
+    "url": "/02_gpu_programming/02_cuda/07_cuda_streams_concurrency.html"
+  },
+  {
+    "title": "CUDA Kernel Launch 开销测量",
+    "url": "/02_gpu_programming/02_cuda/08_kernel_launch_latency.html"
+  },
+  {
     "title": "TileLang 与 Tile-Based 编程",
     "url": "/02_gpu_programming/03_tilelang/"
   },
@@ -138,6 +194,22 @@
   {
     "title": "nvbandwidth 深度解析：NVIDIA GPU 带宽测量工具全指南",
     "url": "/02_gpu_programming/04_profiling/01_nvbandwidth_best_practices.html"
+  },
+  {
+    "title": "PCIe 链路状态与主机-设备带宽实测",
+    "url": "/02_gpu_programming/04_profiling/02_pcie_bandwidth_measurement.html"
+  },
+  {
+    "title": "GPU 显存带宽测试：片内 vs 片外",
+    "url": "/02_gpu_programming/04_profiling/03_hbm_bandwidth_test.html"
+  },
+  {
+    "title": "GPU 功耗管理实战",
+    "url": "/02_gpu_programming/04_profiling/04_power_management.html"
+  },
+  {
+    "title": "PCIe 传输效率曲线：从小包到大块",
+    "url": "/02_gpu_programming/04_profiling/05_pcie_transfer_efficiency.html"
   },
   {
     "title": "AI 集群运维与通信 (AI Cluster Operations & Communication)",
@@ -186,6 +258,10 @@
   {
     "title": "NCCL 测试验证工具说明文档",
     "url": "/03_ai_cluster_ops/03_nccl/01_nccl_tutorial.html"
+  },
+  {
+    "title": "NCCL 单卡验证指南",
+    "url": "/03_ai_cluster_ops/03_nccl/02_nccl_helloworld.html"
   },
   {
     "title": "NCCL Kubernetes 部署指南",
