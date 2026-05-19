@@ -98,6 +98,8 @@ def can_allocate(self, seq: Sequence) -> int:
 
 ## 4. 练习
 
+### 4.1 课堂练习
+
 练习分两步：先用 `BlockManager.compute_hash` 构造一条两块的哈希链，理解"前缀哈希要作为下一块计算的 prefix 输入"；再基于两条"共享前缀"的请求，手算 prefix cache 命中后第二个请求的 `num_cached_blocks` 与实际需要新分配的 block 数。
 
 ```python
@@ -139,3 +141,9 @@ print("num_cached_tokens :", num_cached_blocks * block_size)
   - `compute_hash(token_ids, prefix)` 会先写入 prefix（若存在），再写入当前 block 的 token 字节序列（见 [block_manager.py:L35-L41](../../nanovllm/engine/block_manager.py#L35-L41)）
   - `can_allocate` 通过链式 hash 与 `token_ids` 全等校验累加 `num_cached_blocks`（见 [block_manager.py:L58-L73](../../nanovllm/engine/block_manager.py#L58-L73)）；`allocate` 据此只为剩余块从 `free_block_ids` 新分配，并把 `seq.num_cached_tokens` 置为 `num_cached_blocks * block_size`（见 [block_manager.py:L75-L93](../../nanovllm/engine/block_manager.py#L75-L93)）
   - `hash_blocks` 只对"已完成的整块"写回 `hash_to_block_id`，最后一个未满 block 不会参与前缀命中（见 [block_manager.py:L110-L120](../../nanovllm/engine/block_manager.py#L110-L120)）
+
+### 4.2 课后自测题
+
+1. 链式哈希为什么是 `compute_hash(current_block, prefix=prev_hash)` 而不是对每个 block 单独哈希后拼接比较？如果哈希碰撞发生了（两个不同序列算出相同哈希），代码在哪个环节兜底？
+2. `can_allocate` 中对已命中但不在 `used_block_ids` 中的 block 不扣 `num_new_blocks`（L69-L70），这个 block 处于什么状态？什么时候会处于这种状态？
+3. `hash_blocks` 只写回完整 block。如果一条请求只有 3 个 token（不满一个 block），它的 KV cache 就永远不会被 prefix cache 复用了。这在什么场景下影响最大？

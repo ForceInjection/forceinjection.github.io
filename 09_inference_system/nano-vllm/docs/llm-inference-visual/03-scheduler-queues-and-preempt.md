@@ -109,6 +109,8 @@ def preempt(self, seq: Sequence):
 
 ## 4. 练习
 
+### 4.1 课堂练习
+
 用整数模拟 `max_num_batched_tokens` 的消耗，推导 prefill 阶段每次给 seq 分配多少 `num_scheduled_tokens`，验证分块预填充的限制条件。
 
 ```python
@@ -134,3 +136,9 @@ print(simulate_prefill([1000, 900, 800], max_num_batched_tokens=1200))
 ```
 
 - 验收要点（依据代码）：除首个 seq 外，不允许分块预填充（见 [scheduler.py:L42-L43](../../nanovllm/engine/scheduler.py#L42-L43)）
+
+### 4.2 课后自测题
+
+1. preempt 策略是"从 running 队尾抢占"，如果改成"从队首抢占"或"抢占占用 block 最多的 seq"，各自对吞吐和公平性有什么影响？
+2. chunked prefill 限制只有 batch 中第一条 seq 可分块。如果允许任意 seq 分块，`postprocess` 的 `continue` 逻辑（L86-L87）需要怎么改？
+3. `max_num_seqs` 和 `max_num_batched_tokens` 中，哪个参数主要卡住 prefill、哪个主要卡住 decode？为什么？

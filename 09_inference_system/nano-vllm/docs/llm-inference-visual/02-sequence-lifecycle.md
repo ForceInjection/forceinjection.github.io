@@ -120,6 +120,8 @@ def __setstate__(self, state):
 
 ## 4. 练习
 
+### 4.1 课堂练习
+
 纯 CPU 练习：手算 `block_size` 与 `num_blocks` 的关系，验证 `last_block_num_tokens` 的定义。
 
 ```python
@@ -134,3 +136,9 @@ for n in [1, 4, 5, 8, 9]:
 ```
 
 - 验收要点（依据代码）：`num_blocks = (num_tokens + block_size - 1) // block_size`，`last_block_num_tokens = num_tokens - (num_blocks - 1) * block_size`（见 [sequence.py:L55-L62](../../nanovllm/engine/sequence.py#L55-L62)）
+
+### 4.2 课后自测题
+
+1. `block_size` 是类变量 `Sequence.block_size`。如果多组请求需要不同的 block_size，当前设计会有什么问题？如何改进？
+2. `__getstate__` 中 decode 阶段只传 `last_token`，丢失了完整 `token_ids`。这个信息在子进程中真的不需要吗？什么场景下子进程需要完整的 prompt？
+3. `num_cached_tokens` 和 `num_scheduled_tokens` 的更新放在 `Scheduler.postprocess` 里，如果把这个逻辑移到 `Sequence.append_token` 里，需要额外传入什么信息？哪种设计更好？

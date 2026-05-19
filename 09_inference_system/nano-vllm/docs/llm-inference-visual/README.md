@@ -173,3 +173,14 @@ bash run_all.sh L03 L05
 | [benchmark.py](./scripts/benchmark.py)             | 性能基准测试（`--num-seqs`、`--max-input`、`--max-output`、`--no-cuda-graph`、`--tp`）              |
 
 模型路径通过命令行参数或 `NANOVLLM_MODEL_PATH` 环境变量指定，详见 [scripts/README.md](./scripts/README.md)。
+
+### 3.2 补充材料
+
+| 文档                                         | 说明                                                                         |
+| -------------------------------------------- | ---------------------------------------------------------------------------- |
+| [FAQ.md](./FAQ.md)                           | 常见问题与排障指南：flash-attn 安装、模型下载、CUDA OOM、脚本运行问题        |
+| [vs-vllm.md](./vs-vllm.md)                   | nano-vllm 与真实 vLLM 的架构对比：教学简化 vs 缺失能力，附 vLLM 源码阅读路线 |
+| [INSTRUCTOR.md](./INSTRUCTOR.md)             | 讲师指南：每课时间分配、重点、常见卡点、教学建议                             |
+| [setup_remote.sh](./scripts/setup_remote.sh) | 远端服务器环境搭建脚本                                                       |
+
+每课末尾的 §4 练习已拆分为 **§4.1 课堂练习**（验证脚本）和 **§4.2 课后思考题**（3 道讨论题），便于课堂讲授与课后作业分开使用。

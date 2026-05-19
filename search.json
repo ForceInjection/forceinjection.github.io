@@ -1088,6 +1088,18 @@
     "url": "/09_inference_system/nano-vllm/docs/llm-inference-visual/08-where-optimizations-live.html"
   },
   {
+    "title": "常见问题与排障指南",
+    "url": "/09_inference_system/nano-vllm/docs/llm-inference-visual/FAQ.html"
+  },
+  {
+    "title": "讲师指南",
+    "url": "/09_inference_system/nano-vllm/docs/llm-inference-visual/INSTRUCTOR.html"
+  },
+  {
+    "title": "nano-vllm 与真实 vLLM 的差距",
+    "url": "/09_inference_system/nano-vllm/docs/llm-inference-visual/vs-vllm.html"
+  },
+  {
     "title": "企业级 LLM 推理系统参考设计",
     "url": "/09_inference_system/reference_design/"
   },

@@ -123,6 +123,8 @@ for i in range(start_block, end_block):
 
 ## 4. 练习
 
+### 4.1 课堂练习
+
 用纯 Python 手算 `cu_seqlens_q` 与 `positions`，把"展平拼接"落到两个可打印的列表上。完成后，我们应能解释 `cu_seqlens_q[i]` 与 `cu_seqlens_q[i+1]` 的语义，并说清 `positions` 为什么要以 `num_cached_tokens` 为起点。
 
 ```python
@@ -151,3 +153,9 @@ print("positions   :", pos)   # 期望：[0, 1, 2, 4, 5]
 - 验收要点（对应实现）：
   - `cu_seqlens_q` 以 0 开头，每个元素是前面所有 seq 的 query 累计长度（见 [model_runner.py:L132-L146](../../nanovllm/engine/model_runner.py#L132-L146)）
   - `positions` 在 prefill 下为 `range(seq.num_cached_tokens, seq.num_cached_tokens + seq.num_scheduled_tokens)` 的展平拼接，因此 prefix cache 命中时起点会跳过已缓存 token（见 [model_runner.py:L129-L148](../../nanovllm/engine/model_runner.py#L129-L148)）
+
+### 4.2 课后自测题
+
+1. 为什么 `input_ids` 是 1D 展平而不做成 2D padding？如果用 2D padding 矩阵，注意力计算中无效 token 的处理会引入什么问题（提示：causal mask 在这个场景下还能直接用吗）？
+2. `cu_seqlens_q` 和 `cu_seqlens_k` 在 prefix cache 场景下长度相同但值不同，这对 `flash_attn_varlen_func` 的 `max_seqlen_q` 和 `max_seqlen_k` 参数有什么影响？
+3. Context 通过模块级全局变量传递，而不是作为参数传入 `Attention.forward`。这种设计的 trade-off 是什么？如果改成显式传参会改动多少代码？
