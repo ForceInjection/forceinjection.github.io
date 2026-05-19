@@ -124,6 +124,8 @@ if context.is_prefill:
 
 ## 4. 练习
 
+### 4.1 课堂练习
+
 用最小伪代码复现"slot == -1 时跳过写入"的语义——理解 decode 的 CUDA Graph 分支为什么先把 `slot_mapping` fill 为 `-1` 再写入前 bs 个元素。
 
 ```python
@@ -140,3 +142,9 @@ print(cache)  # 期望只写入 slot 10 与 12
 ```
 
 - 验收要点（依据代码）：Triton kernel 在 `slot == -1` 时直接 return，跳过写入（见 [attention.py:L21-L24](../../nanovllm/layers/attention.py#L21-L24)）；decode 的 graph replay 会先 `fill_(-1)` 再写入有效部分（见 [model_runner.py:L206-L208](../../nanovllm/engine/model_runner.py#L206-L208)）
+
+### 4.2 课后自测题
+
+1. `store_kvcache` 用 `-1` 哨兵跳过无效位置，为什么不直接传一个只包含有效 slot 的数组？这两种设计在 CUDA Graph 场景下有什么不同？
+2. `flash_attn_varlen_func` 和 `flash_attn_with_kvcache` 的参数差异很大。从输入 shape 的角度解释为什么 prefill 需要 `cu_seqlens` 而 decode 需要 `cache_seqlens`。
+3. prefix cache 命中时 `k, v = k_cache, v_cache`。此时 `store_kvcache` 还会为这些 prefix token 再次调用吗？如果会，写入的位置是什么？（提示：看 `slot_mapping` 的区间）

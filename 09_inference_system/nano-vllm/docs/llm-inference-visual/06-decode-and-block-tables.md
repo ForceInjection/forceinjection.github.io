@@ -90,6 +90,8 @@ def may_append(self, seq: Sequence):
 
 ## 4. 练习
 
+### 4.1 课堂练习
+
 分两步：先复现 slot 计算公式，把 `block_table`、`block_size` 与"线性 slot 地址"对齐；再构造一个跨 block 边界的 seq，手算 `may_append` 是否会在下一轮 decode 前追加新 block。
 
 ```python
@@ -120,3 +122,9 @@ for length in [7, 8, 9, 10]:
 - 验收要点（对应实现）：
   - slot 公式：`slot_mapping.append(seq.block_table[-1] * block_size + seq.last_block_num_tokens - 1)`（见 [model_runner.py:L181-L182](../../nanovllm/engine/model_runner.py#L181-L182)）
   - `may_append` 仅在 `len(seq) % block_size == 1` 时新分配 block 并追加到 `seq.block_table`（见 [block_manager.py:L106-L108](../../nanovllm/engine/block_manager.py#L106-L108)），`can_append` 据此判断空闲池是否足够（见 [block_manager.py:L103-L104](../../nanovllm/engine/block_manager.py#L103-L104)）
+
+### 4.2 课后自测题
+
+1. decode 每步只有 1 个新 token，为什么 FlashAttention 的 decode API (`flash_attn_with_kvcache`) 仍然需要完整的 `block_tables`？它内部各 seq 的 look-up 范围有多大？
+2. `may_append` 在 `len(seq) % block_size == 1` 时触发。block_size=4 时，len=1、5、9 触发 —— 用 ASCII 画出 4 个 block 的填充过程，标注每次触发 `may_append` 的时刻。
+3. 如果去掉 `can_append` 的空闲检查，直接在 `may_append` 里捕获 `IndexError`（从空 free 池 pop），会产生什么问题？`preempt` 机制还能正常触发吗？

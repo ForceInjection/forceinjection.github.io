@@ -30,7 +30,52 @@ _GPU Architecture and Programming — An Introduction_：
 - 对比传统 SIMT (Thread 视角) 与 Tile-Based (Block/Tile 视角) 的编程思维。
 - 以矩阵乘法 (GEMM) 为例展示 Tensor Core 的抽象与使用。
 
-## 5. [CUDA 编程简介 - 基础与实践.pdf](./references/CUDA%20%E7%BC%96%E7%A8%8B%E7%AE%80%E4%BB%8B%20-%20%E5%9F%BA%E7%A1%80%E4%B8%8E%E5%AE%9E%E8%B7%B5.pdf)
+## 5. [CUDA NUMA API 编程实践](05_cuda_numa_api.md)
 
-- 一份完整的 CUDA 编程入门讲义（PDF 格式）。
-- 涵盖环境搭建、基础语法、内存管理与实战案例。
+- 单 GPU 环境下的 NUMA 亲和性管理。
+- `cudaMallocHost` 与 NUMA 节点分配策略。
+- `cudaMemAdvise` / `cudaMemPrefetchAsync` 在 Managed Memory 中的应用。
+- CPU 亲和性绑定 (`taskset` / `numactl`) 的最佳实践。
+
+## 6. [GPU 原子操作与 PCIe 能力查询](06_device_attributes.md)
+
+- `cudaDeviceGetAttribute` 查询 100+ 种底层硬件能力。
+- PCIe 原子操作支持确认（Inbound/Outbound Atomic）。
+- Host Native Atomic 与数据中心 GPU 的能力差异。
+- RTX 5090 关键属性实测。
+
+## 7. [CUDA Streams 并发实战](07_cuda_streams_concurrency.md)
+
+- 单 GPU 上 H2D + Kernel + D2H 重叠执行的完整 demo。
+- 4 个 stream 的实测加速比 2.36x（RTX 5090，2 个 async copy engine）。
+- Nsight Systems 可视化概念图与 stream 最佳实践。
+
+## 8. [Kernel Launch 开销测量](08_kernel_launch_latency.md)
+
+- 空 kernel launch 延迟实测：2.6 μs（RTX 5090）。
+- 不同 block 数量对 launch 开销的影响。
+- CPU vs GPU 决策边界与 CUDA Graph 替代方案。
+
+## 9. [CUDA Graphs 编程](09_cuda_graphs.md)
+
+- 将多次 kernel launch + memcpy 合并为一次 graph launch。
+- 覆盖 Stream Capture 与 Manual API 两种创建方式。
+- 生命周期：录制 → 实例化 → 启动 → 更新。
+- A100 实测：Instantiation ~33 μs, Repeat Launch ~2.3 μs。
+
+## 10. [Reduction：从朴素实现到 Warp Shuffle](10_reduction.md)
+
+- GPU 并行编程最经典的教学案例，展示从 0.048ms 到 0.022ms 的逐级优化（2.18× 加速）。
+- 8 个 kernel 变体：interleaved → sequential → warp shuffle → template → Cooperative Groups。
+- A100 实测 `--shmoo` 完整性能表。
+- Warp shuffle 原理与 shared memory / register 性能对比。
+
+## 11. [Tensor Core GEMM 性能实测](11_tensor_core_gemm.md)
+
+- 运行官方 `cudaTensorCoreGemm` / `bf16TensorCoreGemm`，A100 实测 FP16 52.5 TFLOPS、BF16 90.9 TFLOPS。
+- 理论峰值对标（156 TFLOPS dense）与矩阵大小对利用率的影响。
+- WMMA API 编程模型 + "算力-带宽-算数密度"三角分析。
+
+## 参考资料
+
+- [CUDA 编程简介 - 基础与实践.pdf](./references/CUDA%20%E7%BC%96%E7%A8%8B%E7%AE%80%E4%BB%8B%20-%20%E5%9F%BA%E7%A1%80%E4%B8%8E%E5%AE%9E%E8%B7%B5.pdf)

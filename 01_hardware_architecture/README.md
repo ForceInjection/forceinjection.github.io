@@ -1,35 +1,53 @@
 # 硬件架构与互连技术
 
-## 1. 概述
-
-在谈论大模型训练或推理的性能之前，我们首先需要理解算力是怎么“长”出来的——它不是一个单独的芯片，而是一整套自下而上叠起来的硬件体系。本章就沿着这条路径，把最底层的三层结构讲清楚：
-
-- **计算芯片**：GPU、TPU、NPU 这些加速器内部是怎么组织计算单元的，片上的 SRAM 和 HBM 又是如何决定访存效率的。
-- **节点内互连**：从通用的 PCIe（Gen3 到 Gen6），到专为 GPU 设计的 NVLink / NVSwitch，再到封装内的 NVLink-C2C，带宽一路从几十 GB/s 爬升到 TB/s 级。
-- **跨节点直通**：GPUDirect 家族（P2P / RDMA / Storage）如何让数据绕过 CPU，在 GPU 之间、GPU 与网卡或存储之间直接搬运。
-
-读完这一章，你应该能对一台 AI 服务器“从芯片到机架”的关键瓶颈有直观判断，为后续的性能调优打下硬件基础。
+> **快速导航**
+>
+> | 目录           | 主题                                                    | 关键词                       | 对应章节           |
+> | -------------- | ------------------------------------------------------- | ---------------------------- | ------------------ |
+> | `nvidia/`      | GPU 架构（Volta → Blackwell）、GPGPU vs NPU             | Tensor Core, HBM, SM         | §2.1               |
+> | `tpu/`         | Google TPU 脉动阵列架构                                 | Systolic Array, XLA          | §2.2               |
+> | `pcie/`        | PCIe 协议、拓扑层次、P2PDMA、BAR1、AER                  | Gen3–Gen6, Root Complex      | §3.1               |
+> | `nvlink/`      | NVLink / NVSwitch 高速互连                              | 1.8 TB/s, GPU-to-GPU         | §3.2               |
+> | `gpudirect/`   | GPUDirect P2P / RDMA / Storage (GDS)                    | Zero-copy, Bounce Buffer     | §4.1 / §4.2 / §4.3 |
+> | `superchips/`  | NVLink-C2C、GB300 NVL72 机架级架构                      | Chip-to-Chip, Rack-Scale     | §5.1               |
+> | `performance/` | NUMA 亲和性、延迟金字塔、带宽速查表、AMX vs Tensor Core | Latency Hierarchy, Bandwidth | §2.3 / §5.2 / §5.3 |
+> | `assets/`      | GPU↔CPU 数据路径、GPU 物理数据路径全景图                | Topology Atlas, SVG          | §6.1 / §6.2        |
 
 ---
 
-## 2. 基础计算芯片架构
+## 1. 概述
+
+本章沿 **芯片 → 总线 → 链路 → 直通 → 系统** 五层拓扑解构 AI 服务器算力来源，目标是掌握“从芯片到机架”的瓶颈定位能力：
+
+| 层级       | 关键技术                                     | 决定的性能维度               | 章节 |
+| ---------- | -------------------------------------------- | ---------------------------- | ---- |
+| 计算芯片   | GPU SM / Tensor Core、TPU 脉动阵列、CPU AMX  | 算力密度、片上 SRAM/HBM 访存 | §2   |
+| 节点内互连 | PCIe Gen3–Gen6（RC/Switch/Bridge）、NVLink 5 | 卡间 / 卡-外设带宽与延迟     | §3   |
+| 跨设备直通 | GPUDirect P2P / RDMA / Storage(GDS)          | 是否绕开 CPU Bounce Buffer   | §4   |
+| 系统级融合 | NVLink-C2C、GB300 NVL72、多 domain NUMA      | 部署单位、并行策略、拓扑评估 | §5   |
+
+---
+
+## 2. 计算芯片架构
 
 AI 加速器大致沿两条路线发展。一条是以 **NVIDIA GPU** 为代表的通用路线，用 SIMT 加 Tensor Core 的组合，同时兼顾图形、HPC 和深度学习；另一条是以 **Google TPU、各家 NPU** 为代表的专用路线，通过脉动阵列或专用矩阵引擎，把每瓦 TOPS 做得更高，但牺牲了灵活性。
 
-这两条路线在并行模型、片上内存层次（SRAM/HBM）、数值精度支持和编程范式上都有本质差别，也直接影响到训练和推理场景下的芯片选型。
-
 ### 2.1 NVIDIA GPU 架构
 
-NVIDIA GPU 目前占据了 AI 训练算力的绝大部分市场。从 Volta（V100）到 Hopper（H100/H200），再到最新的 Blackwell（B200/GB300），每一代基本都围绕三件事做文章：
+从 Volta（V100）→ Hopper（H100/H200）→ Blackwell（B200/GB300），每代 GPU 的演进可拆为三条独立轴线，合力决定训练吞吐与推理成本：
 
-- **Tensor Core 支持的精度**在不断下探——FP32 → TF32 → FP8 → FP4，单位算力翻倍的同时对量化精度的要求越来越高。
-- **HBM 的容量和带宽**决定了一张卡能装下多大的模型，也决定了访存会不会成为瓶颈。
-- **NVLink 的代际**决定了多卡互联的带宽上限，直接影响张量并行、流水并行能推多远。
+| 演进轴           | 走向                                | 影响                             |
+| ---------------- | ----------------------------------- | -------------------------------- |
+| Tensor Core 精度 | FP32 → TF32 → FP8 → FP4             | 单位算力翻倍、量化精度要求收紧   |
+| HBM 容量 / 带宽  | HBM2e → HBM3 → HBM3e（HBM4 规划中） | 可承载模型规模、访存是否成为瓶颈 |
+| NVLink 代际      | 至 Gen5 单卡 1.8 TB/s               | TP / PP 并行可扩展上限           |
 
-这三条线合起来，基本就决定了大模型的训练吞吐和推理成本。
+> 延伸阅读：Blackwell 代际已从“单卡”进化为“机架级单域”（NVL72、NVLink-C2C），其部署形态与并行策略影响请参阅 §5.1 [AI Superchip 与机架级架构](#51-ai-superchip-与机架级架构)。
 
+- **[NVIDIA 硬件架构与算力解析（子目录总览）](nvidia/README.md)**：NVIDIA 路线下的导航页，串联 GPU 内部结构与 GPGPU vs NPU 选型两条主线。
 - **[深入理解 GPU 架构](nvidia/understand_gpu_architecture/README.md)**：包含 GPU 与 CPU 的特性对比、内存层次模型（全局内存、共享内存等），以及 Tesla V100、RTX 5000 等具体硬件实例的分析。
 - **[GPGPU vs NPU：大模型推理训练对比](nvidia/GPGPU_vs_NPU_大模型推理训练对比.md)**：探讨在大语言模型时代，不同架构芯片在训练与推理场景下的优劣势与选型指南。
+- **[MIG 配置与实操](nvidia/mig_hands_on.md)**：基于 A100 现场查询的 MIG GPU 实例分区实操指南，含 profile 列表、GI/CI 创建命令和 CUDA 设备枚举影响。
 
 ### 2.2 Google TPU 架构
 
@@ -37,99 +55,115 @@ TPU 是 Google 为深度学习量身打造的另一条路径。它的核心思�
 
 - **[TPU 101：深度学习专用加速器架构解析](tpu/tpu%20101.md)**：探索 TPU 的设计哲学、核心计算单元原理及其与 GPU 的差异。
 
+### 2.3 CPU 矩阵加速：AMX
+
+CPU 侧的矩阵加速同样值得关注。Intel 从 Sapphire Rapids 起引入 **AMX (Advanced Matrix Extensions)**，对标 GPU Tensor Core，在小 batch 推理和实时场景下有延迟优势。
+
+- **[CPU AMX vs GPU Tensor Core](performance/03_amx_vs_tensorcore.md)**：Intel AMX 与 NVIDIA Tensor Core 的硬件规格对比、适用场景分析与混合计算 Pipeline 设计。
+
 ---
 
-## 3. 高速互连与数据传输技术
+## 3. 节点内互连：PCIe 与 NVLink
 
-当模型参数量迈过千亿、万亿级别，单颗芯片的算力和显存早就不够用了，真正卡住系统的往往不是计算，而是 **“内存墙”和“IO 墙”**——数据搬不过来、搬不够快。
+千亿 / 万亿参数规模下，瓶颈从计算转为 **内存墙 + IO 墙**。互连栈分两层：通用总线 **PCIe**（含拓扑诊断体系）与 GPU 私有链路 **NVLink / NVSwitch**。
 
-互连技术栈大致可以分成三层：最底下是通用系统总线 PCIe，往上是专为 GPU 设计的 NVLink / NVSwitch，再往上是让设备之间直接对话的 GPUDirect 家族。这三层合起来，决定了张量并行、流水并行、数据并行到底能扩展到多大规模。
+### 3.1 PCIe 总线体系
 
-### 3.1 基础系统总线与片间互连
+PCIe 是异构通信（CPU↔GPU、GPU↔NIC、GPU↔NVMe）的通用标准，按 **协议 → 拓扑 → 运维** 三层组织：
 
-PCIe 和 NVLink 在系统里扮演的是互补角色，而不是替代关系：
-
-- **PCIe** 是通用互连标准，Gen5 x16 单向约 64 GB/s，Gen6 再翻一倍。CPU 和 GPU、GPU 和网卡、GPU 和 NVMe 之间的异构通信基本都走它。
-- **NVLink** 则是 NVIDIA 专门为 GPU 间通信设计的私有链路，第 5 代单卡聚合带宽已经做到 1.8 TB/s，在带宽、延迟和拓扑灵活性上都明显领先 PCIe。
-
-简单说：跨设备类型的通信走 PCIe，GPU 之间要高带宽低延迟就走 NVLink。
+**协议与基础**：
 
 - **[PCIe 总线技术大全](pcie/01_pcie_comprehensive_guide.md)**：从物理层到协议层全面解析 PCIe 总线架构及带宽演进。
 - **[Linux PCIe P2PDMA 技术介绍](pcie/02_p2pdma_technology.md)**：从 PCIe 硬件机制、Linux 内核实现到 GPUDirect Storage (GDS) 场景实践，全面解析设备直连 DMA 技术。
-- **[NVLink 技术入门](nvlink/nvlink_intro.md)**：介绍 NVIDIA 为突破 PCIe 带宽瓶颈而设计的专有高速 GPU 互连方案。
+- **[GPU BAR1 内存映射](pcie/05_bar1_memory_mapping.md)**：BAR1 窗口大小对 Unified Memory 性能的影响、ReBAR 状态检查、BAR1 vs FB 对比。
 
-### 3.2 高级直通技术（GPUDirect）
+**拓扑层次与可视化**：
 
-GPUDirect 解决的是一个很具体的问题：数据从一个设备到另一个设备，为什么非得在 CPU 内存里“中转一下”？这个中转（Bounce Buffer）既浪费带宽又引入延迟。GPUDirect 家族通过让设备之间直接 DMA，把 CPU 从数据路径上拿掉，针对三种典型场景各有对应技术：
+- **[PCIe 拓扑层次](pcie/06_pcie_topology_hierarchy.md)**：Root Complex → Bridge/Switch → Device 四层模型，从 sysfs 识别各层，本环境 24 domain 完整拓扑。
+- **[PCIe 拓扑可视化](pcie/03_pcie_topology_visualization.md)**：通过 sysfs 和 `nvidia-smi` 交叉验证 GPU 在 PCIe 树中的位置与链路状态。
+- **[PCIe Switch 识别与验证](pcie/07_pcie_switch_vs_bridge.md)**：从 sysfs 区分 Switch vs Bridge 的方法，多端口检测、ACS 验证，本环境确认无 Switch。
 
-- **P2P**：同一节点内 GPU 之间直接通信。
-- **RDMA**：跨节点场景下，网卡直接把数据写进远端 GPU 的显存。
-- **Storage（GDS）**：NVMe 上的数据直接加载进 GPU 显存，绕过主机内存。
+**运维与诊断**：
 
-- **[NVIDIA GPUDirect P2P 技术详解](gpudirect/02_gpudirect_p2p.md)**：探讨节点内多 GPU 之间如何通过 PCIe 或 NVLink 实现高速对等通信。
-- **[NVIDIA GPUDirect RDMA 与 Storage 技术详解](gpudirect/01_gpudirect_technology.md)**：深入解析如何通过 RDMA 实现跨节点的网卡到 GPU 直接通信，以及通过 GDS 实现存储到 GPU 的直接数据加载。
+- **[PCIe AER 错误监控](pcie/04_pcie_aer_monitoring.md)**：sysfs AER 计数器解读、nvidia-smi Replay 监控、链路健康诊断流程与排查指南。
 
----
+### 3.2 NVLink 互连
 
-## 4. 异构融合架构与系统性能评估
+NVLink 是 NVIDIA 专为 GPU 间通信设计的私有链路，Gen5 单卡聚合 1.8 TB/s，带宽 / 延迟 / 拓扑灵活性均领先 PCIe。**选型规则**：跨设备类型走 PCIe；GPU↔GPU 高带宽低延迟走 NVLink。
 
-从这一节开始，视角会从单颗芯片、单条链路，拉升到整台服务器乃至整个机架。
-
-一方面，像 **Grace-Hopper、Grace-Blackwell 这类“超级芯片”**，借助 NVLink-C2C 把 CPU 和 GPU 的地址空间在封装层面直接打通；另一方面，**NVL72 这类机架级系统**干脆把 72 颗 GPU 用 NVLink 组成一个统一的通信域，让整个机架像一台加速器一样工作。
-
-与此同时，我们会用一张“延迟金字塔”作为参照系，把寄存器、缓存、HBM、RDMA、NVMe 的访问延迟放到一起，建立跨层级的性能直觉。
-
-### 4.1 AI Superchip 与机架级架构
-
-Blackwell 代际实际上重新定义了“一台 AI 机器”的边界：
-
-- 节点规模从过去常见的 8-GPU HGX，被扩展到 72-GPU 的 NVL72 机架单域；
-- 封装内的 NVLink-C2C 则让 CPU 和 GPU 共享一致性内存，原本跨 PCIe 的开销被压缩到芯片内部。
-
-这意味着模型训练的并行策略、显存规划、通信拓扑，都需要以“机架”而不是“单机”作为新的最小部署单位来重新考虑。
-
-- **[NVLink-C2C 详解](superchips/nvlink_c2c.md)**：解析打破内存墙的关键——基于 `Chip-to-Chip` 的异构融合互连技术。
-- **[NVIDIA GB300 NVL72 架构解析](superchips/nvidia_gb300.md)**：探讨基于下一代 Blackwell 架构的机架级（Rack-Scale）计算系统设计。
-
-### 4.2 性能参考指标
-
-一个常被低估的事实是：系统里不同层级的访问延迟，跨越了 5–6 个数量级。
-
-- 寄存器和 L1 Cache 大约在 **1 ns** 级别；
-- HBM 显存访问在 **~100 ns**；
-- 跨节点 RDMA 是 **微秒级（~2 μs）**；
-- NVMe 存储则要到 **~100 μs**。
-
-也就是说，数据落在哪一层，性能差距动辄上万倍。这个量级差是容量规划、KV Cache 分层存储、集合通信调度等决策的核心依据——**“别让热数据跑到慢介质上去”**，基本是所有优化的出发点。
-
-- **[AI 基础设施延迟金字塔](performance/ai_latency_pyramid.md)**：提供从寄存器访问、内存读写到跨节点网络通信的各级延迟参考基准数据。
+- **[NVLink 技术入门](nvlink/nvlink_intro.md)**：突破 PCIe 带宽瓶颈的专有高速 GPU 互连方案，含消费级 GPU 不支持 NVLink 的说明。
+- **[NVLink 诊断与实操](nvlink/nvlink_diagnostics.md)**：`nvidia-smi nvlink` 命令集、拓扑解读、错误检测，含 A100 实测与 GPU 7 NVLink 故障案例。
 
 ---
 
-## 5. 可视化参考图（Visual Reference）
+## 4. 跨设备直通：GPUDirect 家族
 
-前面几节涉及到的拓扑概念比较抽象，这里用一组统一风格的示意图把它们整合起来，形成一张可以随时翻阅的“硬件拓扑地图”，涵盖：
+GPUDirect 让设备间直接 DMA，把 CPU **Bounce Buffer** 从数据路径上移除——既省带宽又省延迟。三种场景对应三个分支：
 
-- PCIe 拓扑以及 Root Complex 的层级关系；
-- GPUDirect 场景下，数据走传统路径（经 CPU 内存中转）和走 GDS 路径（存储直达 GPU）的差别；
-- NUMA 亲和性对 GPU 访存性能的影响；
-- `nvidia-smi topo -m` 输出的 GPU↔GPU 对等关系六级分类：X / PIX / PXB / PHB / NODE / SYS。
+| 技术          | 场景         | 数据路径                    | 详解                                                               |
+| ------------- | ------------ | --------------------------- | ------------------------------------------------------------------ |
+| P2P           | 同节点多 GPU | GPU ↔ GPU（经 PCIe/NVLink） | [P2P 技术详解](gpudirect/02_gpudirect_p2p.md)                      |
+| RDMA          | 跨节点       | NIC → 远端 GPU VRAM         | [RDMA 与 Storage 技术详解](gpudirect/01_gpudirect_technology.md)   |
+| Storage (GDS) | 存储加载     | NVMe → GPU VRAM（绕过 CPU） | [GDS 基础（GDS 1.13.1 + 3×NVMe 实测）](gpudirect/03_gds_basics.md) |
 
-### 5.1 GPU ↔ CPU 数据路径示意
+---
 
-下图描绘了单机场景下 GPU 访问主机（CPU）内存时所经过的完整物理路径，涵盖 GPU DMA 引擎、PCIe Endpoint、PCIe Switch（可选）、CPU Root Complex、Memory Controller 直至 System DRAM 的逐级流转过程。
+## 5. 系统级融合与性能评估
+
+视角从单颗芯片、单条链路拉升到整台服务器乃至机架，同时补齐贯穿“芯片→链路→机架”的性能评估体系（机器边界 · 拓扑落地性能 · 量级参考）。
+
+### 5.1 AI Superchip 与机架级架构
+
+Blackwell 代际把 AI 机器边界从“单机”推到“机架级单域”：节点规模 **8-GPU HGX → 72-GPU NVL72**；封装内 **NVLink-C2C** 让 CPU/GPU 共享一致性内存，原跨 PCIe 开销被压进芯片。**结论**：并行策略、显存规划、通信拓扑需以“机架”为新的最小部署单位重新设计。
+
+- **[NVLink-C2C 详解](superchips/nvlink_c2c.md)**：基于 Chip-to-Chip 的异构融合互连，打破内存墙的关键。
+- **[NVIDIA GB300 NVL72 架构解析](superchips/nvidia_gb300.md)**：基于 Blackwell 架构的机架级计算系统设计。
+
+### 5.2 拓扑与 NUMA 亲和性
+
+互连拓扑的最终落脚点是性能：GPU 插在哪个 PCIe 槽、属于哪个 NUMA node，直接影响 H2D/D2H 带宽和跨 socket 延迟。
+
+- **[单卡 GPU 拓扑与 NUMA 深入分析](performance/02_single_gpu_topology_analysis.md)**：单 GPU 场景下 `nvidia-smi topo -m` 输出解读、NUMA 亲和性验证与跨 socket 延迟分析（含 taskset 实测数据）。
+- **[多 PCIe Domain 与 NUMA 映射](performance/04_pcie_domain_numa.md)**：Sapphire Rapids 多 domain 架构、BDF 编码的 NUMA 推断、跨 socket PCIe 访问的性能评估。
+
+### 5.3 性能参考指标
+
+系统访问延迟跨越 **5–6 个数量级**，是 KV Cache 分层、容量规划、集合通信调度的决策基准——**“别让热数据跑到慢介质上”**：
+
+| 层级        | 延迟量级 | 相对寄存器倍数 |
+| ----------- | -------- | -------------- |
+| 寄存器 / L1 | ~1 ns    | 1×             |
+| HBM         | ~100 ns  | ~100×          |
+| 跨节点 RDMA | ~2 μs    | ~2,000×        |
+| NVMe 存储   | ~100 μs  | ~100,000×      |
+
+- **[HBM 显存技术演进](performance/01_hbm_evolution.md)**：从 HBM2 到 HBM3e 的技术迭代，A100 HBM2e vs RTX 5090 GDDR7 实测对比，含 3D 封装原理与 L2 Cache 加速效应。
+- **[AI 基础设施延迟金字塔](performance/ai_latency_pyramid.md)**：寄存器→内存→跨节点网络的各级延迟基准。
+- **[PCIe & NVLink 带宽速查表](performance/05_pcie_nvlink_speed_reference.md)**：PCIe/NVLink 各代带宽、主流 GPU 互连规格、NVMe SSD 速度、典型场景瓶颈。
+
+---
+
+## 6. 可视化参考图
+
+将前述抽象拓扑整合为一张“硬件拓扑地图”，覆盖 PCIe 层级、GPUDirect 传统路径 vs GDS 路径、NUMA 影响以及 `nvidia-smi topo -m` 的 **X / PIX / PXB / PHB / NODE / SYS** 六级 Peer 分类。
+
+### 6.1 GPU ↔ CPU 数据路径示意
+
+单机场景下 GPU 访存的完整物理路径：**GPU DMA 引擎 → PCIe Endpoint → (PCIe Switch) → Root Complex → Memory Controller → System DRAM**。
 
 ![GPU ↔ CPU 数据路径](assets/gpu_to_cpu_data_path.png)
 
-### 5.2 GPU 物理数据路径全景图
+### 6.2 GPU 物理数据路径全景图
 
-下图为整合注释版的 GPU 物理数据路径全景图，覆盖以下四个维度：
+整合注释版全景图，覆盖四个维度：
 
-1. **GPU ↔ CPU 内存**：单插槽系统下经由 PCIe → Root Complex → Memory Controller → DRAM 的标准通路。
-2. **GPU ↔ NVMe 存储**：对比 _Traditional Path_（经 CPU 内存的 Bounce Buffer 路径）与 _GPUDirect Storage (GDS) Path_（存储直达 GPU VRAM）的差异。
-3. **拓扑变体**：多插槽 NUMA、多 NVMe + Switch、Root Complex 直连等常见变体。
-4. **Peer 拓扑分级**：依据 `nvidia-smi topo -m` 的输出对 X / PIX / PXB / PHB / NODE / SYS 六类 GPU↔GPU 对等路径进行从优到劣的排序，并标注 GPUDirect P2P 的支持状态。
+| 维度            | 要点                                                                                   |
+| --------------- | -------------------------------------------------------------------------------------- |
+| GPU ↔ CPU 内存  | 单插槽：PCIe → Root Complex → Memory Controller → DRAM                                 |
+| GPU ↔ NVMe 存储 | 对比 _Traditional Path_（CPU Bounce Buffer）vs _GDS Path_（存储直达 VRAM）             |
+| 拓扑变体        | 多插槽 NUMA、多 NVMe + Switch、Root Complex 直连                                       |
+| Peer 拓扑分级   | `nvidia-smi topo -m` 的 X / PIX / PXB / PHB / NODE / SYS 从优到劣排序，含 P2P 支持状态 |
 
 [查看完整 SVG 图（gpu_physical_data_paths.svg）](assets/gpu_physical_data_paths.svg)
 
-> 说明：该 SVG 为矢量图，建议在浏览器中打开以获得最佳分辨率；GPUDirect P2P ⊆ PCIe P2PDMA 能力，NVLink（NV#）属于独立的非 PCIe 通路，不在本图范围内。
+> 说明：矢量图建议浏览器打开。GPUDirect P2P ⊆ PCIe P2PDMA 能力；NVLink（NV#）为独立非 PCIe 通路，不在本图范围内。

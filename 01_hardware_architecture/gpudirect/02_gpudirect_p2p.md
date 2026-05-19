@@ -77,7 +77,7 @@ CUDA 4.0 引入的 **UVA** (Unified Virtual Addressing) 是 P2P 的软件基础�
 - **BAR 映射**：每个 GPU 在启动时都会将其显存的一部分（通常是几百 MB 到全部显存，取决于 Resizable BAR 设置）映射到 PCIe 总线物理地址空间。
 - **TLP 路由**：当源 GPU 发起对目标 GPU BAR 地址的写操作时，PCIe Switch 会根据地址路由 TLP 包。
   - **同一 Switch 下**：Switch 直接将 TLP 转发给目标 GPU，不经过 CPU Root Complex。
-  - **跨 Switch/Root Port**：TLP 可能需要经过 Root Complex，此时需要 **ACS (Access Control Services)** 允许 P2P 转发，否则会被 IOMMU 拦截或重定向。
+  - **跨 Switch/Root Port**：TLP 可能需要经过 Root Complex，此时如果 **ACS (Access Control Services)** 开启，会阻断 P2P 转发并将 TLP 重定向到 Root Complex，导致带宽减半。需关闭 ACS 或配置 ACS 直通策略。
 
 #### 2.2.3 NVLink 高速互连
 
@@ -111,18 +111,18 @@ GPUDirect P2P 在带宽、延迟、CPU 效率以及开发体验上都带来了�
 
 传统的 PCIe 路径受限于 PCIe 总线带宽（例如 PCIe Gen5 x16 双向约为 128 GB/s）。而 GPUDirect P2P 结合 **NVLink** 技术，可以提供数量级提升的互联带宽。
 
-**NVLink 优势**：在 NVIDIA H100 GPU 上，NVLink 4.0 提供高达 **900 GB/s** 的双向聚合带宽，是 PCIe Gen5 的 7 倍以上。这对于参数量巨大的大模型训练（如 Transformer 架构）至关重要，因为 `AllReduce` 等集合通信操作是带宽敏感型的。
+**NVLink 优势**：在 NVIDIA H100 GPU 上，NVLink 4.0 提供高达 **900 GB/s** 的双向聚合带宽，是 PCIe Gen5 的约 7 倍。这对于参数量巨大的大模型训练（如 Transformer 架构）至关重要，因为 `AllReduce` 等集合通信操作是带宽敏感型的。
 
 #### 3.2.2 极致的低延迟体验
 
 通过消除 **Bounce Buffer**（系统内存中转），P2P 显著降低了端到端延迟。
 
-- **物理路径缩短**：数据不再需要经过 Root Complex 和 CPU 内存控制器，减少了物理链路长度。
+- **物理路径缩短**：在同一 PCIe Switch（PIX）下，数据不再需要经过 Root Complex 和 CPU 内存控制器，减少了物理链路长度。
 - **协议开销降低**：省去了 CPU 端的内存分配、锁页（Pinning）以及两次 DMA 描述符的建立过程。对于小包通信（Latency-sensitive），这种延迟优化尤为明显。
 
 #### 3.2.3 CPU 算力解放 (CPU Offloading)
 
-在传统模式下，CPU 需要花费大量周期来搬运数据（Memcpy）。开启 P2P 后：
+在传统模式下，CPU 需要花费大量周期来管理 DMA 缓冲区和设置描述符。开启 P2P 后：
 
 - **控制流与数据流分离**：CPU 仅需负责发射指令（Launch Kernels/MemcpyAsync），繁重的数据搬运工作完全由 GPU 的 Copy Engine (DMA) 或 SM (通过 NVLink Load/Store) 完成。
 - **重叠执行**：CPU 可以立即返回执行其他逻辑，从而更容易实现计算与通信的重叠 (Compute-Communication Overlap)。
@@ -262,7 +262,10 @@ void launch_p2p_kernel(float* d_ptr0, float* d_ptr1, int N, cudaStream_t stream)
 - **拓扑检测**：使用 `nvidia-smi topo -m` 查看矩阵。
   - **最佳路径 (`NV#`)**：通过 NVLink 连接，提供最高带宽（如 H100 上单向 450GB/s）和最低延迟。
   - **次优路径 (`PIX`)**：通过同一 PCIe Switch 连接。支持全速 PCIe P2P，但受限于 PCIe 代数（Gen4/Gen5）带宽。
-  - **受限路径 (`PHB`/`PXB`)**：跨 Host Bridge（即跨 CPU Socket）连接。数据需经过 CPU 间的互连总线（如 Intel UPI/AMD xGMI），不仅带宽受限，还会显著增加延迟。
+  - **良好路径 (`PXB`)**：穿越多个 PCIe Bridge/Switch，但不经过 PCIe Host Bridge。支持 GPUDirect P2P，延迟低。
+  - **一般路径 (`PHB`)**：经由 CPU Root Complex（同 CPU Socket，不同 Root Port）。P2P 支持视平台而定，延迟中等，带宽受 RC 共享限制。
+  - **受限路径 (`NODE`)**：同 Socket 内跨 PCIe Host Bridge（同 NUMA Node，不同 PHB）。P2P 支持视平台而定，需内核 allowlist。
+  - **不可用路径 (`SYS`)**：跨 NUMA Node / CPU Socket，数据经过 CPU 间互连总线（UPI/IF）。不支持 GPUDirect P2P，延迟高、带宽受限。
 - **NUMA 亲和性**：务必将控制 GPU 的 CPU 线程绑定到与该 GPU 最近的 NUMA 节点，以减少控制路径的延迟。
 
 ### 5.2 PCIe ACS (Access Control Services) 瓶颈
@@ -290,11 +293,11 @@ PCIe 和 NVLink 对原子操作的支持存在本质差异：
 
 ## 6. 总结
 
-GPUDirect P2P 不仅仅是一项数据传输技术，更是现代高性能计算和深度学习系统的**节点内通信基石**。通过构建 GPU 间的直连高速公路（PCIe/NVLink），它彻底打破了传统以 CPU 为中心的冯·诺依曼瓶颈，实现了计算与通信的深度融合。
+GPUDirect P2P 不仅仅是一项数据传输技术，更是现代高性能计算和深度学习系统的**节点内通信基石**。通过构建 GPU 间的直连高速公路（PCIe/NVLink），它彻底打破了传统以 CPU 中转系统内存为瓶颈的通信模型，实现了计算与通信的深度融合。
 
 - **核心价值**：
   - **零拷贝与低延迟**：消除 Host 内存中转，显著降低通信开销。
-  - **硬件协同**：充分利用 NVLink 的高带宽（900GB/s+）和原子操作特性，支撑大模型张量并行（Tensor Parallelism）。
+  - **硬件协同**：充分利用 NVLink 的高带宽（900 GB/s）和原子操作特性，支撑大模型张量并行（Tensor Parallelism）。
   - **编程范式革新**：支持 Unified Memory 和直接指针访问，简化了多卡编程复杂度。
 - **扩展路径**：
   - **节点内**：P2P 结合 NVSwitch 构建了单机超级计算机（如 DGX/HGX 系统）。

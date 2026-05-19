@@ -97,6 +97,8 @@ class Sampler(nn.Module):
 
 ## 4. 练习
 
+### 4.1 课堂练习
+
 练习目标：把 `run_model` 的条件分支写成一个可执行的判定函数，将"什么情况下会走 graph replay"变成可复述的规则。
 
 ```python
@@ -115,3 +117,9 @@ print(will_replay(is_prefill=False, enforce_eager=False, batch_size=128))
 ```
 
 - 验收要点（依据代码）：`if is_prefill or self.enforce_eager or input_ids.size(0) > 512: eager else: replay`（见 [model_runner.py:L195-L203](../../nanovllm/engine/model_runner.py#L195-L203)）
+
+### 4.2 课后自测题
+
+1. CUDA Graph replay 的阈值是 `bs > 512`。这个限制是出于什么考虑？如果改成 1024，每次 replay 前需要做什么额外操作？
+2. TP 用 `spawn` + 共享内存而不是 `fork`。Python 的 fork 和 spawn 在 CUDA 上下文继承上有根本差异 —— 如果改用 fork，nano-vllm 的初始化流程会怎么简化？为什么真实 vLLM 也用 spawn？
+3. `torch.compile` 只用在 `Sampler.forward`。如果给整个 Transformer 前向加上 compile，会遇到什么问题（提示：动态 shape、重编译开销、与 CUDA Graph 的互操作）？

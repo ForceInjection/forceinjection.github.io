@@ -20,15 +20,15 @@ GPUDirect RDMA (Remote Direct Memory Access) 是一项允许第三方 PCIe 设�
 
 在未启用 GPUDirect RDMA 的传统架构中，当 GPU 需要通过网络发送数据时，数据流必须经历“GPU 显存 -> 系统内存 (CPU 参与) -> 网卡”的路径：
 
-1. **数据拷贝**：数据从源 GPU 显存拷贝到源主机的系统内存 (CPU 内存)。
-2. **网络传输**：CPU 参与控制，网卡 (NIC) 从系统内存读取数据并通过网络发送。
-3. **接收与拷贝**：目标主机网卡将数据写入系统内存，再由 CPU 拷贝到目标 GPU 显存。
+1. **数据拷贝**：GPU DMA 引擎将数据从 GPU 显存搬运到源主机的系统内存 (CPU 内存)，CPU 不参与数据搬运。
+2. **网络传输**：CPU 参与控制，网卡 (NIC) 通过 DMA 从系统内存读取数据并通过网络发送。
+3. **接收与拷贝**：目标主机网卡通过 DMA 将数据写入系统内存，再由 GPU DMA 引擎搬运到目标 GPU 显存。
 
 这带来了显著的性能瓶颈：
 
 - **高延迟**：数据在 PCIe 总线上往返，且需要 CPU 处理中断和上下文切换。
 - **带宽瓶颈**：数据流经系统内存，受限于 CPU 内存带宽。
-- **CPU 负载**：CPU 必须参与数据的搬运（Memory Copy）和缓冲区管理，无法专注于计算任务。
+- **CPU 负载**：CPU 必须参与缓冲区管理和 DMA 描述符设置，无法专注于计算任务。
 
 ### 2.2 工作原理详解
 
@@ -49,7 +49,6 @@ GPUDirect RDMA 的实现依赖于 NVIDIA Kernel Driver 和用户态 CUDA 库 (Us
 
 1. **地址区分**：用户态 CUDA 库提供 API 帮助通信库（如 MPI, NCCL）区分指针是指向 CPU 内存还是 GPU 显存。
 2. **Pinning GPU Memory (页面锁定)**：
-
    - 对于 CPU 内存，Linux 内核使用 `get_user_pages()` 进行 Pinning。
    - 对于 GPU 显存，NVIDIA Kernel Driver 提供了专用的内核 API 来锁定 GPU 页面，并将其物理地址列表返回给 NIC 驱动。
    - NIC 驱动使用这些物理地址编程 DMA 引擎，从而建立直接的数据传输通道。
@@ -116,12 +115,12 @@ GPUDirect Storage (GDS) 旨在建立一条在本地或远程存储（如 NVMe �
 
 1. **内核态缓冲**：存储设备（如 NVMe SSD）通过 DMA 将数据写入操作系统内核空间的 Page Cache。
 2. **用户态拷贝**：CPU 将数据从内核空间拷贝到用户空间的应用程序缓冲区 (CPU 内存)。
-3. **H2D 拷贝**：CPU 再次将数据从用户空间缓冲区拷贝到 GPU 显存 (Host-to-Device)。
+3. **H2D 拷贝**：GPU DMA 引擎将数据从 pinned buffer 搬运到 GPU 显存 (Host-to-Device)，CPU 仅设置 DMA 描述符，不参与数据搬运。
 
 这种被称为“Bounce Buffer”效应的机制存在三大问题：
 
-- **CPU 瓶颈**：CPU 必须参与每一次内存拷贝，随着 NVMe 速度提升，CPU 逐渐成为瓶颈。
-- **延迟增加**：多次内存拷贝和上下文切换显著增加了端到端延迟。
+- **CPU 瓶颈**：CPU 必须参与中间的 memcpy（page cache → user buffer），随着 NVMe 速度提升，CPU 逐渐成为瓶颈。
+- **延迟增加**：多次数据搬运（DMA + CPU memcpy）和上下文切换显著增加了端到端延迟。
 - **PCIe 带宽浪费**：数据在 PCIe 总线上来回传输（SSD -> CPU -> GPU），实际上占用了两倍的 PCIe 带宽。
 
 ### 3.2 工作原理与软件架构
@@ -156,7 +155,9 @@ GDS 的 I/O 流程并非简单的“把 GPU 地址给硬盘”，而是一个复
 
 #### 3.2.3 路径选择与回退
 
-如果硬件或系统配置不支持 P2P（例如设备不在同一个 PCIe Root Complex 下，或缺少必要的 ACS 支持），`libcufile` 会自动检测并回退到兼容模式（System Memory Bounce Buffer），但仍会尝试优化路径。
+如果硬件或系统配置不支持 P2P（例如设备不在同一个 PCIe Root Complex 下，ACS 未旁路，或 IOMMU 未设为 passthrough），`libcufile` 会自动检测并回退到兼容模式（System Memory Bounce Buffer），但仍会尝试优化路径。
+
+> **GDS 硬件前提条件**：ACS bypass（PCIe Switch 下行端口关闭 ACS 转发限制）、`iommu=pt`（内核启动参数，避免 DMA 地址转换开销）、O_DIRECT 对齐（文件打开必须使用 O_DIRECT 标志）。任一条件不满足将导致回退。
 
 ### 3.3 核心优势
 
@@ -173,8 +174,8 @@ GDS 通过构建存储到 GPU 的直通高速公路，打破了传统 I/O 的带
 | 指标             | 传统 IO (Buffered IO)                          | 传统 Direct IO (O_DIRECT)     | GPUDirect Storage (GDS) |
 | :--------------- | :--------------------------------------------- | :---------------------------- | :---------------------- |
 | **数据路径**     | Storage -> Kernel Buffer -> User Buffer -> GPU | Storage -> User Buffer -> GPU | Storage -> GPU          |
-| **内存拷贝次数** | 2 次 (Kernel->User, User->GPU)                 | 1 次 (User->GPU)              | 0 次                    |
-| **CPU 参与度**   | 高 (数据搬运 & 控制)                           | 中 (单次搬运 & 控制)          | 低 (仅控制)             |
+| **数据搬运次数** | 2 次 (DMA + CPU memcpy)                        | 1 次 (DMA only)               | 0 次                    |
+| **CPU 参与度**   | 高 (CPU memcpy + DMA 控制)                     | 中 (DMA 控制，无 memcpy)      | 低 (仅控制)             |
 | **带宽利用率**   | 受限于 CPU 内存带宽和拷贝速度                  | 受限于 CPU 内存带宽和拷贝速度 | 接近 PCIe/NVMe 极限     |
 | **延迟**         | 高                                             | 中                            | 低                      |
 
@@ -293,7 +294,6 @@ GDS 聚焦于存储 I/O 加速，得到了存储业界和文件系统厂商的�
 GPUDirect 系列技术（RDMA 与 Storage）是 NVIDIA 针对现代高性能计算和 AI 负载中“数据搬运瓶颈”提出的核心解决方案。它们共同的目标是消除 CPU 在数据路径中的介入，实现设备间的**直接内存访问 (DMA)**。
 
 1. **核心价值**：
-
    - **GPUDirect RDMA**：打破了**计算节点间**的通信壁垒。它允许 GPU 直接通过网卡与其他节点的 GPU 交换数据，消除了 PCIe 总线上的冗余拷贝。这对于**分布式训练（Model/Data Parallelism）**至关重要，能够显著提升多机多卡环境下的扩展效率。
    - **GPUDirect Storage (GDS)**：打破了**计算与存储间**的 I/O 壁垒。它允许 GPU 直接从 NVMe 存储设备读取数据，绕过 CPU 内存和 Page Cache。这对于**大数据集训练、推理和实时数据分析**至关重要，解决了 GPU 因等待数据而空转的问题（GPU Starvation）。
 
