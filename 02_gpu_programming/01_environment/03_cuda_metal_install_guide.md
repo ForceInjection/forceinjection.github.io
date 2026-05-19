@@ -4,9 +4,29 @@
 
 ---
 
-## 1. 环境验证
+## 1. 背景：为什么需要"裸金属"安装
 
-安装完成后，逐项执行以下命令验证：
+Docker 和 SLURM 在 AI 基础设施中广泛使用，但它们也引入了额外的抽象层：
+
+- **Docker**：需要 `nvidia-container-toolkit` 做 GPU 透传，镜像体积动辄 5-20 GB，冷启动拉取镜像需要数分钟。
+- **SLURM**：依赖集群调度器，节点间共享存储，单机使用反而增加配置复杂度。
+
+裸金属安装直接在操作系统上部署驱动和 CUDA Toolkit，省去中间层。适用于：
+
+| 场景                   | 推荐方式                                                 |
+| ---------------------- | -------------------------------------------------------- |
+| 个人工作站/开发机      | **裸金属安装**（本文）                                   |
+| 单 GPU 训练/推理       | 裸金属安装                                               |
+| 多 GPU 集群 + 容器编排 | [NVIDIA Container Toolkit](01_nvidia_container_setup.md) |
+| HPC 共享集群           | `module load cuda` + SLURM                               |
+
+裸金属安装的核心链路：`内核驱动 → CUDA Toolkit → NCCL → 应用代码`。驱动是底座，CUDA Toolkit 是编译和运行时，NCCL 是多卡通信（单卡场景也建议安装以验证环境完整性）。
+
+---
+
+## 2. 环境验证
+
+安装完成后，逐项执行以下命令验证。每一项覆盖链路中的一个关键组件：
 
 ```bash
 # 1. 驱动状态
@@ -43,9 +63,9 @@ nvcc -o /tmp/hello /tmp/hello.cu && /tmp/hello
 
 ---
 
-## 2. NVIDIA 驱动安装
+## 3. NVIDIA 驱动安装
 
-### 2.1 检查当前状态
+### 3.1 检查当前状态
 
 ```bash
 # 检查是否已安装驱动
@@ -58,7 +78,7 @@ lsmod | grep nvidia
 apt search nvidia-driver | grep -E "^nvidia-driver-[0-9]+/"
 ```
 
-### 2.2 通过 apt 安装
+### 3.2 通过 apt 安装
 
 ```bash
 # 添加 NVIDIA 官方仓库
@@ -75,9 +95,9 @@ sudo reboot
 
 ---
 
-## 3. CUDA Toolkit 安装
+## 4. CUDA Toolkit 安装
 
-### 3.1 通过 apt (推荐)
+### 4.1 通过 apt (推荐)
 
 ```bash
 # 安装 CUDA Toolkit 12.8
@@ -92,7 +112,7 @@ source ~/.bashrc
 nvcc --version
 ```
 
-### 3.2 多版本共存
+### 4.2 多版本共存
 
 CUDA Toolkit 支持多版本安装到不同目录：
 
@@ -106,7 +126,7 @@ PATH=/usr/local/cuda-12.8/bin:$PATH cmake ..
 make -j$(nproc)
 ```
 
-### 3.3 关键组件说明
+### 4.3 关键组件说明
 
 | 组件              | 路径                                 | 说明              |
 | ----------------- | ------------------------------------ | ----------------- |
@@ -118,7 +138,7 @@ make -j$(nproc)
 
 ---
 
-## 4. NCCL 安装
+## 5. NCCL 安装
 
 ```bash
 # 安装 NCCL (与 CUDA 12.8 匹配的版本)
@@ -132,7 +152,7 @@ dpkg -l | grep libnccl
 
 ---
 
-## 5. 快速参考：监控和性能工具
+## 6. 快速参考：监控和性能工具
 
 ```bash
 # GPU 监控
