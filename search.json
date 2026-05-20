@@ -100,6 +100,10 @@
     "url": "/01_hardware_architecture/performance/04_pcie_domain_numa.html"
   },
   {
+    "title": "PCIe & NVLink 带宽速查表",
+    "url": "/01_hardware_architecture/performance/05_pcie_nvlink_speed_reference.html"
+  },
+  {
     "title": "AI 基础设施延迟金字塔",
     "url": "/01_hardware_architecture/performance/ai_latency_pyramid.html"
   },
