@@ -280,6 +280,10 @@
     "url": "/02_gpu_programming/04_profiling/08_p2p_bandwidth.html"
   },
   {
+    "title": "GPU 间数据传输方法实测",
+    "url": "/02_gpu_programming/04_profiling/09_gpu_transfer_methods.html"
+  },
+  {
     "title": "AI 集群运维与通信 (AI Cluster Operations & Communication)",
     "url": "/03_ai_cluster_ops/"
   },
@@ -350,6 +354,10 @@
   {
     "title": "NCCL 基准测试方法论",
     "url": "/03_ai_cluster_ops/03_nccl/04_nccl_benchmark.html"
+  },
+  {
+    "title": "NCCL Debug 输出实战解读",
+    "url": "/03_ai_cluster_ops/03_nccl/05_nccl_debug_output.html"
   },
   {
     "title": "NCCL Kubernetes 部署指南",
