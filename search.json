@@ -8,6 +8,10 @@
     "url": "/01_hardware_architecture/"
   },
   {
+    "title": "GPUDirect 家族",
+    "url": "/01_hardware_architecture/gpudirect/"
+  },
+  {
     "title": "NVIDIA GPUDirect RDMA 与 Storage 技术详解",
     "url": "/01_hardware_architecture/gpudirect/01_gpudirect_technology.html"
   },
@@ -26,6 +30,10 @@
   {
     "title": "GPGPU vs NPU：大模型推理与训练的算力选择指南",
     "url": "/01_hardware_architecture/nvidia/GPGPU_vs_NPU_大模型推理训练对比.html"
+  },
+  {
+    "title": "MIG 配置与实操",
+    "url": "/01_hardware_architecture/nvidia/mig_hands_on.html"
   },
   {
     "title": "GPU 架构深入理解",
@@ -56,8 +64,24 @@
     "url": "/01_hardware_architecture/nvidia/understand_gpu_architecture/06_exer_device_bandwidth.html"
   },
   {
+    "title": "GPU 架构实例：NVIDIA A100 (Ampere)",
+    "url": "/01_hardware_architecture/nvidia/understand_gpu_architecture/07_a100_architecture.html"
+  },
+  {
+    "title": "NVLink 与 NVSwitch 高速互连",
+    "url": "/01_hardware_architecture/nvlink/"
+  },
+  {
+    "title": "NVLink 诊断与实操",
+    "url": "/01_hardware_architecture/nvlink/nvlink_diagnostics.html"
+  },
+  {
     "title": "NVLink 技术入门",
     "url": "/01_hardware_architecture/nvlink/nvlink_intro.html"
+  },
+  {
+    "title": "PCIe 总线体系",
+    "url": "/01_hardware_architecture/pcie/"
   },
   {
     "title": "PCIe 总线技术大全",
@@ -88,6 +112,14 @@
     "url": "/01_hardware_architecture/pcie/07_pcie_switch_vs_bridge.html"
   },
   {
+    "title": "性能评估与拓扑分析",
+    "url": "/01_hardware_architecture/performance/"
+  },
+  {
+    "title": "HBM 显存技术演进：从 HBM2 到 HBM3e",
+    "url": "/01_hardware_architecture/performance/01_hbm_evolution.html"
+  },
+  {
     "title": "单卡 GPU 拓扑与 NUMA 深入分析",
     "url": "/01_hardware_architecture/performance/02_single_gpu_topology_analysis.html"
   },
@@ -108,12 +140,20 @@
     "url": "/01_hardware_architecture/performance/ai_latency_pyramid.html"
   },
   {
+    "title": "AI Superchip 与机架级架构",
+    "url": "/01_hardware_architecture/superchips/"
+  },
+  {
     "title": "NVIDIA GB300 NVL72 架构解析与性能测试报告",
     "url": "/01_hardware_architecture/superchips/nvidia_gb300.html"
   },
   {
     "title": "NVLink-C2C 技术详解：构建 AI Superchip 的关键互连技术",
     "url": "/01_hardware_architecture/superchips/nvlink_c2c.html"
+  },
+  {
+    "title": "Google TPU 架构",
+    "url": "/01_hardware_architecture/tpu/"
   },
   {
     "title": "Google TPU 101",
@@ -184,6 +224,18 @@
     "url": "/02_gpu_programming/02_cuda/08_kernel_launch_latency.html"
   },
   {
+    "title": "CUDA Graphs 编程",
+    "url": "/02_gpu_programming/02_cuda/09_cuda_graphs.html"
+  },
+  {
+    "title": "Reduction：从朴素实现到 Warp Shuffle",
+    "url": "/02_gpu_programming/02_cuda/10_reduction.html"
+  },
+  {
+    "title": "Tensor Core GEMM 性能实测",
+    "url": "/02_gpu_programming/02_cuda/11_tensor_core_gemm.html"
+  },
+  {
     "title": "TileLang 与 Tile-Based 编程",
     "url": "/02_gpu_programming/03_tilelang/"
   },
@@ -216,6 +268,18 @@
     "url": "/02_gpu_programming/04_profiling/05_pcie_transfer_efficiency.html"
   },
   {
+    "title": "Nsight Compute CLI (`ncu`) 实战",
+    "url": "/02_gpu_programming/04_profiling/06_nsight_compute_cli.html"
+  },
+  {
+    "title": "Nsight Systems CLI (`nsys`) 快速入门",
+    "url": "/02_gpu_programming/04_profiling/07_nsight_systems_cli.html"
+  },
+  {
+    "title": "GPU P2P 带宽实测：NVLink vs PCIe",
+    "url": "/02_gpu_programming/04_profiling/08_p2p_bandwidth.html"
+  },
+  {
     "title": "AI 集群运维与通信 (AI Cluster Operations & Communication)",
     "url": "/03_ai_cluster_ops/"
   },
@@ -240,6 +304,18 @@
     "url": "/03_ai_cluster_ops/01_gpu_ops/04_nvtop_guide.html"
   },
   {
+    "title": "DCGM 监控实操",
+    "url": "/03_ai_cluster_ops/01_gpu_ops/05_dcgm_monitoring.html"
+  },
+  {
+    "title": "GPU 集群健康检查",
+    "url": "/03_ai_cluster_ops/01_gpu_ops/06_gpu_health_check.html"
+  },
+  {
+    "title": "GPU 进程与资源管理",
+    "url": "/03_ai_cluster_ops/01_gpu_ops/07_gpu_process_management.html"
+  },
+  {
     "title": "InfiniBand 高性能网络技术",
     "url": "/03_ai_cluster_ops/02_infiniband/"
   },
@@ -260,12 +336,20 @@
     "url": "/03_ai_cluster_ops/03_nccl/"
   },
   {
-    "title": "NCCL 测试验证工具说明文档",
-    "url": "/03_ai_cluster_ops/03_nccl/01_nccl_tutorial.html"
+    "title": "NCCL 技术理论深度解析",
+    "url": "/03_ai_cluster_ops/03_nccl/01_nccl_theory.html"
   },
   {
     "title": "NCCL 单卡验证指南",
     "url": "/03_ai_cluster_ops/03_nccl/02_nccl_helloworld.html"
+  },
+  {
+    "title": "NCCL 测试验证工具说明文档",
+    "url": "/03_ai_cluster_ops/03_nccl/03_nccl_tutorial.html"
+  },
+  {
+    "title": "NCCL 基准测试方法论",
+    "url": "/03_ai_cluster_ops/03_nccl/04_nccl_benchmark.html"
   },
   {
     "title": "NCCL Kubernetes 部署指南",
