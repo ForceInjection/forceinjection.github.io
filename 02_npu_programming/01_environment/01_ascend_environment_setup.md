@@ -2,15 +2,15 @@
 
 ## 1. 环境概览
 
-| 项目      | 版本/型号                    |
-| --------- | ---------------------------- |
-| 服务器    | Ubuntu 22.04.4 LTS (aarch64) |
-| NPU 型号  | Ascend 910B3 × 8             |
-| CANN 版本 | 8.0.1 (runtime 7.6.0.2.220)  |
-| Python    | 3.10.12                      |
-| PyTorch   | 2.1.0                        |
-| torch_npu | 2.1.0.post13                 |
-| 虚拟环境  | `/root/npu-learning/venv`    |
+| 项目      | 版本/型号                      |
+| --------- | ------------------------------ |
+| 服务器    | Ubuntu 22.04.4 LTS (aarch64)   |
+| NPU 型号  | Ascend 910B3 × 8               |
+| CANN 版本 | 8.0.1 (runtime 7.6.0.2.220)    |
+| Python    | 3.10.12                        |
+| PyTorch   | 2.1.0                          |
+| torch_npu | 2.1.0.post13                   |
+| 虚拟环境  | `/home/user/npu-learning/venv` |
 
 ## 2. 安装步骤
 
@@ -21,7 +21,7 @@
 apt install -y python3.10-venv
 
 # 创建虚拟环境
-python3 -m venv /root/npu-learning/venv
+python3 -m venv /home/user/npu-learning/venv
 ```
 
 ### 2.2 加载 CANN 环境并安装依赖
@@ -30,7 +30,7 @@ python3 -m venv /root/npu-learning/venv
 
 ```bash
 source /usr/local/Ascend/ascend-toolkit/set_env.sh
-source /root/npu-learning/venv/bin/activate
+source /home/user/npu-learning/venv/bin/activate
 
 # ARM 架构 (aarch64) — 不需要额外 index URL
 pip install torch==2.1.0
@@ -74,7 +74,7 @@ GEInitialize failed
 
 ```bash
 source /usr/local/Ascend/ascend-toolkit/set_env.sh
-source /root/npu-learning/venv/bin/activate
+source /home/user/npu-learning/venv/bin/activate
 ASCEND_RT_VISIBLE_DEVICES=7 python3 -c "
 import torch
 import torch_npu

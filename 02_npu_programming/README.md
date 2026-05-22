@@ -1,17 +1,25 @@
 # 华为 NPU 编程入门
 
-系统梳理从昇腾 NPU 硬件特性到上层框架编程的完整知识链路，覆盖**环境搭建 → 架构原理 → 框架实战 → 工具链 → 进阶开发**六大主题。无论读者是从 CUDA 生态迁移而来的 GPU 开发者，还是初次接触 Ascend 的新手，均可按 §2→§4 顺序快速上手，再根据实际需求深入工具链运维或自定义算子开发。
+系统梳理从昇腾 NPU 硬件特性到上层框架编程的完整知识链路，覆盖**环境搭建 → 架构原理 → 框架实战 → 工具链 → 进阶开发 → RAG 实战 → 性能分析 → Mini-GPT → FlashAttention → LLM 推理 → DDP 多卡训练 → LoRA 微调 → 模型量化**十四大主题。无论读者是从 CUDA 生态迁移而来的 GPU 开发者，还是初次接触 Ascend 的新手，均可按 §2→§4 顺序快速上手，再根据实际需求深入工具链运维或自定义算子开发。
 
 > **快速导航**
 >
-> | 目录                      | 主题                        | 关键词                                | 对应章节 |
-> | ------------------------- | --------------------------- | ------------------------------------- | -------- |
-> | `01_environment/`         | Ascend NPU 开发环境搭建     | CANN, torch_npu, venv, 版本对齐       | §2       |
-> | `02_ascend_architecture/` | Da Vinci 架构与 CANN 软件栈 | Cube/Vector/Scalar, HCCS, 七层协议栈  | §3       |
-> | `03_pytorch_npu/`         | PyTorch NPU 适配与训练      | cuda→npu 迁移, AMP, ResNet-50         | §4.1     |
-> | `04_mindspore/`           | MindSpore 原生开发框架      | PyNative/Graph, nn.Cell, 动静态图     | §4.2     |
-> | `05_tools/`               | Ascend 工具链               | npu-smi, ascend-dmi, ATC 模型转换     | §5       |
-> | `06_advanced/`            | 进阶主题                    | Ascend C 自定义算子, GPU→NPU 迁移决策 | §6       |
+> | 目录                      | 主题                        | 关键词                                    | 对应章节 |
+> | ------------------------- | --------------------------- | ----------------------------------------- | -------- |
+> | `01_environment/`         | Ascend NPU 开发环境搭建     | CANN, torch_npu, venv, 版本对齐           | §2       |
+> | `02_ascend_architecture/` | Da Vinci 架构与 CANN 软件栈 | Cube/Vector/Scalar, HCCS, 七层协议栈      | §3       |
+> | `03_pytorch_npu/`         | PyTorch NPU 适配与训练      | cuda→npu 迁移, AMP, ResNet-50             | §4.1     |
+> | `04_mindspore/`           | MindSpore 原生开发框架      | PyNative/Graph, nn.Cell, 动静态图         | §4.2     |
+> | `05_tools/`               | Ascend 工具链               | npu-smi, ascend-dmi, ATC 模型转换         | §5       |
+> | `06_advanced/`            | 进阶主题                    | Ascend C 自定义算子, GPU→NPU 迁移决策     | §6       |
+> | `07_rag_on_npu/`          | RAG 检索增强生成 on NPU     | Embedding, FAISS, BGE, LLM API            | §7       |
+> | `08_npu_profiling/`       | NPU 性能分析                | Profiler, npu-smi, TFLOPS, Chrome trace   | §8       |
+> | `09_flash_attention/`     | FlashAttention 简化版       | Tiling, Online Softmax, O(N²)→O(N)        | §9       |
+> | `10_mini_gpt/`            | Mini-GPT 手写 Transformer   | Self-Attention, Causal Mask, 字符级编码   | §10      |
+> | `11_llm_inference/`       | LLM 推理 on NPU             | Qwen2.5 7B BF16, 自回归, ChatML, NaN 诊断 | §11      |
+> | `12_ddp/`                 | DDP 多卡分布式训练          | HCCL, AllReduce, 8 卡梯度同步, 14B 全参   | §12      |
+> | `13_finetune/`            | LoRA 微调                   | PEFT, SFT v.s. CLM, RAG+SFT 协同, 380 QA  | §13      |
+> | `14_quantization/`        | 模型量化 (INT8/INT4)        | 对称/非对称, per-channel, 校准, 精度-效率 | §14      |
 
 ---
 
@@ -24,13 +32,11 @@
 - **PyTorch NPU 适配**：通过 `torch_npu` 将现有 PyTorch 代码迁移到 Ascend 硬件，API 层面几乎只需将 `cuda` 替换为 `npu`。适合有 GPU/CUDA 经验的开发者快速上手。
 - **MindSpore 原生**：华为自研框架，对 Ascend 有原生支持，提供 PyNative（动态图）和 Graph（静态图）两种执行模式，编程范式与 PyTorch 有明显差异。
 
-完整路径拆为五个递进阶段：
+完整路径拆为三个递进层次：
 
-- **环境**：先把 CANN 工具链和虚拟环境搭起来，理解 `set_env.sh` 和 venv 的加载顺序为什么不能颠倒。
-- **架构**：看达芬奇架构的 Cube/Vector/Scalar 三单元分工和 CANN 软件栈的七层结构，建立与 CUDA 生态的对照。
-- **框架实战**：用 PyTorch NPU 和 MindSpore 分别跑 ResNet-50 训练，对比 FP32/AMP 的吞吐和显存差异。
-- **工具链**：掌握 `npu-smi`（类似 `nvidia-smi`）和 `ascend-dmi`（类似 `deviceQuery` + `bandwidthTest`）的日常用法，以及 ATC 模型转换流程。
-- **进阶**：Ascend C 自定义算子、GPU→NPU 迁移决策树。
+- **基础层（§2→§6）**：环境搭建 → 架构理解 → 框架实战（PyTorch NPU / MindSpore）→ 工具链掌握 → 进阶算子开发。目标是"在 NPU 上跑通模型训练"。
+- **实战层（§7→§11）**：RAG 检索增强生成 → NPU 性能分析 → FlashAttention 手写 → Mini-GPT 从零训练 → LLM 推理部署。目标是"把 NPU 用到生产级任务中"。
+- **规模化层（§12→§14）**：DDP 多卡分布式训练 → LoRA 参数高效微调 → 模型量化。目标是"从单卡走向多卡，从微调走向压缩部署"。
 
 ---
 
@@ -111,7 +117,73 @@ MindSpore 是华为自研框架，采用函数式梯度 API（`ms.value_and_grad
 
 ---
 
-## 7. 参考链接
+## 7. RAG 实战
+
+在 Ascend NPU 上搭建完整的 RAG pipeline：embedding 模型本地推理 + FAISS 向量检索 + LLM（支持外部 API 或本地 Qwen2.5-7B-Instruct，BF16 推理）。支持 `--local` 模式实现全链路本地化推理，通过 `--llm-model` 可切换 0.5B 等模型。NPU 编码 115 条文本耗时 0.8s (153 条/s)，对比 CPU 加速 ~422×。需要独立的 venv（`rag-env`）并精确锁定 transform‌ers / sentence-transformers 版本以兼容 CANN 8.0.1。
+
+- [RAG Pipeline on NPU](07_rag_on_npu/01_rag_pipeline_on_npu.md) — 离线索引 + 在线查询完整流程、BGE 模型 NPU 推理适配、版本兼容性、Chrome trace 性能对比
+
+---
+
+## 8. NPU 性能分析
+
+从"能跑"到"跑得快"——掌握算子级 profiling 方法，定位性能瓶颈。覆盖 `torch_npu.profiler` 的 Chrome trace 分析、npu-smi 实时监控、决策清单。实测 16384² 矩阵乘法 71.84 TFLOPS（FP32 利用率 ~90%）。
+
+- [NPU 性能分析入门](08_npu_profiling/01_npu_profiling.md) — 计算 bound vs 访存 bound、synchronize 陷阱、warmup 必要性、矩阵乘法/2D 卷积/ResNet-50 profiling 数据
+
+---
+
+## 9. FlashAttention 实战
+
+手写 FlashAttention forward pass，理解 online softmax 的数学原理和 tiling 分块策略。标准 attention 的 O(N²) 显存瓶颈是如何通过 `correction = exp(m_old - m_new)` 一行代码解决的。HBM 峰值从 130 MB 降至 1 MB（节省 95%），数值精度 max_diff < 1e-6。
+
+- [FlashAttention 简化版](09_flash_attention/01_flash_attention.md) — online softmax 推导、tiling 伪代码、精度/显存/速度对比、Python 实现不加速的原因分析
+
+---
+
+## 10. Mini-GPT 实战
+
+从零手写 GPT-2 风格 decoder-only Transformer，在单张 NPU 上完成训练和文本生成。覆盖 Self-Attention、Multi-Head、FFN、残差连接、LayerNorm、Position Embedding 六大核心机制的数学推导与代码实现。~11M 参数，2000 iters 训练 43 秒。
+
+- [Mini-GPT 训练详解](10_mini_gpt/01_mini_gpt_training.md) — Transformer 核心机制剖析、模型架构设计、训练过程、文本生成策略、实测 loss 曲线与生成效果
+
+---
+
+## 11. LLM 推理 on NPU
+
+在 NPU 上部署 Qwen2.5-7B-Instruct（BF16）进行本地推理，已与 RAG pipeline 集成实现全链路本地化。记录了 7B 模型 FP16 推理 NaN 问题的完整诊断——从现象到根因（FP16 溢出）到解决方案（BF16），最终以与 FP16 相同的 HBM 代价实现了 FP32 级别的数值稳定性。
+
+- [LLM 推理 on NPU](11_llm_inference/01_llm_inference_on_npu.md) — 自回归生成原理、ChatML 格式、采样策略、0.5B/7B BF16 部署、与 RAG 对接
+- [Qwen2.5-7B FP16 NaN 诊断报告](11_llm_inference/02_fp16_nan_debug.md) — 从乱码 URL → NaN logits → 层级追踪 → FP16 溢出根因 → BF16 解决（14.7 GB，已验证）
+
+---
+
+## 12. DDP 多卡分布式训练
+
+在 Ascend NPU 上使用 HCCL 集合通信库实现多卡分布式训练（DDP），覆盖 HCCL vs NCCL 对照、DDP 工作原理、7B LoRA 多卡微调、初始化常见故障排查、14B 全参训练准备。8 张 910B3 通过 HCCS 全互联，每两张卡直连，通信延迟低。
+
+- [DDP 多卡训练详解](12_ddp/01_ddp_training.md) — HCCL 集合通信、DDP 初始化与数据分发、7B LoRA 多卡微调、等效 batch 计算、HCCL 初始化故障排查
+
+---
+
+## 13. LoRA 微调
+
+在 Ascend NPU 上对 Qwen2.5-7B-Instruct 做参数高效微调（LoRA），支持 CLM 和 SFT 两种数据格式。经过 5 种方案的对比实验，确认 SFT（指令微调）远优于 CLM（原始文本续写），380 条 QA 对已接近 LoRA r=8 的有效上限。配合 RAG 使用时，SFT 提供领域表达风格，RAG 提供具体事实知识，两者互补。
+
+- [LoRA 微调详解](13_finetune/01_lora_finetune.md) — LoRA 原理、配置策略、5 种方案对比、380 QA 训练结果、RAG+SFT 协同验证
+
+---
+
+## 14. 模型量化
+
+理解模型量化的数学原理：对称/非对称量化、per-tensor/per-channel 粒度、校准数据的作用，以及 FP16/BF16 vs INT8/INT4 的精度-效率权衡。7B 模型 INT4 量化后仅需 ~3.5 GB HBM。当前 CANN 8.0.1 + torch_npu 2.1.0 栈不支持 HF 模型的 INT8/INT4 推理（bitsandbytes/GPTQ/AWQ 均为 CUDA 专用），本章聚焦理论理解和 CPU 演示。
+
+- [量化推理详解](14_quantization/01_quantization_theory.md) — 对称/非对称量化、per-tensor/per-channel、校准方法、INT8/INT4 精度分析
+- 交互演示：[`quantization_viz.html`（可视化位宽影响）](./14_quantization/quantization_viz.html)、[`quantization_guide.html`（手算示例）](./14_quantization/quantization_guide.html)
+
+---
+
+## 15. 参考链接
 
 - [昇腾社区官网](https://www.hiascend.com)
 - [Ascend PyTorch 适配 (Gitee)](https://gitee.com/ascend/pytorch)

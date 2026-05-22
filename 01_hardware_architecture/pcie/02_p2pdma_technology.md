@@ -170,6 +170,8 @@ ACS 是 PCIe 的安全特性，用于控制设备间的访问，防止恶意设�
 
 从排障角度，NVIDIA NCCL 文档建议通过 `lspci -vvv | grep ACSCtl` 检查 PCI bridge 上是否启用了 ACS，并在可行的裸机环境中禁用 ACS 以获得更好的 GPU Direct 通信性能。[4]
 
+> **重要前提**：禁用 ACS 只能消除软件/配置层面的 P2P 障碍。它**不能**让硬件本身不支持 P2P 的设备变得支持。如果两个设备位于不同的 Root Complex（跨 CPU Socket）或 PCIe 拓扑物理上不可达，禁用 ACS 不会改变任何事。在尝试禁用 ACS 之前，务必先用 `nvidia-smi topo -m` 确认 GPU 间连接类型为 PIX/PXB/NVLink（而非 SYS/NODE），再用 `lspci -tv` 确认 NVMe 和 GPU 在同一 PCIe 域内。硬件拓扑不支持时，CPU relay 仍然是唯一可用的兜底方案。
+
 ### 5.3 IOMMU 配置与设备隔离
 
 IOMMU（I/O Memory Management Unit）是影响 P2P 的另一个关键因素。它负责将设备发起 DMA 时使用的 IOVA（I/O Virtual Address）翻译为系统可路由的 DMA 地址，并提供隔离与保护。IOMMU 的存在并不改变 PCIe Switch 的转发逻辑，但它会影响“设备能否对某个地址发起合法 DMA 访问”以及 DMA 映射能否建立。对于 GPU Direct / P2P 类场景，错误的 IOMMU/VT-d 配置可能导致点对点流量被重定向或显著降速，甚至引发异常。[4]
@@ -433,40 +435,42 @@ Capabilities: [xxx] Access Control Services
 - **关键点**：关注 `ACSCtl` 中的 `ReqRedir` / `CmpltRedir` 是否为 `+`。若启用重定向，P2P 请求/完成可能被强制上行到 Root Port，导致性能显著降低或 P2P 不可用。[1]
 - 作为快速排障线索，NVIDIA NCCL 文档给出了“若 `grep ACSCtl` 输出中出现 `SrcValid+`，则 ACS 可能启用”的经验判断；更稳妥的做法仍是查看完整 `lspci -vvv` 输出并结合拓扑判断哪些 bridge 的 ACSCtl 位被打开。[4]
 
+**一键禁用 ACS 脚本**：
+
+将以下脚本保存为 `disable_acs.sh`，`chmod +x` 后以 root 运行，遍历所有支持 ACS 的设备并将其关闭：
+
+```bash
+#!/bin/bash
+# disable_acs.sh —— 遍历所有 PCI 设备，关闭 ACS (Access Control Services)
+# 用途: 裸机环境下消除 ACS 转发限制，让 P2P 流量可在 Switch 内部直达（而非上行到 Root Port）
+# 前提: 硬件拓扑本身必须支持 P2P（同一 PCIe Switch/Root Port 下）。如果设备位于
+#       不同 Root Complex（跨 CPU Socket），本脚本无效——那不是 ACS 的问题，是硬件限制。
+# 注意: 生产环境请在维护窗口执行，关闭后运行 P2P benchmark 验证带宽是否恢复
+
+echo ">>> Scanning all PCI devices for ACS capability..."
+
+for dev in $(lspci -D | awk '{print $1}'); do
+    if lspci -s "$dev" -vvv 2>/dev/null | grep -q "ACSCap"; then
+        echo "  Disabling ACS on $dev ..."
+        setpci -s "$dev" ECAP_ACS+06.w=0000 2>/dev/null
+    fi
+done
+
+echo ">>> Done. Checking remaining ACS-enabled devices..."
+lspci -vvv | grep ACSCtl | grep "+" || echo "  (none — all ACS disabled)"
+```
+
 **禁用 ACS 的方法**：
 
-在裸机环境中，可以通过内核启动参数禁用 ACS 重定向功能（需 Linux Kernel 5.1+）。具体步骤如下：
+在裸机环境中，推荐使用两种方式禁用 ACS：
 
-1. **定位需要禁用 ACS 的 Root Port BDF**：
+**方法一：setpci 运行时禁用（推荐，无需重启）：**
 
-   ```bash
-   # 查找所有启用了 ACS 的 PCI Bridge
-   $ lspci -vvv | grep -B 20 "ACSCtl:.*ReqRedir+" | grep "^[0-9a-f]\+:"
-   # 输出示例：
-   # 00:01.0 PCI bridge: Intel Corporation ...
-   # 00:02.0 PCI bridge: Intel Corporation ...
-   ```
+使用上文的一键脚本（`disable_acs.sh`），通过 `setpci -s $dev ECAP_ACS+06.w=0000` 运行时关闭 ACS。优势：即时生效，无需重启，适合调试和临时性能验证。
 
-2. **通过内核参数禁用 ACS**：
+**方法二：内核启动参数（需重启，需确认平台支持）：**
 
-   在 GRUB 配置（`/etc/default/grub` 中的 `GRUB_CMDLINE_LINUX`）中添加以下参数（以 BDF `00:01.0` 和 `00:02.0` 为例）：
-
-   ```bash
-   # /etc/default/grub
-   GRUB_CMDLINE_LINUX="... pci=disable_acs_redir=00:01.0,00:02.0"
-   ```
-
-3. **更新 GRUB 并重启**：
-
-   ```bash
-   sudo update-grub  # Debian/Ubuntu
-   sudo grub2-mkconfig -o /boot/grub2/grub.cfg  # RHEL/CentOS
-   sudo reboot
-   ```
-
-4. **验证 ACS 已禁用**：
-
-   重启后再次检查 `ACSCtl` 输出，确认 `ReqRedir` 和 `CmpltRedir` 已变为 `-`。
+部分 Linux 发行版（尤其是 HPC 定制内核）提供了 `pci=disable_acs_redir` 参数。**注意：该参数并非上游 Linux mainline 标准特性**，仅在某些定制内核补丁中可用。使用前请通过 `cat /proc/cmdline` 确认当前内核是否支持。如果当前环境不支持此参数，请使用方法一（setpci）。
 
 ### 8.3 确认 IOMMU 模式
 
@@ -565,3 +569,5 @@ $ gdsio -f /mnt/nvme/testfile -d 0 -w 0 -s 10G -i 1M -x 0 -I 1 -t 4
 - [2] NVIDIA GPUDirect Storage Overview Guide（GDS 架构、收益表述、`nvidia-fs.ko`、`gdscheck`/`gdsio`、以及“在部分 NVMe 场景使用上游 PCI P2PDMA”说明）: [docs.nvidia.com](https://docs.nvidia.com/gpudirect-storage/overview-guide/index.html)
 - [3] Red Hat Enterprise Linux 9.2 Release Notes：`pcie_bus_perf`/`pcie_bus_peer2peer` 等参数描述（含 MRRS/MPS 说明）: [docs.redhat.com](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/9.2_release_notes/kernel_parameters_changes)
 - [4] NVIDIA NCCL Troubleshooting：ACS/VT-d/IOMMU 对 GPU Direct 的影响及排查建议: [docs.nvidia.com](https://docs.nvidia.com/deeplearning/nccl/user-guide/docs/troubleshooting.html)
+- [GPU 间数据传输方法实测](../../02_gpu_programming/04_profiling/09_gpu_transfer_methods.md)：P2P 249 GB/s vs CPU 中转 12 GB/s A100 实测对比
+- [GPU 间数据传输 Benchmark](../../02_gpu_programming/04_profiling/code/09_gpu_transfer_methods.cu)：可编译运行的 P2P 带宽验证代码

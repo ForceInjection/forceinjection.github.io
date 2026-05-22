@@ -54,7 +54,7 @@ GPU 编程发展到今天，主流上其实有两种思路，对应两种看待�
 
 - **核心概念**：[CUDA 核心原理](02_cuda/02_cuda_cores.md) | [流处理机制](02_cuda/03_cuda_streams.md)
 - **概念解析**：[GPU 编程导论](02_cuda/01_gpu_programming_introduction.md) | [SIMT 到 Tile-Based 编程范式的演进](02_cuda/04_simt_vs_tile_based.md)
-- **进阶专题**：NUMA API、设备属性查询、Stream 并发、Launch 开销、CUDA Graphs、Reduction、Tensor Core GEMM 等共 7 篇，详见 [CUDA 目录](02_cuda/README.md)。
+- **进阶专题**：NUMA API、设备属性查询、Stream 并发、Launch 开销、CUDA Graphs、Reduction、Tensor Core GEMM、GPU 内存管理、Shared Memory 与 Bank Conflict、Warp-level Programming、Multi-GPU 编程、异步拷贝与 Pipeline、性能调优方法论、CUDA 调试实战 等共 14 篇，详见 [CUDA 目录](02_cuda/README.md)。
 
 ### 3.2 [Tile-Based 编程与 TileLang](03_tilelang/README.md)
 
@@ -75,6 +75,8 @@ GPU 性能分析不宜只看一个指标，实践上一般从三个视角交叉�
 - **nvbandwidth 实测带宽**：验证 HBM 和 PCIe 实测带宽是否接近理论上限，以排除硬件或拓扑层面的瓶颈。
 
 - [nvbandwidth 最佳实践](04_profiling/01_nvbandwidth_best_practices.md) - 深入了解和测量 GPU 的显存带宽与 PCIe 传输带宽。
+- [GPU 间数据传输方法实测](04_profiling/09_gpu_transfer_methods.md) - 4 种 GPU→GPU 传输方法 A100 实测，从 P2P (249 GB/s) 到 UM (2.1 GB/s)，差距 119×。含交互式可视化。
+- [Profiling 示例代码](04_profiling/code/README.md) - PCIe/HBM/传输效率的可运行 benchmark 集合。
 
 ---
 

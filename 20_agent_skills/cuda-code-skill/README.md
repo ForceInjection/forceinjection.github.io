@@ -6,9 +6,10 @@
 
 ## 1. 核心特性
 
-针对大模型在底层 GPU 编程中易产生幻觉的问题，本项目通过离线知识库与 Agent 技能的深度结合，提供了以下三大技术优势：
+针对大模型在底层 GPU 编程中易产生幻觉的问题，本项目通过离线知识库与 Agent 技能的深度结合，提供了以下技术优势：
 
 - **基于知识增强的代码生成 (RAG)**：操作技能被专门指导去搜索本地的 `cuda-knowledge`（API 文档）和 `cuda-samples`（代码范例）技能，以确保对复杂 API（如 cuBLASLt、Tensor Cores、PTX 等）的准确使用和代码模式参考，从而避免 AI 产生幻觉。
+- **内核内部分段诊断**：通过 `clock64` PTX 指令实现内核内部 phase 级别的耗时分解（load/compute/store 分段），配合 `-DKERNEL_PROFILE` 条件编译实现零开销的生产/诊断双模式切换。结合 `nvidia-smi` 实时硬件状态监控，形成从环境层到代码层的完整性能排查体系。
 - **全面的离线文档**：包含大量从 NVIDIA HTML 文档转换而来的、支持本地搜索的 Markdown 文件，涵盖了底层开发中最常用的官方参考资料。
 - **文档抓取流水线**：内置了一套完善的文档抓取工具，能够随时同步和更新最新的官方文档内容。
 
@@ -22,14 +23,14 @@
 
 当前已就绪的各项核心技能涵盖了从知识检索、范例匹配、代码生成到性能分析的完整闭环，具体分工如下：
 
-| 技能名称                | 角色     | 描述                                                                                                                             |
-| ----------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------- |
-| **cuda-knowledge**      | 知识基座 | 提供支持搜索的本地文档库（包含来自 NVIDIA 官方文档的 PTX、cuBLAS、Runtime / Driver、Math API、NCCL 等参考资料）。                |
-| **cuda-samples**        | 范例索引 | 精选 50+ NVIDIA 官方 CUDA Samples，按模式（规约/扫描/GEMM/CUDA Graph 等）编排，含 GitHub 永久链接和关键代码片段。                |
-| **cuda-optimizer**      | 任务编排 | 负责主导核心性能分析与优化循环，负责协调并调度其他专项技能共同完成复杂的优化任务。                                               |
-| **cuda-code-generator** | 代码生成 | 用于生成和修改 `.cu` 代码文件，内置指令要求其在执行时必须查阅 `cuda-knowledge` 和 `cuda-samples` 以保证 API 和代码模式的准确性。 |
-| **ncu-rep-analyzer**    | 性能分析 | 负责解析 NCU（Nsight Compute）性能分析报告，并结合内置的性能陷阱指南（如 `performance-traps.md`）进行深度的瓶颈诊断。            |
-| **kernel-benchmarker**  | 基准测试 | 负责内核代码的编译、正确性验证与基准测试，当遇到编译或运行错误时会利用调试指南（如 `debugging-tools.md`）进行自动修复。          |
+| 技能名称                | 角色     | 描述                                                                                                                                                                                                                                                         |
+| ----------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **cuda-knowledge**      | 知识基座 | 提供支持搜索的本地文档库（包含来自 NVIDIA 官方文档的 PTX、cuBLAS、Runtime / Driver、Math API、NCCL 等参考资料）。                                                                                                                                            |
+| **cuda-samples**        | 范例索引 | 精选 50+ NVIDIA 官方 CUDA Samples，按模式（规约/扫描/GEMM/CUDA Graph 等）编排，含 GitHub 永久链接和关键代码片段。                                                                                                                                            |
+| **cuda-optimizer**      | 任务编排 | 负责主导核心性能分析与优化循环，负责协调并调度其他专项技能共同完成复杂的优化任务。                                                                                                                                                                           |
+| **cuda-code-generator** | 代码生成 | 用于生成和修改 `.cu` 代码文件，内置指令要求其在执行时必须查阅 `cuda-knowledge` 和 `cuda-samples` 以保证 API 和代码模式的准确性。支持 `-DKERNEL_PROFILE` 条件编译插桩，同一份 .cu 文件可通过编译 flag 在零开销生产模式与 per-phase clock64 诊断模式之间切换。 |
+| **ncu-rep-analyzer**    | 性能分析 | 负责解析 NCU（Nsight Compute）性能分析报告，并结合内置的性能陷阱指南（如 `performance-traps.md`，含 GPU 硬件状态监控与环境排查清单）进行深度的瓶颈诊断。                                                                                                     |
+| **kernel-benchmarker**  | 基准测试 | 负责内核代码的编译、正确性验证与基准测试，当遇到编译或运行错误时会利用调试指南（如 `debugging-tools.md`）进行自动修复。支持 PTX 缓存、ncu_profile 自包含可执行文件、nsys 快速分析等多种 profiling 路径。                                                     |
 
 ### 2.2 快速开始
 
@@ -155,4 +156,58 @@ grep -r "reduction\|GEMM\|CUDA Graph" skills/cuda-samples/SKILL.md
 
 # 查看完整源码（需先 git submodule update --init）
 cat cuda-samples/cpp/0_Introduction/vectorAdd/vectorAdd.cu
+```
+
+### 4.5 内核内部诊断与环境排查
+
+#### clock64 内核内部分段计时
+
+使用 `%%clock64` PTX 指令在内核内部任意位置插入计时点，实现 load/compute/store 等 phase 级别的延迟分解，精度远超 `cudaEvent`（仅能测量完整 kernel 耗时）。详见 `cuda-optimization-strategies.md` → Kernel Internal Phase Timing。
+
+**快速示例**:
+
+```cuda
+unsigned long long t0, t1;
+asm volatile("mov.u64 %0, %%clock64;" : "=l"(t0));
+// ... 待测量代码段 ...
+asm volatile("mov.u64 %0, %%clock64;" : "=l"(t1));
+// t1 - t0 = 该段代码的 GPU 周期数
+```
+
+#### -DKERNEL_PROFILE 条件编译
+
+`cuda-code-generator` 支持通过 `-DKERNEL_PROFILE` 编译 flag 在同一份 `.cu` 文件中切换生产（零开销）和诊断（per-phase clock64 耗时）模式，无需维护两份源码：
+
+```bash
+# 生产构建 — 零 profiling 开销
+nvcc -O3 -arch=sm_89 -o kernel solution.cu
+
+# 诊断构建 — 输出 per-phase clock64 耗时
+nvcc -O3 -arch=sm_89 -DKERNEL_PROFILE -o kernel_profile solution.cu
+```
+
+#### GPU 硬件状态监控
+
+在进行 benchmark 或 profiling 时，并行运行以下命令以排除环境因素（clock throttling、PCIe 降级、功耗墙等）对性能数据的干扰：
+
+```bash
+# 实时采样（另开终端，与 benchmark 并行运行）
+nvidia-smi -i 0 --query-gpu=timestamp,clocks.gr,clocks.mem,pstate,power.draw,\
+pcie.link.gen.current,pcie.link.width.current,temperature.gpu,\
+utilization.gpu,utilization.memory --format=csv -l 1 > gpu_monitor.csv
+```
+
+详见 `performance-traps.md` → GPU Hardware State Monitoring，包含 7 项关键指标解读表和 9 步环境排查清单。
+
+#### nsys 快速分析
+
+`nsys-guide.md` 提供了四组一键式 profile + report 工作流，适用于快速定位瓶颈：
+
+```bash
+# Kernel 耗时主导分析（哪个 kernel 占 GPU 时间最多？）
+nsys profile -o /tmp/nsys_bench --force-overwrite true ./program
+nsys stats --report cuda_gpu_kern_sum /tmp/nsys_bench.nsys-rep
+
+# 单命令快速模式（profile + stats 一步完成）
+nsys profile --stats=true --trace=cuda -o /tmp/nsys_quick --force-overwrite true ./program
 ```

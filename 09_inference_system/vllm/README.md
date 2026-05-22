@@ -8,22 +8,25 @@
 
 本小节包含了对 vLLM 核心运行时模块的深度解析，重点探讨其内存管理与调度机制。
 
-- [Native KV Offloading 解析](./module_analysis/vllm_native_kv_offloading.md)：详细分析了 vLLM 原生的 KV Cache 卸载机制，探讨其如何在 GPU 显存受限的情况下，利用主机内存提升吞吐量。
-- [Hybrid KV Cache Manager 深度解析](./module_analysis/vllm_hybrid_kv_cache_manager_deep_dive.md)：探讨混合 KV 缓存管理器的设计原理与实现，分析其如何优化多层级存储资源分配。
-- [CUDA Graphs 深度解析](./module_analysis/vllm_cuda_graph_deep_dive.md)：探讨 vLLM 在解码阶段如何利用 CUDA Graphs 技术大幅降低 CPU 调度开销及其底层内存固化机制。
-- [注意力机制演进与 vLLM 支持全景（MHA / MLA / NSA）](./module_analysis/vllm_attention_mha_mla_nsa.md)：系统梳理 **MHA / MQA / GQA**、**DeepSeek 风格 MLA**、**DeepSeek-V3.2 / GLM-5 稀疏 MLA（NSA 语义）** 三类机制的理论演进与 vLLM 代码层适配现状，覆盖 CUDA / ROCm / CPU 跨平台兼容性、Sparse MLA 后端与 Indexer 机制、以及 Hybrid KV Cache Manager 场景下 OffloadingConnector / LMCacheConnectorV1 的支持边界。
-  - [注意力机制演进讲稿](./module_analysis/vllm_attention_mha_mla_nsa.pptx)：配套幻灯片，可用于内部培训或方案评审。
-- [DeepSeek V4 长上下文注意力支持解析](./module_analysis/vllm_deepseek_v4.md)：深入探讨 vLLM 对 DeepSeek V4 模型高效注意力机制的底层实现与算子优化。
+- [Native KV Offloading 解析](./module_analysis/native_kv_offloading.md)：详细分析了 vLLM 原生的 KV Cache 卸载机制，探讨其如何在 GPU 显存受限的情况下，利用主机内存提升吞吐量。
+- [Hybrid KV Cache Manager 深度解析](./module_analysis/hybrid_kv_cache_manager_deep_dive.md)：探讨混合 KV 缓存管理器的设计原理与实现，分析其如何优化多层级存储资源分配。
+- [CUDA Graphs 深度解析](./module_analysis/cuda_graph_deep_dive.md)：探讨 vLLM 在解码阶段如何利用 CUDA Graphs 技术大幅降低 CPU 调度开销及其底层内存固化机制。
+- [注意力机制演进与 vLLM 支持全景（MHA / MLA / NSA）](./module_analysis/attention_mha_mla_nsa.md)：系统梳理 **MHA / MQA / GQA**、**DeepSeek 风格 MLA**、**DeepSeek-V3.2 / GLM-5 稀疏 MLA（NSA 语义）** 三类机制的理论演进与 vLLM 代码层适配现状，覆盖 CUDA / ROCm / CPU 跨平台兼容性、Sparse MLA 后端与 Indexer 机制、以及 Hybrid KV Cache Manager 场景下 OffloadingConnector / LMCacheConnectorV1 的支持边界。
+  - [注意力机制演进讲稿](./module_analysis/attention_mha_mla_nsa.pptx)：配套幻灯片，可用于内部培训或方案评审。
+- [DeepSeek V4 长上下文注意力支持解析](./module_analysis/deepseek_v4.md)：深入探讨 vLLM 对 DeepSeek V4 模型高效注意力机制的底层实现与算子优化。
 - [DeepSeek 注意力架构进化：从 MLA 到 CSA/HCA](./module_analysis/deepseek_attention_evolution_mla_to_csa_hca.md)：系统梳理 DeepSeek V2/V3/V4 三代注意力机制（MLA → NSA/DSA → CSA+HCA）的技术演进脉络与架构权衡。
+- [PagedAttention 退役的技术原因](./module_analysis/pagedattention_retirement.md)：基于 v0.23.1rc0 与 v0.25.0 两版源码对比，从 MLA 不兼容、两遍遍历浪费带宽、无原生 FP8 计算、模板爆炸无法利用新硬件等五个角度，分析 PagedAttention 被 FlashMLA/FA3 取代的技术必然性。
+- [MLA 的 TP 切分：为什么 8 张 GPU 存了同一份 KV cache](./module_analysis/mla_tp_kv_redundancy.md)：MLA 将 KV cache 压缩到标准 MHA 的 ~1.8%，但 `ReplicatedLinear` 使全部 576 维在 8 个 TP rank 上完全复制——TP 对 MLA 的 KV cache 显存节省为 0%，冗余率 87.5%。从 vLLM v0.20.0 和 LMCache v0.5.1 的源码出发，分析这个结构性摩擦的根源，并结合 SGLang 源码验证这不是单一框架的设计选择。
+- [投机解码方法全景：六种草拟策略的工程选择](./module_analysis/speculative_decoding_landscape.md)：vLLM V1 支持 ngram、suffix、Medusa、EAGLE、draft_model、MTP 六种投机解码方法，共享同一个 Proposer 抽象框架但草拟信号的来源、模型依赖、接入成本和收益边界完全不同。从分类框架、逐层拆解、选型决策路径到 roadmap 统合趋势，提供完整的工程选型指南。
 
 ---
 
-## 2. 关联组件分析 (related_module)
+## 2. 路由与调度分析 (routing)
 
 本小节整理了与 vLLM 配合使用的外部路由与请求调度组件的分析。
 
-- [vLLM Router 概述](./related_module/vllm_router.md)：介绍 vLLM 请求路由器的基础架构与功能。
-- [Semantic Router 深度解析](./related_module/vllm_semantic_router_deep_dive.md)：深入探讨基于语义的路由分发策略，及其在复杂推理场景下如何提高缓存命中率和整体吞吐量。
+- [vLLM Router 概述](./routing/router.md)：介绍 vLLM 请求路由器的基础架构与功能。
+- [Semantic Router 深度解析](./routing/semantic_router_deep_dive.md)：深入探讨基于语义的路由分发策略，及其在复杂推理场景下如何提高缓存命中率和整体吞吐量。
 
 ---
 
@@ -32,5 +35,5 @@
 本小节收录了 vLLM 在前沿硬件平台上的部署策略、扩展性测试及性能调优案例。
 
 - [DeepSeek 与 Blackwell 架构扩展性分析](./hardware_optimization/scaling_deepseek_blackwell.pptx)：关于如何在 NVIDIA Blackwell 架构上扩展 DeepSeek 模型推理的演示文稿。
-- [DeepSeek Blackwell Wide EP 优化](./hardware_optimization/vllm_deepseek_blackwell_wide_ep.md)：探讨针对 DeepSeek 模型在 Blackwell 架构下利用宽泛的专家并行（Expert Parallelism）进行的特定优化策略。
-- [GB200 性能优化](./hardware_optimization/vllm_gb200_optimization.pptx)：针对 NVIDIA GB200 超级芯片的 vLLM 推理优化实践及性能评估演示。
+- [DeepSeek Blackwell Wide EP 优化](./hardware_optimization/deepseek_blackwell_wide_ep.md)：探讨针对 DeepSeek 模型在 Blackwell 架构下利用宽泛的专家并行（Expert Parallelism）进行的特定优化策略。
+- [GB200 性能优化](./hardware_optimization/gb200_optimization.pptx)：针对 NVIDIA GB200 超级芯片的 vLLM 推理优化实践及性能评估演示。

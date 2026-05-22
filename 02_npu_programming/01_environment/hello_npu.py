@@ -11,16 +11,23 @@ import time
 
 
 def check_environment():
-    """检测 NPU 环境基本信息"""
+    """检测 NPU 环境基本信息，返回 NPU 是否可用"""
     print("=" * 60)
     print("  NPU 环境信息")
     print("=" * 60)
     print(f"  PyTorch 版本:    {torch.__version__}")
     print(f"  torch_npu 版本:  {torch_npu.__version__}")
     print(f"  NPU 可用:        {torch.npu.is_available()}")
+
+    if not torch.npu.is_available():
+        print("  [错误] NPU 不可用！")
+        print("  请检查: 1) torch_npu 是否安装  2) ASCEND_RT_VISIBLE_DEVICES 是否设置")
+        return False
+
     print(f"  可见 NPU 数量:   {torch.npu.device_count()}")
     for i in range(torch.npu.device_count()):
         print(f"  设备 {i}: {torch.npu.get_device_name(i)}")
+    return True
 
 
 def basic_tensor_ops():
@@ -71,8 +78,9 @@ def matmul_benchmark():
     # NPU 运算
     a_npu = a_cpu.npu()
     b_npu = b_cpu.npu()
-    # Warmup
-    _ = torch.matmul(a_npu, b_npu)
+    # Warmup: 多次执行确保算子编译完成和内存状态稳定
+    for _ in range(5):
+        _ = torch.matmul(a_npu, b_npu)
     torch.npu.synchronize()
 
     t0 = time.time()
@@ -100,7 +108,9 @@ def memory_info():
 
 
 def main():
-    check_environment()
+    if not check_environment():
+        print("\n环境检查失败，脚本退出。")
+        sys.exit(1)
     basic_tensor_ops()
     matmul_benchmark()
     memory_info()

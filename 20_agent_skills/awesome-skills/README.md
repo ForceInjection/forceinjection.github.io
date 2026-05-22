@@ -104,7 +104,7 @@
 
 [`doc-reviewer`](./skills/doc-reviewer) 技能用于审查技术文档的准确性、一致性、结构规范和专业性，以确保项目文档的高质量。
 
-该技能通过标准的评审闭环流程，逐项检查目标文档的排版结构（如中英文空格、章节编号）与内容质量（如术语统一、脱敏处理）。在明确指出具体问题和修改建议后，它还支持在用户授权下自动应用修复，极大提升了文档维护的效率。
+该技能将文档评审拆分为四种独立的评审类型——**大纲评审**（检查目录与结构逻辑）、**内容评审**（检查文字准确性与代码质量）、**资产与链接评审**（校验链接与引用合规）以及**格式评审**（校对纯视觉排版与标点）——各类型的详细规则分别存放在 `references/` 目录下，支持按需加载，避免单次评审时的上下文膨胀。在明确指出具体问题和修改建议后，它还支持在用户授权下自动应用修复，极大提升了文档维护的效率。
 
 使用示例如下：
 
@@ -386,7 +386,7 @@ python3 scripts/ontology.py validate
 
 ## 3. `Agent Skill` 最佳实践
 
-从生产级目录组织到渐进式上下文加载，一套标准化的工程规范是确保智能体技能稳定运行的基石。以下实践均参考自 [给 Claude 写本“标准操作手册”：Agent Skills 实战与深度解析](https://github.com/ForceInjection/AI-fundermentals/blob/main/08_agentic_system/agent_skills/docs/claude_skills_guide.md) 文档。
+从生产级目录组织到渐进式上下文加载，一套标准化的工程规范是确保智能体技能稳定运行的基石。以下实践均参考自 [给 Claude 写本“标准操作手册”：Agent Skills 实战与深度解析](https://github.com/ForceInjection/AI-fundamentals/blob/main/08_agentic_system/agent_skills/docs/claude_skills_guide.md) 文档。
 
 ### 3.1 生产级目录结构
 

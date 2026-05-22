@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>一层 Transformer 的数据流 — LLaMA 标准配方</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #0d1117; color: #c9d1d9; min-height: 100vh; display: flex; align-items: center; justify-content: center; }
+#app { width: 900px; background: #161b22; border: 1px solid #30363d; border-radius: 10px; overflow: hidden; display: flex; flex-direction: column; }
+h1 { font-size: 14px; padding: 14px 20px 0; color: #f0f6fc; flex-shrink: 0; }
+h1 span { color: #8b949e; font-weight: normal; font-size: 12px; }
+#main { flex: 1; min-height: 0; }
+#main svg { width: 100%; height: 100%; }
+#footer { padding: 5px 20px 14px; font-size: 11px; color: #8b949e; border-top: 1px solid #21262d; flex-shrink: 0; display: flex; gap: 20px; }
+#footer span b { color: #58a6ff; font-weight: normal; }
+#footer span i { color: #a371f7; font-style: normal; }
+#footer span em { color: #3fb950; font-style: normal; }
+</style>
+</head>
+<body>
+<div id="app">
+  <h1>一层 Transformer 的数据流 <span>— LLaMA、Qwen、Mistral、DeepSeek 等主流开源模型共同遵循的标准配方</span></h1>
+  <div id="main"><svg id="svg" viewBox="0 0 880 545"></svg></div>
+  <div id="footer">
+    <span><b>蓝色</b> = Attention 分支（token 间交换信息）</span>
+    <span><i>紫色</i> = FFN 分支（每个 token 独立加工）</span>
+    <span><em>绿色</em> = RMSNorm 归一化</span>
+    <span>橙色虚线 = 残差连接（梯度高速通道）</span>
+  </div>
+</div>
+
+<script>
+const NS = "http://www.w3.org/2000/svg";
+const ce = (t, a) => { const e = document.createElementNS(NS, t); if (a) for (let k in a) e.setAttribute(k, a[k]); return e; };
+const svg = document.getElementById("svg");
+const g = ce("g"); svg.appendChild(g);
+
+const C = { blue: "#58a6ff", purple: "#a371f7", green: "#3fb950", orange: "#d29922",
+  gray: "#8b949e", white: "#f0f6fc", bg: "#0d1117", border: "#30363d", dim: "#484f58" };
+
+function r(x, y, w, h, c, o, rx) {
+  g.appendChild(ce("rect", { x, y, width: w, height: h, rx: rx || 4, fill: c, opacity: o || 1 }));
+}
+function t(x, y, s, c, sz, anchor) {
+  const e = ce("text", { x, y, "font-size": (sz||"12"), fill: c||C.white });
+  if (anchor) e.setAttribute("text-anchor", anchor);
+  e.textContent = s; g.appendChild(e);
+}
+function line(x1, y1, x2, y2, c, sw, dash) {
+  const e = ce("line", { x1, y1, x2, y2, stroke: c, "stroke-width": sw||1.5, opacity: .55 });
+  if (dash) e.setAttribute("stroke-dasharray", dash);
+  g.appendChild(e);
+}
+// Arrow: from (x1,y1) down to (x2,y2), with arrow head at bottom
+function dArrow(x1, y1, x2, y2, c, sw, dash) {
+  line(x1, y1, x2, y2, c, sw||1.8, dash);
+  g.appendChild(ce("polygon", { points: `${x2-4},${y2-5} ${x2+4},${y2-5} ${x2},${y2}`, fill: c, opacity: .7 }));
+}
+
+function draw() {
+  // ─── Layout constants ───
+  const centerX = 440, leftCol = 160, rightCol = 720;
+  const boxW = 320, boxH = 36, smallW = 140, smallH = 30;
+
+  // ─── TOP: Input ───
+  const inY = 18;
+  r(centerX - boxW/2, inY, boxW, boxH, C.bg, 1, 6);
+  r(centerX - boxW/2, inY, boxW, boxH, C.border, 0.5, 6);
+  t(centerX, inY + boxH/2 + 4, "输入：Token Embeddings", C.white, "13", "middle");
+  t(centerX, inY + boxH + 12, "[batch, seq_len, d_model]  ·  d_model = 4096 (LLaMA-8B) 或 7168 (DeepSeek-V3)", C.gray, "10", "middle");
+
+  // ─── First RMSNorm ───
+  const norm1Y = inY + boxH + 34;
+  r(centerX - smallW/2, norm1Y, smallW, smallH, C.green, .15, 5);
+  t(centerX, norm1Y + smallH/2 + 4, "RMSNorm", C.green, "12", "middle");
+  dArrow(centerX, inY + boxH, centerX, norm1Y, C.gray, 1.5, null);
+
+  // ─── ATTENTION branch ───
+  const attnY = norm1Y + smallH + 22;
+  r(centerX - boxW/2, attnY, boxW, 80, C.blue, .08, 6);
+  r(centerX - boxW/2, attnY, boxW, 80, C.blue, .15, 6);
+
+  // Attention box content
+  t(centerX, attnY + 24, "Self-Attention", C.blue, "13", "middle");
+  t(centerX, attnY + 46, "QKV 投影 → RoPE 旋转 → 因果掩码 → softmax → 加权求和", C.blue, "10", "middle");
+  t(centerX, attnY + 66, "让每个 token 看到序列中所有其他 token，建立上下文关联", C.gray, "10", "middle");
+
+  // Arrow from RMSNorm to Attention
+  dArrow(centerX, norm1Y + smallH, centerX, attnY, C.gray, 1.5, null);
+
+  // ─── Residual connection 1 ───
+  // Bypass: picks up input BEFORE RMSNorm, routes around the right side, rejoins AFTER Attention
+  const resMargin = rightCol;
+  const res1StartY = norm1Y;           // start: before RMSNorm
+  const res1EndY = attnY + 80 + 12;    // end: after Attention
+  // Vertical down the right margin
+  line(resMargin, res1StartY, resMargin, res1EndY, C.orange, 1.8, "5 3");
+  // Horizontal: from main flow center (centerX) → right margin (start)
+  line(centerX, res1StartY, resMargin, res1StartY, C.orange, 1.8, "5 3");
+  // Horizontal: from right margin → main flow center (end)
+  line(resMargin, res1EndY, centerX, res1EndY, C.orange, 1.8, "5 3");
+  // Plus sign at end
+  r(centerX - 12, res1EndY - 10, 24, 20, C.orange, .15, 4);
+  t(centerX, res1EndY + 4, "+", C.orange, "14", "middle");
+  // Label
+  t(resMargin + 8, (res1StartY + res1EndY)/2 + 4, "残差", C.orange, "11");
+
+  // ─── Post-attention ───
+  const midY = res1EndY + 24;
+  dArrow(centerX, attnY + 80, centerX, midY - 4, C.gray, 1.5, null);
+
+  // Small tag showing what comes out of attention + residual
+  t(centerX, midY, "经过 Attention 的表示 + 原始输入（残差）", C.gray, "10", "middle");
+
+  // ─── Second RMSNorm ───
+  const norm2Y = midY + 26;
+  r(centerX - smallW/2, norm2Y, smallW, smallH, C.green, .15, 5);
+  t(centerX, norm2Y + smallH/2 + 4, "RMSNorm", C.green, "12", "middle");
+  dArrow(centerX, midY + 8, centerX, norm2Y, C.gray, 1.5, null);
+
+  // ─── FFN branch ───
+  const ffnY = norm2Y + smallH + 22;
+  r(centerX - boxW/2, ffnY, boxW, 80, C.purple, .08, 6);
+  r(centerX - boxW/2, ffnY, boxW, 80, C.purple, .15, 6);
+
+  t(centerX, ffnY + 24, "FFN (SwiGLU)", C.purple, "13", "middle");
+  t(centerX, ffnY + 46, "gate_proj ⊙ SiLU(up_proj) → down_proj", C.purple, "10", "middle");
+  t(centerX, ffnY + 66, "每个 token 独立加工，不与其他 token 交互。存储模型「知识」。", C.gray, "10", "middle");
+
+  dArrow(centerX, norm2Y + smallH, centerX, ffnY, C.gray, 1.5, null);
+
+  // ─── Residual connection 2 ───
+  const res2StartY = norm2Y;           // start: before RMSNorm
+  const res2EndY = ffnY + 80 + 12;     // end: after FFN
+  line(resMargin, res2StartY, resMargin, res2EndY, C.orange, 1.8, "5 3");
+  line(centerX, res2StartY, resMargin, res2StartY, C.orange, 1.8, "5 3");
+  line(resMargin, res2EndY, centerX, res2EndY, C.orange, 1.8, "5 3");
+  r(centerX - 12, res2EndY - 10, 24, 20, C.orange, .15, 4);
+  t(centerX, res2EndY + 4, "+", C.orange, "14", "middle");
+  t(resMargin + 8, (res2StartY + res2EndY)/2 + 4, "残差", C.orange, "11");
+
+  // ─── Block output ───
+  const outY = res2EndY + 22;
+  dArrow(centerX, ffnY + 80, centerX, outY, C.gray, 1.5, null);
+  t(centerX, outY + 11, "→ 送入下一个 Block，重复 24-80 层", C.green, "11", "middle");
+
+  // ─── Left side: Component type labels ───
+  t(28, attnY + 42, "① Attention", C.blue, "11");
+  t(28, ffnY + 42, "② FFN", C.purple, "11");
+
+  // ─── Right side: Dimension/param annotations ──
+  const annoX = centerX - boxW/2 - 14;
+  t(annoX, attnY + 34, "参数占比 ~1/3", C.gray, "10", "end");
+  t(annoX, attnY + 52, "计算量 O(n²·d)", C.gray, "10", "end");
+  t(annoX, ffnY + 34, "参数占比 ~2/3", C.gray, "10", "end");
+  t(annoX, ffnY + 52, "计算量 O(n·d_ff)", C.gray, "10", "end");
+
+  // ─── Key design notes ──
+  const noteY = outY + 40;
+  t(centerX, noteY + 12, "Pre-LN：先归一化再计算 → 梯度流更通畅，训练更稳定", C.gray, "11", "middle");
+  t(centerX, noteY + 28, "SwiGLU：可学习门控替代固定激活函数 → 训练稳定性提升，收敛更快", C.gray, "11", "middle");
+  t(centerX, noteY + 44, "RoPE + Causal Mask：相对位置编码 + 因果约束 → 支持上下文外推", C.gray, "11", "middle");
+}
+
+draw();
+</script>
+</body>
+</html>

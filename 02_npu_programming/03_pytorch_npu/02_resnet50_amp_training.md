@@ -49,11 +49,11 @@ CANN TBE 依赖安装和环境变量加载顺序是 NPU 训练最常见的两个
 
 ## 5. Profiling
 
-使用 CANN 自带的 `msprof` 进行性能分析。进行 profiling 前，先用 `npu-smi info` 确认目标卡空闲（AICore 0%、HBM 余量充足，详见 `05_tools/01_npu_smi_reference.md`）。
+使用 CANN 自带的 `msprof` 进行性能分析。进行 profiling 前，先用 `npu-smi info` 确认目标卡空闲（AICore 0%、HBM 余量充足，详见 [01_npu_smi_reference.md](../05_tools/01_npu_smi_reference.md)）。
 
 ```bash
 source /usr/local/Ascend/ascend-toolkit/set_env.sh
-source /root/npu-learning/venv/bin/activate
+source /home/user/npu-learning/venv/bin/activate
 ASCEND_RT_VISIBLE_DEVICES=7 msprof \
   --output=/tmp/prof_resnet50 \
   --application="python3 train_resnet50.py --epochs 1"

@@ -1,8 +1,6 @@
 # CUDA 编程 (CUDA Programming)
 
-这个目录给出了理解 CUDA 所需的一个完整的入门回路：从 GPU 的分层执行模型出发，看硬件是怎么组织线程的；再回到 CUDA 核心这个计算单元本身，看单条指令如何被并行执行；然后引入 Streams，理解 GPU 上的异步并发；最后从 SIMT 过渡到 Tile-Based，看当代 GPU 编程范式是如何被 Tensor Core 推着向前演进的。
-
-下面的四篇文档基本就按这个顺序展开。
+这个目录覆盖了从零开始系统学习 CUDA 编程的完整路径：执行模型 → 核心架构 → 异步流 → 编程范式 → 内存管理 → 性能调优 → 调试。18 篇文章外加 12 个可运行 benchmark，全部在 A100 上实测验证。
 
 ## 1. [GPU 编程导论](01_gpu_programming_introduction.md)
 
@@ -75,6 +73,50 @@ _GPU Architecture and Programming — An Introduction_：
 - 运行官方 `cudaTensorCoreGemm` / `bf16TensorCoreGemm`，A100 实测 FP16 52.5 TFLOPS、BF16 90.9 TFLOPS。
 - 理论峰值对标（156 TFLOPS dense）与矩阵大小对利用率的影响。
 - WMMA API 编程模型 + "算力-带宽-算数密度"三角分析。
+
+## 12. [GPU 内存管理——从推理工程师的日常问题出发](12_gpu_memory_management.md)
+
+- 以 Linux 概念为类比，系统讲解 GPU 显存管理的核心机制：虚拟内存与碎片化、DMA 传输（pinned vs pageable）、NVLink/PCIe 拓扑、跨进程共享（CUDA IPC）、GPUDirect Storage、大页与 TLB、内存层级。
+- 配套可交互概念图：[gpu-memory-visual.html](gpu-memory-visual.html)（6 个图层：物理拓扑 / 内存层级 / DMA 路径 / MMU 页表 / 碎片化 / 跨进程共享）。
+- 包含 CPU ↔ GPU 命令对照附录和性能诊断决策树。
+
+## 13. [Shared Memory 与 Bank Conflict](13_shared_memory_bank_conflict.md)
+
+- 从 Bank 的硬件拓扑出发，系统讲解 Bank Conflict 的产生机制（stride 访问、列优先写入），以及三种消除方法：Padding（空间换时间）、Swizzle（地址 XOR 变换）、Reorder（算法层面重构）。
+- 包含三个实战场景拆解：GEMM 的 tile 宽度为什么必须是 32 的倍数、FlashAttention 中的 XOR Swizzle 应用、Reduction 的 Sequential Addressing 为何天然无冲突。
+- 跨架构迁移注意事项（V100 4B Bank → A100/H100 的 FP16 双通道 Bank 判定差异）。
+- 附带 Bank Conflict 诊断 SOP 和 Python 验证脚本。
+
+## 14. [Warp-level Programming——从 Shuffle 到 Cooperative Groups](14_warp_level_programming.md)
+
+- 系统讲解 Warp 原语体系：Shuffle（`__shfl_sync`/`__shfl_down_sync`/`__shfl_up_sync`/`__shfl_xor_sync`）、Vote（`__ballot_sync`/`__all_sync`/`__any_sync`）、Match（`__match_any_sync`/`__match_all_sync`）、`__activemask`。
+- 涵盖 Cooperative Groups `tiled_partition` 现代抽象与 A100 硬件 `__reduce_add_sync` 加速指令。
+- A100 实测验证：Warp Reduce、Prefix Sum Scan、Ballot Filter、Match Dedup。
+
+## 15. [Multi-GPU CUDA 编程——从 P2P 到 NCCL 的多卡协作](15_multi_gpu_programming.md)
+
+- 系统讲解多 GPU 编程体系：多 device 管理（`cudaSetDevice`）、Peer Access（`cudaDeviceEnablePeerAccess`）、P2P Memcpy（NVLink 249 GB/s vs CPU 中转 12 GB/s）、跨 GPU Stream/Event 同步。
+- 涵盖 NCCL 集合通信基础（`ncclAllReduce` 等）、拓扑感知（NVSwitch domain、`nvidia-smi topo -m`）。
+- A100 实测验证：Peer Access、P2P 带宽 20.7× 加速比、跨 GPU 同步、NCCL AllReduce。
+
+## 16. [异步拷贝与现代 Pipeline——从 cp.async 到 memcpy_async](16_async_copy_pipeline.md)
+
+- 系统讲解异步数据搬运技术：传统同步 Load 的瓶颈、`cp.async` PTX 指令（SM80+）、Pipeline 原语（`cuda::pipeline`）、`cuda::memcpy_async` C++ API。
+- 涵盖 double buffering / triple buffering 的 Shared Memory 布局与 buffer 管理。
+- 实战：BF16 GEMM 的 `cp.async` loop、FlashAttention 的 tile pipeline、通用 tile-based kernel 的 pipeline 模板。
+- A100 验证：1-stage sync vs 2-stage double buffer 对比（同步 `ld` 实现，加速比有限——证明异步 DMA 是 pipeline 收益的核心）。
+
+## 17. [CUDA 性能调优方法论——从 Roofline Model 到 ncu 诊断](17_roofline_optimization.md)
+
+- 系列收官文章，建立分级诊断框架：Roofline Model（天花板分析）→ ncu 三指标（瓶颈定位）→ 6 级逐级优化 Checklist。
+- 案例：朴素 GEMM 从 Level 0 → Level 6 的完整调优过程（规划加速比 ~80×）。
+- 包含优化边界分析（边际收益递减、"够好了"的判断标准）。
+
+## 18. [CUDA 调试实战——从 cuda-gdb 到 compute-sanitizer](18_cuda_debugging.md)
+
+- 系统讲解 CUDA 调试工具链：`cuda-gdb`（断点、寄存器/Shared Memory 检查、NaN 定位）、`compute-sanitizer`（越界/race/未初始化检测、内存泄漏）。
+- `cudaError_t` 错误处理模式（同步 vs 异步 error、生产环境宏）。
+- 常见 Bug 排查 SOP：NaN、Hang、间歇性错误、内存泄漏。
 
 ## 参考资料
 

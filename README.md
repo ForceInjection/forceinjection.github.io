@@ -9,7 +9,7 @@
 
 **Star History**:
 
-## ![Star History Chart](https://api.star-history.com/svg?repos=ForceInjection/AI-fundamentals&type=date&legend=top-left)
+![Star History Chart](https://api.star-history.com/svg?repos=ForceInjection/AI-fundamentals&type=date&legend=top-left)
 
 ---
 
@@ -47,7 +47,7 @@
   - [理论基础：IB 网络架构与协议](./03_ai_cluster_ops/02_infiniband/01_ib_network_theory.md)
   - [网络运维：健康检查与性能监控实战](./03_ai_cluster_ops/02_infiniband/README.md)
 - **NCCL 分布式通信测试**
-  - [理论基础：NCCL 教程](./03_ai_cluster_ops/03_nccl/01_nccl_tutorial.md)
+  - [理论基础：NCCL 教程](./03_ai_cluster_ops/03_nccl/01_nccl_theory.md)
   - [实战指南：基准测试与多节点部署](./03_ai_cluster_ops/03_nccl/README.md)
 
 ---
@@ -74,10 +74,10 @@
 
 **基础系列文档**：
 
-- [第一部分：基础理论篇](./04_cloud_native_ai_platform/gpu_manager/第一部分：基础理论篇.md)：构建技术认知框架，解析传统模式局限性与核心技术体系
-- [第二部分：虚拟化技术篇](./04_cloud_native_ai_platform/gpu_manager/第二部分：虚拟化技术篇.md)：深入剖析硬件级、内核态与用户态虚拟化的核心实现机制
-- [第三部分：资源管理与优化篇](./04_cloud_native_ai_platform/gpu_manager/第三部分：资源管理与优化篇.md)：探讨 GPU 切分、CUDA 流及 MPS 等高效资源调度与优化策略
-- [第四部分：实践应用篇](./04_cloud_native_ai_platform/gpu_manager/第四部分：实践应用篇.md)：涵盖环境部署、监控运维及云平台集成的生产落地指南
+- [第一部分：基础理论篇](./04_cloud_native_ai_platform/gpu_manager/01_basic_theory.md)：构建技术认知框架，解析传统模式局限性与核心技术体系
+- [第二部分：虚拟化技术篇](./04_cloud_native_ai_platform/gpu_manager/02_virtualization.md)：深入剖析硬件级、内核态与用户态虚拟化的核心实现机制
+- [第三部分：资源管理与优化篇](./04_cloud_native_ai_platform/gpu_manager/03_resource_management.md)：探讨 GPU 切分、CUDA 流及 MPS 等高效资源调度与优化策略
+- [第四部分：实践应用篇](./04_cloud_native_ai_platform/gpu_manager/04_practice.md)：涵盖环境部署、监控运维及云平台集成的生产落地指南
 
 **HAMi 专题**：
 
@@ -144,28 +144,30 @@
 - **DOCA 框架**
   - [DOCA 编程入门](./02_dpu_programming/doca/doca_programming_guide.md)：涵盖架构简介、核心组件及典型场景编程实践
 
+### 4.3 华为 NPU 编程
+
+基于昇腾 NPU 硬件特性和 CANN 软件栈的系统级编程路径，涵盖 Da Vinci 架构、PyTorch NPU 适配与迁移、MindSpore 原生框架、Ascend 工具链、自定义算子开发，以及 RAG pipeline、FlashAttention、Mini-GPT 和 LLM 推理（Qwen2.5-7B BF16 + LoRA 微调）等端到端实战。详细内容请访问：[华为 NPU 编程入门](02_npu_programming/README.md)。
+
+- [NPU 开发环境搭建](02_npu_programming/01_environment/README.md) — CANN 驱动、torch_npu 安装与版本对齐
+- [RAG Pipeline on NPU](02_npu_programming/07_rag_on_npu/01_rag_pipeline_on_npu.md) — Embedding + FAISS + LLM 全链路 NPU 化
+- [LLM 推理 on NPU](02_npu_programming/11_llm_inference/01_llm_inference_on_npu.md) — Qwen2.5 本地推理、ChatML、NaN 诊断
+- [LoRA 微调 on NPU](02_npu_programming/13_finetune/01_lora_finetune.md) — BF16 + peft + 梯度检查点，HBM 峰值 16.4 GB
+- 更多主题：[Da Vinci 架构与 CANN 软件栈](02_npu_programming/02_ascend_architecture/README.md)、[PyTorch NPU 适配](02_npu_programming/03_pytorch_npu/README.md)、[MindSpore 框架](02_npu_programming/04_mindspore/README.md)、[Ascend 工具链](02_npu_programming/05_tools/README.md)、[Ascend C 自定义算子](02_npu_programming/06_advanced/README.md)、[NPU 性能分析](02_npu_programming/08_npu_profiling/README.md)、[FlashAttention](02_npu_programming/09_flash_attention/README.md)、[Mini-GPT](02_npu_programming/10_mini_gpt/README.md)
+
 ---
 
 ## 5. 大语言模型应用开发与编排
 
-探索以自然语言驱动与 Agent 自主决策为核心的 Software 3.0 开发范式，包含 OpenSpec 规范驱动开发、Spring AI 企业级 Java 接入、LangGraph 有状态多智能体图计算模型，以及 Coze/n8n 无代码工作流编排技术。详细的深度探讨可参考 [大模型编程指南](98_llm_programming/README.md)。
+探索以自然语言驱动与 Agent 自主决策为核心的 Software 3.0 开发范式，包含 Spring AI 企业级 Java 接入、LangGraph 有状态多智能体图计算模型，以及 Coze/n8n 无代码工作流编排技术。详细的深度探讨可参考 [大模型编程指南](98_llm_programming/README.md)。
 
-### 5.1 AI 时代的软件工程：范式转移与重构
-
-软件工程正向以 Agent First 与自主推理为核心的 **Software 3.0** 时代演进。本节梳理驾驭工程 (Harness Engineering) 体系，并演示基于 OpenSpec 的“意图 -> Spec -> AI -> 代码 & 验证”新一代规范驱动开发工作流。
-
-- [Agent First：软件工程的下一个范式转移](98_llm_programming/Agent_First.md) - 梳理编程范式的演变历史，探讨 Agent First 的核心理念与实战指南。
-- [驾驭工程](98_llm_programming/Harness_Engineering.md) - 深度解析如何构建驾驭系统，提升 AI 编程助手的可控性与效能。
-- [OpenSpec 实战指南](https://github.com/ForceInjection/OpenSpec-practise/blob/main/README.md) - Spec 驱动开发 (Spec-Driven Development) 的工程实践，演示了“意图 -> Spec -> AI -> 代码 & 验证”的新一代开发工作流。
-
-### 5.2 Java AI 开发
+### 5.1 Java AI 开发
 
 剖析 Java 生态 AI 开发技术栈，通过 Spring AI 工程框架实现企业级 Java 应用对 LLM 能力的接入，并演示基于 Spring AI 构建高效 LLM 代理的工程实践。
 
 - [Java AI 开发指南](98_llm_programming/java_ai/README.md) - Java 生态系统中的 AI 开发技术总览。
 - [使用 Spring AI 构建高效 LLM 代理](98_llm_programming/java_ai/spring_ai_cn.md) - 基于 Spring AI 框架的企业级 AI 应用开发实践。
 
-### 5.3 LangGraph 开发
+### 5.2 LangGraph 开发
 
 LangGraph 通过图计算模型解决 LLM 应用在循环逻辑与状态持久化上的瓶颈，提供状态机机制以支持多轮推理、自我反思的复杂 Agent 工作流构建（如 AI 客服系统 Notebook 实战）。
 
@@ -173,7 +175,7 @@ LangGraph 通过图计算模型解决 LLM 应用在循环逻辑与状态持久�
 - [LangGraph 简介](98_llm_programming/langgraph/langgraph_intro.md) - LangGraph 的核心概念与入门指南。
 - [AI 客服系统实战](98_llm_programming/langgraph/aics.ipynb) - 基于 LangGraph 构建的 AI 客服系统 Notebook 实战。
 
-### 5.4 AI 工作流与编排
+### 5.3 AI 工作流与编排
 
 无代码/低代码（No-Code/Low-Code）AI 应用落地指南，包含 Coze 私有化部署配置、n8n 多智能体编排实践，以及 Dify、Ragflow 等主流开源编排平台的架构与商业许可对比。
 
@@ -237,9 +239,11 @@ LLM 核心理论与架构基石，深入解析 Tokenizer 分词机制、Embeddin
 拆解 LLM 底层运作机制，包括 Tiktokenizer 分词编码、大模型文件格式存储规范、Chain-of-Thought (CoT) 逻辑推理增强技术，以及模型幻觉 (Hallucination) 的成因分析与工程化应对策略。
 
 - [基础理论与概念导航](06_llm_theory_and_fundamentals/llm_basic_concepts/README.md) - LLM 核心概念的完整学习路径。
+- [Transformer 架构详解](06_llm_theory_and_fundamentals/llm_basic_concepts/transformer/transformer_architecture.md) — 从 RNN 串行瓶颈到自注意力机制，拆解 Attention、FFN、位置编码、LayerNorm 等核心组件，目标是读完能看懂 `modeling_llama.py`。
 - [Andrej Karpathy ： Deep Dive into LLMs like ChatGPT （B 站视频）](https://www.bilibili.com/video/BV16cNEeXEer) - 深度学习领域权威专家的 LLM 技术解析。
 - [大模型基础组件 - Tokenizer](https://zhuanlan.zhihu.com/p/651430181) - 文本分词与编码的核心技术。
 - [解密大语言模型中的 Tokens](06_llm_theory_and_fundamentals/llm_basic_concepts/token/README.md) - Token 机制的深度解析与实践应用。
+  - [LLM Token 机制详解](06_llm_theory_and_fundamentals/llm_basic_concepts/token/llm_token_intro.md) - Token 的基础概念与应用原理。
   - [Tiktokenizer 在线版](https://tiktokenizer.vercel.app/?model=gpt-4o) - 交互式 Token 分析工具。
 - [一文读懂思维链（Chain-of-Thought, CoT）](06_llm_theory_and_fundamentals/llm_basic_concepts/cot/chain_of_thought_cot_intro.md) - 推理能力增强的核心技术。
 - [大模型的幻觉及其应对措施](06_llm_theory_and_fundamentals/llm_basic_concepts/hallucination/llm_hallucination_and_mitigation.md) - 幻觉问题的成因分析与解决方案。
@@ -261,7 +265,7 @@ LLM 核心理论与架构基石，深入解析 Tokenizer 分词机制、Embeddin
 
 - [大模型可视化指南](https://www.maartengrootendorst.com/) - 大模型内部机制的可视化分析。
 - [混合专家模型 (MoE) 可视化指南](06_llm_theory_and_fundamentals/llm_basic_concepts/moe/mixture_of_experts_moe_visual_guide.zh-CN.md) - 深入解析 MoE 架构原理。
-- [量化技术可视化指南](06_llm_theory_and_fundamentals/llm_basic_concepts/quantization/01_visual_guide_to_quantization.md) - 模型压缩与加速的核心技术。
+- [量化技术可视化指南](06_llm_theory_and_fundamentals/llm_basic_concepts/quantization/visual_guide_to_quantization.md) - 模型压缩与加速的核心技术。
 - [基于 LLM 的意图检测](06_llm_theory_and_fundamentals/llm_basic_concepts/intent_detection/intent_detection_using_llm.zh-CN.md) - 意图识别系统设计与实现。
   - 参见：[ChatBox 意图识别与语义理解](06_llm_theory_and_fundamentals/llm_basic_concepts/intent_detection/chatbox_intent_recognition_and_semantic_understanding.md) - ChatBox 中意图识别的实际案例分析。
 
@@ -350,6 +354,8 @@ LLM 核心理论与架构基石，深入解析 Tokenizer 分词机制、Embeddin
 剖析现代推理系统的底层架构创新，重点解构 Mooncake 等以 KV Cache 为中心的高效 LLM 调度系统设计模式与性能调优策略。
 
 - [Mooncake 架构详解：以 KV Cache 为中心的高效 LLM 推理系统设计](09_inference_system/kv_cache/02_systems/mooncake/mooncake_architecture.md) - 新一代推理系统的架构创新与性能优化策略
+- [大模型推理并行策略](09_inference_system/parallelism/parallelism_strategies.md)（[交互可视化](09_inference_system/parallelism/parallelism_visual.html)） - DP、TP、PP、EP、SP 五种策略的统一拆解与混合部署案例
+  - [专家并行（EP）深度解析](09_inference_system/parallelism/expert_parallelism_deep_dive.md) - EP 独立深度文章：DP/TP/PP 为什么解决不了 MoE、All-to-All 通信模式、EP+DP 耦合、DeepEP 低延迟后端、EPLB 负载均衡、选型决策
 
 ### 9.2 核心框架与平台
 
@@ -358,6 +364,7 @@ LLM 核心理论与架构基石，深入解析 Tokenizer 分词机制、Embeddin
 - [推理优化技术方案](09_inference_system/README.md) - 企业级推理优化全景指南，涵盖集群规模分析、核心优化技术及实施路径
 - [vLLM + LWS ： Kubernetes 上的多机多卡推理方案](04_cloud_native_ai_platform/k8s/04_lws_intro.md) - 大模型推理在 Kubernetes 上的最佳实践
 - [云原生高性能分布式 LLM 推理框架 llm-d 介绍](04_cloud_native_ai_platform/k8s/05_llm_d_intro.md) - 云原生架构下的高性能推理服务栈
+- **[nano-vllm](https://github.com/ForceInjection/nano-vllm) ★** — 从零构建的轻量级 vLLM 实现（~1400 行 Python），在极简代码中保留 PagedAttention、连续批处理、张量并行与 CUDA Graph 等核心机制，推理速度与 vLLM 相当。配套 8 课 **[在线 PPT 实战课程](https://forceinjection.github.io/nano-vllm/)**，逐步拆解 Sequence 生命周期、调度器队列、KV Cache 管理与注意力算子分支
 
 ### 9.3 KV Cache 核心技术
 
@@ -376,7 +383,7 @@ LLM 核心理论与架构基石，深入解析 Tokenizer 分词机制、Embeddin
 
 - [LMCache 源码分析指南](09_inference_system/kv_cache/02_systems/lmcache/README.md) - 完整学习路径与文档索引
 - [LMCache 架构概览](09_inference_system/kv_cache/02_systems/lmcache/lmcache_overview.md) - 四层存储架构 (L1-L4)、核心组件交互与典型工作流
-- [vLLM KV Offloading 与 LMCache 深度对比](09_inference_system/kv_cache/01_concepts/advanced/kv_offloading_analysis.md) - 架构设计、存储层级及跨实例共享能力上的核心差异与性能权衡
+- [vLLM KV Offloading 与 LMCache 深度对比](09_inference_system/kv_cache/01_concepts/offloading/01_kv_offloading.md) - 架构设计、存储层级及跨实例共享能力上的核心差异与性能权衡
 
 **核心运行时组件**：
 
@@ -410,9 +417,16 @@ LLM 核心理论与架构基石，深入解析 Tokenizer 分词机制、Embeddin
 
 - [Tair KVCache 架构与设计深度分析](09_inference_system/kv_cache/02_systems/tair_kvcache/tair-kvcache-architecture-design.md) - 阿里云企业级 KVCache 管理系统架构详解，包含与 LMCache 的全面对比分析、中心化管理模式及大规模部署最佳实践
 
-#### 9.3.3 SGLang HiCache
+#### 9.3.3 SGLang 推理引擎
 
-- [HiCache 深入详解](09_inference_system/kv_cache/02_systems/hicache/hicache_deep_dive.md) - SGLang 分层 KV Cache 架构解析与源码分析
+SGLang 以 RadixAttention 前缀缓存和高效调度器著称，涵盖 HiCache 分层 KV 缓存、Chunked Prefill 调度机制、超大规模推理调优实践与交互式可视化演示。
+
+- [SGLang 内容索引](09_inference_system/sglang/README.md) - 源码分析、案例研究与可视化演示导航
+- [HiCache 深入详解](09_inference_system/sglang/hicache_deep_dive.md) - SGLang 分层 KV Cache 架构（L1/L2/L3）与 HiRadixTree 源码分析
+- [Chunked Prefill 原理与代码实现](09_inference_system/sglang/chunked_prefill.md) - 长 prompt 切分、PrefillAdder 截断决策、调度循环与 HiCache 协同的完整源码级分析
+- [SGLang Scaling Pain 超大规模推理调优案例](09_inference_system/sglang/sglang_scaling_case_study.md) - 利用投机采样定位 PD 分离架构下的 KV Cache 竞态与时序缺陷
+- [SGLang 推理流水线可视化](09_inference_system/sglang/inference-pipeline.html) - 交互式 Prefill & Decode 流水线演示，追踪 HiCache 三级缓存全流程
+- [SGLang 调度器可视化](09_inference_system/sglang/scheduler-visual.html)（[GIF 预览](09_inference_system/sglang/scheduler-visual.gif)） - 模拟 6 请求 × 22 步的 Chunked Prefill 调度过程
 
 ### 9.4 推理优化技术体系
 
@@ -421,26 +435,29 @@ LLM 核心理论与架构基石，深入解析 Tokenizer 分词机制、Embeddin
 **vLLM 核心机制分析**：
 
 - [vLLM 推理系统优化与分析](09_inference_system/vllm/README.md) - vLLM 底层机制和系统架构的深度解构
-- [vLLM 注意力机制演进与支持全景](09_inference_system/vllm/module_analysis/vllm_attention_mha_mla_nsa.md) ([配套 PPT](09_inference_system/vllm/module_analysis/vllm_attention_mha_mla_nsa.pptx)) - 从 MHA 到 MLA 与 NSA 的架构解析及 vLLM 支持现状
-- [vLLM 内置 KV Cache Offloading 模块解析](09_inference_system/vllm/module_analysis/vllm_native_kv_offloading.md) - 原生 KV Cache CPU Offloading 功能原理与实现
-- [vLLM Hybrid KV Cache Manager](09_inference_system/vllm/module_analysis/vllm_hybrid_kv_cache_manager_deep_dive.md) - vLLM 针对混合注意力架构的显存优化机制
-- [vLLM CUDA Graphs 深度解析](09_inference_system/vllm/module_analysis/vllm_cuda_graph_deep_dive.md) - 深入探讨 vLLM 解码阶段 CUDA Graphs 的核心机制与实践
-- [vLLM Router 架构解析](09_inference_system/vllm/related_module/vllm_router.md) - 高性能、轻量级请求转发系统
-- [vLLM Semantic Router](09_inference_system/vllm/related_module/vllm_semantic_router_deep_dive.md) - 基于语义的智能路由策略
+- [vLLM 注意力机制演进与支持全景](09_inference_system/vllm/module_analysis/attention_mha_mla_nsa.md) ([配套 PPT](09_inference_system/vllm/module_analysis/attention_mha_mla_nsa.pptx)) - 从 MHA 到 MLA 与 NSA 的架构解析及 vLLM 支持现状
+- [vLLM 内置 KV Cache Offloading 模块解析](09_inference_system/vllm/module_analysis/native_kv_offloading.md) - 原生 KV Cache CPU Offloading 功能原理与实现
+- [vLLM Hybrid KV Cache Manager](09_inference_system/vllm/module_analysis/hybrid_kv_cache_manager_deep_dive.md) - vLLM 针对混合注意力架构的显存优化机制
+- [vLLM CUDA Graphs 深度解析](09_inference_system/vllm/module_analysis/cuda_graph_deep_dive.md) - 深入探讨 vLLM 解码阶段 CUDA Graphs 的核心机制与实践
+- [vLLM Router 架构解析](09_inference_system/vllm/routing/router.md) - 高性能、轻量级请求转发系统
+- [vLLM Semantic Router](09_inference_system/vllm/routing/semantic_router_deep_dive.md) - 基于语义的智能路由策略
+- [DeepSeek V4 长上下文注意力支持解析](09_inference_system/vllm/module_analysis/deepseek_v4.md) - 深入探讨 vLLM 对 DeepSeek V4 模型高效注意力机制的底层实现与算子优化
+- [PagedAttention 退役的技术原因](09_inference_system/vllm/module_analysis/pagedattention_retirement.md) - 从 MLA 不兼容、两遍遍历浪费带宽、无原生 FP8 计算、模板爆炸等角度分析 PagedAttention 被取代的技术必然性
+- [MLA 的 TP 切分：KV Cache 冗余分析](09_inference_system/vllm/module_analysis/mla_tp_kv_redundancy.md) - MLA 将 KV cache 压缩到标准 MHA 的 ~1.8%，但 TP 对其显存节省为 0%，冗余率达 87.5%
 
 **显存与缓存优化**：
 
 - [LLM 显存占用分析与计算](09_inference_system/memory_calc/memory_analysis.md) - 模型参数、KV Cache 与中间激活值的显存估算方法
 - [KV Block Manager 分析](09_inference_system/kv_cache/02_systems/kvbm/KVBM_Analysis.md) - KV Cache 内存管理机制深度解析
-- [分层流水线技术](09_inference_system/kv_cache/01_concepts/advanced/layerwise_pipeline.md) - Layer-wise Pipeline 技术原理与性能优化
+- [分层流水线技术](09_inference_system/kv_cache/01_concepts/offloading/02_layerwise_pipeline.md) - Layer-wise Pipeline 技术原理与性能优化
 
 **网络与模型工具**：
 
 - [模型优化导航](09_inference_system/model_optimization/README.md) - 模型优化技术概览与导读
-- [NIXL 网络存储介绍](09_inference_system/infrastructure/nixl_introduction.md) - 高性能网络存储架构与应用
+- [NIXL 网络存储介绍](09_inference_system/kv_cache/02_systems/nixl/nixl_introduction.md) - 高性能网络存储架构与应用
 - [NVIDIA 模型优化器](09_inference_system/model_optimization/nvidia_model_optimizer.md) - NVIDIA 模型优化工具链详解
 - [图解投机解码](09_inference_system/model_optimization/illustrated-speculative-decoding.md) - Speculative Decoding 的核心思想、系统实现与工程调优要点
-- [vLLM GB200 优化](09_inference_system/vllm/hardware_optimization/vllm_gb200_optimization.pptx) - vLLM 在 GB200 硬件上的性能优化策略
+- [vLLM GB200 优化](09_inference_system/vllm/hardware_optimization/gb200_optimization.pptx) - vLLM 在 GB200 硬件上的性能优化策略
 
 ### 9.5 推理优化参考设计
 
@@ -458,7 +475,7 @@ LLM 核心理论与架构基石，深入解析 Tokenizer 分词机制、Embeddin
 **架构设计与评估体系**：
 
 - [推理服务架构设计](09_inference_system/reference_design/06-推理服务架构设计.md) - 企业级推理服务架构设计方案
-- [面向推理执行图的异构调度系统架构设计](09_inference_system/reference_design/面向推理执行图的异构调度系统架构设计.md) - 跨设备、跨阶段、跨模型的精细化调度方案
+- [面向推理执行图的异构调度系统架构设计](09_inference_system/reference_design/15-异构调度系统架构设计.md) - 跨设备、跨阶段、跨模型的精细化调度方案
 - [性能评估指标体系](09_inference_system/reference_design/05-性能评估指标体系.md) - 推理性能评估指标与方法
 
 **专业领域优化**：
@@ -475,20 +492,30 @@ LLM 核心理论与架构基石，深入解析 Tokenizer 分词机制、Embeddin
 - [参考资料与延伸阅读](09_inference_system/reference_design/08-参考资料与延伸阅读.md) - 推荐阅读与延伸资料
 - [总结与展望](09_inference_system/reference_design/14-总结与展望.md) - 推理优化技术发展趋势
 
-### 9.6 模型部署与运维实践
+### 9.6 推理成本与容量规划
+
+大模型推理成本的定量分析与容量规划决策，涵盖 API 按量计费与 Coding Plan 包月订阅的定价数据建模，以及基于业务前缀复用率的 KV Cache 各级存储（HBM/DRAM/NVMe）容量推演。
+
+- [推理成本分析](09_inference_system/cost_analysis/llm_api_pricing_analysis.md) — 基于 OpenRouter 的多模型成本测算与动态抓取脚本
+- [Coding Plan 订阅对比](09_inference_system/cost_analysis/coding_plan/coding_plan_report.md) — 11 款 AI 编程工具订阅成本与隐藏条款解析
+- [KV Cache 容量规划](09_inference_system/kv_cache/01_concepts/capacity_planning/glm5_kv_cache_capacity_planning.md) — GLM-5 显存容量推演与 ROI 评估
+- [KV Cache 压缩技术](09_inference_system/kv_cache/01_concepts/compression/kv_cache_compression.md) — INT8/FP8 量化、稀疏化与注意力优化
+- [Claude Prompt Caching 机制分析](09_inference_system/kv_cache/01_concepts/prefix_caching/claude_prompt_caching.md) — 提示词缓存的终端 Agent 源码实现与成本优化
+
+### 9.7 模型部署与运维实践
 
 跨硬件平台的模型服务化落地指南，涵盖 Mac 本地 DeepSeek-R1 运行、Ollama 架构原理，以及 DeepSeek-V3 MoE 在 H20 硬件与 Qwen2-VL 在华为昇腾上的专项部署调优。
 
 - [动手跑大模型](99_misc/mac-deepseek-r1.md) - 手把手教你如何跑大模型
 - [Ollama 推理框架详解](99_misc/ollama/README.md) - Ollama 的架构原理与进阶配置
-- [DeepSeek-V3 MoE 模型 vLLM 部署](09_inference_system/inference_solutions/deepseek_v3_moe_vllm_h20_deployment.md) - H20 硬件上的部署方案与 SLO 验证
-- [Qwen2-VL-7B 华为昇腾部署](09_inference_system/inference_solutions/qwen2_vl_7b_huawei.md) - 国产硬件平台的部署优化
+- [DeepSeek-V3 MoE 模型 vLLM 部署](09_inference_system/deployment/deepseek_v3_moe_vllm_h20_deployment.md) - H20 硬件上的部署方案与 SLO 验证
+- [Qwen2-VL-7B 华为昇腾部署](09_inference_system/deployment/qwen2_vl_7b_huawei.md) - 国产硬件平台的部署优化
 
-### 9.7 DeepSeek 专题
+### 9.8 DeepSeek 专题
 
 DeepSeek 模型极致性能优化实战，深度解析 vLLM 宽端点 (Wide Endpoint) 专有并行架构，以及在 Blackwell 等下一代高性能计算平台上的可扩展性评估与部署策略。
 
-- [vLLM WideEP 架构](09_inference_system/vllm/hardware_optimization/vllm_deepseek_blackwell_wide_ep.md) - vLLM 宽端点 (Wide Endpoint) 架构解析
+- [vLLM WideEP 架构](09_inference_system/vllm/hardware_optimization/deepseek_blackwell_wide_ep.md) - vLLM 宽端点 (Wide Endpoint) 架构解析
 - [Scaling DeepSeek on Blackwell](09_inference_system/vllm/hardware_optimization/scaling_deepseek_blackwell.pptx) - DeepSeek 在 Blackwell 平台上的扩展性优化
 - [从 MLA 到 CSA + HCA：DeepSeek 注意力架构的进化之路](09_inference_system/vllm/module_analysis/deepseek_attention_evolution_mla_to_csa_hca.md) - 结合 vLLM 推理引擎源码，深度解析 DeepSeek 注意力机制演进
 
@@ -550,7 +577,7 @@ DeepSeek 模型极致性能优化实战，深度解析 vLLM 宽端点 (Wide Endp
 
 - [Claude Skills 开发指南](08_agentic_system/agent_skills/docs/claude_skills_guide.md) - 扩展智能体能力的工具定义规范与最佳实践
   - [构建完整指南 (PDF)](08_agentic_system/agent_skills/docs/the_complete_guide_to_building_skill_for_claude.pdf)
-- [Agent Skill 开发指南](https://github.com/ForceInjection/awesome-skills) - 由原力注入博主维护的优秀认知技能（Agent Skill）合集，包含深度代码阅读、架构分析、文档评审等自动化工作流。
+- [Agent Skill 开发指南](https://github.com/ForceInjection/awesome-skills)（[在线版](https://forceinjection.github.io/awesome-skills/)）- 由原力注入博主维护的优秀认知技能（Agent Skill）合集，包含深度代码阅读、架构分析、文档评审等自动化工作流。
 - [CUDA Code Skill](https://github.com/ForceInjection/cuda-code-skill) - 面向 AI IDE（Claude Code、Trae 等）的 CUDA 知识增强代码生成与性能分析技能库。
 - [mmx-cli](https://github.com/MiniMax-AI/cli) - MiniMax AI 平台的 CLI 技能，支持文本、图片、视频、语音、音乐生成与 Web 搜索，遵循 agentskills.io 标准。
 
@@ -697,7 +724,21 @@ ZOMI 酱主导的高分开源 AI 基础设施架构体系，从底层 AI 芯片�
 
 由微软提供的初学者课程，旨在帮助学习者全面了解 AI Agent 的构建与应用。
 
-- [AI Agents for Beginners 课程之 AI Agent及使用场景简介](10_ai_related_course/AI Agents for Beginners 课程之 AI Agent及使用场景简介.md) - 涵盖 AI Agent 基础概念、开发框架、设计模式与应用场景。
+- [AI Agents for Beginners 课程之 AI Agent及使用场景简介](10_ai_related_course/AI%20Agents%20for%20Beginners%20课程之%20AI%20Agent及使用场景简介.md) - 涵盖 AI Agent 基础概念、开发框架、设计模式与应用场景。
+
+---
+
+## 13. AI Native 全栈实践
+
+以"认知性质决定技术分层"为裁断准则的 AI Native 方法论体系，包含应用架构（Agent / Skill / Tool 三层 + 七项工程治理）和 DevOps（AI 增强而非替代的全流程协同框架），通过真实电力交易场景推导可复用架构。详细内容请访问：[AI Native 全栈实践](11_ai_native_everything/README.md)，配套 DevOps 参考：[ai-native-devops](https://github.com/ForceInjection/ai-native-devops)（[在线版](https://forceinjection.github.io/ai-native-devops/)）。
+
+### 13.1 AI 时代的软件工程
+
+软件工程正向以 Agent First 与自主推理为核心的 **Software 3.0** 时代演进，涵盖驾驭工程 (Harness Engineering) 体系与 Spec 驱动开发工作流。
+
+- [Agent First：软件工程的下一个范式转移](98_llm_programming/Agent_First.md) - 梳理编程范式的演变历史，探讨 Agent First 的核心理念与实战指南。
+- [驾驭工程](98_llm_programming/Harness_Engineering.md) - 深度解析如何构建驾驭系统，提升 AI 编程助手的可控性与效能。
+- [OpenSpec 实战指南](https://github.com/ForceInjection/OpenSpec-practise/blob/main/README.md) - Spec 驱动开发 (Spec-Driven Development) 的工程实践，演示了"意图 → Spec → AI → 代码 & 验证"的新一代开发工作流。
 
 ---
 

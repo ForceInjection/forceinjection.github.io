@@ -1,0 +1,166 @@
+/**
+ * GPU 间数据传输方法实测 Benchmark
+ *
+ * 配套文章: 09_gpu_transfer_methods.md
+ *
+ * 测试场景: 往返（A→B 再 B→A，串行交替，非全双工），每方向 128 MB。
+ * 报告值:   每方向等效速率（往返总数据量 / 往返总时间）。
+ *           方法 4-5 为单向测试，仅测一个方向。
+ *
+ * 对比 4 种 GPU→GPU 数据传输方法:
+ *   P2P 直连 (cudaMemcpyPeer / cudaMemcpy D2D) — 往返 (同一路径, 两种等效 API)
+ *   CPU relay (G→CPU→G)                        — 往返
+ *   Zero-Copy (mapped host memory)              — 单向
+ *   Unified Memory (prefetch + D2D copy)        — 单向
+ *
+ * 编译: nvcc -arch=sm_80 -O3 -o gpu_transfer_methods 09_gpu_transfer_methods.cu
+ * 运行: CUDA_VISIBLE_DEVICES=0,1 ./gpu_transfer_methods
+ *
+ * 要求: ≥2 GPUs (P2P 仅在 Peer Access 可用时运行)
+ */
+
+#include <cuda_runtime.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+#define CS(c) do { cudaError_t r = c; if(r != cudaSuccess) { \
+    printf("CUDA Err at %d: %s\n", __LINE__, cudaGetErrorString(r)); exit(1); } } while(0)
+#define N (128 * 1024 * 1024)  // 128 MB per direction
+
+static int iters = 50;  // default iterations, override via argv[1]
+
+float *d_a, *d_b;
+
+// dirs: 每次 fn() 的方向数 (2=往返 P2P/CPU relay, 1=单向 Zero-Copy/UM)
+double run(const char *name, void (*fn)(), int dirs) {
+    for (int i = 0; i < 3; i++) fn();
+    cudaEvent_t start, stop; float ms;
+    cudaEventCreate(&start); cudaEventCreate(&stop);
+    CS(cudaEventRecord(start, 0));
+    for (int i = 0; i < iters; i++) fn();
+    CS(cudaEventRecord(stop, 0));
+    CS(cudaEventSynchronize(stop));
+    cudaEventElapsedTime(&ms, start, stop);
+    cudaEventDestroy(start); cudaEventDestroy(stop);
+    double bw = (double)dirs * (double)N * iters / (ms / 1000.0) / (1024*1024*1024);
+    printf("  %-35s  %8.2f ms  %8.2f GB/s\n", name, ms, bw);
+    return bw;
+}
+
+/* ---- Method 1: cudaMemcpyPeer — 往返 (A→B + B→A) ---- */
+void m1_peer() {
+    cudaMemcpyPeer(d_b, 1, d_a, 0, N);
+    cudaMemcpyPeer(d_a, 0, d_b, 1, N);
+}
+
+/* ---- Method 2: cudaMemcpy D2D — 往返 (A→B + B→A) ---- */
+void m2_d2d() {
+    cudaMemcpy(d_b, d_a, N, cudaMemcpyDeviceToDevice);
+    cudaMemcpy(d_a, d_b, N, cudaMemcpyDeviceToDevice);
+}
+
+/* ---- Method 3: CPU relay — 往返 (A→CPU→B + B→CPU→A) ---- */
+float *h_relay, *dr_a, *dr_b;
+void m3_cpu() {
+    cudaMemcpy(h_relay, dr_a, N, cudaMemcpyDeviceToHost);
+    cudaMemcpy(dr_b, h_relay, N, cudaMemcpyHostToDevice);
+    cudaMemcpy(h_relay, dr_b, N, cudaMemcpyDeviceToHost);
+    cudaMemcpy(dr_a, h_relay, N, cudaMemcpyHostToDevice);
+}
+
+/* ---- Method 4: Zero-Copy — 单向 (GPU0 host→GPU1 device) ---- */
+float *h_zc, *d_zc;
+float *d_zc_gpu1;
+void m4_zc() {
+    cudaSetDevice(0);
+    cudaMemset(d_zc, 42, N);
+    CS(cudaDeviceSynchronize());
+    cudaSetDevice(1);
+    cudaMemcpy(d_zc_gpu1, h_zc, N, cudaMemcpyHostToDevice);
+    CS(cudaDeviceSynchronize());
+}
+
+/* ---- Method 5: Unified Memory — prefetch + D2D copy (单向, GPU0→GPU1) ---- */
+float *d_um, *d_um2;
+void m5_um() {
+    cudaSetDevice(0);
+    {cudaMemLocation loc = {cudaMemLocationTypeDevice, 0};
+     cudaMemPrefetchAsync(d_um, N, loc, 0);}
+    cudaMemsetAsync(d_um, 0, N, 0);
+    CS(cudaDeviceSynchronize());
+    {cudaMemLocation loc2 = {cudaMemLocationTypeDevice, 1};
+     cudaMemPrefetchAsync(d_um, N, loc2, 0);}
+    cudaSetDevice(1);
+    cudaMemcpy(d_um2, d_um, N, cudaMemcpyDeviceToDevice);
+    CS(cudaDeviceSynchronize());
+}
+
+int main(int argc, char **argv) {
+    if (argc > 1) iters = atoi(argv[1]);
+
+    int devCount, canPeer;
+    cudaGetDeviceCount(&devCount);
+    if (devCount < 2) { printf("Need >=2 GPUs\n"); return 1; }
+
+    for (int i = 0; i < 2; i++) {
+        cudaDeviceProp p; cudaGetDeviceProperties(&p, i);
+        printf("Device %d: %s\n", i, p.name);
+    }
+    CS(cudaDeviceCanAccessPeer(&canPeer, 0, 1));
+    printf("P2P available: %s\n\n", canPeer ? "YES" : "NO");
+    printf("%-35s  %8s  %8s\n", "Method", "Time", "Bandwidth");
+    printf("%-35s  %8s  %8s\n", "------", "----", "--------");
+
+    double bw2 = 0, bw3 = 0, bw4 = 0, bw5 = 0;
+
+    /* Methods 1 & 2: P2P required, 往返 (dirs=2) */
+    if (canPeer) {
+        CS(cudaSetDevice(0)); CS(cudaMalloc(&d_a, N));
+        CS(cudaSetDevice(1)); CS(cudaMalloc(&d_b, N));
+        CS(cudaSetDevice(0)); CS(cudaDeviceEnablePeerAccess(1, 0));
+        CS(cudaSetDevice(1)); CS(cudaDeviceEnablePeerAccess(0, 0));
+
+        CS(cudaSetDevice(0));
+        run("1. cudaMemcpyPeer (NVLink/P2P)", m1_peer, 2);
+        bw2 = run("2. cudaMemcpy D2D (P2P enabled)",  m2_d2d, 2);
+
+        CS(cudaSetDevice(0)); CS(cudaFree(d_a));
+        CS(cudaSetDevice(1)); CS(cudaFree(d_b));
+    }
+
+    /* Method 3: CPU relay, 往返 (dirs=2) */
+    CS(cudaSetDevice(0)); CS(cudaMalloc(&dr_a, N));
+    CS(cudaSetDevice(1)); CS(cudaMalloc(&dr_b, N));
+    CS(cudaMallocHost(&h_relay, N));
+    bw3 = run("3. CPU relay (G->CPU->G)", m3_cpu, 2);
+    CS(cudaFreeHost(h_relay));
+    CS(cudaSetDevice(0)); CS(cudaFree(dr_a));
+    CS(cudaSetDevice(1)); CS(cudaFree(dr_b));
+
+    /* Method 4: Zero-Copy, 单向 (dirs=1) */
+    CS(cudaSetDevice(0));
+    CS(cudaHostAlloc(&h_zc, N, cudaHostAllocPortable | cudaHostAllocMapped));
+    CS(cudaHostGetDevicePointer(&d_zc, h_zc, 0));
+    CS(cudaSetDevice(1)); CS(cudaMalloc(&d_zc_gpu1, N));
+    bw4 = run("4. Zero-Copy (mapped host memory)", m4_zc, 1);
+    CS(cudaSetDevice(0)); CS(cudaFreeHost(h_zc));
+    CS(cudaSetDevice(1)); CS(cudaFree(d_zc_gpu1));
+
+    /* Method 5: Unified Memory, 单向 (dirs=1) */
+    CS(cudaSetDevice(0)); CS(cudaMallocManaged(&d_um, N));
+    CS(cudaSetDevice(1)); CS(cudaMalloc(&d_um2, N));
+    bw5 = run("5. Unified Memory (prefetch)", m5_um, 1);
+    CS(cudaSetDevice(0)); CS(cudaFree(d_um));
+    CS(cudaSetDevice(1)); CS(cudaFree(d_um2));
+
+    printf("\n=== Summary ===\n");
+    printf("  P2P + CPU relay: 往返 (每方向等效速率)\n");
+    printf("  Zero-Copy + UM:   单向\n");
+    printf("  规格: NVLink 3.0 单向理论 = 300 GB/s\n");
+    if (canPeer) {
+        printf("  P2P vs CPU relay:     %.0fx\n", bw2 / bw3);
+        printf("  P2P vs Zero-Copy:     %.0fx\n", bw2 / bw4);
+        printf("  P2P vs Unified Mem:   %.0fx\n", bw2 / bw5);
+    }
+    return 0;
+}

@@ -1,4 +1,4 @@
-# npu-smi 使用参考
+# 07 — npu-smi 使用参考
 
 `npu-smi` v24.1.0.3 是昇腾 NPU 的轻量级设备管理工具，对应 NVIDIA 生态中的 `nvidia-smi`。它不依赖 CANN toolkit，直接通过驱动层获取设备状态，因此即使在 CANN 未安装或配置错误的场景下仍可正常工作。适合日常巡检、状态监控和进程管理。
 
@@ -47,10 +47,10 @@ npu-smi info watch                # 滚动刷新模式
 | Health           | 健康状态       | OK 正常；若有异常则显示具体告警码                                                            |
 | Power(W)         | 实时功耗       | 空闲 ~93 W；FP16 算力测试满载 ~231 W；实际训练可达 ~273 W（此前观测到 5 号卡训练时达此功耗） |
 | Temp(C)          | 芯片温度       | 正常范围 30-60°C；持续 >85°C 触发降频                                                        |
-| Hugepages-Usage  | 大页内存       | 显示已用/总量（page）；测试服务器为 0，表示未使用 DDR 大页                                   |
+| Hugepages-Usage  | 大页内存       | 显示已用/总量（page）；本服务器为 0，表示未使用 DDR 大页                                     |
 | Bus-Id           | PCIe 总线地址  | 格式 `domain:bus:device.function`，可据此定位物理插槽                                        |
 | AICore(%)        | AI Core 利用率 | 0% 表示空闲；若持续为 0 但进程存在，可能进程在等待数据                                       |
-| Memory-Usage(MB) | DDR 内存使用   | 已用/总量；测试服务器 DDR 容量为 0，因此始终为 0/0                                           |
+| Memory-Usage(MB) | DDR 内存使用   | 已用/总量；本服务器 DDR 容量为 0，因此始终为 0/0                                             |
 | HBM-Usage(MB)    | HBM 使用量     | 已用/总量；空闲时约 3300-3400 MB 为驱动保留（约 5%），65536 MB 为 64 GB 总量                 |
 
 下半部分为进程表，列出每张 NPU 上运行的进程 PID、进程名和 NPU 内存占用。默认模式只显示当前时刻快照。
@@ -66,7 +66,7 @@ npu-smi info proc           # 进程表滚动刷新
 
 ## 4. 拓扑查询 (`-l` / `-m`)
 
-### 4.1 卡间拓扑 (`-l`)
+### 卡间拓扑 (`-l`)
 
 ```bash
 npu-smi info -l
@@ -84,9 +84,9 @@ npu-smi info -l
 | PXB  | 经过多个 PCIe Switch                                 |
 | NA   | 无法判定                                             |
 
-测试服务器 8 卡之间全部为 HCCS 直连（8 卡全互联 full mesh），不存在经过 PCIe 或 NUMA 的间接链路。这是训练集群的理想拓扑——任何两卡之间的 AllReduce 延迟完全对称，不存在跨 NUMA node 的通信瓶颈。
+本服务器 8 卡之间全部为 HCCS 直连（8 卡全互联 full mesh），不存在经过 PCIe 或 NUMA 的间接链路。这是训练集群的理想拓扑——任何两卡之间的 AllReduce 延迟完全对称，不存在跨 NUMA node 的通信瓶颈。
 
-### 4.2 Chip ID 映射 (`-m`)
+### Chip ID 映射 (`-m`)
 
 ```bash
 npu-smi info -m
@@ -96,7 +96,7 @@ npu-smi info -m
 
 ## 5. 常用查询类型速查
 
-以下为测试服务器实测数据的精选子集，按使用频率排序。
+以下为本服务器实测数据的精选子集，按使用频率排序。
 
 ### 5.1 资源使用 (`-t usages`)
 
@@ -131,7 +131,7 @@ npu-smi info -t pcie-err -i 7   # PCIe 链路错误计数器
 | HBM Double Bit Error Count | 不可纠正双比特错误   | 任何 >0 都需要硬件检查 |
 | Isolated Pages Count       | 已被驱动隔离的坏页数 | 持续增长表示 HBM 退化  |
 
-测试服务器所有卡 ECC 计数均为 0，PCIe TX/RX/LCRC/ECRC/Retry 计数均为 0，硬件状态健康。
+本服务器所有卡 ECC 计数均为 0，PCIe TX/RX/LCRC/ECRC/Retry 计数均为 0，硬件状态健康。
 
 ### 5.3 物理信息 (`-t board` / `-t memory`)
 
@@ -158,7 +158,7 @@ npu-smi info -t memory -i 7     # 内存规格
 | HBM Clock Speed     | 1600 MHz | 1.6 GHz，对应 ~1.54 TB/s 实测带宽   |
 | HBM Temperature     | 38°C     | 仅 HBM 颗粒温度，不同于芯片整体温度 |
 | HBM Manufacturer ID | 0x57     | Samsung                             |
-| DDR Capacity        | 0 MB     | 测试服务器 DDR 不可用               |
+| DDR Capacity        | 0 MB     | 本服务器 DDR 不可用                 |
 
 ### 5.4 HCCS 链路状态 (`-t hccs` / `-t hccs-bw`)
 
@@ -169,7 +169,7 @@ npu-smi info -t hccs-bw -i 7 -c 0 -time 100  # HCCS 带宽实时探测（100 ms�
 
 **`hccs` 输出解读**（8 个 lane 按数组格式排列，`[lane0 lane1 ... lane7]`）：
 
-| 字段                     | 测试服务器值        | 说明                           |
+| 字段                     | 本服务器值          | 说明                           |
 | ------------------------ | ------------------- | ------------------------------ |
 | hccs health status       | OK                  | 链路健康                       |
 | hccs lane mode           | `[4 4 4 4 4 4 4 4]` | 每个 lane 模式为 4             |
@@ -213,7 +213,7 @@ npu-smi info -t common -i 7
 | 输出格式 | 纯文本                  | 支持 `--fmt json`                |
 | 最佳场景 | 日常巡检、确认卡状态    | 装机验收、性能基准、硬件排障     |
 
-日常流程：`npu-smi` 快速确认所有卡 OK → 发现异常时用 `npu-smi info -t <type> -i <id>` 深入查看 → 需要定量诊断或压测时切到 `ascend-dmi`（详见 `02_ascend_dmi_reference.md`）。
+日常流程：`npu-smi` 快速确认所有卡 OK → 发现异常时用 `npu-smi info -t <type> -i <id>` 深入查看 → 需要定量诊断或压测时切到 `ascend-dmi`（详见 [02_ascend_dmi_reference.md](02_ascend_dmi_reference.md)）。
 
 ## 7. 参考链接
 

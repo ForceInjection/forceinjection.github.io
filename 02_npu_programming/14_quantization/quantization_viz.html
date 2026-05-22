@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>量化对比 — 交互式分析</title>
+<style>
+:root{--bg:#0d1117;--card:#161b22;--bdr:#30363d;--tx:#c9d1d9;--ac:#58a6ff;--gn:#3fb950;--or:#d2991d;--rd:#f85149;--dim:#8b949e}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--tx);padding:24px;max-width:1100px;margin:0 auto}
+h1{font-size:24px;margin-bottom:4px}
+.sub{color:var(--dim);font-size:14px;margin-bottom:20px}
+.card{background:var(--card);border:1px solid var(--bdr);border-radius:8px;padding:20px;margin-bottom:20px}
+.card h3{font-size:15px;margin-bottom:12px;color:var(--ac)}
+canvas{display:block;width:100%;border-radius:4px;background:#010409}
+.controls{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:20px;align-items:center}
+.controls label{font-size:13px;color:var(--dim);display:flex;align-items:center;gap:6px}
+.controls select,.controls input[type=range]{background:var(--card);color:var(--tx);border:1px solid var(--bdr);border-radius:4px;padding:4px 8px;font-size:13px}
+.controls input[type=range]{width:100px}
+.controls .val{color:var(--ac);font-size:12px;min-width:28px}
+table{width:100%;border-collapse:collapse;margin:8px 0;font-size:13px}
+th,td{padding:8px 12px;border-bottom:1px solid var(--bdr);white-space:nowrap}
+th{color:var(--ac);font-weight:600;text-align:center}
+th:first-child{text-align:left}
+td{text-align:center}
+td:first-child{text-align:left;font-weight:600}
+td:nth-child(2),td:nth-child(3),td:nth-child(5){text-align:center}
+td:nth-child(4),td:nth-child(6),td:nth-child(7),td:nth-child(8){text-align:right}
+.bar-cell{min-width:90px;text-align:left!important}
+.bar-fill{display:inline-block;height:14px;border-radius:3px;vertical-align:middle}
+.legend{font-size:11px;color:var(--dim);margin-top:6px}
+</style>
+</head>
+<body>
+
+<h1>量化精度对比 — 交互式分析</h1>
+<p class="sub">调整 outlier 强度，观察不同量化位数下的精度损失</p>
+
+<div class="controls">
+  <label>Outlier强度:
+    <input type="range" id="outlier" min="0" max="10" value="5" step="1">
+    <span class="val" id="outlierVal">5×</span>
+  </label>
+</div>
+
+<div class="card">
+  <h3>① 原始值分布（直方图）</h3>
+  <canvas id="canvasDist" height="140"></canvas>
+  <div class="legend">60 个正态分布值 + 2 个 outlier | 横轴=数值 | 纵轴=频次</div>
+</div>
+
+<div class="card">
+  <h3>② 量化精度对比</h3>
+  <table id="metricsTable"></table>
+  <div class="legend" style="margin-top:8px">
+    Scale = 量化步长（越小精度越高）| RMSE = 均方根误差（综合精度指标）| 利用率 = 实际使用的量化级别占比
+  </div>
+</div>
+
+<div class="card">
+  <h3>③ 误差分布（每个值的绝对误差，从大到小排序）</h3>
+  <canvas id="canvasError" height="140"></canvas>
+</div>
+
+<script>
+const N=60,SEED=42;
+function rng(s){return function(){s=(s*16807)%2147483647;return(s-1)/2147483646;}}
+
+function genData(outlier){
+  const r=rng(SEED),d=[];
+  for(let i=0;i<N;i++){const u1=r(),u2=r();d.push(Math.sqrt(-2*Math.log(u1))*Math.cos(2*Math.PI*u2)*0.3)}
+  if(outlier>0){d[0]=outlier*0.5;d[1]=outlier*0.4}
+  return d;
+}
+
+function symQuant(data,bits){
+  const qmax=(1<<(bits-1))-1;
+  const maxAbs=Math.max(...data.map(v=>Math.abs(v)))||1e-9;
+  const scale=maxAbs/qmax;
+  const q=data.map(v=>Math.max(-qmax,Math.min(qmax,Math.round(v/scale))));
+  const deq=q.map(x=>x*scale);
+  const errs=data.map((v,i)=>Math.abs(v-deq[i]));
+  return{scale,q,deq,errs,n:qmax*2+1};
+}
+
+function drawDist(canvas,data){
+  const ctx=canvas.getContext('2d');
+  const W=canvas.width=canvas.clientWidth*2,H=canvas.height=140*2;
+  ctx.clearRect(0,0,W,H);
+  const min=Math.min(...data),max=Math.max(...data),rng=max-min||1;
+  const bins=40,bw=rng/bins;
+  const cnt=new Array(bins).fill(0);
+  data.forEach(v=>{const i=Math.min(bins-1,Math.max(0,Math.floor((v-min)/bw)));cnt[i]++;});
+  const mx=Math.max(...cnt);
+  const barW=(W-60)/bins;
+  ctx.fillStyle='rgba(88,166,255,0.3)';
+  cnt.forEach((c,i)=>{const h=c/mx*(H-60);ctx.fillRect(42+i*barW,H-30-h,Math.max(1,barW-1),h)});
+  ctx.strokeStyle='#30363d';ctx.lineWidth=1;
+  ctx.beginPath();ctx.moveTo(40,20);ctx.lineTo(40,H-30);ctx.lineTo(W-20,H-30);ctx.stroke();
+  ctx.fillStyle='#8b949e';ctx.font='16px monospace';
+  ctx.fillText(min.toFixed(2),42,H-8);ctx.fillText(max.toFixed(2),W-70,H-8);
+}
+
+function drawErrBars(canvas,results,globalMaxErr){
+  const ctx=canvas.getContext('2d');
+  const W=canvas.width=canvas.clientWidth*2,H=canvas.height=140*2;
+  ctx.clearRect(0,0,W,H);
+  const yMax=globalMaxErr*1.1||1e-9;
+  const colors={8:'#3fb950',4:'#d2991d',3:'#f0883e',2:'#f85149'};
+  const bits=[8,4,3,2];
+  const groupW=(W-60)/4,gap=4;
+
+  bits.forEach((b,gi)=>{
+    const errs=[...results[b].errs].sort((a,b)=>b-a);
+    const x0=42+gi*groupW;
+    const bw=Math.max(1,(groupW-gap*2)/errs.length);
+    ctx.fillStyle=colors[b];
+    errs.forEach((e,i)=>{
+      const h=(e/yMax)*(H-60);
+      ctx.fillRect(x0+gap+i*bw,H-30-h,Math.max(0.5,bw-0.5),h||0.3);
+    });
+    ctx.fillStyle='#8b949e';ctx.font='14px monospace';
+    ctx.fillText(`INT${b}`,x0+groupW/2-14,H-10);
+  });
+
+  ctx.strokeStyle='#30363d';ctx.lineWidth=1;
+  ctx.beginPath();ctx.moveTo(40,20);ctx.lineTo(40,H-30);ctx.lineTo(W-20,H-30);ctx.stroke();
+  ctx.fillStyle='#8b949e';ctx.font='14px monospace';
+  ctx.fillText('0',38,H-8);
+  ctx.fillText(yMax.toFixed(4),38,22);
+}
+
+function renderTable(results,outlier){
+  const bits=[8,4,3,2];
+  const fp16Mem=14;
+  const globalMaxErr=Math.max(...bits.map(b=>Math.max(...results[b].errs)));
+
+  let html=`<tr><th>精度</th><th>级别数</th><th>HBM</th><th>Scale</th><th>利用率</th><th>Max Err</th><th>Mean Err</th><th>RMSE</th><th style="text-align:center">HBM节省</th></tr>`;
+  bits.forEach(b=>{
+    const r=results[b];
+    const rmse=Math.sqrt(r.errs.reduce((s,e)=>s+e*e,0)/N);
+    const mean=r.errs.reduce((s,e)=>s+e,0)/N;
+    const maxE=Math.max(...r.errs);
+    const levels=new Set(r.q).size;
+    const mem=fp16Mem*b/16;
+    const pct=(levels/(1<<b)*100).toFixed(0);
+    const savePct=((1-b/16)*100).toFixed(0);
+    const color={8:'#3fb950',4:'#d2991d',3:'#f0883e',2:'#f85149'}[b];
+    html+=`<tr>
+      <td style="color:${color}">INT${b}</td>
+      <td>${1<<b}</td>
+      <td>${mem.toFixed(1)} GB</td>
+      <td>${r.scale.toFixed(6)}</td>
+      <td>${levels}/${1<<b} (${pct}%)</td>
+      <td>${maxE.toFixed(6)}</td>
+      <td>${mean.toFixed(6)}</td>
+      <td>${rmse.toFixed(6)}</td>
+      <td class="bar-cell"><div class="bar-fill" style="width:${savePct}%;background:${color}"></div><span style="font-size:11px;margin-left:4px">${savePct}%</span></td>
+    </tr>`;
+  });
+  document.getElementById('metricsTable').innerHTML=html;
+  return globalMaxErr;
+}
+
+function update(){
+  const outlier=+document.getElementById('outlier').value;
+  document.getElementById('outlierVal').textContent=outlier+'×';
+  const data=genData(outlier);
+  drawDist(document.getElementById('canvasDist'),data);
+
+  const results={};
+  [8,4,3,2].forEach(b=>{results[b]=symQuant(data,b)});
+  const globalMaxErr=renderTable(results,outlier);
+  drawErrBars(document.getElementById('canvasError'),results,globalMaxErr);
+}
+
+document.getElementById('outlier').addEventListener('input',update);
+update();
+</script>
+</body>
+</html>
