@@ -364,6 +364,22 @@
     "url": "/02_npu_programming/06_advanced/02_gpu_to_npu_migration.html"
   },
   {
+    "title": "RAG on NPU 实战",
+    "url": "/02_npu_programming/07_rag_on_npu/"
+  },
+  {
+    "title": "RAG 检索增强生成 on Ascend NPU",
+    "url": "/02_npu_programming/07_rag_on_npu/01_rag_pipeline_on_npu.html"
+  },
+  {
+    "title": "NPU 性能分析",
+    "url": "/02_npu_programming/08_npu_profiling/"
+  },
+  {
+    "title": "NPU 性能分析入门",
+    "url": "/02_npu_programming/08_npu_profiling/01_npu_profiling.html"
+  },
+  {
     "title": "AI 集群运维与通信 (AI Cluster Operations & Communication)",
     "url": "/03_ai_cluster_ops/"
   },
