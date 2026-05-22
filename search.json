@@ -380,6 +380,14 @@
     "url": "/02_npu_programming/08_npu_profiling/01_npu_profiling.html"
   },
   {
+    "title": "FlashAttention 简化版",
+    "url": "/02_npu_programming/09_flash_attention/"
+  },
+  {
+    "title": "FlashAttention 简化版：Tiling + Online Softmax",
+    "url": "/02_npu_programming/09_flash_attention/01_flash_attention.html"
+  },
+  {
     "title": "AI 集群运维与通信 (AI Cluster Operations & Communication)",
     "url": "/03_ai_cluster_ops/"
   },
