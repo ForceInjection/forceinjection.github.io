@@ -388,6 +388,14 @@
     "url": "/02_npu_programming/09_flash_attention/01_flash_attention.html"
   },
   {
+    "title": "Mini-GPT：手写 Transformer 训练",
+    "url": "/02_npu_programming/10_mini_gpt/"
+  },
+  {
+    "title": "Mini-GPT：从零手写 Transformer 在 NPU 上训练",
+    "url": "/02_npu_programming/10_mini_gpt/01_mini_gpt_training.html"
+  },
+  {
     "title": "AI 集群运维与通信 (AI Cluster Operations & Communication)",
     "url": "/03_ai_cluster_ops/"
   },
