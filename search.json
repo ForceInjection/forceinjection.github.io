@@ -372,6 +372,10 @@
     "url": "/02_npu_programming/07_rag_on_npu/01_rag_pipeline_on_npu.html"
   },
   {
+    "title": "RAG 评估体系",
+    "url": "/02_npu_programming/07_rag_on_npu/02_rag_evaluation.html"
+  },
+  {
     "title": "NPU 性能分析",
     "url": "/02_npu_programming/08_npu_profiling/"
   },
@@ -394,6 +398,22 @@
   {
     "title": "Mini-GPT：从零手写 Transformer 在 NPU 上训练",
     "url": "/02_npu_programming/10_mini_gpt/01_mini_gpt_training.html"
+  },
+  {
+    "title": "11. LLM 推理 on NPU",
+    "url": "/02_npu_programming/11_llm_inference/"
+  },
+  {
+    "title": "LLM 推理 on NPU：Qwen2.5-0.5B 本地部署",
+    "url": "/02_npu_programming/11_llm_inference/01_llm_inference_on_npu.html"
+  },
+  {
+    "title": "诊断报告：Qwen2.5-7B FP16 在 NPU 上输出 NaN",
+    "url": "/02_npu_programming/11_llm_inference/02_fp16_nan_debug.html"
+  },
+  {
+    "title": "LoRA 微调 Qwen2.5-7B on Ascend NPU",
+    "url": "/02_npu_programming/11_llm_inference/03_lora_finetune.html"
   },
   {
     "title": "AI 集群运维与通信 (AI Cluster Operations & Communication)",

@@ -1,21 +1,22 @@
 # 华为 NPU 编程入门
 
-系统梳理从昇腾 NPU 硬件特性到上层框架编程的完整知识链路，覆盖**环境搭建 → 架构原理 → 框架实战 → 工具链 → 进阶开发 → RAG 实战 → 性能分析 → Mini-GPT → FlashAttention**十大主题。无论读者是从 CUDA 生态迁移而来的 GPU 开发者，还是初次接触 Ascend 的新手，均可按 §2→§4 顺序快速上手，再根据实际需求深入工具链运维或自定义算子开发。
+系统梳理从昇腾 NPU 硬件特性到上层框架编程的完整知识链路，覆盖**环境搭建 → 架构原理 → 框架实战 → 工具链 → 进阶开发 → RAG 实战 → 性能分析 → Mini-GPT → FlashAttention → LLM 推理**十一大主题。无论读者是从 CUDA 生态迁移而来的 GPU 开发者，还是初次接触 Ascend 的新手，均可按 §2→§4 顺序快速上手，再根据实际需求深入工具链运维或自定义算子开发。
 
 > **快速导航**
 >
-> | 目录                      | 主题                        | 关键词                                  | 对应章节 |
-> | ------------------------- | --------------------------- | --------------------------------------- | -------- |
-> | `01_environment/`         | Ascend NPU 开发环境搭建     | CANN, torch_npu, venv, 版本对齐         | §2       |
-> | `02_ascend_architecture/` | Da Vinci 架构与 CANN 软件栈 | Cube/Vector/Scalar, HCCS, 七层协议栈    | §3       |
-> | `03_pytorch_npu/`         | PyTorch NPU 适配与训练      | cuda→npu 迁移, AMP, ResNet-50           | §4.1     |
-> | `04_mindspore/`           | MindSpore 原生开发框架      | PyNative/Graph, nn.Cell, 动静态图       | §4.2     |
-> | `05_tools/`               | Ascend 工具链               | npu-smi, ascend-dmi, ATC 模型转换       | §5       |
-> | `06_advanced/`            | 进阶主题                    | Ascend C 自定义算子, GPU→NPU 迁移决策   | §6       |
-> | `07_rag_on_npu/`          | RAG 检索增强生成 on NPU     | Embedding, FAISS, BGE, LLM API          | §7       |
-> | `08_npu_profiling/`       | NPU 性能分析                | Profiler, npu-smi, TFLOPS, Chrome trace | §8       |
-> | `09_flash_attention/`     | FlashAttention 简化版       | Tiling, Online Softmax, O(N²)→O(N)      | §9       |
-> | `10_mini_gpt/`            | Mini-GPT 手写 Transformer   | Self-Attention, Causal Mask, 字符级编码  | §10      |
+> | 目录                      | 主题                        | 关键词                                    | 对应章节 |
+> | ------------------------- | --------------------------- | ----------------------------------------- | -------- |
+> | `01_environment/`         | Ascend NPU 开发环境搭建     | CANN, torch_npu, venv, 版本对齐           | §2       |
+> | `02_ascend_architecture/` | Da Vinci 架构与 CANN 软件栈 | Cube/Vector/Scalar, HCCS, 七层协议栈      | §3       |
+> | `03_pytorch_npu/`         | PyTorch NPU 适配与训练      | cuda→npu 迁移, AMP, ResNet-50             | §4.1     |
+> | `04_mindspore/`           | MindSpore 原生开发框架      | PyNative/Graph, nn.Cell, 动静态图         | §4.2     |
+> | `05_tools/`               | Ascend 工具链               | npu-smi, ascend-dmi, ATC 模型转换         | §5       |
+> | `06_advanced/`            | 进阶主题                    | Ascend C 自定义算子, GPU→NPU 迁移决策     | §6       |
+> | `07_rag_on_npu/`          | RAG 检索增强生成 on NPU     | Embedding, FAISS, BGE, LLM API            | §7       |
+> | `08_npu_profiling/`       | NPU 性能分析                | Profiler, npu-smi, TFLOPS, Chrome trace   | §8       |
+> | `09_flash_attention/`     | FlashAttention 简化版       | Tiling, Online Softmax, O(N²)→O(N)        | §9       |
+> | `10_mini_gpt/`            | Mini-GPT 手写 Transformer   | Self-Attention, Causal Mask, 字符级编码   | §10      |
+> | `11_llm_inference/`       | LLM 推理 on NPU             | Qwen2.5 7B BF16, 自回归, ChatML, NaN 诊断 | §11      |
 
 ---
 
@@ -117,7 +118,7 @@ MindSpore 是华为自研框架，采用函数式梯度 API（`ms.value_and_grad
 
 ## 7. RAG 实战
 
-在 Ascend NPU 上搭建完整的 RAG pipeline：embedding 模型本地推理 + FAISS 向量检索 + 外部 LLM API。NPU 编码 115 条文本耗时 0.8s (153 条/s)，对比 CPU 加速 ~422×。需要独立的 venv（`rag-env`）并精确锁定 transform‌ers / sentence-transformers 版本以兼容 CANN 8.0.1。
+在 Ascend NPU 上搭建完整的 RAG pipeline：embedding 模型本地推理 + FAISS 向量检索 + LLM（支持外部 API 或本地 Qwen2.5-7B-Instruct，BF16 推理）。支持 `--local` 模式实现全链路本地化推理，通过 `--llm-model` 可切换 0.5B 等模型。NPU 编码 115 条文本耗时 0.8s (153 条/s)，对比 CPU 加速 ~422×。需要独立的 venv（`rag-env`）并精确锁定 transform‌ers / sentence-transformers 版本以兼容 CANN 8.0.1。
 
 - [RAG Pipeline on NPU](07_rag_on_npu/01_rag_pipeline_on_npu.md) — 离线索引 + 在线查询完整流程、BGE 模型 NPU 推理适配、版本兼容性、Chrome trace 性能对比
 
@@ -147,7 +148,16 @@ MindSpore 是华为自研框架，采用函数式梯度 API（`ms.value_and_grad
 
 ---
 
-## 11. 参考链接
+## 11. LLM 推理 on NPU
+
+在 NPU 上部署 Qwen2.5-7B-Instruct（BF16）进行本地推理，已与 RAG pipeline 集成实现全链路本地化。记录了 7B 模型 FP16 推理 NaN 问题的完整诊断——从现象到根因（FP16 溢出）到解决方案（BF16），最终以与 FP16 相同的 HBM 代价实现了 FP32 级别的数值稳定性。
+
+- [LLM 推理 on NPU](11_llm_inference/01_llm_inference_on_npu.md) — 自回归生成原理、ChatML 格式、采样策略、0.5B/7B BF16 部署、与 RAG 对接
+- [Qwen2.5-7B FP16 NaN 诊断报告](11_llm_inference/02_fp16_nan_debug.md) — 从乱码 URL → NaN logits → 层级追踪 → FP16 溢出根因 → BF16 解决（14.7 GB，已验证）
+
+---
+
+## 12. 参考链接
 
 - [昇腾社区官网](https://www.hiascend.com)
 - [Ascend PyTorch 适配 (Gitee)](https://gitee.com/ascend/pytorch)
