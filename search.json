@@ -1328,62 +1328,6 @@
     "url": "/09_inference_system/model_optimization/nvidia_model_optimizer.html"
   },
   {
-    "title": "Nano-vLLM",
-    "url": "/09_inference_system/nano-vllm/"
-  },
-  {
-    "title": "CLAUDE.md",
-    "url": "/09_inference_system/nano-vllm/CLAUDE.html"
-  },
-  {
-    "title": "nano-vllm 实战课程",
-    "url": "/09_inference_system/nano-vllm/docs/llm-inference-visual/"
-  },
-  {
-    "title": "第 1 课：从 LLM.generate 走到 step 循环",
-    "url": "/09_inference_system/nano-vllm/docs/llm-inference-visual/01-llm-generate-and-step.html"
-  },
-  {
-    "title": "第 2 课：Sequence 数据结构与请求生命周期",
-    "url": "/09_inference_system/nano-vllm/docs/llm-inference-visual/02-sequence-lifecycle.html"
-  },
-  {
-    "title": "第 3 课：Scheduler 的队列、chunked prefill 与 preempt",
-    "url": "/09_inference_system/nano-vllm/docs/llm-inference-visual/03-scheduler-queues-and-preempt.html"
-  },
-  {
-    "title": "第 4 课：BlockManager 与 prefix caching",
-    "url": "/09_inference_system/nano-vllm/docs/llm-inference-visual/04-block-manager-and-prefix-cache.html"
-  },
-  {
-    "title": "第 5 课：prefill 批构建与 context 注入",
-    "url": "/09_inference_system/nano-vllm/docs/llm-inference-visual/05-prefill-batching-and-context.html"
-  },
-  {
-    "title": "第 6 课：decode 一步生成与 block_tables",
-    "url": "/09_inference_system/nano-vllm/docs/llm-inference-visual/06-decode-and-block-tables.html"
-  },
-  {
-    "title": "第 7 课：Attention：KV 写入与算子分支",
-    "url": "/09_inference_system/nano-vllm/docs/llm-inference-visual/07-attention-kv-cache-and-branches.html"
-  },
-  {
-    "title": "第 8 课：常见优化的\"位置感\"（TP、CUDA Graph、torch.compile）",
-    "url": "/09_inference_system/nano-vllm/docs/llm-inference-visual/08-where-optimizations-live.html"
-  },
-  {
-    "title": "常见问题与排障指南",
-    "url": "/09_inference_system/nano-vllm/docs/llm-inference-visual/FAQ.html"
-  },
-  {
-    "title": "讲师指南",
-    "url": "/09_inference_system/nano-vllm/docs/llm-inference-visual/INSTRUCTOR.html"
-  },
-  {
-    "title": "nano-vllm 与真实 vLLM 的差距",
-    "url": "/09_inference_system/nano-vllm/docs/llm-inference-visual/vs-vllm.html"
-  },
-  {
     "title": "企业级 LLM 推理系统参考设计",
     "url": "/09_inference_system/reference_design/"
   },
