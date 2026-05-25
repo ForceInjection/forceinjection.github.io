@@ -416,6 +416,10 @@
     "url": "/02_npu_programming/11_llm_inference/03_lora_finetune.html"
   },
   {
+    "title": "lora finetune animation",
+    "url": "/02_npu_programming/11_llm_inference/lora_finetune_animation.html"
+  },
+  {
     "title": "AI 集群运维与通信 (AI Cluster Operations & Communication)",
     "url": "/03_ai_cluster_ops/"
   },
@@ -1838,14 +1842,6 @@
   {
     "title": "AI Native 全栈实践",
     "url": "/11_ai_native_everything/"
-  },
-  {
-    "title": "ai native architecture diagram",
-    "url": "/11_ai_native_everything/ai_native_application/ai-native-architecture-diagram.html"
-  },
-  {
-    "title": "AI Native 应用架构：从一笔真实电力交易看起",
-    "url": "/11_ai_native_everything/ai_native_application/ai-native-architecture.html"
   },
   {
     "title": "Agent Skills (AI 技能)",
