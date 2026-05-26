@@ -296,7 +296,7 @@
     "url": "/02_npu_programming/01_environment/01_ascend_environment_setup.html"
   },
   {
-    "title": "Hello NPU：第一个程序",
+    "title": "01 — Hello NPU: 华为昇腾初体验",
     "url": "/02_npu_programming/01_environment/02_hello_npu_first_program.html"
   },
   {
@@ -304,7 +304,7 @@
     "url": "/02_npu_programming/02_ascend_architecture/"
   },
   {
-    "title": "达芬奇架构与 Ascend 910B3",
+    "title": "02 — 昇腾硬件架构与 CANN 软件栈",
     "url": "/02_npu_programming/02_ascend_architecture/01_davinci_architecture.html"
   },
   {
@@ -316,7 +316,7 @@
     "url": "/02_npu_programming/03_pytorch_npu/"
   },
   {
-    "title": "CUDA 到 NPU 的代码迁移",
+    "title": "03 — PyTorch NPU 实战: ResNet-50 训练与 AMP",
     "url": "/02_npu_programming/03_pytorch_npu/01_cuda_to_npu_migration.html"
   },
   {
@@ -332,7 +332,7 @@
     "url": "/02_npu_programming/04_mindspore/01_mindspore_vs_pytorch_api.html"
   },
   {
-    "title": "MindSpore Ascend 训练实战",
+    "title": "04 — MindSpore 实战: 在 Ascend 上定义与训练模型",
     "url": "/02_npu_programming/04_mindspore/02_mindspore_ascend_training.html"
   },
   {
@@ -340,11 +340,11 @@
     "url": "/02_npu_programming/05_tools/"
   },
   {
-    "title": "npu-smi 使用参考",
+    "title": "07 — npu-smi 使用参考",
     "url": "/02_npu_programming/05_tools/01_npu_smi_reference.html"
   },
   {
-    "title": "ascend-dmi 使用参考",
+    "title": "06 — ascend-dmi 使用参考",
     "url": "/02_npu_programming/05_tools/02_ascend_dmi_reference.html"
   },
   {
@@ -356,7 +356,7 @@
     "url": "/02_npu_programming/06_advanced/"
   },
   {
-    "title": "Ascend C 算子开发入门",
+    "title": "05 — 进阶主题: 算子开发、模型转换与迁移决策",
     "url": "/02_npu_programming/06_advanced/01_ascend_c_intro.html"
   },
   {
@@ -380,7 +380,7 @@
     "url": "/02_npu_programming/08_npu_profiling/"
   },
   {
-    "title": "NPU 性能分析入门",
+    "title": "NPU 性能分析",
     "url": "/02_npu_programming/08_npu_profiling/01_npu_profiling.html"
   },
   {
@@ -412,12 +412,24 @@
     "url": "/02_npu_programming/11_llm_inference/02_fp16_nan_debug.html"
   },
   {
-    "title": "LoRA 微调 Qwen2.5-7B on Ascend NPU",
-    "url": "/02_npu_programming/11_llm_inference/03_lora_finetune.html"
-  },
-  {
     "title": "lora finetune animation",
     "url": "/02_npu_programming/11_llm_inference/lora_finetune_animation.html"
+  },
+  {
+    "title": "12. 多卡分布式训练 (DDP + HCCL)",
+    "url": "/02_npu_programming/12_ddp/"
+  },
+  {
+    "title": "多卡分布式训练 (DDP + HCCL) on Ascend NPU",
+    "url": "/02_npu_programming/12_ddp/01_ddp_training.html"
+  },
+  {
+    "title": "13. LoRA 微调",
+    "url": "/02_npu_programming/13_finetune/"
+  },
+  {
+    "title": "LoRA 微调 Qwen2.5-7B on Ascend NPU",
+    "url": "/02_npu_programming/13_finetune/01_lora_finetune.html"
   },
   {
     "title": "AI 集群运维与通信 (AI Cluster Operations & Communication)",
