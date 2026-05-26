@@ -432,6 +432,22 @@
     "url": "/02_npu_programming/13_finetune/01_lora_finetune.html"
   },
   {
+    "title": "14. 量化推理原理 (INT8 / INT4)",
+    "url": "/02_npu_programming/14_quantization/"
+  },
+  {
+    "title": "量化推理原理：INT8 / INT4",
+    "url": "/02_npu_programming/14_quantization/01_quantization_theory.html"
+  },
+  {
+    "title": "quantization guide",
+    "url": "/02_npu_programming/14_quantization/quantization_guide.html"
+  },
+  {
+    "title": "quantization viz",
+    "url": "/02_npu_programming/14_quantization/quantization_viz.html"
+  },
+  {
     "title": "AI 集群运维与通信 (AI Cluster Operations & Communication)",
     "url": "/03_ai_cluster_ops/"
   },
