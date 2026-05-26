@@ -436,7 +436,7 @@
     "url": "/02_npu_programming/14_quantization/"
   },
   {
-    "title": "量化推理原理：INT8 / INT4",
+    "title": "模型量化：从手算推演到可视化验证",
     "url": "/02_npu_programming/14_quantization/01_quantization_theory.html"
   },
   {
