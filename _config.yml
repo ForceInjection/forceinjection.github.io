@@ -75,6 +75,7 @@ exclude:
   - "**/venv/"
   - "**/node_modules/"
   - "*/.DS_Store"
+  - CLAUDE.md
   # Files with Liquid-incompatible syntax (Python f-strings, template vars)
   - 10_ai_related_course/multi_agent_system/multi_agent_training/05-应用实践/05-应用实践与部署运维.md
   - 98_llm_programming/java_ai/spring_ai_cn.md

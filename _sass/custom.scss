@@ -12,6 +12,13 @@ $dell-mid:     #005EB8;
 $dell-light:   #4CB8E4;
 $dell-pale:    #D6EAF5;
 
+// ── Font stacks ───────────────────────────────────────
+// System font stack: PingFang SC (macOS/iOS) → Microsoft YaHei (Windows) →
+// Noto Sans SC (Linux/Android) → platform sans-serif fallback.
+// All three have professionally-designed Latin + CJK glyphs that read as one family.
+$font-body: 'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+$font-code: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+
 $code-bg:      #0d1117;   // GitHub dark
 $code-fg:      #e6edf3;
 $code-border:  #30363d;
@@ -45,7 +52,7 @@ $text-code:    #0a6694;
   }
 
   &__brand {
-    font-family: 'Inter', sans-serif;
+    font-family: $font-body;
     font-weight: 700;
     font-size: .95em;
     color: #fff !important;
@@ -75,7 +82,7 @@ $text-code:    #0a6694;
     background: none;
     border: 1px solid rgba(255, 255, 255, .45);
     color: #fff;
-    font-family: 'Inter', sans-serif;
+    font-family: $font-body;
     font-size: .85em;
     font-weight: 500;
     padding: 6px 14px;
@@ -232,7 +239,7 @@ $text-code:    #0a6694;
       border-radius: 6px;
       padding: 5px 10px 5px 30px;
       color: #fff;
-      font-family: 'Inter', sans-serif;
+      font-family: $font-body;
       font-size: .85em;
       outline: none;
       transition: background .15s, border-color .15s;
@@ -296,7 +303,7 @@ $text-code:    #0a6694;
       padding: 0 14px 6px;
       color: $text-muted;
       font-size: .75em;
-      font-family: 'JetBrains Mono', monospace;
+      font-family: $font-code;
     }
 
     &-no-results {
@@ -310,7 +317,7 @@ $text-code:    #0a6694;
 
 // ── Body & page chrome ─────────────────────────────
 body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-family: $font-body;
   background-color: $page-bg;
   color: $text-primary;
   line-height: 1.75;
@@ -348,7 +355,7 @@ article.post {
 
   // ── Headings ────────────────────────────────────────
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Inter', sans-serif;
+    font-family: $font-body;
     font-weight: 700;
     color: $dell-navy;
     margin-top: 2em;
@@ -356,8 +363,9 @@ article.post {
     line-height: 1.3;
   }
 
-  // Chinese brush font for major headings
-  h1, h2 { font-family: 'Ma Shan Zheng', cursive; }
+  // h1, h2 use the body font stack (bold) — system fonts handle CN/EN uniformly
+  // h3 uses body font with a code-inspired ## marker
+  // h4 retains JetBrains Mono for a terminal / tech-doc accent
 
   h1 {
     font-size: 1.9em;
@@ -391,7 +399,7 @@ article.post {
       position: absolute;
       left: 0;
       color: $dell-light;
-      font-family: 'JetBrains Mono', monospace;
+      font-family: $font-code;
       font-size: .75em;
       top: 3px;
       opacity: .7;
@@ -400,7 +408,7 @@ article.post {
 
   h4 {
     font-size: 1.02em;
-    font-family: 'JetBrains Mono', monospace;
+    font-family: $font-code;
     color: $dell-mid;
     font-weight: 600;
     letter-spacing: .3px;
@@ -408,7 +416,7 @@ article.post {
 
   // ── Inline code ─────────────────────────────────────
   code:not(pre code) {
-    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+    font-family: $font-code;
     font-size: .875em;
     background: #eef5fb;
     color: $text-code;
@@ -441,7 +449,7 @@ article.post {
     }
 
     code {
-      font-family: 'JetBrains Mono', 'Fira Code', monospace !important;
+      font-family: $font-code !important;
       font-size: .875em;
       color: $code-fg;
       background: none !important;
@@ -511,7 +519,7 @@ article.post {
         background: transparent;
         padding: 11px 16px;
         text-align: left;
-        font-family: 'JetBrains Mono', monospace;
+        font-family: $font-code;
         font-size: .85em;
         letter-spacing: .5px;
         font-weight: 600;
@@ -607,7 +615,7 @@ article.post {
   margin-bottom: 32px;
 
   .post-title {
-    font-family: 'Inter', sans-serif;
+    font-family: $font-body;
     font-weight: 800;
     color: $dell-navy;
   }
@@ -647,7 +655,7 @@ article.post {
 
   // Primary quoted line
   &__primary {
-    font-family: 'Ma Shan Zheng', cursive;
+    font-family: $font-body;
     font-size: 1.6em;
     font-weight: 400;
     font-style: normal;
@@ -660,7 +668,7 @@ article.post {
   // Attribution
   &__cite {
     display: block;
-    font-family: 'JetBrains Mono', monospace;
+    font-family: $font-code;
     font-size: .78em;
     color: rgba(255, 255, 255, .8);
     font-style: normal;
