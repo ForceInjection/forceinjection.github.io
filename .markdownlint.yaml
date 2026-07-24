@@ -1,0 +1,27 @@
+# markdownlint configuration for Chinese technical writing
+# 中文技术文章行宽天然较长，表格用 HTML 居中等场景常见
+
+# 行宽限制关闭 — 中英文混排 + 长 URL + 表格行常超 80 字符
+MD013: false
+
+# 行内 HTML 关闭 — 中文技术文章常用 <center>, <br>, <span>
+MD033: false
+
+# 首行标题关闭 — 部分文件以 YAML front matter 或表格开头
+MD041: false
+
+# 表格 pipe 样式关闭 — 中文文章表格用空格包裹 pipe 提高可读性
+MD060: false
+
+# 强调符风格关闭 — _ 和 * 混用不影响渲染
+MD049: false
+
+# shell 命令前 $ 符号关闭 — 教程文档需要
+MD014: false
+
+# 图片 alt 文本关闭 — 翻译文章图片自动生成
+MD045: false
+
+# 同名标题检查仅限同级 — 不同章节下重复子标题是合理的
+MD024:
+  siblings_only: true

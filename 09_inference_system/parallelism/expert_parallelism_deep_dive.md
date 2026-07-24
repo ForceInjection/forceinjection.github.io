@@ -90,11 +90,11 @@ Step 5 — Router 加权求和（本 GPU ⊗，无通信）
 
 通信量的精算：
 
-- **Dispatch**：token 被发送到它路由到的专家所在的 GPU。最坏情况每个 token 的 Top-8 分布在 8 张不同的 GPU 上，数据量 = $\text{batch\_size} \times \text{top\_k} \times \text{hidden\_size} \times \text{dtype\_size}$。但实际上，一个 token 的 Top-8 通常集中分布在 2-4 张 GPU 上（因为相邻编号的专家在连续 token 上有相似的激活模式）。
+- **Dispatch**：token 被发送到它路由到的专家所在的 GPU。最坏情况每个 token 的 Top-8 分布在 8 张不同的 GPU 上，数据量 = $\mathrm{batch size} \times \mathrm{top k} \times \mathrm{hidden size} \times \mathrm{dtype size}$。但实际上，一个 token 的 Top-8 通常集中分布在 2-4 张 GPU 上（因为相邻编号的专家在连续 token 上有相似的激活模式）。
 - **Combine**：与 dispatch 对称，从各 GPU 收回专家计算结果，数据量与 dispatch 相同。
-- **总通信量（每 token 每 MoE 层）**： $2 \times \text{top\_k} \times \text{hidden\_size} \times 2\,\text{bytes}$（FP16）= $2 \times 8 \times 7168 \times 2 \approx 229\,\text{KB}$。如果使用 FP8 通信，减半至 $\approx 115\,\text{KB}$。
+- **总通信量（每 token 每 MoE 层）**： $2 \times \mathrm{top k} \times \mathrm{hidden size} \times 2\,\text{bytes}$（FP16）= $2 \times 8 \times 7168 \times 2 \approx 229\,\text{KB}$。如果使用 FP8 通信，减半至 $\approx 115\,\text{KB}$。
 
-对比 TP 的 All-Reduce：TP=8 的每次 All-Reduce 通信量 $\approx 2 \times \text{hidden\_size} \times 2\,\text{bytes} \times (N-1)/N \approx 2 \times 7168 \times 2 \times 7/8 \approx 25\,\text{KB}$。但 TP 每层有多次 All-Reduce（QKV proj、output proj、FFN up、FFN down），总共约 4-6 次 All-Reduce 每层。
+对比 TP 的 All-Reduce：TP=8 的每次 All-Reduce 通信量 $\approx 2 \times \mathrm{hidden size} \times 2\,\text{bytes} \times (N-1)/N \approx 2 \times 7168 \times 2 \times 7/8 \approx 25\,\text{KB}$。但 TP 每层有多次 All-Reduce（QKV proj、output proj、FFN up、FFN down），总共约 4-6 次 All-Reduce 每层。
 
 EP 的每次通信量比 TP 大（229 KB vs 25 KB），但 EP 只在 MoE 层通信（attention 层无 EP 通信），且 EP 的 combine 可以和最后一轮专家计算并行。
 
@@ -407,7 +407,7 @@ EP 的核心取舍：
 ## 延伸阅读
 
 - [并行策略总览：DP、TP、PP、EP、SP](parallelism_strategies.md) — 五种策略的对比性入门
-- [DeepSeek-V3 MoE vLLM 部署方案](../deployment/deepseek_v3_moe_vllm_h20_deployment.md) — EP=32 的生产环境配置与 SLO 验证
+- [DeepSeek-V3 MoE vLLM 部署方案](../deployment/deepseek_v3_h20_vllm_deep_dive.md) — EP=32 的生产环境配置与 SLO 验证
 - [vLLM WideEP 架构解析](../vllm/hardware_optimization/deepseek_blackwell_wide_ep.md) — EP + DP 在 Blackwell 上的专门优化
 - [MLA TP KV Cache 冗余分析](../vllm/module_analysis/mla_tp_kv_redundancy.md) — EP 下 KV Cache 归属问题的深入探讨
 - [vLLM 官方 EP 部署文档](https://docs.vllm.ai/en/stable/serving/expert_parallel_deployment.html)

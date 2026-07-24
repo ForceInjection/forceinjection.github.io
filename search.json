@@ -1336,8 +1336,8 @@
     "url": "/09_inference_system/deployment/"
   },
   {
-    "title": "DeepSeek-V3 在 32 张 H20 GPU 集群上的部署方案【理论分析篇】",
-    "url": "/09_inference_system/deployment/deepseek_v3_moe_vllm_h20_deployment.html"
+    "title": "DeepSeek-V3 H20 推理优化：基于 vLLM 源码的深度分析",
+    "url": "/09_inference_system/deployment/deepseek_v3_h20_vllm_deep_dive.html"
   },
   {
     "title": "Qwen2-VL-7B-Instruct 昇腾部署指南",
@@ -1353,7 +1353,7 @@
   },
   {
     "title": "KV Cache 原理简介",
-    "url": "/09_inference_system/kv_cache/01_concepts/basic/kv_cache_原理简介.html"
+    "url": "/09_inference_system/kv_cache/01_concepts/basic/kv_cache_basics.html"
   },
   {
     "title": "PagedAttention：当 KV Cache 遇到操作系统分页",
@@ -1540,6 +1540,10 @@
     "url": "/09_inference_system/model_optimization/illustrated-speculative-decoding.html"
   },
   {
+    "title": "推理量化技术基础：FP8、INT8 与 FP4 的格式、粒度与算法",
+    "url": "/09_inference_system/model_optimization/inference_quantization.html"
+  },
+  {
     "title": "MTP 深度解析：把投机能力训进模型里",
     "url": "/09_inference_system/model_optimization/mtp-multi-token-prediction.html"
   },
@@ -1562,6 +1566,10 @@
   {
     "title": "parallelism visual",
     "url": "/09_inference_system/parallelism/parallelism_visual.html"
+  },
+  {
+    "title": "Continuous Batching 深度解析：从静态批处理到迭代级调度",
+    "url": "/09_inference_system/prefill_decode/continuous_batching.html"
   },
   {
     "title": "为什么 GPU 生成每个 token 时利用率不到 5%？——Prefill 与 Decode 深度拆解",
@@ -1648,16 +1656,28 @@
     "url": "/09_inference_system/sglang/hicache_deep_dive.html"
   },
   {
-    "title": "inference pipeline",
-    "url": "/09_inference_system/sglang/inference-pipeline.html"
+    "title": "SGLang HiSparse：当稀疏注意力从算法变为系统组件",
+    "url": "/09_inference_system/sglang/hisparse_deep_dive.html"
   },
   {
-    "title": "scheduler visual",
-    "url": "/09_inference_system/sglang/scheduler-visual.html"
+    "title": "KV Cache L1↔L2 数据流深度分析",
+    "url": "/09_inference_system/sglang/sglang-kv-cache-dataflow-analysis.html"
+  },
+  {
+    "title": "SGLang KV Pool 管理：物理存储、Radix Tree 索引与请求视图",
+    "url": "/09_inference_system/sglang/sglang-kv-pool-management.html"
+  },
+  {
+    "title": "SGLang Overlap Scheduling 深度解析：CPU 与 GPU 的双流水线",
+    "url": "/09_inference_system/sglang/sglang-overlap-scheduling.html"
   },
   {
     "title": "Scaling Pain：超大规模 Coding Agent 推理实践（Tech Deep Dive）",
-    "url": "/09_inference_system/sglang/sglang_scaling_case_study.html"
+    "url": "/09_inference_system/sglang/sglang-scaling-case-study.html"
+  },
+  {
+    "title": "SGLang 调度器：请求编排与 Batch 调度",
+    "url": "/09_inference_system/sglang/sglang-scheduler.html"
   },
   {
     "title": "vLLM 推理系统优化与分析",
@@ -1680,12 +1700,28 @@
     "url": "/09_inference_system/vllm/module_analysis/deepseek_attention_evolution_mla_to_csa_hca.html"
   },
   {
+    "title": "DeepSeek-V3 端到端推理 Pipeline 走读：一个 Token 的 61 层旅程",
+    "url": "/09_inference_system/vllm/module_analysis/deepseek_v3_inference_pipeline.html"
+  },
+  {
     "title": "vLLM 中的 DeepSeek V4：高效长上下文注意力",
     "url": "/09_inference_system/vllm/module_analysis/deepseek_v4.html"
   },
   {
+    "title": "DeepSeek-V4 端到端推理 Pipeline 走读：多流残差、MQA 压缩与哈希路由",
+    "url": "/09_inference_system/vllm/module_analysis/deepseek_v4_inference_pipeline.html"
+  },
+  {
+    "title": "FlashAttention 深度解析：从 IO-Aware Tiling 到 Hopper 异步计算",
+    "url": "/09_inference_system/vllm/module_analysis/flashattention_deep_dive.html"
+  },
+  {
     "title": "Hybrid KV Cache Manager 深度解析",
     "url": "/09_inference_system/vllm/module_analysis/hybrid_kv_cache_manager_deep_dive.html"
+  },
+  {
+    "title": "Kimi K3 注意力机制深度解析：KDA、Gated MLA 与 AttnRes 的混合架构",
+    "url": "/09_inference_system/vllm/module_analysis/kimi_k3_attention.html"
   },
   {
     "title": "MLA 的 TP 切分：为什么 8 张 GPU 存了同一份 KV cache",
@@ -1700,7 +1736,7 @@
     "url": "/09_inference_system/vllm/module_analysis/pagedattention_retirement.html"
   },
   {
-    "title": "vLLM 投机解码方法全景：六种草拟策略的工程选择",
+    "title": "vLLM 投机解码方法全景：六种草拟方法的工程选择",
     "url": "/09_inference_system/vllm/module_analysis/speculative_decoding_landscape.html"
   },
   {

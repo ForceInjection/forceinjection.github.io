@@ -10,7 +10,7 @@
 
 ### 1.1 投机解码的答案：用另一个模型猜
 
-[投机解码](illustrated-speculative-decoding.md) 提供了一个巧妙的绕行方案：让一个更快、更小的 **draft model** 先行草拟 K 个候选 token，然后让 target model 一次性批量验证。从接收率 $\alpha$ 和草拟-验证耗时比 $\rho$ 推导，当 $\alpha K > 1 + \rho K$ 时，投机解码带来净加速。在理想条件下，decode 延迟可以降低 2–3 倍。
+[投机解码](illustrated-speculative-decoding.md) 提供了一个巧妙的绕行方案：让一个更快、更小的 **draft model** 先行草拟 K 个候选 token，然后让 target model 一次性批量验证。从接受率 $\alpha$ 和草拟-验证耗时比 $\rho$ 推导，当 $\alpha K > 1 + \rho K$ 时，投机解码带来净加速。在理想条件下，decode 延迟可以降低 2–3 倍。
 
 但这个方案绑定了一个前提：**需要两次 forward**。Draft model 一次，target model 一次。两次 forward 意味着两倍的 KV cache 查询、两倍的 kernel launch 开销、两倍的调度器往返。
 
@@ -87,29 +87,37 @@ DeepSeek V3 主模型 671B，MTP 模块增加约 14B 参数（~2%）。在 V3 �
 
 所有这些分布共享同一次 hidden state 计算。attention 层的 K、V 矩阵在整个 forward 中只计算一次——MTP 模块只消费已经存在的 hidden state，不产生额外的 attention 计算。
 
-### 4.2 Self-Speculation：草拟与验证共享一个 forward
+### 4.2 Self-Speculation：一次 forward，两个 token
 
-投机解码需要两步：draft model forward → target model forward。MTP 做的是 **self-speculation**——草拟和验证来自同一个模型、同一次 forward。
+投机解码需要两步：draft model forward → target model forward。MTP 做的是 **self-speculation**——草拟和验证来自同一个模型、同一次 forward。但关键不是「省掉了验证 forward」，而是 **把投机 token 拼进下一轮的输入序列，一次 forward 消费两个 token**。
 
-具体来说，推理时的 MTP 加速流程如下：
+具体来说（以 N=1 为例）：
 
 ```text
 Step T:
-  Forward: hidden state h_T 经过主预测头 → 采样得到 token t_{T+1}
-           h_T 同时经过 MTP 模块 → 采样得到 token t_{T+2}
-
-  Token t_{T+1} 被确认输出。Token t_{T+2} 作为投机标记，暂不输出。
+  Forward: 输入序列 [...t_T]
+           主预测头 → 采样得到 t_{T+1}（确认输出）
+           MTP 模块 → 采样得到 t_{T+2}（投机标记，暂不输出）
 
 Step T+1:
-  Forward: 输入序列 [...t_T, t_{T+1}]
-           主预测头 → 采样得到 token t_{T+2}'
+  Forward: 输入序列 [...t_T, t_{T+1}, t_{T+2}]   ← 投机 token 被拼入输入
+           模型在位置 T+1 和 T+2 分别做 attention 和 FFN
+           主预测头（位置 T+1）→ 采样得到 t'_{T+2}
+           主预测头（位置 T+2）→ 采样得到 t_{T+3}
+           MTP 模块（位置 T+2）→ 投机 t_{T+4}
 
-  验证: 比较 t_{T+2}' 与上一轮的 MTP 预测 t_{T+2}
-    - 一致: t_{T+2} 被确认，本轮 MTP 预测 t_{T+3} 继续投机
-    - 不一致: 接受主预测结果 t_{T+2}'，丢弃 MTP 预测，从分歧点继续
+  验证: 比较 t'_{T+2} 与上一轮的 MTP 预测 t_{T+2}
+    - 一致: t_{T+2} 被确认。本轮净产出 = t_{T+1} + t_{T+2} = 2 个 token
+            上一轮产出的 t_{T+2} 和本轮产出的 t_{T+3} 都被接受
+            继续持有投机标记 t_{T+4}，推进到 Step T+2
+    - 不一致: 丢弃 t_{T+2} 及之后所有状态，回滚输入序列到 [...t_T, t_{T+1}]
+             仅确认 t_{T+1}，本轮净产出 = 1 个 token
+             用标准 decode 从分歧点继续
 ```
 
-这个过程的核心好处是：**不需要第二次 forward 来验证**。验证发生在下一步的主预测中——这是自然的、零额外开销的。MTP 预测只是「提前」给出了一个候选，下一步的主预测自然验证它。
+加速来自哪里？当 MTP 预测正确时（接受率 ~80%），**一次 forward 消费了两个新 token**（t_{T+1} 已经在输入中，t_{T+2} 作为投机 token 也被消费），同时产出了两个确认 token（t_{T+2} 和 t_{T+3}）。而两个 token 的 forward 比两次单个 token 的 forward 要快——K、V 计算共享，attention 开销几乎持平。
+
+接受率 α = 80% 时，平均每步产出 1 + α = 1.8 个 token，即约 1.8× 的理论加速（不计回退开销）。实践中 wall-clock 加速可达到 2–3×，因为双 token forward 的增量计算成本远低于独立执行两次单 token forward。
 
 ### 4.3 接受率：不是预测准确度，是分布一致性
 
@@ -201,8 +209,7 @@ MTP 的 forward 不会与 attention 后端产生冲突。因为 MTP 模块消费
 
 在 AIME 2024 基准上，DeepSeek V4-Flash 开启 MTP（NVFP4-FP8 量化，`num_speculative_tokens=1`）的表现：
 
-- 草拟 token 接受率 **81.6%**（concurrency=8）
-- 接受率在 c=1 到 c=16 之间保持 ~88% 平坦——批处理不降低草拟质量
+- 草拟 token 接受率约 **82–88%**（concurrency=1–16，接受率不随并发增加衰减，说明 self-speculation 的草拟质量不受 batch 内其他请求干扰）
 - Wall-clock 加速比约 **2.95×**（相对不开 MTP 的等硬件配置）
 
 接受率不随并发增加而衰减，说明 MTP 的草拟质量不受 batch 内其他请求的 KV cache 状态干扰——这是 self-speculation（不依赖外部 draft model）的天然优势。

@@ -38,10 +38,10 @@ MLA（Multi-head Latent Attention）也是一个好设计。它不缓存显式�
 标准 MHA 中，K 和 V 的投影权重分别是 column-parallel 线性层：
 
 $$
-W_K \in \mathbb{R}^{\text{hidden\_size} \times (N_{\text{kv\_heads}} \times D_{\text{head}})}
+W_K \in \mathbb{R}^{\mathrm{hidden size} \times (N_{\mathrm{kv heads}} \times D_{\text{head}})}
 $$
 
-TP=8 时使用列切分：每个 rank 拿总列数的 $1/8$，即 $\frac{N_{\text{kv\_heads}}}{8}$ 个 head 对应列。每个 rank 算出的 K、V 只覆盖自己的 head，不相重叠。**切分后的所有权重列都是唯一的，没有一列出现在两个 rank 上。**
+TP=8 时使用列切分：每个 rank 拿总列数的 $1/8$，即 $\frac{N_{\mathrm{kv heads}}}{8}$ 个 head 对应列。每个 rank 算出的 K、V 只覆盖自己的 head，不相重叠。**切分后的所有权重列都是唯一的，没有一列出现在两个 rank 上。**
 
 ### 2.2 MLA 的投影：没有 head，也就不需要切
 
@@ -136,7 +136,7 @@ $$
 对比标准 MHA（GQA, 8 个 KV head, TP=8）：冗余率 **0%**。TP 为 KV cache 节省的显存：
 
 $$
-\text{标准 MHA TP=8：节省 } 87.5\%，\quad \text{MLA TP=8：节省 } 0\%
+\text{标准 MHA TP=8：节省 } 87.5\%,\quad \text{MLA TP=8：节省 } 0\%
 $$
 
 **MLA 抹去了 TP 对 KV cache 的显存收益。** TP 仍然为模型权重、激活值节省显存——但 KV cache 这部分，被 MLA 的跨 head 共享设计完全归零了。
@@ -189,12 +189,12 @@ def wait_for_save(self):
 
 不要用压缩公式直接推算 per-GPU KV cache 分配量。$512 + 64 = 576$ 元素/token/层（576 bytes in FP8）既是信息量，也是**per-rank 分配量**——二者相等，因为 MLA 在 TP 下没有节省任何 KV cache 显存。
 
-标准 MHA TP=8 的公式：$\frac{N_{\text{kv\_heads}} \times D_{\text{head}} \times 2}{\text{tp\_size}}$——有除以 tp_size。
+标准 MHA TP=8 的公式：$\frac{N_{\mathrm{kv heads}} \times D_{\text{head}} \times 2}{\mathrm{tp size}}$——有除以 tp_size。
 
-MLA TP=8 的公式：$R_{\text{kv\_lora}} + D_{\text{qk\_rope}}$——**没有除以 tp_size。**
+MLA TP=8 的公式：$R_{\mathrm{kv lora}} + D_{\mathrm{qk rope}}$——**没有除以 tp_size。**
 
 $$
-\text{MLA per-rank KV (bytes per token per layer)} = kv\_lora\_rank + qk\_rope\_head\_dim = 576
+\text{MLA per-rank KV (bytes per token per layer)} = kv lora rank + qk rope head dim = 576
 $$
 
 如果你部署 DeepSeek V3 在 8×GPU 上，每个 GPU 的 KV cache 预算和单 GPU 部署完全一样。TP 帮你分担了权重和激活值，但对 KV cache 无能为力。
@@ -223,18 +223,18 @@ $$
 
 V3 的 61 层全部是 MLA，每层 576 维，全部复制。分析 V3 时是一个简单的答案：「是的，全部复制。」
 
-DeepSeek V4 引入了更复杂的注意力体系——四组不同压缩比的 KV cache：MLA 主缓存（c4a, 4×）、Indexer（c128a, 128×）、SWA 滑动窗口（1×）、Compressor 状态（1×）。直觉上，四组的 TP 行为应该像第三章描述的标准 MHA 那样——分别判断、各不相同。但 vLLM v0.20.0 的代码给出了一个意外的答案。
+DeepSeek V4 引入了更复杂的注意力体系——四组不同压缩比的 KV cache：MLA 主缓存（c4a/c128a，4×/128×）、Indexer（c4a 层专用，条目 128 维）、SWA 滑动窗口（1×）、Compressor 状态（1×）。直觉上，四组的 TP 行为应该像第三章描述的标准 MHA 那样——分别判断、各不相同。但 vLLM v0.20.0 的代码给出了一个意外的答案。
 
 ### 6.1 四组全部是 MLA 变体
 
 vLLM v0.20.0 中，V4 的四组 KV cache 使用的是 MLA 家族 spec，不是标准 MHA spec：
 
-| KV cache 组       | Spec 类型                              | kv_size     | 存储形状              |
-| ----------------- | -------------------------------------- | ----------- | --------------------- |
-| MLA 主缓存（c4a） | `MLAAttentionSpec(num_kv_heads=1)`     | 1（rank-3） | `(NB, BS, head_size)` |
-| Indexer（c128a）  | `MLAAttentionSpec(num_kv_heads=1)`     | 1（rank-3） | `(NB, BS, head_size)` |
-| SWA 滑动窗口      | `SlidingWindowMLASpec(num_kv_heads=1)` | 1（rank-3） | `(NB, BS, head_size)` |
-| Compressor 状态   | `SlidingWindowMLASpec(num_kv_heads=1)` | 1（rank-3） | `(NB, BS, head_size)` |
+| KV cache 组           | Spec 类型                              | kv_size     | 存储形状              |
+| --------------------- | -------------------------------------- | ----------- | --------------------- |
+| MLA 主缓存（c4a）     | `MLAAttentionSpec(num_kv_heads=1)`     | 1（rank-3） | `(NB, BS, head_size)` |
+| Indexer（c4a 层专用） | `MLAAttentionSpec(num_kv_heads=1)`     | 1（rank-3） | `(NB, BS, head_size)` |
+| SWA 滑动窗口          | `SlidingWindowMLASpec(num_kv_heads=1)` | 1（rank-3） | `(NB, BS, head_size)` |
+| Compressor 状态       | `SlidingWindowMLASpec(num_kv_heads=1)` | 1（rank-3） | `(NB, BS, head_size)` |
 
 `SlidingWindowMLASpec` 在 vLLM v0.20.0 的 `vllm/v1/kv_cache_interface.py` 中定义。它与标准 `SlidingWindowSpec` 的关键区别在于 `real_page_size_bytes`——移除了标准 spec 中的 `2 ×` 因子（K+V 分离的乘数）。`CompressorBackend.get_kv_cache_shape()` 返回 `(num_blocks, block_size, head_size)`——明确是 rank-3，单向量。
 
@@ -242,13 +242,13 @@ LMCache v0.5.1 的 `kv_layer_groups.py` 用假设性例子描述了 `engine_kv_f
 
 ### 6.2 冗余表：V3 vs V4
 
-|              | V3（全 MLA）         | V4 MLA 主缓存       | V4 Indexer          | V4 SWA              | V4 Compressor          |
-| ------------ | -------------------- | ------------------- | ------------------- | ------------------- | ---------------------- |
-| 压缩方式     | 低秩（kv_lora_rank） | slot 压缩（c4a）    | slot 压缩（c128a）  | 无（SWA attention） | 无（compressor state） |
-| 存储格式     | rank-3               | rank-3              | rank-3              | rank-3              | rank-3                 |
-| kv_size      | 1                    | 1                   | 1                   | 1                   | 1                      |
-| num_kv_heads | 1                    | 1                   | 1                   | 1                   | 1                      |
-| TP 冗余？    | **是**（100% 复制）  | **是**（100% 复制） | **是**（100% 复制） | **是**（100% 复制） | **是**（100% 复制）    |
+|              | V3（全 MLA）         | V4 MLA 主缓存          | V4 Indexer                | V4 SWA              | V4 Compressor          |
+| ------------ | -------------------- | ---------------------- | ------------------------- | ------------------- | ---------------------- |
+| 压缩方式     | 低秩（kv_lora_rank） | slot 压缩（c4a/c128a） | 条目 128 维（c4a 层专用） | 无（SWA attention） | 无（compressor state） |
+| 存储格式     | rank-3               | rank-3                 | rank-3                    | rank-3              | rank-3                 |
+| kv_size      | 1                    | 1                      | 1                         | 1                   | 1                      |
+| num_kv_heads | 1                    | 1                      | 1                         | 1                   | 1                      |
+| TP 冗余？    | **是**（100% 复制）  | **是**（100% 复制）    | **是**（100% 复制）       | **是**（100% 复制） | **是**（100% 复制）    |
 
 V3 的答案是「全部复制，冗余 87.5%」。V4 的答案没有变——**全部四组都复制。**
 
