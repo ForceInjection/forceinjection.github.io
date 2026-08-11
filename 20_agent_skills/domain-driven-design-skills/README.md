@@ -6,7 +6,7 @@
 
 > ⚠️ **Work In Progress (WIP)**：本仓库及其自研体系主干正处于积极建设与持续迭代中，部分结构、文档与规范可能随时调整。
 
-本仓库以自研的 `ddd-*` Skill 为核心，提供一套面向 AI Agent 的领域建模主干链路（发现 / 战略 / 战术 / 验证 / 规范衔接）；同时以 Git Submodule 形式收录主流 DDD 相关 AI Skill，作为生态参考便于对比与按需引用。
+本仓库以自研的 `ddd-*` Skill 为核心，提供一套面向 AI Agent 的领域建模主干链路（发现 / 战略 / 战术 / 验证 / 规范衔接）；同时以调研记录形式收录主流 DDD 相关 AI Skill 的生态参考（见[外部生态参考](#外部生态参考)），便于对比与按需引用。
 
 ```bash
 # 快速克隆（含所有子模块）
@@ -17,7 +17,7 @@ git clone --recurse-submodules https://github.com/<your-org>/domain-driven-desig
 
 ## 本仓库 DDD Skills（`ddd-*` Skill）
 
-本仓库的核心交付物是 `skills/` 目录下的一组 **自研 `ddd-*` Skill**，它们构成一套面向 AI Agent 的领域建模主干链路。`relative-skills/` 下的外部子模块仅作为**生态参考**，用于对比与按需引用，不承担主流程职责。
+本仓库的核心交付物是 `skills/` 目录下的一组 **自研 `ddd-*` Skill**，它们构成一套面向 AI Agent 的领域建模主干链路。外部生态 Skill 仅作为**生态参考**（见[外部生态参考](#外部生态参考)），用于对比与按需引用，不承担主流程职责。
 
 ### 设计动机与边界
 
@@ -84,9 +84,9 @@ git clone --recurse-submodules https://github.com/<your-org>/domain-driven-desig
 
 ## 外部生态参考
 
-下表汇总了开源社区中具有代表性的 DDD 相关 Skill，以 Git Submodule 形式冻结引用，便于**了解现状、对比差异、按需组合**。它们**不是本仓库主干的一部分**，供参考使用。
+下表汇总了开源社区中具有代表性的 DDD 相关 Skill 调研记录，便于**了解现状、对比差异、按需组合**。它们**不是本仓库主干的一部分**，仅作参考使用，不随本仓库分发。
 
-| 设计层级      | Skill 名称                | 子模块路径                                   | 源仓库                                                                                      | 适用场景                                                       |
+| 设计层级      | Skill 名称                | 来源路径                                     | 源仓库                                                                                      | 适用场景                                                       |
 | :------------ | :------------------------ | :------------------------------------------- | :------------------------------------------------------------------------------------------ | :------------------------------------------------------------- |
 | 通用战术建模  | `domain-driven-design`    | `relative-skills/wondelai-skills`            | [wondelai/skills](https://github.com/wondelai/skills)                                       | 通用战术建模工具，聚焦实体、值对象、聚合、领域服务、仓库等模式 |
 | 架构风格融合  | `clean-ddd-hexagonal`     | `relative-skills/robust-skills`              | [ccheney/robust-skills](https://github.com/ccheney/robust-skills)                           | DDD + 整洁架构 + 六边形架构融合，提供依赖规则决策树            |
@@ -100,7 +100,7 @@ git clone --recurse-submodules https://github.com/<your-org>/domain-driven-desig
 | 特定框架/平台 | `Solon AI Skills`         | `relative-skills/solon-ai`                   | [opensolon/solon-ai](https://github.com/opensolon/solon-ai)                                 | Solon AI 框架，将 Skill 视为自治语义上下文，借鉴 DDD 思想      |
 | 重点场景/应用 | `microservices-architect` | `relative-skills/jeffallan-claude-skills`    | [Jeffallan/claude-skills](https://github.com/Jeffallan/claude-skills)                       | 微服务架构师，运用 DDD 限界上下文指导服务拆分                  |
 
-> 使用方式：通过 Git Submodule 拉取到本地后，可在各自仓库中按其原生约定调用（通常为 `@skill-name`）。
+> 引用方式：按表格中的源仓库链接获取，在各自仓库中按其原生约定调用（通常为 `@skill-name`）。
 
 **选型建议**：
 
@@ -121,7 +121,8 @@ git clone --recurse-submodules https://github.com/<your-org>/domain-driven-desig
 为了对自研 `ddd-*` Skill 主干做 **客观、可重复的质量评估**，仓库维护一个独立的 `validation-cases/` 目录，收录端到端的盲跑验证案例与通用验证方法。
 
 - [validation-cases/README.md](validation-cases/README.md) —— **验证方法总纲**：6 步流程（模糊输入 → 盲跑 8 Skill → 真值抽取 → 对标评分 → 回溯注入测试 → 汇总报告）、盲跑约束、注入矩阵、可复用步骤与已知局限。
-- [validation-cases/cargo-validation/](validation-cases/cargo-validation/) —— **Cargo 验证案例**：以 Eric Evans + Citerus 的 Cargo Shipping DDD Sample（子模块 `validation-cases/cargo-shipping`）为真值参照，完整运行 8 Skill 流水线。当前加权得分 **85.8 %**（B+ 良好），回溯触发器测试 **3/3 全通过**；完整结论见 [REPORT.md](validation-cases/cargo-validation/REPORT.md)。
+- [validation-cases/cargo-validation/](validation-cases/cargo-validation/) —— **Cargo 验证案例**：以 Eric Evans + Citerus 的 Cargo Shipping DDD Sample（子模块 `validation-cases/cargo-shipping`）为真值参照，完整运行 8 Skill 流水线。当前加权得分 **85.8 %**（B+ 良好），回溯触发器测试 **5/5 全通过**；完整结论见 [REPORT.md](validation-cases/cargo-validation/REPORT.md)。
+- [validation-cases/insurance-validation/](validation-cases/insurance-validation/) —— **保险承保与理赔验证案例**：**无规范参考**领域（保险），采用专家评审制（四类判据替代真值锚点）。加权得分 **90.9 %**（与 Cargo 分数不可直接对比）；并追加阶段 V（`ddd-openspec-bridge`，OpenSpec 变更集校验 9/9 通过），实现 5 阶段全链验证；完整结论见 [REPORT.md](validation-cases/insurance-validation/REPORT.md)。
 
 验证结果已反哺到主干 SKILL 的迭代（例如 `ddd-aggregates` 的"外部引用再审视 + Specification 模式"、`ddd-model-review` 的"行业对标维度"、`ddd-contexts` 的"中间概念 ADR"），形成可观测的反馈闭环。
 
@@ -144,19 +145,11 @@ skills/
 validation-cases/
 ├── README.md                   # 验证方法总纲（6 步流程）
 ├── cargo-shipping/             # Cargo Shipping DDD Sample（子模块，真值来源）
-└── cargo-validation/           # Cargo 验证案例（盲产出 + 真值 + 评分 + 回溯注入 + REPORT）
-
-relative-skills/
-├── wondelai-skills/            # domain-driven-design
-├── robust-skills/              # clean-ddd-hexagonal
-├── antigravity-awesome-skills/ # ddd-strategic-design, ddd-context-mapping, architecture-patterns
-├── aiee-team/                  # arch-ddd
-├── claude-skill-registry/      # ddd-planning（通用 DDD Skill 注册表，本表仅收录 ddd-planning）
-├── cleanddd-skills/            # cleanddd-skills
-├── agentic-flow/               # claude-flow
-├── solon-ai/                   # Solon AI Skills
-└── jeffallan-claude-skills/    # microservices-architect
+├── cargo-validation/           # Cargo 验证案例（盲产出 + 真值 + 评分 + 回溯注入 + REPORT）
+└── insurance-validation/       # 保险承保与理赔验证案例（无规范参考，专家评审制）
 ```
+
+> 外部生态 Skill 的调研记录见[外部生态参考](#外部生态参考)章节，不再以子模块形式分发。
 
 ---
 
@@ -168,29 +161,14 @@ relative-skills/
 - [ddd-skills-report.md](docs/ddd-skills-report.md) — 领域驱动设计技能调研报告（含引用与改进 Backlog）
 - [validation-cases/README.md](validation-cases/README.md) — 验证方法总纲（6 步盲跑流程、注入矩阵、复用指南）
 - [validation-cases/cargo-validation/REPORT.md](validation-cases/cargo-validation/REPORT.md) — Cargo Shipping 验证报告（当前得分 85.8 %）
+- [validation-cases/insurance-validation/REPORT.md](validation-cases/insurance-validation/REPORT.md) — 保险承保与理赔验证报告（无规范参考，专家评审制 90.9 %）
 
 ---
 
 ## 子模块管理
 
-如果已克隆但未拉取子模块：
+仓库仅保留 `validation-cases/cargo-shipping` 一个子模块（验证案例的真值来源）。如果已克隆但未拉取：
 
 ```bash
 git submodule update --init --recursive
-```
-
-更新所有子模块到最新版本：
-
-```bash
-git submodule update --remote
-```
-
-更新指定子模块：
-
-```bash
-cd relative-skills/<submodule-name>
-git pull origin main
-cd ../..
-git add relative-skills/<submodule-name>
-git commit -m "update: bump <submodule-name> to latest"
 ```

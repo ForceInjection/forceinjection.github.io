@@ -441,7 +441,7 @@ SGLang 以 RadixAttention 前缀缓存和高效调度器著称，涵盖 HiCache 
 - [vLLM CUDA Graphs 深度解析](09_inference_system/vllm/module_analysis/cuda_graph_deep_dive.md) - 深入探讨 vLLM 解码阶段 CUDA Graphs 的核心机制与实践
 - [vLLM Router 架构解析](09_inference_system/vllm/routing/router.md) - 高性能、轻量级请求转发系统
 - [vLLM Semantic Router](09_inference_system/vllm/routing/semantic_router_deep_dive.md) - 基于语义的智能路由策略
-- [DeepSeek V4 长上下文注意力支持解析](09_inference_system/vllm/module_analysis/deepseek_v4.md) - 深入探讨 vLLM 对 DeepSeek V4 模型高效注意力机制的底层实现与算子优化
+- [DeepSeek V4 长上下文注意力支持解析](09_inference_system/vllm/module_analysis/deepseek_v4_attention_support.md) - 深入探讨 vLLM 对 DeepSeek V4 模型高效注意力机制的底层实现与算子优化
 - [PagedAttention 退役的技术原因](09_inference_system/vllm/module_analysis/pagedattention_retirement.md) - 从 MLA 不兼容、两遍遍历浪费带宽、无原生 FP8 计算、模板爆炸等角度分析 PagedAttention 被取代的技术必然性
 - [MLA 的 TP 切分：KV Cache 冗余分析](09_inference_system/vllm/module_analysis/mla_tp_kv_redundancy.md) - MLA 将 KV cache 压缩到标准 MHA 的 ~1.8%，但 TP 对其显存节省为 0%，冗余率达 87.5%
 
@@ -508,7 +508,7 @@ SGLang 以 RadixAttention 前缀缓存和高效调度器著称，涵盖 HiCache 
 
 - [动手跑大模型](99_misc/mac-deepseek-r1.md) - 手把手教你如何跑大模型
 - [Ollama 推理框架详解](99_misc/ollama/README.md) - Ollama 的架构原理与进阶配置
-- [DeepSeek-V3 MoE 模型 vLLM 部署](09_inference_system/deployment/deepseek_v3_moe_vllm_h20_deployment.md) - H20 硬件上的部署方案与 SLO 验证
+- [DeepSeek-V3 H20 推理优化：基于 vLLM 源码的深度分析](09_inference_system/deployment/deepseek_v3_h20_vllm_deep_dive.md) - PD 分离、EPLB、DP 适配、MTP 加速、FP8 量化的源码级分析
 - [Qwen2-VL-7B 华为昇腾部署](09_inference_system/deployment/qwen2_vl_7b_huawei.md) - 国产硬件平台的部署优化
 
 ### 9.8 DeepSeek 专题
@@ -685,18 +685,18 @@ ZOMI 酱主导的高分开源 AI 基础设施架构体系，从底层 AI 芯片�
 
 ### 12.2 AI Infra 基础课程（入门）
 
-面向初学者的大模型入门知识体系，涵盖 Transformer 架构原理、GPT-3/4 与 PaLM 等模型的规模与训练成本分析、DeepSeek V1/V2/R1 技术演进（MLA 与 MoE 稀疏化）、能力涌现现象研究，以及 GPU 架构/CUDA 编程与云原生 AI 基础设施运维实践。
+面向初学者的 AI 基础设施普及讲座（90 分钟），围绕一条主线：**一切 AI 基础设施优化的最终目标，都是降低每 token 成本**。沿"模型架构 → 硬件 → 推理引擎 → 基础设施与生态"四层杠杆展开，覆盖 2026 年最新格局（DeepSeek-V4、Kimi K3、开源价格战、1M 上下文、Agentic 编程）。
 
 - [大模型原理与最新进展](10_ai_related_course/ai_coding/index.html) - 交互式在线课程平台。
 - [AI 编程入门](10_ai_related_course/ai_coding/AI%20编程入门.md) - AI 编程基础知识与应用入门。
-- [AI Infra 课程演讲稿](10_ai_related_course/ai_infra_course/%E5%85%A5%E9%97%A8%E7%BA%A7/%E8%AE%B2%E7%A8%BF.md) - 完整的课程演讲内容、技术要点与实践案例。
-- **学习目标**：深入理解大模型工作原理、最新技术进展与企业级应用实践。
+- [Token Factory 讲座大纲与讲稿](10_ai_related_course/ai_infra_lecture/%E5%85%A5%E9%97%A8%E7%BA%A7/) - 40 页 PPT 大纲（单一数据源）+ 552 行完整演讲逐字稿 + 自制 PPT 成品。
+- **学习目标**：理解 AI 推理成本四年下降 100 倍背后的四层杠杆（架构/硬件/引擎/生态）。
 - **核心内容**：
-  - **Transformer 架构深度解析**：编码器-解码器结构、多头注意力机制、文本生成过程。
-  - **训练规模与成本分析**：GPT-3/4、PaLM 等主流模型的参数量、训练成本和资源需求。
-  - **DeepSeek 技术突破**：V1/V2/R1 三代模型演进、MLA 架构创新、MoE 稀疏化优化。
-  - **能力涌现现象研究**：规模效应、临界点突破、多模态融合发展趋势。
-  - **AI 编程工具生态**：GitHub Copilot、Cursor、Trae AI 等工具对比分析与应用实践。
+  - **Token 工厂概念**：token 作为 AI 经济基本单位，四年价格下降 100 倍（对数坐标曲线）。
+  - **第一层杠杆·模型架构**：MLA（KV Cache -93.3%）、MoE（激活 5.5%）、CSA/HCA（DeepSeek V4 成本 -73%）、KDA（Kimi K3 线性注意力）。
+  - **第二层杠杆·硬件**：Blackwell FP4、HBM3e 8 TB/s、NVLink-C2C、CUDA 优化、GPU 虚拟化共享。
+  - **第三层杠杆·推理引擎**：KV Cache 四层解法、连续批处理、DSpark 投机解码、FP8/FP4 量化。
+  - **第四层杠杆·基础设施与生态**：PD 分离、开源价格战（28 倍价差）、成本下降打开 AI 编程/长上下文/Agent 三大应用形态。
   - **GPU 架构与 CUDA 编程**：硬件基础、并行计算原理、性能优化策略。
   - **云原生 AI 基础设施**：现代化 AI 基础设施设计、容器化部署与运维实践。
 

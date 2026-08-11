@@ -792,6 +792,10 @@
     "url": "/06_llm_theory_and_fundamentals/llm_basic_concepts/"
   },
   {
+    "title": "从 GPT-2 到 Kimi K3：注意力机制的演进史",
+    "url": "/06_llm_theory_and_fundamentals/llm_basic_concepts/architecture_evolution/from_gpt2_to_kimi_k3_attention_evolution.html"
+  },
+  {
     "title": "LLM 架构演进史——从 GPT-1 到 DeepSeek-V3 的七个拐点",
     "url": "/06_llm_theory_and_fundamentals/llm_basic_concepts/architecture_evolution/llm_architecture_evolution.html"
   },
@@ -1568,6 +1572,10 @@
     "url": "/09_inference_system/parallelism/parallelism_visual.html"
   },
   {
+    "title": "当百万 Token KV Cache 从 250GB 降到 5GB：推理系统的新挑战",
+    "url": "/09_inference_system/post-kv-cache-era-challenges.html"
+  },
+  {
     "title": "Continuous Batching 深度解析：从静态批处理到迭代级调度",
     "url": "/09_inference_system/prefill_decode/continuous_batching.html"
   },
@@ -1660,6 +1668,10 @@
     "url": "/09_inference_system/sglang/hisparse_deep_dive.html"
   },
   {
+    "title": "SGLang 0.5.16 解读：一棵 Radix Tree 统一四种 Attention，DSpark 让投机解码不再一刀切",
+    "url": "/09_inference_system/sglang/sglang-0.5.16-release.html"
+  },
+  {
     "title": "KV Cache L1↔L2 数据流深度分析",
     "url": "/09_inference_system/sglang/sglang-kv-cache-dataflow-analysis.html"
   },
@@ -1678,6 +1690,10 @@
   {
     "title": "SGLang 调度器：请求编排与 Batch 调度",
     "url": "/09_inference_system/sglang/sglang-scheduler.html"
+  },
+  {
+    "title": "SGLang UnifiedRadixTree：一棵树，四种注意力",
+    "url": "/09_inference_system/sglang/sglang-unified-radix-tree.html"
   },
   {
     "title": "vLLM 推理系统优化与分析",
@@ -1705,7 +1721,7 @@
   },
   {
     "title": "vLLM 中的 DeepSeek V4：高效长上下文注意力",
-    "url": "/09_inference_system/vllm/module_analysis/deepseek_v4.html"
+    "url": "/09_inference_system/vllm/module_analysis/deepseek_v4_attention_support.html"
   },
   {
     "title": "DeepSeek-V4 端到端推理 Pipeline 走读：多流残差、MQA 压缩与哈希路由",
@@ -1868,156 +1884,20 @@
     "url": "/10_ai_related_course/ai_coding/page_9.html"
   },
   {
-    "title": "AI 基础设施课程",
+    "title": "入门级",
     "url": "/10_ai_related_course/ai_infra_course/入门级/"
   },
   {
-    "title": "AI Infra 最新进展 - PPT 大纲设计（详尽素材版）",
-    "url": "/10_ai_related_course/ai_infra_course/入门级/AI Infra 课程 PPT 大纲.html"
+    "title": "Token Factory：AI 推理的成本革命",
+    "url": "/10_ai_related_course/ai_infra_lecture/入门级/"
   },
   {
-    "title": "page 1",
-    "url": "/10_ai_related_course/ai_infra_course/入门级/page_1.html"
+    "title": "Token Factory：AI 推理的成本革命 - PPT 大纲设计（2026 年 8 月）",
+    "url": "/10_ai_related_course/ai_infra_lecture/入门级/AI Infra 课程 PPT 大纲.html"
   },
   {
-    "title": "page 10",
-    "url": "/10_ai_related_course/ai_infra_course/入门级/page_10.html"
-  },
-  {
-    "title": "page 11",
-    "url": "/10_ai_related_course/ai_infra_course/入门级/page_11.html"
-  },
-  {
-    "title": "page 12",
-    "url": "/10_ai_related_course/ai_infra_course/入门级/page_12.html"
-  },
-  {
-    "title": "page 13",
-    "url": "/10_ai_related_course/ai_infra_course/入门级/page_13.html"
-  },
-  {
-    "title": "page 14",
-    "url": "/10_ai_related_course/ai_infra_course/入门级/page_14.html"
-  },
-  {
-    "title": "page 15",
-    "url": "/10_ai_related_course/ai_infra_course/入门级/page_15.html"
-  },
-  {
-    "title": "page 16",
-    "url": "/10_ai_related_course/ai_infra_course/入门级/page_16.html"
-  },
-  {
-    "title": "page 17",
-    "url": "/10_ai_related_course/ai_infra_course/入门级/page_17.html"
-  },
-  {
-    "title": "page 18",
-    "url": "/10_ai_related_course/ai_infra_course/入门级/page_18.html"
-  },
-  {
-    "title": "page 19",
-    "url": "/10_ai_related_course/ai_infra_course/入门级/page_19.html"
-  },
-  {
-    "title": "page 2",
-    "url": "/10_ai_related_course/ai_infra_course/入门级/page_2.html"
-  },
-  {
-    "title": "page 20",
-    "url": "/10_ai_related_course/ai_infra_course/入门级/page_20.html"
-  },
-  {
-    "title": "page 21",
-    "url": "/10_ai_related_course/ai_infra_course/入门级/page_21.html"
-  },
-  {
-    "title": "page 22",
-    "url": "/10_ai_related_course/ai_infra_course/入门级/page_22.html"
-  },
-  {
-    "title": "page 23",
-    "url": "/10_ai_related_course/ai_infra_course/入门级/page_23.html"
-  },
-  {
-    "title": "page 24",
-    "url": "/10_ai_related_course/ai_infra_course/入门级/page_24.html"
-  },
-  {
-    "title": "page 25",
-    "url": "/10_ai_related_course/ai_infra_course/入门级/page_25.html"
-  },
-  {
-    "title": "page 26",
-    "url": "/10_ai_related_course/ai_infra_course/入门级/page_26.html"
-  },
-  {
-    "title": "page 27",
-    "url": "/10_ai_related_course/ai_infra_course/入门级/page_27.html"
-  },
-  {
-    "title": "page 28",
-    "url": "/10_ai_related_course/ai_infra_course/入门级/page_28.html"
-  },
-  {
-    "title": "page 29",
-    "url": "/10_ai_related_course/ai_infra_course/入门级/page_29.html"
-  },
-  {
-    "title": "page 3",
-    "url": "/10_ai_related_course/ai_infra_course/入门级/page_3.html"
-  },
-  {
-    "title": "page 30",
-    "url": "/10_ai_related_course/ai_infra_course/入门级/page_30.html"
-  },
-  {
-    "title": "page 31",
-    "url": "/10_ai_related_course/ai_infra_course/入门级/page_31.html"
-  },
-  {
-    "title": "page 32",
-    "url": "/10_ai_related_course/ai_infra_course/入门级/page_32.html"
-  },
-  {
-    "title": "page 33",
-    "url": "/10_ai_related_course/ai_infra_course/入门级/page_33.html"
-  },
-  {
-    "title": "page 34",
-    "url": "/10_ai_related_course/ai_infra_course/入门级/page_34.html"
-  },
-  {
-    "title": "page 35",
-    "url": "/10_ai_related_course/ai_infra_course/入门级/page_35.html"
-  },
-  {
-    "title": "page 4",
-    "url": "/10_ai_related_course/ai_infra_course/入门级/page_4.html"
-  },
-  {
-    "title": "page 5",
-    "url": "/10_ai_related_course/ai_infra_course/入门级/page_5.html"
-  },
-  {
-    "title": "page 6",
-    "url": "/10_ai_related_course/ai_infra_course/入门级/page_6.html"
-  },
-  {
-    "title": "page 7",
-    "url": "/10_ai_related_course/ai_infra_course/入门级/page_7.html"
-  },
-  {
-    "title": "page 8",
-    "url": "/10_ai_related_course/ai_infra_course/入门级/page_8.html"
-  },
-  {
-    "title": "page 9",
-    "url": "/10_ai_related_course/ai_infra_course/入门级/page_9.html"
-  },
-  {
-    "title": "AI Infra 最新进展：从模型到架构 - 演讲稿",
-    "url": "/10_ai_related_course/ai_infra_course/入门级/讲稿.html"
+    "title": "Token Factory：AI 推理的成本革命 - 演讲稿",
+    "url": "/10_ai_related_course/ai_infra_lecture/入门级/讲稿.html"
   },
   {
     "title": "多智能体 AI 系统培训材料",
@@ -2184,6 +2064,14 @@
     "url": "/21_openspec_practise/docs-en/openspec-user-manual.html"
   },
   {
+    "title": "From Hardcoded to Dynamic Instructions: The Three Major Changes in OpenSpec v1.5.0",
+    "url": "/21_openspec_practise/docs-en/openspec-v1.5.0-upgrade.html"
+  },
+  {
+    "title": "Refining Requirements with /opsx:update: OpenSpec v1.7.0 Full Workflow Practice",
+    "url": "/21_openspec_practise/docs-en/openspec-v1.7.0-workflow-practice.html"
+  },
+  {
     "title": "OpenSpec 实战指南：AI 辅助软件工程全流程深度复盘",
     "url": "/21_openspec_practise/docs/openspec-ai-workflow-analysis.html"
   },
@@ -2198,6 +2086,10 @@
   {
     "title": "从硬编码到动态指令：OpenSpec v1.5.0 的三大变革",
     "url": "/21_openspec_practise/docs/openspec-v1.5.0-upgrade.html"
+  },
+  {
+    "title": "用 /opsx:update 完善需求：OpenSpec v1.7.0 完整工作流实践",
+    "url": "/21_openspec_practise/docs/openspec-v1.7.0-workflow-practice.html"
   },
   {
     "title": "Design: Ecommerce Mini Architecture",
@@ -2250,6 +2142,22 @@
   {
     "title": "tasks",
     "url": "/21_openspec_practise/openspec/changes/archive/2026-07-08-add-product-get-by-id/tasks.html"
+  },
+  {
+    "title": "design",
+    "url": "/21_openspec_practise/openspec/changes/archive/2026-07-28-add-product-search/design.html"
+  },
+  {
+    "title": "proposal",
+    "url": "/21_openspec_practise/openspec/changes/archive/2026-07-28-add-product-search/proposal.html"
+  },
+  {
+    "title": "spec",
+    "url": "/21_openspec_practise/openspec/changes/archive/2026-07-28-add-product-search/specs/catalog-management/spec.html"
+  },
+  {
+    "title": "tasks",
+    "url": "/21_openspec_practise/openspec/changes/archive/2026-07-28-add-product-search/tasks.html"
   },
   {
     "title": "Cart Management Specification",
