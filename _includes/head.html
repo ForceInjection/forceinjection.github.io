@@ -6,42 +6,58 @@
   <link rel="stylesheet" href="{{ "/assets/main.css" | relative_url }}">
   {%- feed_meta -%}
 
-  <!-- Geek theme fonts: Inter (body) + JetBrains Mono (code) -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:ital,wght@0,400;0,600;1,400&family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
+  <!-- Fonts: JetBrains Mono (code) via jsdelivr @fontsource — Google Fonts is unreliable in China -->
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/jetbrains-mono@5.2.5/400.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/jetbrains-mono@5.2.5/400-italic.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/jetbrains-mono@5.2.5/600.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/jetbrains-mono@5.2.5/700.css">
 
-  <!-- MathJax 3: LaTeX formula rendering -->
+  <!-- MathJax 3: lazy-loaded only when the page contains math delimiters -->
   <script>
-  MathJax = {
-    tex: {
-      inlineMath: [['$', '$'], ['\\(', '\\)']],
-      displayMath: [['$$', '$$'], ['\\[', '\\]']],
-      processEscapes: true,
-      tags: 'ams'
-    },
-    options: {
-      skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-    }
-  };
-  </script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
-
-  <!-- Mermaid: diagram rendering -->
-  <script type="module">
-    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
-    mermaid.initialize({ startOnLoad: false, theme: 'default' });
-    document.addEventListener('DOMContentLoaded', () => {
-      // Kramdown renders ```mermaid as <pre><code class="language-mermaid">,
-      // but Mermaid expects <div class="mermaid">. Convert them here.
-      document.querySelectorAll('pre code.language-mermaid').forEach(el => {
-        const div = document.createElement('div');
-        div.className = 'mermaid';
-        div.textContent = el.textContent;
-        el.parentElement.replaceWith(div);
-      });
-      mermaid.run();
+  (function () {
+    // Runs on DOMContentLoaded — in <head> the body isn't parsed yet.
+    document.addEventListener('DOMContentLoaded', function () {
+      if (!/\$\$|\\\(|\\\[/.test(document.body.textContent)) return;
+      window.MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']],
+          displayMath: [['$$', '$$'], ['\\[', '\\]']],
+          processEscapes: true,
+          tags: 'ams'
+        },
+        options: {
+          skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      };
+      var s = document.createElement('script');
+      s.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js';
+      s.async = true;
+      document.head.appendChild(s);
     });
+  }());
+  </script>
+
+  <!-- Mermaid: lazy-loaded only when the page contains mermaid code blocks (dark theme) -->
+  <script>
+  (function () {
+    document.addEventListener('DOMContentLoaded', function () {
+      if (!document.querySelector('pre code.language-mermaid')) return;
+      import('https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs').then(function (m) {
+        var mermaid = m.default;
+        mermaid.initialize({ startOnLoad: false, theme: 'dark', themeVariables: { background: '#161b22' } });
+        // Kramdown renders ```mermaid as <pre><code class="language-mermaid">,
+        // but Mermaid expects <div class="mermaid">. Convert them here.
+        document.querySelectorAll('pre code.language-mermaid').forEach(function (el) {
+          var div = document.createElement('div');
+          div.className = 'mermaid';
+          div.textContent = el.textContent;
+          el.parentElement.replaceWith(div);
+        });
+        mermaid.run();
+      });
+    });
+  }());
   </script>
   <!-- Favicon: based on ForceInjection GitHub avatar -->
   <link rel="icon" type="image/png" sizes="32x32" href="{{ '/favicon.png' | relative_url }}">

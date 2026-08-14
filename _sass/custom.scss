@@ -5,12 +5,28 @@
 // ═══════════════════════════════════════════════════════
 
 // ── Color tokens ──────────────────────────────────────
-$dell-navy:    #001A3A;
+// Terminal theme (dark navy): brand-continuation palette
+$dell-navy:    #001A3A;   // deepest brand navy
 $dell-dark:    #003B6F;
 $dell-blue:    #007DB8;
 $dell-mid:     #005EB8;
-$dell-light:   #4CB8E4;
+$dell-light:   #4CB8E4;   // primary accent (light cyan-blue)
 $dell-pale:    #D6EAF5;
+
+// ── Terminal dark surface tokens ──────────────────────
+// GitHub Dark neutral base + brand-blue (#4CB8E4) accents
+$page-bg:      #0d1117;   // terminal background (GitHub canvas default)
+$surface:      #161b22;   // raised surface (cards, dropdowns)
+$surface-hi:   #21262d;   // hover surface
+$border-color: #30363d;   // terminal borders
+$text-primary: #e6edf3;   // main foreground
+$text-muted:   #8b949e;   // secondary text
+$text-faint:   #6e7681;   // tertiary text
+$text-code:    #7ee0ff;   // inline code accent (brand cyan)
+
+$code-bg:      #161b22;   // code block bg (raised panel)
+$code-fg:      #e6edf3;
+$code-border:  #30363d;
 
 // ── Font stacks ───────────────────────────────────────
 // System font stack: PingFang SC (macOS/iOS) → Microsoft YaHei (Windows) →
@@ -19,17 +35,6 @@ $dell-pale:    #D6EAF5;
 $font-body: 'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 $font-code: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
 
-$code-bg:      #0d1117;   // GitHub dark
-$code-fg:      #e6edf3;
-$code-border:  #30363d;
-
-$page-bg:      #fafbfc;
-$content-bg:   #ffffff;
-$border-color: #e8ecf0;
-$text-primary: #1a2332;
-$text-muted:   #5a6a7a;
-$text-code:    #0a6694;
-
 // ═══════════════════════════════════════════════════════
 //  Site Navigation Bar
 // ═══════════════════════════════════════════════════════
@@ -37,9 +42,9 @@ $text-code:    #0a6694;
   position: sticky;
   top: 0;
   z-index: 1000;
-  background: #007DB8;
-  border-bottom: 1px solid rgba(255, 255, 255, .15);
-  box-shadow: 0 2px 14px rgba(0, 94, 184, .35);
+  background: $surface;
+  border-bottom: 1px solid $border-color;
+  box-shadow: 0 2px 14px rgba(0, 0, 0, .45);
 
   &__inner {
     max-width: 1100px;
@@ -55,7 +60,7 @@ $text-code:    #0a6694;
     font-family: $font-body;
     font-weight: 700;
     font-size: .95em;
-    color: #fff !important;
+    color: $dell-light !important;
     text-decoration: none !important;
     letter-spacing: -.01em;
     white-space: nowrap;
@@ -63,7 +68,7 @@ $text-code:    #0a6694;
     align-items: center;
     gap: 7px;
     flex-shrink: 0;
-    &:hover { color: rgba(255,255,255,.75) !important; }
+    &:hover { color: #fff !important; }
   }
 
   &__logo {
@@ -71,7 +76,7 @@ $text-code:    #0a6694;
     height: 32px;
     border-radius: 50%;
     object-fit: cover;
-    border: 1.5px solid rgba(255, 255, 255, .5);
+    border: 1.5px solid $border-color;
     flex-shrink: 0;
   }
 
@@ -80,8 +85,8 @@ $text-code:    #0a6694;
   &__modules-btn {
     margin-left: auto;
     background: none;
-    border: 1px solid rgba(255, 255, 255, .45);
-    color: #fff;
+    border: 1px solid $border-color;
+    color: $text-primary;
     font-family: $font-body;
     font-size: .85em;
     font-weight: 500;
@@ -95,8 +100,9 @@ $text-code:    #0a6694;
     flex-shrink: 0;
     &:hover,
     &[aria-expanded="true"] {
-      background: rgba(255, 255, 255, .18);
-      border-color: rgba(255, 255, 255, .8);
+      background: $surface-hi;
+      border-color: $dell-light;
+      color: $dell-light;
     }
   }
 
@@ -111,13 +117,13 @@ $text-code:    #0a6694;
     align-items: center;
     padding: 5px;
     border-radius: 6px;
-    color: rgba(255, 255, 255, .85) !important;
+    color: $text-muted !important;
     text-decoration: none !important;
     flex-shrink: 0;
     transition: color .15s, background .15s;
     &:hover {
-      color: #fff !important;
-      background: rgba(255, 255, 255, .18);
+      color: $dell-light !important;
+      background: $surface-hi;
     }
   }
 
@@ -135,7 +141,7 @@ $text-code:    #0a6694;
       display: block;
       width: 22px;
       height: 2px;
-      background: rgba(255, 255, 255, .9);
+      background: $text-primary;
       border-radius: 2px;
       transition: transform .22s ease, opacity .22s ease;
     }
@@ -150,9 +156,9 @@ $text-code:    #0a6694;
     position: absolute;
     left: 0;
     right: 0;
-    background: #fff;
+    background: $surface;
     border-bottom: 2px solid $dell-blue;
-    box-shadow: 0 8px 28px rgba(0, 94, 184, .18);
+    box-shadow: 0 8px 28px rgba(0, 0, 0, .5);
     z-index: 999;
     &.is-open { display: block; }
   }
@@ -173,13 +179,13 @@ $text-code:    #0a6694;
     padding: 9px 11px;
     border-radius: 7px;
     text-decoration: none !important;
-    color: $dell-dark !important;
+    color: $text-primary !important;
     font-size: .83em;
     font-weight: 500;
     transition: background .12s, color .12s;
     &:hover {
-      background: $dell-pale;
-      color: $dell-mid !important;
+      background: $surface-hi;
+      color: $dell-light !important;
     }
   }
 
@@ -189,8 +195,8 @@ $text-code:    #0a6694;
   // ── Mobile menu
   &__mobile-menu {
     display: none;
-    background: #005EB8;
-    border-top: 1px solid rgba(255, 255, 255, .18);
+    background: $surface-hi;
+    border-top: 1px solid $border-color;
     max-height: 70vh;
     overflow-y: auto;
     &.is-open { display: block; }
@@ -199,11 +205,11 @@ $text-code:    #0a6694;
       align-items: center;
       gap: 10px;
       padding: 11px 20px;
-      color: rgba(255,255,255,.9) !important;
+      color: $text-primary !important;
       font-size: .9em;
       text-decoration: none !important;
-      border-bottom: 1px solid rgba(255, 255, 255, .1);
-      &:hover { background: rgba(255, 255, 255, .12); color: #fff !important; }
+      border-bottom: 1px solid $border-color;
+      &:hover { background: $surface; color: $dell-light !important; }
     }
   }
 
@@ -227,28 +233,28 @@ $text-code:    #0a6694;
     &-icon {
       position: absolute;
       left: 10px;
-      color: rgba(255,255,255,.65);
+      color: $text-muted;
       pointer-events: none;
       z-index: 1;
     }
 
     &-input {
       width: 100%;
-      background: rgba(255,255,255,.12);
-      border: 1px solid rgba(255,255,255,.25);
+      background: $page-bg;
+      border: 1px solid $border-color;
       border-radius: 6px;
       padding: 5px 10px 5px 30px;
-      color: #fff;
+      color: $text-primary;
       font-family: $font-body;
       font-size: .85em;
       outline: none;
       transition: background .15s, border-color .15s;
 
-      &::placeholder { color: rgba(255,255,255,.5); }
+      &::placeholder { color: $text-faint; }
 
       &:focus {
-        background: rgba(255,255,255,.22);
-        border-color: rgba(255,255,255,.6);
+        background: $surface-hi;
+        border-color: $dell-light;
       }
     }
 
@@ -257,10 +263,10 @@ $text-code:    #0a6694;
       top: calc(100% + 6px);
       left: 0;
       right: 0;
-      background: #fff;
+      background: $surface;
       border: 1px solid $border-color;
       border-radius: 8px;
-      box-shadow: 0 8px 28px rgba(0,0,0,.12);
+      box-shadow: 0 8px 28px rgba(0,0,0,.5);
       max-height: 340px;
       overflow-y: auto;
       margin: 0;
@@ -275,7 +281,7 @@ $text-code:    #0a6694;
           cursor: pointer;
           &.is-selected,
           &:hover {
-            background: $dell-pale;
+            background: $surface-hi;
           }
         }
       }
@@ -284,14 +290,14 @@ $text-code:    #0a6694;
     &-link {
       display: block;
       padding: 7px 14px;
-      color: $dell-dark !important;
+      color: $text-primary !important;
       font-size: .85em;
       font-weight: 500;
       text-decoration: none !important;
       line-height: 1.4;
       mark {
-        background: #ffec99;
-        color: inherit;
+        background: #0d419d;
+        color: #ddf4ff;
         font-weight: 700;
         padding: 0 1px;
         border-radius: 2px;
@@ -323,22 +329,11 @@ body {
   line-height: 1.75;
 }
 
-// ── Site-wide link color → Dell blue ─────────────────
+// ── Site-wide link color → terminal cyan ─────────────
 a {
-  color: $dell-blue;
-  &:hover { color: $dell-mid; }
-  &:visited { color: $dell-dark; }
-}
-
-// ── Site footer ───────────────────────────────────────
-.site-footer {
-  background: $dell-navy;
-  color: #8da0b3;
-  border-top: none;
-  padding: 28px 0;
-
-  a { color: $dell-light; &:hover { color: #fff; } }
-  .footer-col-wrapper { color: #8da0b3; }
+  color: $dell-light;
+  &:hover { color: #9fe0ff; }
+  &:visited { color: #8fc8e8; }
 }
 
 // ═══════════════════════════════════════════════════════
@@ -357,19 +352,21 @@ article.post {
   h1, h2, h3, h4, h5, h6 {
     font-family: $font-body;
     font-weight: 700;
-    color: $dell-navy;
+    color: #f0f6fc;
     margin-top: 2em;
     margin-bottom: .5em;
     line-height: 1.3;
   }
 
-  // h1, h2 use the body font stack (bold) — system fonts handle CN/EN uniformly
-  // h3 uses body font with a code-inspired ## marker
+  // Terminal-styled headings:
+  // h1 keeps a clean title with terminal divider
+  // h2 gets a shell prompt marker (❯)
+  // h3 uses a code-inspired ## marker
   // h4 retains JetBrains Mono for a terminal / tech-doc accent
 
   h1 {
     font-size: 1.9em;
-    border-bottom: 2px solid $dell-pale;
+    border-bottom: 2px solid $border-color;
     padding-bottom: .3em;
   }
 
@@ -378,20 +375,21 @@ article.post {
     border-bottom: 1px solid $border-color;
     padding-bottom: .25em;
     position: relative;
-    padding-left: 14px;
+    padding-left: 20px;
     &::before {
-      content: '';
+      content: '❯';
       position: absolute;
-      left: 0; top: 4px; bottom: 4px;
-      width: 4px;
-      background: $dell-blue;
-      border-radius: 2px;
+      left: 0; top: 50%;
+      transform: translateY(-52%);
+      color: $dell-light;
+      font-family: $font-code;
+      font-size: .72em;
     }
   }
 
   h3 {
     font-size: 1.18em;
-    color: $dell-dark;
+    color: #dfe9f2;
     padding-left: 28px;
     position: relative;
     &::before {
@@ -409,7 +407,7 @@ article.post {
   h4 {
     font-size: 1.02em;
     font-family: $font-code;
-    color: $dell-mid;
+    color: $dell-light;
     font-weight: 600;
     letter-spacing: .3px;
   }
@@ -418,11 +416,11 @@ article.post {
   code:not(pre code) {
     font-family: $font-code;
     font-size: .875em;
-    background: #eef5fb;
+    background: $surface-hi;
     color: $text-code;
     padding: 2px 6px;
     border-radius: 4px;
-    border: 1px solid #c8dff0;
+    border: 1px solid $border-color;
     white-space: nowrap;
   }
 
@@ -442,7 +440,7 @@ article.post {
       content: '● ● ●';
       display: block;
       font-size: 10px;
-      color: #4a5568;
+      color: #30363d;
       letter-spacing: 4px;
       margin-bottom: 12px;
       margin-top: -4px;
@@ -489,7 +487,7 @@ article.post {
     margin: 1.5em 0;
     padding: 14px 20px;
     border-left: 4px solid $dell-blue;
-    background: #f0f7fc;
+    background: $surface;
     border-radius: 0 6px 6px 0;
     color: $text-muted;
     font-style: normal;
@@ -497,9 +495,9 @@ article.post {
     p { margin: 0; }
 
     // ⚠ NOTE / TIP styled blockquote
-    &.note   { border-color: #f0ad4e; background: #fffdf0; }
-    &.tip    { border-color: #28a745; background: #f0fff4; }
-    &.warn   { border-color: #dc3545; background: #fff5f5; }
+    &.note   { border-color: #d4a017; background: #211e12; }
+    &.tip    { border-color: #28a745; background: #12261a; }
+    &.warn   { border-color: #e05252; background: #2a1616; }
   }
 
   // ── Tables ──────────────────────────────────────────
@@ -514,7 +512,7 @@ article.post {
 
     thead {
       background: $dell-navy;
-      color: #fff;
+      color: $dell-light;
       th {
         background: transparent;
         padding: 11px 16px;
@@ -530,8 +528,8 @@ article.post {
     tbody {
       tr {
         border-bottom: 1px solid $border-color;
-        &:nth-child(even) { background: #f5f9fc; }
-        &:hover { background: #eef5fb; }
+        &:nth-child(even) { background: $surface; }
+        &:hover { background: $surface-hi; }
       }
       td {
         padding: 9px 16px;
@@ -603,39 +601,27 @@ article.post {
   }
 
   // ── Strong / em ─────────────────────────────────────
-  strong { color: $dell-navy; font-weight: 700; }
+  strong { color: #f0f6fc; font-weight: 700; }
 }
 
 // ═══════════════════════════════════════════════════════
-//  POST / PAGE WRAPPER layout
+//  PAGE WRAPPER layout
+//  (.post-header / .post-title / .post-meta don't render on this site —
+//  content pages use page.html which has no post header block)
 // ═══════════════════════════════════════════════════════
-.post-header {
-  border-bottom: 2px solid $dell-pale;
-  padding-bottom: 16px;
-  margin-bottom: 32px;
-
-  .post-title {
-    font-family: $font-body;
-    font-weight: 800;
-    color: $dell-navy;
-  }
-  .post-meta { color: $text-muted; font-size: .9em; }
-}
-
-// Breadcrumb-style page title bar
 .page-content > .wrapper {
   max-width: 860px;
-  padding-top: 40px;
+  padding: 40px 0;
 }
 
 // ═══════════════════════════════════════════════════════
 //  Quote Footer — sitewide bottom strip
 // ═══════════════════════════════════════════════════════
 .quote-footer {
-  background: linear-gradient(180deg, #007DB8 0%, #005EB8 100%);
+  background: linear-gradient(180deg, $surface 0%, $page-bg 100%);
   padding: 64px 24px 52px;
   text-align: center;
-  border-top: 1px solid rgba(255, 255, 255, .2);
+  border-top: 1px solid $border-color;
 
   &__inner {
     max-width: 740px;
@@ -704,6 +690,6 @@ article.post {
 //  Scrollbar (WebKit) — subtle geek touch
 // ═══════════════════════════════════════════════════════
 pre::-webkit-scrollbar { height: 6px; }
-pre::-webkit-scrollbar-track { background: #161b22; }
-pre::-webkit-scrollbar-thumb { background: #30363d; border-radius: 3px; }
+pre::-webkit-scrollbar-track { background: $code-bg; }
+pre::-webkit-scrollbar-thumb { background: $border-color; border-radius: 3px; }
 pre::-webkit-scrollbar-thumb:hover { background: $dell-blue; }
