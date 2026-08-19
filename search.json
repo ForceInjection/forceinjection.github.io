@@ -884,6 +884,10 @@
     "url": "/06_llm_theory_and_fundamentals/llm_basic_concepts/transformer/transformer_block_visual.html"
   },
   {
+    "title": "AI 水印：道高一尺，魔高一丈",
+    "url": "/06_llm_theory_and_fundamentals/llm_basic_concepts/watermark/ai_watermark_attack_and_defense.html"
+  },
+  {
     "title": "工作流编排与应用平台（Workflow）",
     "url": "/06_llm_theory_and_fundamentals/workflow/"
   },
@@ -1546,6 +1550,10 @@
   {
     "title": "模型优化技术",
     "url": "/09_inference_system/model_optimization/"
+  },
+  {
+    "title": "一次前向，白赚 4 个 token：DFlash 2 块扩散投机解码技术详解",
+    "url": "/09_inference_system/model_optimization/dflash-block-diffusion-speculative-decoding.html"
   },
   {
     "title": "图解投机解码",
