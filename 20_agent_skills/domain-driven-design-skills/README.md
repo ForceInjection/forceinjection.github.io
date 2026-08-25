@@ -155,6 +155,7 @@ validation-cases/
 
 ## 相关文档
 
+- [ddd-quickstart.md](docs/ddd-quickstart.md) — **快速上手**：Skill 是什么、在哪里运行、如何从 0 到 1 完成一次建模（新手必读）
 - [ddd-skill-system-design.md](docs/ddd-skill-system-design.md) — 领域驱动设计自研体系主干设计文档（5 阶段模型、依赖图、反馈环矩阵）
 - [ddd-pipeline-article.md](docs/ddd-pipeline-article.md) — 技能流水线叙述性介绍（4 阶段 / 8 Skill 首版设计 + Cargo 验证关键结论）
 - [ddd-openspec-mapping.md](docs/ddd-openspec-mapping.md) — 映射指南：DDD 战术工件向 OpenSpec 规格转化的标准定义

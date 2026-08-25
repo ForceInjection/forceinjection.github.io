@@ -120,6 +120,10 @@
     "url": "/01_hardware_architecture/pcie/08_cxl_interconnect_overview.html"
   },
   {
+    "title": "CXL 命令行工具链全景：cxl / daxctl / ndctl 从查看到配置",
+    "url": "/01_hardware_architecture/pcie/09_cxl_cli_tools.html"
+  },
+  {
     "title": "性能评估与拓扑分析",
     "url": "/01_hardware_architecture/performance/"
   },
@@ -984,6 +988,26 @@
     "url": "/08_agentic_system/"
   },
   {
+    "title": "Agent 学习课程 Hub",
+    "url": "/08_agentic_system/agent_course_hub/"
+  },
+  {
+    "title": "2026 年 AI Agent 学习路线图：先跑通，再理解，最后造轮子",
+    "url": "/08_agentic_system/agent_course_hub/2026-agent-learning-roadmap-blog.html"
+  },
+  {
+    "title": "Agent 学习课程 Hub",
+    "url": "/08_agentic_system/agent_course_hub/agent-course-hub.html"
+  },
+  {
+    "title": "Agent 术语速查",
+    "url": "/08_agentic_system/agent_course_hub/glossary.html"
+  },
+  {
+    "title": "Agent 学习路线图：先跑通，再理解，最后造轮子",
+    "url": "/08_agentic_system/agent_course_hub/learning-roadmap.html"
+  },
+  {
     "title": "多轮指代消解对话系统",
     "url": "/08_agentic_system/agent_design/coref-dialogue-system/"
   },
@@ -1354,6 +1378,10 @@
   {
     "title": "DeepSeek-V3 H20 推理优化：基于 vLLM 源码的深度分析",
     "url": "/09_inference_system/deployment/deepseek_v3_h20_vllm_deep_dive.html"
+  },
+  {
+    "title": "输出差了一点点？用 logprobs 分清「噪声」还是「bug」",
+    "url": "/09_inference_system/deployment/logprobs-precision-diagnosis.html"
   },
   {
     "title": "Qwen2-VL-7B-Instruct 昇腾部署指南",
@@ -1746,6 +1774,10 @@
   {
     "title": "FlashAttention 深度解析：从 IO-Aware Tiling 到 Hopper 异步计算",
     "url": "/09_inference_system/vllm/module_analysis/flashattention_deep_dive.html"
+  },
+  {
+    "title": "gpu-memory-utilization 的谢幕：vLLM 如何用「实测」替代「估算」",
+    "url": "/09_inference_system/vllm/module_analysis/gpu-memory-utilization-retirement.html"
   },
   {
     "title": "Hybrid KV Cache Manager 深度解析",
@@ -2232,12 +2264,56 @@
     "url": "/98_llm_programming/langgraph/langgraph_intro.html"
   },
   {
+    "title": "杂项与专题合集",
+    "url": "/99_misc/"
+  },
+  {
+    "title": "从芯片到 Agent：AI 基础设施的阅读地图 ——「AI 原力注入」好书推荐合集",
+    "url": "/99_misc/book-recommendations.html"
+  },
+  {
     "title": "在 Mac 上运行 DeepSeek-R1 模型",
     "url": "/99_misc/mac-deepseek-r1.html"
   },
   {
     "title": "Ollama",
     "url": "/99_misc/ollama/"
+  },
+  {
+    "title": "Token Factory 演讲项目",
+    "url": "/99_misc/token_factory_talk/"
+  },
+  {
+    "title": "《Token Factory: AI 推理的成本革命》演讲提纲（可排练版）",
+    "url": "/99_misc/token_factory_talk/outline.html"
+  },
+  {
+    "title": "分享：Token工厂财务运营测算工具（附下载和学习笔记拆解）",
+    "url": "/99_misc/token_factory_talk/references/01-wechat-token-factory-model.html"
+  },
+  {
+    "title": "素材：AI Factory 的定义、分类与产业格局",
+    "url": "/99_misc/token_factory_talk/references/02-ai-factory-ecosystem.html"
+  },
+  {
+    "title": "素材：Token 工厂的商业模式与财务数据",
+    "url": "/99_misc/token_factory_talk/references/03-business-model-and-finance.html"
+  },
+  {
+    "title": "素材：成本技术（物理三维框架 / 模型架构 / KV Cache / 硬件 / 价格历史）",
+    "url": "/99_misc/token_factory_talk/references/04-cost-technology.html"
+  },
+  {
+    "title": "素材：杰文斯悖论、需求增长与未来方向",
+    "url": "/99_misc/token_factory_talk/references/05-jevons-demand-future.html"
+  },
+  {
+    "title": "素材：上市公司与 IPO 公司的 Token 财报数据",
+    "url": "/99_misc/token_factory_talk/references/06-listed-companies.html"
+  },
+  {
+    "title": "TokenFactory（词元工厂）技术与产业发展白皮书 2026",
+    "url": "/99_misc/token_factory_talk/references/07-tokenfactory-whitepaper-2026.html"
   },
   {
     "title": "CLAUDE.md",

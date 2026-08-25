@@ -155,6 +155,7 @@ validation-cases/
 
 ## Related Documents
 
+- [ddd-quickstart.en.md](docs/ddd-quickstart.en.md) — **Quickstart**: what the Skills are, where they run, and how to complete a modeling run from scratch (must-read for newcomers)
 - [ddd-skill-system-design.en.md](docs/ddd-skill-system-design.en.md) — In-house backbone system design document (5-stage model, dependency graph, feedback loop matrix)
 - [ddd-pipeline-article.en.md](docs/ddd-pipeline-article.en.md) — Narrative introduction to the skill pipeline (first-gen 4-stage / 8-Skill design + Cargo validation key findings)
 - [ddd-openspec-mapping.en.md](docs/ddd-openspec-mapping.en.md) — Mapping Guide: Standard definitions for converting DDD tactical artifacts to OpenSpec specifications

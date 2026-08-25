@@ -161,22 +161,27 @@
 
 该文档对 superpowers 插件与技能体系进行系统化的工程解析与实战指南，涵盖架构分层、核心模块、TDD/SDD 工作流、子智能体协作与钩子注入机制等内容，帮助读者快速掌握如何基于 superpowers 构建高确定性的 AI 工程能力。全文见：[superpowers 深度解析](./docs/superpowers-deep-dive.md)。
 
+### 4.4 mattpocock/skills 深度解析
+
+该文档对 Matt Pocock（Total TypeScript 创始人）的 22 万 + star 实战技能库进行深度拆解：**组合压倒内容**的架构（底层原语 + 薄路由）、grilling 设计树访谈、wayfinder 决策票地图、tdd seam 治理、diagnosing-bugs 回路纪律与 writing-for-agents 元技能，并与本仓库技能体系逐一对比。全文见：[mattpocock/skills 深度解析](./docs/mattpocock-skills-deep-dive.md)。
+
 ---
 
 ## 5. 推荐参考资源
 
 除了本项目内置的工具流，以下由官方或原力注入博主维护的技能合集同样展示了在各自领域的绝佳实践。
 
-| 仓库                                                                                                        | 领域               | 说明                                                                                                                         |
-| ----------------------------------------------------------------------------------------------------------- | ------------------ | ---------------------------------------------------------------------------------------------------------------------------- |
-| [MiniMax-AI/skills](https://github.com/MiniMax-AI/skills)                                                   | 全栈开发与办公文档 | 官方技能合集：前端 / 全栈 / Android / iOS 开发，着色器与 GIF 生成，PDF / PPTX / Excel / DOCX 文档处理                        |
-| [ForceInjection/cuda-code-skill](https://github.com/ForceInjection/cuda-code-skill)                         | CUDA 开发          | 将 PTX ISA、CUDA Runtime/Driver API、CUDA Math、cuBLAS、NCCL 官方文档转换为可检索 Markdown，内置 GPU 开发专属技能            |
-| [vllm-project/vllm-skills](https://github.com/vllm-project/vllm-skills/tree/main)                           | vLLM 部署与基准    | Claude Code 插件形式分发，6 个技能：部署（docker / k8s / simple）+ 性能基准（serve / random-synthetic / prefix-cache-bench） |
-| [ForceInjection/domain-driven-design-skills](https://github.com/ForceInjection/domain-driven-design-skills) | 领域驱动设计       | DDD 战略设计、战术设计与事件驱动架构（CQRS/Event Sourcing）技能封装                                                          |
-| [franklinxkk/ai-delivery-spec](https://github.com/franklinxkk/ai-delivery-spec)                             | 需求管理 / SDD     | 面向产品经理的需求管理 Kernel：intake→澄清→PRD/契约→评审→基线→变更/验收证据，自带 CLI、领域包与结构门禁                      |
-| [ForceInjection/cufile-skill](https://github.com/ForceInjection/cufile-skill)                               | GPUDirect Storage  | cuFile API 生命周期、同步/异步/批量 I/O、性能调优、`cufile.json` 配置与 GDS 兼容性检测（含 `check_gds.sh`）                  |
-| [ForceInjection/elf-skill](https://github.com/ForceInjection/elf-skill)                                     | 二进制安全         | elf-analyzer / binary-reverse / linux-pwn 三技能套件，内置 `allowed-tools` + `trust-level` 安全设计                          |
-| [ForceInjection/nvme-programming-skill](https://github.com/ForceInjection/nvme-programming-skill)           | NVMe 编程          | 队列模型与命令构造、多队列调优，NVMe 2.3 规范章节提取为可 grep 文本，4 个可编译 C 示例                                       |
+| 仓库                                                                                                        | 领域               | 说明                                                                                                                                                     |
+| ----------------------------------------------------------------------------------------------------------- | ------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [MiniMax-AI/skills](https://github.com/MiniMax-AI/skills)                                                   | 全栈开发与办公文档 | 官方技能合集：前端 / 全栈 / Android / iOS 开发，着色器与 GIF 生成，PDF / PPTX / Excel / DOCX 文档处理                                                    |
+| [mattpocock/skills](https://github.com/mattpocock/skills)                                                   | 工程纪律技能集     | Matt Pocock（Total TypeScript 创始人）日常实战技能：grilling 设计树访谈、wayfinder 决策票地图、tdd seam 治理等 35 个可组合技能，Claude Code 插件市场分发 |
+| [ForceInjection/cuda-code-skill](https://github.com/ForceInjection/cuda-code-skill)                         | CUDA 开发          | 将 PTX ISA、CUDA Runtime/Driver API、CUDA Math、cuBLAS、NCCL 官方文档转换为可检索 Markdown，内置 GPU 开发专属技能                                        |
+| [vllm-project/vllm-skills](https://github.com/vllm-project/vllm-skills/tree/main)                           | vLLM 部署与基准    | Claude Code 插件形式分发，6 个技能：部署（docker / k8s / simple）+ 性能基准（serve / random-synthetic / prefix-cache-bench）                             |
+| [ForceInjection/domain-driven-design-skills](https://github.com/ForceInjection/domain-driven-design-skills) | 领域驱动设计       | DDD 战略设计、战术设计与事件驱动架构（CQRS/Event Sourcing）技能封装                                                                                      |
+| [franklinxkk/ai-delivery-spec](https://github.com/franklinxkk/ai-delivery-spec)                             | 需求管理 / SDD     | 面向产品经理的需求管理 Kernel：intake→澄清→PRD/契约→评审→基线→变更/验收证据，自带 CLI、领域包与结构门禁                                                  |
+| [ForceInjection/cufile-skill](https://github.com/ForceInjection/cufile-skill)                               | GPUDirect Storage  | cuFile API 生命周期、同步/异步/批量 I/O、性能调优、`cufile.json` 配置与 GDS 兼容性检测（含 `check_gds.sh`）                                              |
+| [ForceInjection/elf-skill](https://github.com/ForceInjection/elf-skill)                                     | 二进制安全         | elf-analyzer / binary-reverse / linux-pwn 三技能套件，内置 `allowed-tools` + `trust-level` 安全设计                                                      |
+| [ForceInjection/nvme-programming-skill](https://github.com/ForceInjection/nvme-programming-skill)           | NVMe 编程          | 队列模型与命令构造、多队列调优，NVMe 2.3 规范章节提取为可 grep 文本，4 个可编译 C 示例                                                                   |
 
 ---
 
