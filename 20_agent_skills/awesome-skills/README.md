@@ -17,29 +17,30 @@
 
 ## 1. 核心技能介绍
 
-针对复杂代码阅读、项目逆向工程、规范驱动开发等工程挑战，本项目封装了 17 个独立智能体技能，旨在通过多角色协同解决实际开发瓶颈。
+针对复杂代码阅读、项目逆向工程、规范驱动开发等工程挑战，本项目封装了 18 个独立智能体技能，旨在通过多角色协同解决实际开发瓶颈。
 
-| 技能                                                          | 功能                                                                                                                                                      | 触发命令                                  |
-| ------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------- |
-| [`code-reader`](./skills/code-reader)                         | 深度代码阅读：三重智能体协作（技术作者 / QA / 初级开发者）+ 闭卷考试式验证循环，系统化阅读陌生代码库并生成可复用的认知技能                                | `/code-reader <source> <output-dir>`      |
-| [`project-analyzer`](./skills/project-analyzer)               | 深度项目架构分析：在 `code-reader` 基础上对第三方仓库逆向工程与静态分析，产出含 7 个标准章节的《项目架构深度分析报告》（代码解析与执行流程约占 70% 篇幅） | `/project-analyzer <source> <output-dir>` |
-| [`dir-organizer`](./skills/dir-organizer)                     | 目录整理：规范化重构项目目录结构，先完整打印重构计划并经用户同意后执行，完成后自动更新内部引用链接                                                        | `/dir-organizer <target-dir>`             |
-| [`doc-reviewer`](./skills/doc-reviewer)                       | 文档评审：四种独立评审类型（大纲 / 内容 / 资产链接 / 格式），规则按需加载，支持用户授权下自动应用修复                                                     | `/doc-reviewer <target-file>`             |
-| [`md-summarizer`](./skills/md-summarizer)                     | Markdown 总结器：提取核心概要、深度解析与关键要点，支持多文件综合对比分析，输出结构化中文报告                                                             | `/md-summarizer <file...>`                |
-| [`update-submitter`](./skills/update-submitter)               | 代码提交助手：分析 `git status`/`git diff`，将相关变更逻辑分组并生成符合 Conventional Commits 规范的提交信息，授权后执行提交                              | `/update-submitter <target-dir>`          |
-| [`agent-skill-reviewer`](./skills/agent-skill-reviewer)       | Agent Skill 审查器：审查技能目录结构、YAML Frontmatter（描述公式）与指令清晰度，输出结构化审查报告                                                        | `/agent-skill-reviewer <target-dir>`      |
-| [`openspec-assistant`](./skills/openspec-assistant)           | OpenSpec 规范驱动开发：架构师 / 开发 / QA 三角色协同，覆盖意图对齐、规范生成、代码实现与自动化验证，内置 `/opsx` 指令体系                                 | `/openspec-assistant [执行意图]`          |
-| [`web-content-downloader`](./skills/web-content-downloader)   | 网页内容下载器：Jina Reader 正文提取 + 核心配图智能下载重命名 + HTML 表格转 Markdown，保留网页原始语言                                                    | `/web-content-downloader <URL>`           |
-| [`md-translator`](./skills/md-translator)                     | Markdown 翻译器：翻译为指定语言（默认中文），严格保留 Markdown 格式，内置中英空格等排版规范检查                                                           | `/md-translator <target-file>`            |
-| [`reference-organizer`](./skills/reference-organizer)         | 参考文献整理：arXiv API / Crossref DOI / 无头浏览器三种抓取通道，输出符合 GB/T 7714 / APA / IEEE 标准的引文                                               | `/reference-organizer [URL/DOI/ID]`       |
-| [`md-link-checker`](./skills/md-link-checker)                 | Markdown 链接检查器：多线程并发 + LRU 缓存，校验本地与外部链接连通性，兼容 HTML 图片标签                                                                  | `/md-link-checker <target-file\|dir>`     |
-| [`drawio-designer`](./skills/drawio-designer)                 | Draw.io 架构图设计器：直接操作 `.drawio` XML，内置 AWS 官方图标映射与防重叠连线规则，headless 导出透明背景高分辨率 PNG                                    | `/drawio-designer <diagram-file>`         |
-| [`pptx-reader`](./skills/pptx-reader)                         | PPTX 读取器：markitdown 文本提取 + XML 解包 + LibreOffice/Poppler 无损渲染为高分辨率图像，独立 venv 隔离系统依赖                                          | `/pptx-reader <target-file>`              |
-| [`ontology`](./skills/ontology)                               | 知识图谱本体管理：16 种实体 / 15 种关系的类型化知识图谱，属性 / 基数 / 环路约束校验，JSONL 事件日志落盘审计，作为跨技能状态共享的记忆基座                 | `python3 scripts/ontology.py <cmd>`       |
-| [`editorial-card-designer`](./skills/editorial-card-designer) | 杂志编辑式信息卡：现代杂志 + 瑞士国际主义风格的高密度 HTML 信息卡，8 种固定比例预设，headless Chrome 渲染为精确对齐的 PNG                                 | 对话式工作流                              |
-| [`tech-outline-planner`](./skills/tech-outline-planner)       | 技术文章大纲规划：Context-first + Process narrative 组合叙事结构，遵循 Given-before-new 认知原则，产出"架构评审级"大纲                                    | `/tech-outline-planner [主题/痛点/方案]`  |
+| 技能                                                          | 功能                                                                                                                                                                          | 触发命令                                  |
+| ------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------- |
+| [`code-reader`](./skills/code-reader)                         | 深度代码阅读：三重智能体协作（技术作者 / QA / 初级开发者）+ 闭卷考试式验证循环，系统化阅读陌生代码库并生成可复用的认知技能                                                    | `/code-reader <source> <output-dir>`      |
+| [`project-analyzer`](./skills/project-analyzer)               | 深度项目架构分析：在 `code-reader` 基础上对第三方仓库逆向工程与静态分析，产出含 7 个标准章节的《项目架构深度分析报告》（代码解析与执行流程约占 70% 篇幅）                     | `/project-analyzer <source> <output-dir>` |
+| [`dir-organizer`](./skills/dir-organizer)                     | 目录整理：规范化重构项目目录结构，先完整打印重构计划并经用户同意后执行，完成后自动更新内部引用链接                                                                            | `/dir-organizer <target-dir>`             |
+| [`doc-reviewer`](./skills/doc-reviewer)                       | 文档评审：四种独立评审类型（大纲 / 内容 / 资产链接 / 格式），规则按需加载，支持用户授权下自动应用修复                                                                         | `/doc-reviewer <target-file>`             |
+| [`md-summarizer`](./skills/md-summarizer)                     | Markdown 总结器：提取核心概要、深度解析与关键要点，支持多文件综合对比分析，输出结构化中文报告                                                                                 | `/md-summarizer <file...>`                |
+| [`update-submitter`](./skills/update-submitter)               | 代码提交助手：分析 `git status`/`git diff`，将相关变更逻辑分组并生成符合 Conventional Commits 规范的提交信息，授权后执行提交                                                  | `/update-submitter <target-dir>`          |
+| [`agent-skill-reviewer`](./skills/agent-skill-reviewer)       | Agent Skill 审查器：审查技能目录结构、YAML Frontmatter（描述公式）与指令清晰度，输出结构化审查报告                                                                            | `/agent-skill-reviewer <target-dir>`      |
+| [`openspec-assistant`](./skills/openspec-assistant)           | OpenSpec 规范驱动开发：架构师 / 开发 / QA 三角色协同，覆盖意图对齐、规范生成、代码实现与自动化验证，内置 `/opsx` 指令体系                                                     | `/openspec-assistant [执行意图]`          |
+| [`web-content-downloader`](./skills/web-content-downloader)   | 网页内容下载器：Jina Reader 正文提取 + 核心配图智能下载重命名 + HTML 表格转 Markdown，保留网页原始语言                                                                        | `/web-content-downloader <URL>`           |
+| [`md-translator`](./skills/md-translator)                     | Markdown 翻译器：翻译为指定语言（默认中文），严格保留 Markdown 格式，内置中英空格等排版规范检查                                                                               | `/md-translator <target-file>`            |
+| [`humanizer-zh`](./skills/humanizer-zh)                       | 中文去 AI 化：检测并修复 35 种 AI 写作特征（夸大意义宣称、宣传语、AI 高频词、破折号滥用、三段式结构等），改写为自然的人类文风且不改变原意，基于维基百科 "Signs of AI writing" | `/humanizer-zh <文本或文件>`              |
+| [`reference-organizer`](./skills/reference-organizer)         | 参考文献整理：arXiv API / Crossref DOI / 无头浏览器三种抓取通道，输出符合 GB/T 7714 / APA / IEEE 标准的引文                                                                   | `/reference-organizer [URL/DOI/ID]`       |
+| [`md-link-checker`](./skills/md-link-checker)                 | Markdown 链接检查器：多线程并发 + LRU 缓存，校验本地与外部链接连通性，兼容 HTML 图片标签                                                                                      | `/md-link-checker <target-file\|dir>`     |
+| [`drawio-designer`](./skills/drawio-designer)                 | Draw.io 架构图设计器：直接操作 `.drawio` XML，内置 AWS 官方图标映射与防重叠连线规则，headless 导出透明背景高分辨率 PNG                                                        | `/drawio-designer <diagram-file>`         |
+| [`pptx-reader`](./skills/pptx-reader)                         | PPTX 读取器：markitdown 文本提取 + XML 解包 + LibreOffice/Poppler 无损渲染为高分辨率图像，独立 venv 隔离系统依赖                                                              | `/pptx-reader <target-file>`              |
+| [`ontology`](./skills/ontology)                               | 知识图谱本体管理：16 种实体 / 15 种关系的类型化知识图谱，属性 / 基数 / 环路约束校验，JSONL 事件日志落盘审计，作为跨技能状态共享的记忆基座                                     | `python3 scripts/ontology.py <cmd>`       |
+| [`editorial-card-designer`](./skills/editorial-card-designer) | 杂志编辑式信息卡：现代杂志 + 瑞士国际主义风格的高密度 HTML 信息卡，8 种固定比例预设，headless Chrome 渲染为精确对齐的 PNG                                                     | 对话式工作流                              |
+| [`tech-outline-planner`](./skills/tech-outline-planner)       | 技术文章大纲规划：Context-first + Process narrative 组合叙事结构，遵循 Given-before-new 认知原则，产出"架构评审级"大纲                                                        | `/tech-outline-planner [主题/痛点/方案]`  |
 
-> 来源说明：`ontology` 导入自 [hanzoskill/ontology](https://github.com/hanzoskill/ontology)（本地增强为超集），`editorial-card-designer` 导入自 [shaom/infocard-skills](https://github.com/shaom/infocard-skills)（本地更名 + 加固），`pptx-reader` 参考自 [anthropics/skills](https://github.com/anthropics/skills/blob/main/skills/pptx/SKILL.md)。各技能的详细使用示例与端到端演示见各自 `SKILL.md` 及 `examples/` 目录。
+> 来源说明：`ontology` 导入自 [hanzoskill/ontology](https://github.com/hanzoskill/ontology)（本地增强为超集），`editorial-card-designer` 导入自 [shaom/infocard-skills](https://github.com/shaom/infocard-skills)（本地更名 + 加固），`pptx-reader` 参考自 [anthropics/skills](https://github.com/anthropics/skills/blob/main/skills/pptx/SKILL.md)，`humanizer-zh` 翻译自 [blader/humanizer](https://github.com/blader/humanizer)（中文语境适配）。各技能的详细使用示例与端到端演示见各自 `SKILL.md` 及 `examples/` 目录。
 
 ---
 
