@@ -22,6 +22,9 @@ $font-code: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
 //  DARK palette (default — :root)
 // ═══════════════════════════════════════════════════════
 :root {
+  // Native UI (scrollbars, form controls) follows the theme
+  color-scheme: dark;
+
   // Backgrounds
   --bg:                #0d1117;
   --bg-surface:        #161b22;
@@ -53,6 +56,7 @@ $font-code: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
 
   // Buttons
   --btn-solid-bg:      #{$dell-blue};
+  --btn-solid-hover-bg: #{$dell-light};
   --btn-solid-text:    #fff;
   --btn-outline-text:  #{$dell-light};
   --btn-outline-border:#30363d;
@@ -122,9 +126,6 @@ $font-code: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
   --nav-logo-border:   #30363d;
   --nav-brand:         #{$dell-light};
 
-  // Mermaid background (used when mermaid theme != dark)
-  --mermaid-bg:        #161b22;
-
   // Blockquote
   --blockquote-note-border: #d4a017;
   --blockquote-note-bg:     #211e12;
@@ -144,6 +145,8 @@ $font-code: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
 //  LIGHT palette
 // ═══════════════════════════════════════════════════════
 [data-theme="light"] {
+  color-scheme: light;
+
   --bg:                #ffffff;
   --bg-surface:        #f6f8fa;
   --bg-surface-hi:     #eaeef2;
@@ -169,6 +172,7 @@ $font-code: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
   --accent-contrast:   #ffffff;
 
   --btn-solid-bg:      #0969da;
+  --btn-solid-hover-bg: #0550ae;
   --btn-solid-text:    #fff;
   --btn-outline-text:  #0969da;
   --btn-outline-border:#d0d7de;
