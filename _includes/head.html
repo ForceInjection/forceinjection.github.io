@@ -3,6 +3,32 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   {%- seo -%}
+
+  <!--
+    Theme bootstrap — runs before any stylesheet to prevent a flash of the
+    wrong theme. Priority (Q5): localStorage > prefers-color-scheme > dark.
+    The attribute is set on <html>, so CSS `[data-theme="light"]` rules apply
+    as soon as first paint happens.
+  -->
+  <script>
+  (function () {
+    try {
+      var saved = localStorage.getItem('theme');
+      var theme;
+      if (saved === 'light' || saved === 'dark') {
+        theme = saved;
+      } else if (window.matchMedia('(prefers-color-scheme: light)').matches) {
+        theme = 'light';
+      } else {
+        theme = 'dark';
+      }
+      document.documentElement.setAttribute('data-theme', theme);
+    } catch (e) {
+      document.documentElement.setAttribute('data-theme', 'dark');
+    }
+  }());
+  </script>
+
   <link rel="stylesheet" href="{{ "/assets/main.css" | relative_url }}">
   {%- feed_meta -%}
 
@@ -38,14 +64,21 @@
   }());
   </script>
 
-  <!-- Mermaid: lazy-loaded only when the page contains mermaid code blocks (dark theme) -->
+  <!-- Mermaid: lazy-loaded only when the page contains mermaid code blocks.
+       Theme follows the active data-theme at load time (dark by default). -->
   <script>
   (function () {
     document.addEventListener('DOMContentLoaded', function () {
       if (!document.querySelector('pre code.language-mermaid')) return;
       import('https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs').then(function (m) {
         var mermaid = m.default;
-        mermaid.initialize({ startOnLoad: false, theme: 'dark', themeVariables: { background: '#161b22' } });
+        var activeTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+        var isLight = activeTheme === 'light';
+        mermaid.initialize({
+          startOnLoad: false,
+          theme: isLight ? 'default' : 'dark',
+          themeVariables: isLight ? {} : { background: '#161b22' }
+        });
         // Kramdown renders ```mermaid as <pre><code class="language-mermaid">,
         // but Mermaid expects <div class="mermaid">. Convert them here.
         document.querySelectorAll('pre code.language-mermaid').forEach(function (el) {

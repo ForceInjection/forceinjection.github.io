@@ -1,39 +1,235 @@
 // ═══════════════════════════════════════════════════════
 //  Geek Theme — content page styles for forceinjection.github.io
-//  Applies only to .post-content / .page-content (MD rendered pages)
+//  Applies to .post-content / .page-content (MD rendered pages)
 //  Homepage (index.html) has its own inline CSS, unaffected.
+//
+//  Dark-mode default; add data-theme="light" to <html> for light mode.
+//  Toggle logic lives in _includes/head.html.
 // ═══════════════════════════════════════════════════════
 
-// ── Color tokens ──────────────────────────────────────
-// Terminal theme (dark navy): brand-continuation palette
-$dell-navy:    #001A3A;   // deepest brand navy
+// ── SCSS variables for building the CSS-custom-property palettes only ───
+// (These must stay as SCSS variables because they feed :root / [data-theme])
+$dell-navy:    #001A3A;
 $dell-dark:    #003B6F;
 $dell-blue:    #007DB8;
-$dell-mid:     #005EB8;
-$dell-light:   #4CB8E4;   // primary accent (light cyan-blue)
-$dell-pale:    #D6EAF5;
-
-// ── Terminal dark surface tokens ──────────────────────
-// GitHub Dark neutral base + brand-blue (#4CB8E4) accents
-$page-bg:      #0d1117;   // terminal background (GitHub canvas default)
-$surface:      #161b22;   // raised surface (cards, dropdowns)
-$surface-hi:   #21262d;   // hover surface
-$border-color: #30363d;   // terminal borders
-$text-primary: #e6edf3;   // main foreground
-$text-muted:   #8b949e;   // secondary text
-$text-faint:   #6e7681;   // tertiary text
-$text-code:    #7ee0ff;   // inline code accent (brand cyan)
-
-$code-bg:      #161b22;   // code block bg (raised panel)
-$code-fg:      #e6edf3;
-$code-border:  #30363d;
+$dell-light:   #4CB8E4;
 
 // ── Font stacks ───────────────────────────────────────
-// System font stack: PingFang SC (macOS/iOS) → Microsoft YaHei (Windows) →
-// Noto Sans SC (Linux/Android) → platform sans-serif fallback.
-// All three have professionally-designed Latin + CJK glyphs that read as one family.
 $font-body: 'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 $font-code: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+
+// ═══════════════════════════════════════════════════════
+//  DARK palette (default — :root)
+// ═══════════════════════════════════════════════════════
+:root {
+  // Backgrounds
+  --bg:                #0d1117;
+  --bg-surface:        #161b22;
+  --bg-surface-hi:     #21262d;
+  --bg-code:           #161b22;
+  --bg-input:          #0d1117;
+
+  // Borders
+  --border:            #30363d;
+  --border-code:       #30363d;
+
+  // Text
+  --text:              #e6edf3;
+  --text-heading:      #f0f6fc;
+  --text-muted:        #8b949e;
+  --text-faint:        #6e7681;
+  --text-link:         #{$dell-light};
+  --text-link-hover:   #9fe0ff;
+  --text-link-visited: #8fc8e8;
+  --text-code:         #7ee0ff;
+  --text-strong:       #f0f6fc;
+
+  // Accent
+  --accent:            #{$dell-light};
+  --accent-blue:       #{$dell-blue};
+  --accent-deep:       #{$dell-navy};
+  // text/icon color that sits on top of --accent backgrounds
+  --accent-contrast:   #001A3A;
+
+  // Buttons
+  --btn-solid-bg:      #{$dell-blue};
+  --btn-solid-text:    #fff;
+  --btn-outline-text:  #{$dell-light};
+  --btn-outline-border:#30363d;
+  --btn-outline-hover-bg: #21262d;
+  --btn-outline-hover-border: #{$dell-light};
+
+  // Tags
+  --tag-bg:            #21262d;
+  --tag-text:          #7ee0ff;
+
+  // Cards
+  --card-bg:           #161b22;
+  --card-border:       #30363d;
+  --card-shadow:       rgba(0,0,0,.25);
+  --card-hover-shadow: rgba(0,0,0,.5);
+
+  // Hero / Terminal (terminal window stays dark even in light mode)
+  --hero-bg:           #0d1117;
+  --term-bg:           #161b22;
+  --term-bar-bg:       #21262d;
+  --term-border:       #30363d;
+  --term-bar-text:     #8b949e;
+  --term-prompt:       #28c840;
+  --term-cmd:          #f0f6fc;
+  --term-out:          #7ee0ff;
+  --term-cursor:       #{$dell-light};
+  --term-dot-red:      #ff5f57;
+  --term-dot-yellow:   #febc2e;
+  --term-dot-green:    #28c840;
+
+  // Footer
+  --footer-bg-start:   #161b22;
+  --footer-bg-end:     #0d1117;
+  --footer-mark:       rgba(255,255,255,.28);
+  --footer-text:       #ffffff;
+  --footer-cite:       rgba(255,255,255,.8);
+  --footer-divider:    rgba(255,255,255,.35);
+  --footer-body:       rgba(255,255,255,.8);
+
+  // Syntax highlighting (Rouge / GitHub dark)
+  --syn-comment:       #8b949e;
+  --syn-keyword:       #ff7b72;
+  --syn-string:        #a5d6ff;
+  --syn-name:          #e6edf3;
+  --syn-func-class:    #d2a8ff;
+  --syn-number:        #79c0ff;
+  --syn-operator:      #ff7b72;
+  --syn-punctuation:   #c9d1d9;
+  --syn-tag:           #7ee787;
+  --syn-variable:      #ffa657;
+
+  // Section headings (index.html)
+  --section-heading:   #f0f6fc;
+  --section-sub:       #8b949e;
+
+  // Scrollbar
+  --scrollbar-track:   #161b22;
+  --scrollbar-thumb:   #30363d;
+  --scrollbar-thumb-hover: #{$dell-blue};
+
+  // Search highlight
+  --search-hi-bg:      #0d419d;
+  --search-hi-text:    #ddf4ff;
+
+  // Nav
+  --nav-shadow:        rgba(0,0,0,.45);
+  --nav-logo-border:   #30363d;
+  --nav-brand:         #{$dell-light};
+
+  // Mermaid background (used when mermaid theme != dark)
+  --mermaid-bg:        #161b22;
+
+  // Blockquote
+  --blockquote-note-border: #d4a017;
+  --blockquote-note-bg:     #211e12;
+  --blockquote-tip-border:  #28a745;
+  --blockquote-tip-bg:      #12261a;
+  --blockquote-warn-border: #e05252;
+  --blockquote-warn-bg:     #2a1616;
+
+  // HR diamond
+  --hr-diamond-color:  #{$dell-light};
+
+  // List marker
+  --list-marker:       #{$dell-blue};
+}
+
+// ═══════════════════════════════════════════════════════
+//  LIGHT palette
+// ═══════════════════════════════════════════════════════
+[data-theme="light"] {
+  --bg:                #ffffff;
+  --bg-surface:        #f6f8fa;
+  --bg-surface-hi:     #eaeef2;
+  --bg-code:           #f6f8fa;
+  --bg-input:          #ffffff;
+
+  --border:            #d0d7de;
+  --border-code:       #d0d7de;
+
+  --text:              #1f2328;
+  --text-heading:      #1f2328;
+  --text-muted:        #59636e;
+  --text-faint:        #818b98;
+  --text-link:         #0969da;
+  --text-link-hover:   #0550ae;
+  --text-link-visited: #8250df;
+  --text-code:         #0550ae;
+  --text-strong:       #1f2328;
+
+  --accent:            #0969da;
+  --accent-blue:       #0969da;
+  --accent-deep:       #e6f0ff;
+  --accent-contrast:   #ffffff;
+
+  --btn-solid-bg:      #0969da;
+  --btn-solid-text:    #fff;
+  --btn-outline-text:  #0969da;
+  --btn-outline-border:#d0d7de;
+  --btn-outline-hover-bg: #eaeef2;
+  --btn-outline-hover-border: #0969da;
+
+  --tag-bg:            #eaeef2;
+  --tag-text:          #0550ae;
+
+  --card-bg:           #f6f8fa;
+  --card-border:       #d0d7de;
+  --card-shadow:       rgba(0,0,0,.08);
+  --card-hover-shadow: rgba(0,0,0,.15);
+
+  // Hero → light background, terminal stays dark
+  --hero-bg:           #f6f8fa;
+
+  --footer-bg-start:   #f6f8fa;
+  --footer-bg-end:     #ffffff;
+  --footer-mark:       rgba(0,0,0,.12);
+  --footer-text:       #1f2328;
+  --footer-cite:       rgba(0,0,0,.55);
+  --footer-divider:    rgba(0,0,0,.12);
+  --footer-body:       rgba(0,0,0,.65);
+
+  --syn-comment:       #6e7781;
+  --syn-keyword:       #cf222e;
+  --syn-string:        #0a3069;
+  --syn-name:          #1f2328;
+  --syn-func-class:    #8250df;
+  --syn-number:        #0550ae;
+  --syn-operator:      #cf222e;
+  --syn-punctuation:   #24292f;
+  --syn-tag:           #116329;
+  --syn-variable:      #953800;
+
+  --section-heading:   #1f2328;
+  --section-sub:       #59636e;
+
+  --scrollbar-track:   #f6f8fa;
+  --scrollbar-thumb:   #d0d7de;
+  --scrollbar-thumb-hover: #0969da;
+
+  --search-hi-bg:      #ddf4ff;
+  --search-hi-text:    #0969da;
+
+  --nav-shadow:        rgba(0,0,0,.08);
+  --nav-logo-border:   #d0d7de;
+  --nav-brand:         #0969da;
+
+  --blockquote-note-border: #d4a017;
+  --blockquote-note-bg:     #fff8e1;
+  --blockquote-tip-border:  #28a745;
+  --blockquote-tip-bg:      #e6ffed;
+  --blockquote-warn-border: #e05252;
+  --blockquote-warn-bg:     #ffeef0;
+
+  --hr-diamond-color:  #0969da;
+
+  --list-marker:       #0969da;
+}
 
 // ═══════════════════════════════════════════════════════
 //  Site Navigation Bar
@@ -42,9 +238,9 @@ $font-code: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
   position: sticky;
   top: 0;
   z-index: 1000;
-  background: $surface;
-  border-bottom: 1px solid $border-color;
-  box-shadow: 0 2px 14px rgba(0, 0, 0, .45);
+  background: var(--bg-surface);
+  border-bottom: 1px solid var(--border);
+  box-shadow: 0 2px 14px var(--nav-shadow);
 
   &__inner {
     max-width: 1100px;
@@ -60,7 +256,7 @@ $font-code: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
     font-family: $font-body;
     font-weight: 700;
     font-size: .95em;
-    color: $dell-light !important;
+    color: var(--nav-brand) !important;
     text-decoration: none !important;
     letter-spacing: -.01em;
     white-space: nowrap;
@@ -68,7 +264,7 @@ $font-code: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
     align-items: center;
     gap: 7px;
     flex-shrink: 0;
-    &:hover { color: #fff !important; }
+    &:hover { color: var(--text-link) !important; }
   }
 
   &__logo {
@@ -76,7 +272,7 @@ $font-code: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
     height: 32px;
     border-radius: 50%;
     object-fit: cover;
-    border: 1.5px solid $border-color;
+    border: 1.5px solid var(--nav-logo-border);
     flex-shrink: 0;
   }
 
@@ -85,8 +281,8 @@ $font-code: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
   &__modules-btn {
     margin-left: auto;
     background: none;
-    border: 1px solid $border-color;
-    color: $text-primary;
+    border: 1px solid var(--border);
+    color: var(--text);
     font-family: $font-body;
     font-size: .85em;
     font-weight: 500;
@@ -100,9 +296,9 @@ $font-code: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
     flex-shrink: 0;
     &:hover,
     &[aria-expanded="true"] {
-      background: $surface-hi;
-      border-color: $dell-light;
-      color: $dell-light;
+      background: var(--bg-surface-hi);
+      border-color: var(--accent);
+      color: var(--accent);
     }
   }
 
@@ -117,17 +313,46 @@ $font-code: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
     align-items: center;
     padding: 5px;
     border-radius: 6px;
-    color: $text-muted !important;
+    color: var(--text-muted) !important;
     text-decoration: none !important;
     flex-shrink: 0;
     transition: color .15s, background .15s;
     &:hover {
-      color: $dell-light !important;
-      background: $surface-hi;
+      color: var(--accent) !important;
+      background: var(--bg-surface-hi);
     }
   }
 
   &__github-icon { fill: currentColor; display: block; }
+
+  // ── Theme toggle button ──
+  &__theme-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    border-radius: 6px;
+    padding: 5px;
+    cursor: pointer;
+    color: var(--text-muted);
+    flex-shrink: 0;
+    transition: color .15s, background .15s;
+    &:hover {
+      color: var(--accent);
+      background: var(--bg-surface-hi);
+    }
+    svg { display: block; }
+    // Show one icon at a time
+    .icon-sun  { display: none; }
+    .icon-moon { display: block; }
+  }
+
+  // In light mode, swap icons
+  [data-theme="light"] &__theme-toggle {
+    .icon-sun  { display: block; }
+    .icon-moon { display: none; }
+  }
 
   &__hamburger {
     display: none;
@@ -141,7 +366,7 @@ $font-code: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
       display: block;
       width: 22px;
       height: 2px;
-      background: $text-primary;
+      background: var(--text);
       border-radius: 2px;
       transition: transform .22s ease, opacity .22s ease;
     }
@@ -156,9 +381,9 @@ $font-code: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
     position: absolute;
     left: 0;
     right: 0;
-    background: $surface;
-    border-bottom: 2px solid $dell-blue;
-    box-shadow: 0 8px 28px rgba(0, 0, 0, .5);
+    background: var(--bg-surface);
+    border-bottom: 2px solid var(--accent-blue);
+    box-shadow: 0 8px 28px var(--nav-shadow);
     z-index: 999;
     &.is-open { display: block; }
   }
@@ -179,13 +404,13 @@ $font-code: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
     padding: 9px 11px;
     border-radius: 7px;
     text-decoration: none !important;
-    color: $text-primary !important;
+    color: var(--text) !important;
     font-size: .83em;
     font-weight: 500;
     transition: background .12s, color .12s;
     &:hover {
-      background: $surface-hi;
-      color: $dell-light !important;
+      background: var(--bg-surface-hi);
+      color: var(--accent) !important;
     }
   }
 
@@ -195,8 +420,8 @@ $font-code: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
   // ── Mobile menu
   &__mobile-menu {
     display: none;
-    background: $surface-hi;
-    border-top: 1px solid $border-color;
+    background: var(--bg-surface-hi);
+    border-top: 1px solid var(--border);
     max-height: 70vh;
     overflow-y: auto;
     &.is-open { display: block; }
@@ -205,11 +430,11 @@ $font-code: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
       align-items: center;
       gap: 10px;
       padding: 11px 20px;
-      color: $text-primary !important;
+      color: var(--text) !important;
       font-size: .9em;
       text-decoration: none !important;
-      border-bottom: 1px solid $border-color;
-      &:hover { background: $surface; color: $dell-light !important; }
+      border-bottom: 1px solid var(--border);
+      &:hover { background: var(--bg-surface); color: var(--accent) !important; }
     }
   }
 
@@ -233,28 +458,28 @@ $font-code: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
     &-icon {
       position: absolute;
       left: 10px;
-      color: $text-muted;
+      color: var(--text-muted);
       pointer-events: none;
       z-index: 1;
     }
 
     &-input {
       width: 100%;
-      background: $page-bg;
-      border: 1px solid $border-color;
+      background: var(--bg-input);
+      border: 1px solid var(--border);
       border-radius: 6px;
       padding: 5px 10px 5px 30px;
-      color: $text-primary;
+      color: var(--text);
       font-family: $font-body;
       font-size: .85em;
       outline: none;
       transition: background .15s, border-color .15s;
 
-      &::placeholder { color: $text-faint; }
+      &::placeholder { color: var(--text-faint); }
 
       &:focus {
-        background: $surface-hi;
-        border-color: $dell-light;
+        background: var(--bg-surface-hi);
+        border-color: var(--accent);
       }
     }
 
@@ -263,10 +488,10 @@ $font-code: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
       top: calc(100% + 6px);
       left: 0;
       right: 0;
-      background: $surface;
-      border: 1px solid $border-color;
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
       border-radius: 8px;
-      box-shadow: 0 8px 28px rgba(0,0,0,.5);
+      box-shadow: 0 8px 28px var(--nav-shadow);
       max-height: 340px;
       overflow-y: auto;
       margin: 0;
@@ -281,7 +506,7 @@ $font-code: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
           cursor: pointer;
           &.is-selected,
           &:hover {
-            background: $surface-hi;
+            background: var(--bg-surface-hi);
           }
         }
       }
@@ -290,14 +515,14 @@ $font-code: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
     &-link {
       display: block;
       padding: 7px 14px;
-      color: $text-primary !important;
+      color: var(--text) !important;
       font-size: .85em;
       font-weight: 500;
       text-decoration: none !important;
       line-height: 1.4;
       mark {
-        background: #0d419d;
-        color: #ddf4ff;
+        background: var(--search-hi-bg);
+        color: var(--search-hi-text);
         font-weight: 700;
         padding: 0 1px;
         border-radius: 2px;
@@ -307,14 +532,14 @@ $font-code: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
     &-url {
       display: block;
       padding: 0 14px 6px;
-      color: $text-muted;
+      color: var(--text-muted);
       font-size: .75em;
       font-family: $font-code;
     }
 
     &-no-results {
       padding: 10px 14px;
-      color: $text-muted;
+      color: var(--text-muted);
       font-size: .85em;
       text-align: center;
     }
@@ -324,16 +549,16 @@ $font-code: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
 // ── Body & page chrome ─────────────────────────────
 body {
   font-family: $font-body;
-  background-color: $page-bg;
-  color: $text-primary;
+  background-color: var(--bg);
+  color: var(--text);
   line-height: 1.75;
 }
 
-// ── Site-wide link color → terminal cyan ─────────────
+// ── Site-wide link color ─────────────
 a {
-  color: $dell-light;
-  &:hover { color: #9fe0ff; }
-  &:visited { color: #8fc8e8; }
+  color: var(--text-link);
+  &:hover { color: var(--text-link-hover); }
+  &:visited { color: var(--text-link-visited); }
 }
 
 // ═══════════════════════════════════════════════════════
@@ -346,33 +571,27 @@ article.post {
   // ── Typography ──────────────────────────────────────
   font-size: 15.5px;
   line-height: 1.8;
-  color: $text-primary;
+  color: var(--text);
 
   // ── Headings ────────────────────────────────────────
   h1, h2, h3, h4, h5, h6 {
     font-family: $font-body;
     font-weight: 700;
-    color: #f0f6fc;
+    color: var(--text-heading);
     margin-top: 2em;
     margin-bottom: .5em;
     line-height: 1.3;
   }
 
-  // Terminal-styled headings:
-  // h1 keeps a clean title with terminal divider
-  // h2 gets a shell prompt marker (❯)
-  // h3 uses a code-inspired ## marker
-  // h4 retains JetBrains Mono for a terminal / tech-doc accent
-
   h1 {
     font-size: 1.9em;
-    border-bottom: 2px solid $border-color;
+    border-bottom: 2px solid var(--border);
     padding-bottom: .3em;
   }
 
   h2 {
     font-size: 1.45em;
-    border-bottom: 1px solid $border-color;
+    border-bottom: 1px solid var(--border);
     padding-bottom: .25em;
     position: relative;
     padding-left: 20px;
@@ -381,7 +600,7 @@ article.post {
       position: absolute;
       left: 0; top: 50%;
       transform: translateY(-52%);
-      color: $dell-light;
+      color: var(--accent);
       font-family: $font-code;
       font-size: .72em;
     }
@@ -389,14 +608,14 @@ article.post {
 
   h3 {
     font-size: 1.18em;
-    color: #dfe9f2;
+    color: var(--text-heading);
     padding-left: 28px;
     position: relative;
     &::before {
       content: '##';
       position: absolute;
       left: 0;
-      color: $dell-light;
+      color: var(--accent);
       font-family: $font-code;
       font-size: .75em;
       top: 3px;
@@ -407,7 +626,7 @@ article.post {
   h4 {
     font-size: 1.02em;
     font-family: $font-code;
-    color: $dell-light;
+    color: var(--accent);
     font-weight: 600;
     letter-spacing: .3px;
   }
@@ -416,31 +635,30 @@ article.post {
   code:not(pre code) {
     font-family: $font-code;
     font-size: .875em;
-    background: $surface-hi;
-    color: $text-code;
+    background: var(--bg-surface-hi);
+    color: var(--text-code);
     padding: 2px 6px;
     border-radius: 4px;
-    border: 1px solid $border-color;
+    border: 1px solid var(--border);
     white-space: nowrap;
   }
 
   // ── Code blocks ─────────────────────────────────────
   pre {
-    background: $code-bg !important;
-    border: 1px solid $code-border;
+    background: var(--bg-code) !important;
+    border: 1px solid var(--border-code);
     border-radius: 8px;
     padding: 18px 20px;
     overflow-x: auto;
     position: relative;
     margin: 1.5em 0;
-    box-shadow: 0 4px 16px rgba(0,0,0,.18);
+    box-shadow: 0 4px 16px var(--card-shadow);
 
-    // top-bar decoration (terminal dots)
     &::before {
       content: '● ● ●';
       display: block;
       font-size: 10px;
-      color: #30363d;
+      color: var(--text-faint);
       letter-spacing: 4px;
       margin-bottom: 12px;
       margin-top: -4px;
@@ -449,7 +667,7 @@ article.post {
     code {
       font-family: $font-code !important;
       font-size: .875em;
-      color: $code-fg;
+      color: var(--text);
       background: none !important;
       border: none !important;
       padding: 0;
@@ -457,27 +675,26 @@ article.post {
     }
   }
 
-  // Rouge highlighter dark override
+  // Rouge highlighter
   .highlight {
-    background: $code-bg;
+    background: var(--bg-code);
     border-radius: 8px;
-    border: 1px solid $code-border;
+    border: 1px solid var(--border-code);
     margin: 1.5em 0;
-    box-shadow: 0 4px 16px rgba(0,0,0,.18);
+    box-shadow: 0 4px 16px var(--card-shadow);
 
     pre { border: none; box-shadow: none; margin: 0; }
 
-    // Token colors (GitHub dark style)
-    .c, .c1, .cm, .cs  { color: #8b949e; font-style: italic; }  // comments
-    .k, .kd, .kn, .kp, .kr { color: #ff7b72; }                  // keywords
-    .s, .s1, .s2, .sb, .sc, .sd, .se, .si, .ss { color: #a5d6ff; } // strings
-    .n, .na, .nb        { color: $code-fg; }                     // names
-    .nf, .nc            { color: #d2a8ff; }                      // func/class
-    .mi, .mf, .mo, .mh  { color: #79c0ff; }                     // numbers
-    .o, .ow             { color: #ff7b72; }                      // operators
-    .p                  { color: #c9d1d9; }                      // punctuation
-    .nt                 { color: #7ee787; }                      // tag names
-    .nv, .vi            { color: #ffa657; }                      // variables
+    .c, .c1, .cm, .cs  { color: var(--syn-comment); font-style: italic; }
+    .k, .kd, .kn, .kp, .kr { color: var(--syn-keyword); }
+    .s, .s1, .s2, .sb, .sc, .sd, .se, .si, .ss { color: var(--syn-string); }
+    .n, .na, .nb        { color: var(--syn-name); }
+    .nf, .nc            { color: var(--syn-func-class); }
+    .mi, .mf, .mo, .mh  { color: var(--syn-number); }
+    .o, .ow             { color: var(--syn-operator); }
+    .p                  { color: var(--syn-punctuation); }
+    .nt                 { color: var(--syn-tag); }
+    .nv, .vi            { color: var(--syn-variable); }
     .ge                 { font-style: italic; }
     .gs                 { font-weight: bold; }
   }
@@ -486,18 +703,17 @@ article.post {
   blockquote {
     margin: 1.5em 0;
     padding: 14px 20px;
-    border-left: 4px solid $dell-blue;
-    background: $surface;
+    border-left: 4px solid var(--accent-blue);
+    background: var(--bg-surface);
     border-radius: 0 6px 6px 0;
-    color: $text-muted;
+    color: var(--text-muted);
     font-style: normal;
 
     p { margin: 0; }
 
-    // ⚠ NOTE / TIP styled blockquote
-    &.note   { border-color: #d4a017; background: #211e12; }
-    &.tip    { border-color: #28a745; background: #12261a; }
-    &.warn   { border-color: #e05252; background: #2a1616; }
+    &.note   { border-color: var(--blockquote-note-border); background: var(--blockquote-note-bg); }
+    &.tip    { border-color: var(--blockquote-tip-border); background: var(--blockquote-tip-bg); }
+    &.warn   { border-color: var(--blockquote-warn-border); background: var(--blockquote-warn-bg); }
   }
 
   // ── Tables ──────────────────────────────────────────
@@ -506,13 +722,13 @@ article.post {
     border-collapse: collapse;
     margin: 1.5em 0;
     font-size: .93em;
-    border: 1px solid $border-color;
+    border: 1px solid var(--border);
     border-radius: 8px;
     overflow: hidden;
 
     thead {
-      background: $dell-navy;
-      color: $dell-light;
+      background: var(--accent-deep);
+      color: var(--accent);
       th {
         background: transparent;
         padding: 11px 16px;
@@ -527,9 +743,9 @@ article.post {
 
     tbody {
       tr {
-        border-bottom: 1px solid $border-color;
-        &:nth-child(even) { background: $surface; }
-        &:hover { background: $surface-hi; }
+        border-bottom: 1px solid var(--border);
+        &:nth-child(even) { background: var(--bg-surface); }
+        &:hover { background: var(--bg-surface-hi); }
       }
       td {
         padding: 9px 16px;
@@ -542,7 +758,7 @@ article.post {
   // ── Horizontal rule ─────────────────────────────────
   hr {
     border: none;
-    border-top: 1px solid $border-color;
+    border-top: 1px solid var(--border);
     margin: 2.5em 0;
     position: relative;
     &::after {
@@ -550,8 +766,8 @@ article.post {
       position: absolute;
       left: 50%;
       transform: translateX(-50%) translateY(-50%);
-      background: $page-bg;
-      color: $dell-light;
+      background: var(--bg);
+      color: var(--hr-diamond-color);
       padding: 0 8px;
       font-size: 11px;
     }
@@ -562,10 +778,8 @@ article.post {
     padding-left: 1.6em;
     li {
       margin-bottom: .3em;
-      &::marker { color: $dell-blue; }
+      &::marker { color: var(--list-marker); }
 
-      // kramdown parses "- text | text2" as a pipe table.
-      // Re-render those in-list tables as inline pipe-separated text.
       > table, > p > table {
         display: inline;
         width: auto;
@@ -585,7 +799,7 @@ article.post {
           background: transparent !important;
           vertical-align: baseline;
 
-          &::after { content: ' | '; color: $text-muted; }
+          &::after { content: ' | '; color: var(--text-muted); }
           &:last-child::after { content: ''; }
         }
       }
@@ -596,18 +810,16 @@ article.post {
   img {
     max-width: 100%;
     border-radius: 6px;
-    box-shadow: 0 2px 12px rgba(0,0,0,.1);
+    box-shadow: 0 2px 12px var(--card-shadow);
     margin: .5em 0;
   }
 
   // ── Strong / em ─────────────────────────────────────
-  strong { color: #f0f6fc; font-weight: 700; }
+  strong { color: var(--text-strong); font-weight: 700; }
 }
 
 // ═══════════════════════════════════════════════════════
 //  PAGE WRAPPER layout
-//  (.post-header / .post-title / .post-meta don't render on this site —
-//  content pages use page.html which has no post header block)
 // ═══════════════════════════════════════════════════════
 .page-content > .wrapper {
   max-width: 860px;
@@ -618,62 +830,57 @@ article.post {
 //  Quote Footer — sitewide bottom strip
 // ═══════════════════════════════════════════════════════
 .quote-footer {
-  background: linear-gradient(180deg, $surface 0%, $page-bg 100%);
+  background: linear-gradient(180deg, var(--footer-bg-start) 0%, var(--footer-bg-end) 100%);
   padding: 64px 24px 52px;
   text-align: center;
-  border-top: 1px solid $border-color;
+  border-top: 1px solid var(--border);
 
   &__inner {
     max-width: 740px;
     margin: 0 auto;
   }
 
-  // Decorative opening quotation mark
   &__mark {
     display: block;
     font-family: 'Georgia', 'Times New Roman', serif;
     font-size: 5.5em;
     line-height: .85;
-    color: rgba(255, 255, 255, .28);
+    color: var(--footer-mark);
     margin-bottom: -8px;
     user-select: none;
   }
 
-  // Primary quoted line
   &__primary {
     font-family: $font-body;
     font-size: 1.6em;
     font-weight: 400;
     font-style: normal;
-    color: #ffffff;
+    color: var(--footer-text);
     letter-spacing: .02em;
     line-height: 1.6;
     margin: 0 0 14px;
   }
 
-  // Attribution
   &__cite {
     display: block;
     font-family: $font-code;
     font-size: .78em;
-    color: rgba(255, 255, 255, .8);
+    color: var(--footer-cite);
     font-style: normal;
     letter-spacing: .06em;
     text-transform: uppercase;
     margin-bottom: 32px;
   }
 
-  // Thin divider line
   &__divider {
     width: 48px;
     height: 1px;
-    background: rgba(255, 255, 255, .35);
+    background: var(--footer-divider);
     margin: 0 auto 28px;
   }
 
-  // Closing paragraph
   &__body {
-    color: rgba(255, 255, 255, .8);
+    color: var(--footer-body);
     font-size: .95em;
     line-height: 1.85;
     max-width: 600px;
@@ -681,15 +888,15 @@ article.post {
   }
 
   &__brand {
-    color: #ffffff;
+    color: var(--footer-text);
     font-weight: 700;
   }
 }
 
 // ═══════════════════════════════════════════════════════
-//  Scrollbar (WebKit) — subtle geek touch
+//  Scrollbar (WebKit)
 // ═══════════════════════════════════════════════════════
 pre::-webkit-scrollbar { height: 6px; }
-pre::-webkit-scrollbar-track { background: $code-bg; }
-pre::-webkit-scrollbar-thumb { background: $border-color; border-radius: 3px; }
-pre::-webkit-scrollbar-thumb:hover { background: $dell-blue; }
+pre::-webkit-scrollbar-track { background: var(--scrollbar-track); }
+pre::-webkit-scrollbar-thumb { background: var(--scrollbar-thumb); border-radius: 3px; }
+pre::-webkit-scrollbar-thumb:hover { background: var(--scrollbar-thumb-hover); }
