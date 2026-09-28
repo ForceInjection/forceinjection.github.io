@@ -6,9 +6,7 @@
 
 ---
 
-> **前瞻**：DeepSeek-V4 和 Kimi K3 从架构层面对 attention 做了根本性改造，KV Cache 从 250GB 降到 5GB，旧叙事终结。但新架构带来了新的系统挑战。详见 **[当百万 Token KV Cache 从 250GB 降到 5GB](post-kv-cache-era-challenges.md)**（对照 vLLM/SGLang 源码 ✓，含 39 处代码验证）。
->
-> **续篇 · KV 压缩推到极限**：一个月后 DeepSeek 发布 V4.1-Flash，全局 KV 再压到 1/4、持久化压到 1/8，并推翻了前篇三处判断（跨层共享「无意义」、跨类型前缀缓存「未解决」、mHC 迭代「无法被 kernel fusion 覆盖」）。详见 **[把 KV Cache 压缩推到极限：DeepSeek-V4.1-Flash 技术报告精读](deepseek-v41-flash-kv-compression.md)**（报告 §章节 + 官方 `config.json` 双向核对）。
+> **KV 压缩推到极限**：DeepSeek-V4 与 Kimi K3 从架构层面重写了 attention，1M 上下文下 KV 从 250GB 量级降到个位数 GB，旧叙事随之作废；一个月后 V4.1-Flash 又把全局 KV 压到 V4-Flash 的 1/4，并推翻前篇三处判断。但压缩只是把问题换了位置：单层的绝对量小到极点之后，杠杆从「每层压多少」转向「几层共用一份」，而一个 token 的状态不再是连续张量，变成了一组异构池，其中还混着不是 KV 的压缩器状态。系列入口：**[KV 压缩推到极限：从架构改造到分层缓存](kv_compression/README.md)**（体积账 → 报告精读 → 分层缓存三篇深挖；核对口径各不相同：源码验证、报告章节与 `config.json` 对照、`文件:行号` 逐条复验）。
 >
 > **新负载**：Agent 流量正在取代 Chat 成为主要负载——KV 生命周期错配、调度语义失真、会话粘性、容量公式失效四个连锁问题，以及两引擎源码级现状与「保留 vs 重算」的系数变化。详见 **[当 Agent 流量成为推理系统的主要负载](agent_serving/agent-workload-serving.md)**（vLLM `43d691ec6b` / SGLang `f7101b0ae6` 源码验证）。
 >
@@ -17,6 +15,8 @@
 > **线性注意力**：没有 KV Cache 的模型来了——delta-rule 一脉（KDA/Gated DeltaNet，Qwen3-Next 与 Kimi K3 都在其中）落地后，prefill 串行化、前缀缓存重写为状态检查点、状态池成硬并发上限。系列入口：[线性注意力与推理系统](linear_attention/README.md)（总览 + 机制/调度/状态语义三篇深挖）。
 >
 > **内存介质**：算法把每步读取压下去之后，介质本身成了下一个变量。Hot Chips 2026 上 OXMIQ 用一套 (β, α) 坐标系和一行 `max()` 公式回答「HBF 是不是便宜的 HBM」——容量便宜 8–16 倍，但单位容量带宽只有 HBM 的 1/25，折算成带宽单价反而贵 1.7 倍，结论是它只在一个很窄的低带宽区间里划算。详见 **[HBF 是 HBM 的替代吗：单位存储便宜了，Token 成本却可能更高](hbf-vs-hbm.md)**（22 页幻灯片逐页核对 + 独立报道交叉验证，含一份 2026-08 的反方实测）。
+>
+> **条件记忆**：稀疏有了第二根轴——V4.1-Flash 把 196B 参数从 HBM 搬进主机内存（LPDDR），靠 O(1) 查表替代多层对静态知识的重建。系列入口：**[Engram：条件记忆与主机内存参数](engram/README.md)**（首篇源码深读：官方 demo + SGLang 巨页手术，LPDDR 的优势与代价逐项算账）。
 
 ---
 

@@ -26,6 +26,7 @@
 - [技术博客撰写 Agentic RAG Agent 系统设计](./agent_design/docs/writing-agentic-agent.md) - 针对复杂长文本内容创作领域的智能体工作流架构设计与实践优化。
 - [支持多轮对话指代消解的 ChatBot 系统：架构设计与实现详解](./agent_design/docs/coreference-resolution-dialogue-system.md) - 探讨高级对话状态管理、上下文理解以及多轮交互中的指代消解技术。
 - [12-Factor Agents - 构建可靠 LLM 应用的原则](./concepts/12-factor-agents-intro.md) - 借鉴云原生应用设计理念，提出构建高可靠、可扩展 LLM 应用的 12 要素原则。
+- [七张图看懂 Jev：Agent 的每一步都需要大模型吗](./concepts/jev-seven-charts.md) - 手绘图解 TypeSafe 的决策模型 Jev（System One Models）：三种接口零幻觉、判断与生成的分工、confidence ≠ 准确率、三档置信度门禁与成本账；数字对照官方 docs 与 Browser Use 实测记录。
 - [TradingAgents-CN 多智能体设计与交互分析](./agent_design/docs/trading-agents-cn.md) - 探讨大模型技术如何创造商业价值，以及交易领域的智能体设计与交互分析。
 - [All Agentic Architectures 深入详解](./agent_design/docs/all-agentic-architectures-deep-dive.md) - 系统梳理 17 种可运行的 LangChain + LangGraph 智能体架构（Reflection、ReAct、Planning、Blackboard、Ensemble、Tree of Thoughts、Graph World-Model、Metacognitive 等），覆盖从单 Agent 到多 Agent、从记忆推理到安全可靠的完整设计谱系。
 
@@ -89,6 +90,8 @@ Agent Infra 是「让 Agent 能真正可靠运行、能操作真实世界、能�
 - [AI Agent 基础设施的崛起](./agent_infra/docs/the-rise-of-ai-agent-infrastructure.md) - 分析基础设施生态的演进趋势、核心玩家与未来投资方向。
 - [OpenHarness 深入浅出：解密开源智能体基础设施](./agent_infra/docs/openharness-deep-dive.md) ([配套 PPT](./agent_infra/docs/openharness-deep-dive.pptx)) - 大型语言模型 (LLM) 在推理与生成能力上取得了突破性进展，但它们本身受限于静态的上下文窗口，无法直接与真实世界进行交互。要让模型成为能够自主解决复杂任务的工程化智能体 (Agent) ，必须为其配备执行动作的工具、持久化的记忆以及安全隔离的运行边界。这就是“智能体基础设施” (Agent Harness) 的核心使命。
 - [一切皆插件：DeepSeek Harness 是怎么把 Agent 装起来的](./agent_infra/docs/deepseek-harness-deep-dive.md) - 拆解 DeepSeek 开源的 Agent 框架 dsh：基于 Cordis 的「一切皆插件」架构（连 agent loop 本身都是插件）、profile/bundle 分层组装、事件溯源会话日志、四个内置预设与能力 seam，以及它在开发者预览阶段必须正视的四条边界；文末推荐《Harness工程实战》一书。
+- [DeepSeek Harness：一本书讲透 Agent 怎么组织](./agent_infra/docs/deepseek-harness-book-charts.md) - 书介与概念图解（图解《DeepSeek Harness 技术入门与架构原理》）：以同模型换 Harness 差 8.6 分的评测数字切入，用五张手绘图讲清 Harness 的位置、「一切皆插件」、Skill/Tool/Hook 与 Guard/Approval/Sandbox、四套 Preset；概念解释对照 dsh 源码核对结果，并评点全书「先跑起来、再拆开、最后动手」的认知阶梯。
+- [一天 300 万个沙盒：DeepSeek 怎么给 Agent 造环境](./agent_infra/docs/dsec-deep-dive.md) - 深度解读梁文锋署名的 DSec 论文（arXiv:2609.22978）：单单元 160 节点、日 300 万沙盒的生产平台，如何用分层组合、按需镜像加载与高密度资源管理撑起 Agent RL 的执行环境，以及 Agent 钻训练环境漏洞的生产实录。
 - [Agent Sandbox 的演进与设计范式](./agent_infra/docs/agent-sandbox-design.md) ([配套 PPT](./agent_infra/docs/agent-sandbox-design.pptx)) - 探讨 Agent Sandbox 的核心设计理念，对比 OpenShell、Sandlock 等沙箱方案，揭示从“硬件级隔离”向“策略优先”演进的技术趋势。
 - [深度解析 Kagent：从零打造 Kubernetes 运维智能体](./agent_infra/docs/deep-dive-kagent-k8s-ops-agent.md) ([配套 PPT](./agent_infra/docs/deep-dive-kagent-k8s-ops-agent.pptx)) - 深度解析 Kagent 的核心架构与工作机制，并以“构建阿里云 ACK 运维智能体”为实战案例，展示大模型与运维工具的编排。
 - [云原生 AI Agent 基础设施：OpenClaw Operator 架构深度解析](./agent_infra/docs/openclaw-operator-deep-dive.md) - 深入探讨 OpenClaw Kubernetes Operator 的核心架构设计与工程实践，涵盖从 Server-Side Apply 的冲突解决到 StatefulSet 的持久化绑定，以及容器级软隔离与进程级沙箱的安全边界设计。

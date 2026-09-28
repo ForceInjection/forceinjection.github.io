@@ -804,8 +804,20 @@
     "url": "/06_llm_theory_and_fundamentals/llm_basic_concepts/"
   },
   {
+    "title": "图解注意力算力账：从 171.7 亿格，到 2048 格",
+    "url": "/06_llm_theory_and_fundamentals/llm_basic_concepts/architecture_evolution/attention_compute_fifteen_charts.html"
+  },
+  {
+    "title": "Attention 演进与 KV Cache 之变：每 token 从 4.5 MiB 到 890 B",
+    "url": "/06_llm_theory_and_fundamentals/llm_basic_concepts/architecture_evolution/attention_evolution_kv_cache.html"
+  },
+  {
     "title": "从 GPT-2 到 Kimi K3：注意力机制的演进史",
     "url": "/06_llm_theory_and_fundamentals/llm_basic_concepts/architecture_evolution/from_gpt2_to_kimi_k3_attention_evolution.html"
+  },
+  {
+    "title": "7 年前，AI 记住一个字要 4.5 MB；今天只要 890 B——七张图讲透 KV Cache",
+    "url": "/06_llm_theory_and_fundamentals/llm_basic_concepts/architecture_evolution/kv_cache_seven_charts.html"
   },
   {
     "title": "LLM 架构演进史——从 GPT-1 到 DeepSeek-V3 的七个拐点",
@@ -1060,12 +1072,20 @@
     "url": "/08_agentic_system/agent_infra/docs/deep-dive-kagent-k8s-ops-agent.html"
   },
   {
+    "title": "DeepSeek Harness：一本书讲透 Agent 怎么组织",
+    "url": "/08_agentic_system/agent_infra/docs/deepseek-harness-book-charts.html"
+  },
+  {
     "title": "一切皆插件：DeepSeek Harness 是怎么把 Agent 装起来的",
     "url": "/08_agentic_system/agent_infra/docs/deepseek-harness-deep-dive.html"
   },
   {
     "title": "DeepSeek-TUI 实战：榨干 DeepSeek V4 长上下文红利的命令行编程 Agent 实战指南",
     "url": "/08_agentic_system/agent_infra/docs/deepseek-tui-in-practice.html"
+  },
+  {
+    "title": "一天 300 万个沙盒：DeepSeek 怎么给 Agent 造环境",
+    "url": "/08_agentic_system/agent_infra/docs/dsec-deep-dive.html"
   },
   {
     "title": "云原生 AI Agent 基础设施：OpenClaw Operator 架构深度解析",
@@ -1114,6 +1134,10 @@
   {
     "title": "12-Factor Agents - 构建可靠 LLM 应用的原则",
     "url": "/08_agentic_system/concepts/12-factor-agents-intro.html"
+  },
+  {
+    "title": "Agent 的每一步，都需要大模型吗？七张图看懂刚爆火的决策模型 Jev",
+    "url": "/08_agentic_system/concepts/jev-seven-charts.html"
   },
   {
     "title": "世界模型简介：智能体理解世界的内部引擎",
@@ -1392,10 +1416,6 @@
     "url": "/09_inference_system/cost_analysis/llm_api_pricing_analysis.html"
   },
   {
-    "title": "把 KV Cache 压缩推到极限：DeepSeek-V4.1-Flash 技术报告精读",
-    "url": "/09_inference_system/deepseek-v41-flash-kv-compression.html"
-  },
-  {
     "title": "模型部署实战",
     "url": "/09_inference_system/deployment/"
   },
@@ -1414,6 +1434,14 @@
   {
     "title": "Qwen2-VL-7B-Instruct 昇腾部署指南",
     "url": "/09_inference_system/deployment/qwen2_vl_7b_huawei.html"
+  },
+  {
+    "title": "Engram：条件记忆与主机内存参数",
+    "url": "/09_inference_system/engram/"
+  },
+  {
+    "title": "条件记忆：DeepSeek V4.1 Engram 如何用 O(1) 查表换掉一层计算",
+    "url": "/09_inference_system/engram/01-engram-deep-dive.html"
   },
   {
     "title": "HBF 是 HBM 的替代吗？单位存储便宜了，Token 成本却可能更高",
@@ -1608,6 +1636,22 @@
     "url": "/09_inference_system/kv_cache/02_systems/tair_kvcache/tair-kvcache-architecture-design.html"
   },
   {
+    "title": "KV 压缩推到极限：从架构改造到分层缓存",
+    "url": "/09_inference_system/kv_compression/"
+  },
+  {
+    "title": "当百万 Token KV Cache 从 250GB 降到 5GB：推理系统的新挑战",
+    "url": "/09_inference_system/kv_compression/01-post-kv-cache-era.html"
+  },
+  {
+    "title": "把 KV Cache 压缩推到极限：DeepSeek-V4.1-Flash 技术报告精读",
+    "url": "/09_inference_system/kv_compression/02-deepseek-v41-flash.html"
+  },
+  {
+    "title": "七池与八池：HiCache 支持 DeepSeek V4 与 V4.1 的不同接法",
+    "url": "/09_inference_system/kv_compression/03-multilevel-cache.html"
+  },
+  {
     "title": "线性注意力与推理系统",
     "url": "/09_inference_system/linear_attention/"
   },
@@ -1674,10 +1718,6 @@
   {
     "title": "parallelism visual",
     "url": "/09_inference_system/parallelism/parallelism_visual.html"
-  },
-  {
-    "title": "当百万 Token KV Cache 从 250GB 降到 5GB：推理系统的新挑战",
-    "url": "/09_inference_system/post-kv-cache-era-challenges.html"
   },
   {
     "title": "Continuous Batching 深度解析：从静态批处理到迭代级调度",
@@ -1776,6 +1816,10 @@
     "url": "/09_inference_system/sglang/sglang-0.5.16-release.html"
   },
   {
+    "title": "MoE 与百万上下文：请求怎么分卡，长文怎么切",
+    "url": "/09_inference_system/sglang/sglang-dp-attention-dcp.html"
+  },
+  {
     "title": "KV Cache L1↔L2 数据流深度分析",
     "url": "/09_inference_system/sglang/sglang-kv-cache-dataflow-analysis.html"
   },
@@ -1794,6 +1838,10 @@
   {
     "title": "SGLang 调度器：请求编排与 Batch 调度",
     "url": "/09_inference_system/sglang/sglang-scheduler.html"
+  },
+  {
+    "title": "SGLang 分叉点缓存源码解析：从 43.8% 到 60.8% 的命中率是怎么来的",
+    "url": "/09_inference_system/sglang/sglang-swa-branching-point-cache.html"
   },
   {
     "title": "SGLang UnifiedRadixTree：一棵树，四种注意力",
@@ -2122,6 +2170,14 @@
   {
     "title": "AI Native 全栈实践",
     "url": "/11_ai_native_everything/"
+  },
+  {
+    "title": "24 个企业 AI 落地案例解读：FDE 最难的不是模型",
+    "url": "/11_ai_native_everything/fde/fde-100-cases-analysis.html"
+  },
+  {
+    "title": "《FDE：AI落地实战指南》：把 AI 塞进业务现场的操作手册",
+    "url": "/11_ai_native_everything/fde/fde-ai-landing-guide.html"
   },
   {
     "title": "模型不稀缺了，稀缺的是把模型塞进业务的人",

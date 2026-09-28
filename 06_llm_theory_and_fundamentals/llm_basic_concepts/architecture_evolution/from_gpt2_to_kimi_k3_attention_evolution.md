@@ -172,7 +172,7 @@ def generate_with_kv_cache(model, prompt, max_new_tokens=50):
 
 KV Cache 将每步解码的计算量从 O(T²·D) 降到 O(T·D)，但存储随序列长度**线性增长**：
 
-$$\text{KV Cache 大小} = 2 \times n_{\text{layer}} \times n_{\text{kv\_heads}} \times d_{\text{head}} \times \text{seq\_len} \times \text{dtype\_bytes}$$
+$$\text{KV Cache 大小} = 2 \times n_{\text{layer}} \times n_{\text{kv heads}} \times d_{\text{head}} \times \text{seq len} \times \text{bytes}$$
 
 对于 70B 模型、128K 上下文的标准 GQA8 配置，仅 KV Cache 就吃掉了约 320 GB 显存。
 
@@ -503,7 +503,7 @@ C = T   → 恢复完整 O(T²) softmax 注意力（最多 FLOP，但 GPU 矩阵
 C = 64  → 当前 GPU 张量核（如 UMMA 指令）的最佳粒度
 ```
 
-> **注**：Kimi K3 的 KDA 实际使用 `FLA_CHUNK_SIZE = 64`（`vllm/third_party/flash_linear_attention/ops/utils.py:31`）。对于 100 万 token 的上下文，这需要 15,625 次串行跨块步骤——这是我们在 [post-kv-cache-era-challenges.md](../../../09_inference_system/post-kv-cache-era-challenges.md) §3 中分析的 KDA chunkwise serial 约束的来源。
+> **注**：Kimi K3 的 KDA 实际使用 `FLA_CHUNK_SIZE = 64`（`vllm/third_party/flash_linear_attention/ops/utils.py:31`）。对于 100 万 token 的上下文，这需要 15,625 次串行跨块步骤——这是我们在 [01-post-kv-cache-era.md](../../../09_inference_system/kv_compression/01-post-kv-cache-era.md) §3 中分析的 KDA chunkwise serial 约束的来源。
 
 ### 5.6 对比：MHA vs DeltaNet
 
@@ -612,7 +612,7 @@ Gated DeltaNet (GDN)       →  合并门控衰减 + Delta 修正，记忆管理
 
 ![线性注意力 → DeltaNet → Gated DeltaNet 的架构演进全景](https://www.datocms-assets.com/104802/1785353294-20.png?auto=format&w=1200)
 
-> **注**：这一演进线（加性 → Delta → Gated Delta）独立于 Transformer 的 MHA→MQA→GQA→MLA 主线。两条线在 Kimi Linear / Kimi K3 中交汇：KDA 提供恒定大小的循环记忆，周期性的 MLA 层提供完整上下文的 softmax 检索。详见 [post-kv-cache-era-challenges.md](../../../09_inference_system/post-kv-cache-era-challenges.md) §3。
+> **注**：这一演进线（加性 → Delta → Gated Delta）独立于 Transformer 的 MHA→MQA→GQA→MLA 主线。两条线在 Kimi Linear / Kimi K3 中交汇：KDA 提供恒定大小的循环记忆，周期性的 MLA 层提供完整上下文的 softmax 检索。详见 [01-post-kv-cache-era.md](../../../09_inference_system/kv_compression/01-post-kv-cache-era.md) §3。
 
 ---
 
@@ -702,17 +702,22 @@ Kimi Linear 的解码吞吐比全注意力最高提升 6 倍——这个提升�
 
 ## 八、Kimi K3：工业化混合架构
 
-Kimi K3 在 Kimi Linear 的基础上做了规模化升级。其核心架构是一个**23 次循环的宏结构**：
+Kimi K3 在 Kimi Linear 的基础上做了规模化升级。其核心架构是 **23 个宏循环（92 层）加一个末层额外 MLA，共 93 层**：
 
 ```text
-每个宏循环（共 23 次）：
+每个宏循环（共 23 次，第 1–92 层）：
   ├── Layer_i+0: KDA + 稠密 FFN + SiTU 激活
   ├── Layer_i+1: KDA + LatentMoE + SiTU 激活
   ├── Layer_i+2: KDA + LatentMoE + SiTU 激活
   └── Layer_i+3: MLA + LatentMoE + SiTU 激活  ← Gated MLA + 周期性 softmax 检索
 
+末层（第 93 层）：额外的 1 个 MLA，收尾完整上下文检索
+→ 全模型 69 个 KDA 层 + 24 个 MLA 层
+
 每 3 个宏循环（12 层）做一次 AttnRes
 ```
+
+> 层数依据 `moonshotai/Kimi-K3` config.json 的 `full_attn_layers`（23 项 [4,8,…,92] + [93]）与 `kda_layers`（69 项）逐层清单。
 
 ![Kimi K3 的四层宏循环结构：3 层 KDA + 1 层 Gated MLA，每 12 层插入一次 AttnRes](https://www.datocms-assets.com/104802/1785353466-25.png?auto=format&w=1200)
 
@@ -1005,7 +1010,8 @@ KDA 的恒定大小状态**不可避免会丢失信息**。MLA 从 **token 维�
 > **参考与延伸阅读**
 >
 > - 原文：[22,580: GPT-2 to Kimi K3, explained](https://www.baseten.co/blog/22580-gpt-2-to-kimi-k3-explained/) — Ali Taha, Baseten (2026.07.30)
-> - 源码验证：[post-kv-cache-era-challenges.md](../../../09_inference_system/post-kv-cache-era-challenges.md) — 39 处对照 vLLM/SGLang 源码的机制验证
+> - 源码验证：[01-post-kv-cache-era.md](../../../09_inference_system/kv_compression/01-post-kv-cache-era.md) — 逐条对照 vLLM/SGLang 源码的机制验证
+> - KV Cache 视角：[Attention 演进与 KV Cache 之变](attention_evolution_kv_cache.md) — 同一条时间线上，每代架构在存储侧省下的那笔账（2019–2026）
 > - 架构主线：[LLM 架构演进史](llm_architecture_evolution.md) — GPT-1 到 DeepSeek-V3 的七个拐点
 > - KV Cache：[KV Cache 技术体系](../../../09_inference_system/kv_cache/README.md) — 42 篇文章，从原理到分布式管理
 > - 基础概念：[Transformer 架构详解](../transformer/transformer_architecture.md) — 从自注意力到完整 Decoder Block

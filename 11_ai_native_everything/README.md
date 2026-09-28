@@ -63,7 +63,7 @@ AI 作为"一等协作者"参与工程：开发者提供意图、约束、契约
 
 ## 2. CloudPilot 端到端案例
 
-CloudPilot 是一个云管理平台 MVP，验证三层框架的协同效应。以 Vibe Coding 为日常工作流，完成 P1-P4 阶段（访谈 → OpenSpec），仅需 6 层工件：访谈笔记 → PRD → Mock UI → DDD 模型 → OpenSpec → 代码桥接。所有 Prompt 可录制并由 `ddd-modeler` 和 `openspec-author` 两个 sub-agent 重放。
+CloudPilot 是一个云管理平台 MVP，验证三层框架的协同效应。以 Vibe Coding 为日常工作流，走完从业务调研到实现与测试的链路，产出 7 层工件：访谈笔记 → PRD → Mock UI → DDD 模型 → OpenSpec → 代码桥接 → 实现工作流。所有 Prompt 可录制，由 `ddd-modeler` 和 `openspec-author` 两个 sub-agent 重放。
 
 > 📂 详见：[ai-native-devops/cloudpilot-case](https://github.com/ForceInjection/ai-native-devops/tree/main/cloudpilot-case)
 
@@ -88,6 +88,8 @@ CloudPilot 是一个云管理平台 MVP，验证三层框架的协同效应。�
 
 - **[模型不稀缺了，稀缺的是把模型塞进业务的人](fde/forward-deployed-engineer.md)** — 从 80/95/99 规律出发，讲清 FDE 是什么、不是什么（不是售前、不是驻场外包、不是咨询顾问、不是产品工程师）；为什么 AI 同时拉低了知识蒸馏、定制开发和复合型人才供给三道成本门槛，让一个 2003 年就存在的角色在 2026 年成为最缺的岗位；以及本体层、Skill 与连接器如何构成规模化的地基。含腾讯研究院报告、范冰开源手册与一线从业者实录三份材料的用法指引
   - 源笔记：[腾讯研究院《FDE模式行业观察与实践》](fde/references/01-腾讯研究院-FDE模式行业观察与实践.md) · [范冰《前线部署工程师（FDE）》](fde/references/02-范冰-FDE开源手册.md) · [Jove Zhong《我在 AI 异世界重生为 FDE》](fde/references/03-Jove-北美AI-Agent公司一线实录.md)
+  - 导读：[《FDE：AI落地实战指南》](fde/fde-ai-landing-guide.md)——樊中恺（百度主任架构师、文心应用技术负责人）著，人民邮电出版社 2026 年 10 月出版；七篇三十章的骨架、五种死法/访谈法/工作化石三处要点与第 22 章的按周复盘
+  - 实证：[24 个企业 AI 落地案例读完：最难的不是模型](fde/fde-100-cases-analysis.md)——Datawhale《FDE 案例 100》（246 页）精读后的交叉分析：80/95/99 规律的 24 个实证切片、技术选型的克制、效果账与 FDE 角色的三层动作清单
 
 ---
 
@@ -103,7 +105,7 @@ CloudPilot 是一个云管理平台 MVP，验证三层框架的协同效应。�
 
 ---
 
-## 5. 关联模块与参考
+## 6. 关联模块与参考
 
 - **[08_agentic_system](../08_agentic_system/README.md)** — Agent 系统全栈工程，补充单 Agent 内部机制与基础设施
 - **[04_cloud_native_ai_platform](../04_cloud_native_ai_platform/README.md)** — Tool 层（MCP 暴露）与 DevOps 实践所需的集群底座

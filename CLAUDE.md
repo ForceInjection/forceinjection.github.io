@@ -50,6 +50,7 @@ The full sequence is packaged as the **`tech-article-pipeline`** skill — invok
 - Long-form articles often use **Chinese numerals** for major headings (一、二、三…). Follow the existing heading style of the document you're editing.
 - Numbered article series use zero-padded prefixes with Chinese descriptive filenames (`01-背景与目标.md`, `02-集群规模分类与特征分析.md`).
 - **Time-sensitive data** (prices, benchmarks, model releases, market stats): record the as-of date, mark vendor-claimed vs independently measured figures (e.g. 「厂商口径」), and add a 复核 reminder when data moves fast (see `99_misc/token_factory_talk/README.md`).
+- **Math formulas (`$$`)**: never put underscores inside `\text{}` — GitHub restores `\_` to a bare `_` before handing TeX to its math renderer, which then fails with `'_' allowed only in math mode` (local MathJax tolerates it, so it passes local checks and only breaks on GitHub). Use spaces or short words in subscripts (`n_{\text{kv heads}}`, `\text{bytes}`); wrap bare notation in prose (`c^KV`, `d_c`) in code spans. Self-check with `grep -n '\$\$.*\\text{[^}]*_'`.
 
 ## Source-code-based deep-dive articles
 
@@ -106,6 +107,17 @@ Use these when the task matches:
 
 ## CI/CD
 
-No GitHub Actions, no build step, no enforced linting, no automated tests. Content quality is maintained by manual review (`doc-reviewer`).
+No build step, no test suite. `.github/workflows/md-structure.yml` is the only **workflow file**; the rest of the automation comes from GitHub's default setup and repo settings, and is not visible in the tree. `gh workflow list --all` currently shows five active workflows: the structure check, `CodeQL` (default setup, runs on push to main and weekly, scanning c-cpp / go / javascript / python / typescript), `pages-build-deployment` (builds the GitHub Pages site the README links to), `Dependabot Updates`, and `Dependency Graph`. So "this repo has no CI" is wrong — check before claiming it.
+
+**Markdown structure check** — `scripts/check_md_structure.py` (needs `markdown-it-py`), wired into two places:
+
+- **Pre-commit hook** (`.pre-commit-config.yaml`): catches your own commits. Needs `pre-commit install` once per clone; `pre-commit run --all-files` checks the whole repo.
+- **GitHub Actions**: catches pull requests. External contributors won't have the hook installed, so CI is the only thing covering them.
+
+It flags two failure modes that silently drop content: an unclosed code fence, and a broken Chinese section sequence (`## 一、` → `## 二、` → …). Syntax linting catches neither — the original regression case (`attention_kv_cache_formats.md`, fixed in `20127cb`) passes markdownlint with zero warnings, because a 4-backtick fence closed by a 4-backtick fence *is* valid CommonMark. Only the rendered result gives it away. Long-fence inconsistencies are warnings and don't fail the build.
+
+If you add hooks to `.pre-commit-config.yaml`, add them to the workflow too — CI runs the script directly, not through pre-commit.
+
+Content quality is otherwise maintained by manual review (`doc-reviewer`).
 
 A local `.markdownlint.yaml` (gitignored — personal preference, not enforced) relaxes the rules that clash with Chinese technical writing: line length (MD013), inline HTML (MD033), first-line heading (MD041), table pipe style (MD060), emphasis marker style (MD049), `$` in shell blocks (MD014), image alt text (MD045), and duplicate headings across sections (MD024 `siblings_only`). Don't reformat existing prose to satisfy markdownlint defaults.
