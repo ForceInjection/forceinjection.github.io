@@ -179,11 +179,7 @@ LangGraph 通过图计算模型解决 LLM 应用在循环逻辑与状态持久�
 
 ### 5.3 AI 工作流与编排
 
-无代码/低代码（No-Code/Low-Code）AI 应用落地指南，包含 Coze 私有化部署配置、n8n 多智能体编排实践，以及 Dify、Ragflow 等主流开源编排平台的架构与商业许可对比。
-
-- [Coze 部署和配置手册](06_llm_theory_and_fundamentals/workflow/coze_deployment_and_configuration_guide.md) - Coze 平台的私有化部署与配置指南。
-- [n8n 多智能体编排指南](06_llm_theory_and_fundamentals/workflow/n8n_multi_agent_guide.md) - 基于 n8n 构建 Multi-Agent 系统。
-- [开源大模型应用编排平台对比](06_llm_theory_and_fundamentals/workflow/open_source_llm_orchestration_platforms_comparison.md) - 主流应用编排平台的深度横评。
+无代码/低代码（No-Code/Low-Code）AI 应用落地指南，包含 Coze 私有化部署配置、n8n 多智能体编排实践，以及 Dify、Ragflow 等主流开源编排平台的架构与商业许可对比。文章收录于 [7.5 工作流编排与应用平台](#75-工作流编排与应用平台-workflow)（文件在 `06_llm_theory_and_fundamentals/workflow/`）。
 
 ---
 
@@ -525,6 +521,7 @@ SGLang 以 RadixAttention 前缀缓存和高效调度器著称，涵盖 KV Cache
 
   <img src="./99_misc/token_factory_talk/img/cover.jpg" width="600" alt="Token Factory：AI 推理的成本革命 — 演讲封面"/>
 
+- [L1 KV Pool 与系统并发上限](09_inference_system/kv_cache/01_concepts/capacity_planning/hbm_kv_pool_concurrency.md) — 并发上限公式、三态记账与指标观测；为什么 L2 空余救不了 P99 TTFT（SGLang/vLLM 对照）
 - [KV Cache 容量规划](09_inference_system/kv_cache/01_concepts/capacity_planning/glm5_kv_cache_capacity_planning.md) — GLM-5 显存容量推演与 ROI 评估
 - [KV Cache 压缩技术](09_inference_system/kv_cache/01_concepts/compression/kv_cache_compression.md) — INT8/FP8 量化、稀疏化与注意力优化
 - [Claude Prompt Caching 机制分析](09_inference_system/kv_cache/01_concepts/prefix_caching/claude_prompt_caching.md) — 提示词缓存的终端 Agent 源码实现与成本优化
@@ -730,8 +727,6 @@ ZOMI 酱主导的高分开源 AI 基础设施架构体系，从底层 AI 芯片�
   - **第二层杠杆·硬件**：Blackwell FP4、HBM3e 8 TB/s、NVLink-C2C、CUDA 优化、GPU 虚拟化共享。
   - **第三层杠杆·推理引擎**：KV Cache 四层解法、连续批处理、DSpark 投机解码、FP8/FP4 量化。
   - **第四层杠杆·基础设施与生态**：PD 分离、开源价格战（28 倍价差）、成本下降打开 AI 编程/长上下文/Agent 三大应用形态。
-  - **GPU 架构与 CUDA 编程**：硬件基础、并行计算原理、性能优化策略。
-  - **云原生 AI 基础设施**：现代化 AI 基础设施设计、容器化部署与运维实践。
 
 ### 12.3 Trae 编程实战课程
 

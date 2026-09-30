@@ -1480,6 +1480,10 @@
     "url": "/09_inference_system/kv_cache/01_concepts/capacity_planning/glm5_kv_cache_capacity_planning.html"
   },
   {
+    "title": "L2 还有大半空着，TTFT 为什么先崩了？L1 KV Pool 才是系统并发的上限",
+    "url": "/09_inference_system/kv_cache/01_concepts/capacity_planning/hbm_kv_pool_concurrency.html"
+  },
+  {
     "title": "【企业 AI Infra 决策者】大模型推理引入 `KV Cache` 收益评估分析",
     "url": "/09_inference_system/kv_cache/01_concepts/capacity_planning/kv_cache_roi.html"
   },
@@ -1530,6 +1534,10 @@
   {
     "title": "压缩、重叠、复用、隔离：PD 状态交接优化的四条轴",
     "url": "/09_inference_system/kv_cache/01_concepts/pd_transfer/02-pd-state-handoff-optimization-map.html"
+  },
+  {
+    "title": "分卡之后再跨机：DCP 与 PD 分离叠加时的 KV 传输",
+    "url": "/09_inference_system/kv_cache/01_concepts/pd_transfer/03-dcp-pd-transfer.html"
   },
   {
     "title": "Claude 提示词缓存机制与源码实现深度分析",
@@ -2522,6 +2530,10 @@
   {
     "title": "《Token Factory：AI 推理的成本革命》图文讲解",
     "url": "/99_misc/token_factory_talk/talk-illustrated.html"
+  },
+  {
+    "title": "390 篇新增、517 篇总量：原力注入 AI Infra 知识库 4.0 版本发布了",
+    "url": "/99_misc/v4-release/article.html"
   },
   {
     "title": "CLAUDE.md",
