@@ -8,6 +8,14 @@
     "url": "/01_hardware_architecture/"
   },
   {
+    "title": "Ascend 950 微架构速查：来自 FlashMLA 算子报告的硬件信息整理",
+    "url": "/01_hardware_architecture/ascend/Ascend950_微架构速查.html"
+  },
+  {
+    "title": "Ascend Sparse Attention Forward 算法与优化技术简析",
+    "url": "/01_hardware_architecture/ascend/Ascend950_稀疏注意力Forward算子与优化技术简析.html"
+  },
+  {
     "title": "GPUDirect 家族",
     "url": "/01_hardware_architecture/gpudirect/"
   },
@@ -1414,6 +1422,10 @@
   {
     "title": "大模型 API 定价策略定量分析框架",
     "url": "/09_inference_system/cost_analysis/llm_api_pricing_analysis.html"
+  },
+  {
+    "title": "DeepSeek 把家底搬上了昇腾：六个组件、三种双端模式与一份 950 微架构报告",
+    "url": "/09_inference_system/deepseek_ascend/deepseek-ascend-open-source.html"
   },
   {
     "title": "模型部署实战",

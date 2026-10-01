@@ -12,7 +12,7 @@ v3.0 时代的仓库，文章平铺，找一篇讲 KV Cache 的要靠搜索。�
 
 - **编号目录体系**。十几个目录从 `01_hardware_architecture`（硬件架构）排到 `11_ai_native_everything`（AI Native 实践），外加两个附区，看目录名就知道里面是什么；
 - **每目录一个 README 门户**。进入任何一条线，先看到导览：每篇文章一句话摘要，按学习顺序排列，文章之间相对路径互链，顺着「相关阅读」能一路读下去；
-- **质量闸门**。提交前有 pre-commit 结构检查，围栏没闭合、章节序号断号这类「内容凭空消失」的问题过不了提交；全仓内链有链接校验器看着，光是顶层 README 就有 311 条。
+- **质量闸门**。提交前有 pre-commit 结构检查，围栏没闭合、章节序号断号这类「内容凭空消失」的问题过不了提交；全仓内链有链接校验器看着，光是顶层 README 就有 300 多条。
 
 地基的回报后面这半年看得见：新增 390 篇，每一篇都有明确的落位和门户入口，「杂乱无章」四个字可以摘下来了。
 
@@ -47,6 +47,6 @@ v3.0 时代的仓库，文章平铺，找一篇讲 KV Cache 的要靠搜索。�
 - **Agent 开发者**：08 智能体系统（理论 → 工程组件 → 实战代码三层）→ 07 RAG；
 - **入门转型**：12 课程体系的 AI Infra 入门讲座开胃，再按兴趣下钻。
 
-仓库在 GitHub：`ForceInjection/AI-fundamentals`，目前 2.9k star。这个版本还有一层变化：贡献者列表不再是一个名字，挂名的有了九位——YangooSen、AaronYang238、3em0、Dessalines39394、ningg、octo-patch，谢谢你们。
+仓库在 GitHub：`ForceInjection/AI-fundamentals`，目前 2.9k star。这个版本还有一层变化：贡献者列表不再是一个名字——YangooSen、AaronYang238、3em0、Dessalines39394、ningg、octo-patch，谢谢你们。
 
 v5.0 不立 flag。先把 517 篇里该修的修、该连的连，更新随写随发，公众号同步。下篇见。
