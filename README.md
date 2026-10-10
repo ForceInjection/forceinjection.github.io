@@ -49,6 +49,8 @@
 - **InfiniBand 高性能网络**
   - [理论基础：IB 网络架构与协议](./03_ai_cluster_ops/02_infiniband/01_ib_network_theory.md)
   - [网络运维：健康检查与性能监控实战](./03_ai_cluster_ops/02_infiniband/README.md)
+- **数据中心市场与容量**
+  - [中国数据中心有多大、建在哪、谁在租：SemiAnalysis 模型精读](./03_ai_cluster_ops/04_datacenter/china-dc-boom-semianalysis.md) - 逐栋模型精读：双速市场（高空置与 AI 容量短缺并存）、四阶段史、东数西算的配额传导机制与需求侧五家打法
 - **NCCL 分布式通信测试**
   - [理论基础：NCCL 教程](./03_ai_cluster_ops/03_nccl/01_nccl_theory.md)
   - [实战指南：基准测试与多节点部署](./03_ai_cluster_ops/03_nccl/README.md)
@@ -538,6 +540,7 @@ SGLang 以 RadixAttention 前缀缓存和高效调度器著称，涵盖 KV Cache
 - [DeepSeek-V3 H20 推理优化：基于 vLLM 源码的深度分析](09_inference_system/deployment/deepseek_v3_h20_vllm_deep_dive.md) - PD 分离、EPLB、DP 适配、MTP 加速、FP8 量化的源码级分析
 - [Qwen2-VL-7B 华为昇腾部署](09_inference_system/deployment/qwen2_vl_7b_huawei.md) - 国产硬件平台的部署优化
 - [B300 上的模型部署与 KV Cache：官方手册最佳实践](09_inference_system/deployment/b300-deployment-and-kv-cache.md) - vLLM/SGLang 官方手册的推荐配置与调优判据：SM103 三道门槛、Kimi-K3/DeepSeek-V4 启动配方、-O0~-O3 与 2+N 物理核公式、KV 量化官方精度表、HiCache 三档配置、NVFP4 KV 禁用理由；含 §三 K3 从 16 卡到 64 卡的权重/KV/通信三笔账
+- [大模型启动，七成时间花在加载权重上：FAST'26 论文用可编程页缓存把延迟砍了 79%](09_inference_system/deployment/fast26-programmable-page-cache.md) - FAST'26 华为论文精读：三个测量驱动的观察（SSD 带宽只用 17%、NUMA 亲和够不着、一次性读撞上 LRU），PPC 用 stacking 只读 FS 加用户态策略运行时满足透明/非侵入/无硬件依赖三约束，MAIO 以 I/O 模板驱动三机制拿下模型加载延迟 −79%、弹性吞吐 +36%；含 openEuler ModelFS 落地路径与 3 张手绘图
 
 ### 9.8 DeepSeek 专题
 
@@ -614,6 +617,7 @@ DeepSeek 模型极致性能优化实战，深度解析 vLLM 宽端点 (Wide Endp
 - [基础设施技术栈](08_agentic_system/agent_infra/docs/ai-agent-infra-stack.md) - 全面梳理工具层、数据层与编排层
 - [基础设施的崛起](08_agentic_system/agent_infra/docs/the-rise-of-ai-agent-infrastructure.md) - 生态演进趋势与未来投资方向
 - [OpenHarness 深入浅出：解密开源智能体基础设施](08_agentic_system/agent_infra/docs/openharness-deep-dive.md) ([配套 PPT](08_agentic_system/agent_infra/docs/openharness-deep-dive.pptx)) - 大型语言模型 (LLM) 在推理与生成能力上取得了突破性进展，但它们本身受限于静态的上下文窗口，无法直接与真实世界进行交互。要让模型成为能够自主解决复杂任务的工程化智能体 (Agent) ，必须为其配备执行动作的工具、持久化的记忆以及安全隔离的运行边界。这就是“智能体基础设施” (Agent Harness) 的核心使命。
+- [4 个工具、42 家供应商、11 万 star：Pi 的极简 harness，与 DeepSeek Harness、OpenHarness 的路线对比](08_agentic_system/agent_infra/docs/pi-agent-deep-dive.md) - 极简 harness 源码深读：默认 4 工具、系统提示 677 token、可替换协议与 42 家供应商；含与 DeepSeek Harness、OpenHarness 的三路线对比
 - [Agent Sandbox 的演进与设计范式](08_agentic_system/agent_infra/docs/agent-sandbox-design.md) ([配套 PPT](08_agentic_system/agent_infra/docs/agent-sandbox-design.pptx)) - 探讨 Agent Sandbox 的核心设计理念，对比 OpenShell、Sandlock 等沙箱方案，揭示从“硬件级隔离”向“策略优先”演进的技术趋势。
 - [深度解析 Kagent：以构建 Kubernetes 运维智能体为例](08_agentic_system/agent_infra/docs/deep-dive-kagent-k8s-ops-agent.md) ([配套 PPT](08_agentic_system/agent_infra/docs/deep-dive-kagent-k8s-ops-agent.pptx)) - 深度解析 Kagent 的核心架构与工作机制，并以“构建阿里云 ACK 运维智能体”为实战案例，展示大模型与运维工具的编排。
 - [OpenClaw Operator 架构深度解析](08_agentic_system/agent_infra/docs/openclaw-operator-deep-dive.md) - 云原生时代 AI Agent 运行时环境编排机制
@@ -776,6 +780,7 @@ AI 进入**开发流程**与**应用架构**之外，还有一条线：进入**�
 
 - [模型不稀缺了，稀缺的是把模型塞进业务的人](11_ai_native_everything/fde/forward-deployed-engineer.md) - 从 80/95/99 规律出发讲清 FDE：是什么、不是什么（不是售前、不是驻场外包、不是咨询顾问、不是产品工程师）；三道成本门槛如何被 AI 拉低；本体层、Skill 与连接器如何构成规模化的地基。含腾讯研究院报告与范冰开源手册两份材料的用法指引
 - [《FDE：AI落地实战指南》导读](11_ai_native_everything/fde/fde-ai-landing-guide.md) - 樊中恺（百度主任架构师、文心应用技术负责人）著，人民邮电出版社 2026 年 10 月出版。七篇三十章的骨架，五种死法、访谈提问法与"工作化石"三处要点，以及第 22 章按周复盘的案例写法
+- [别让写代码的 Agent 评审自己：AI 代码评审的三道闸门](11_ai_native_everything/vibe_coding/docs/ai-code-review-three-gates.md) - 生成成本归零后评审成为新瓶颈：METR 实验自评 +20% 实测 −19% 的感知差、LLM 评审的否定盲区、假统计传播三个信号失真；给出机械门（确定性脚本）、流程门（六步自评审）、多 Agent 门（Builder–Critic 信息边界）三道闸门，融合 OpenCodeReview 三阶段架构与公开研究数据，含 6 张手绘图
 
 ---
 

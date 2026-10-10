@@ -612,6 +612,14 @@
     "url": "/03_ai_cluster_ops/03_nccl/test/"
   },
   {
+    "title": "数据中心市场与容量",
+    "url": "/03_ai_cluster_ops/04_datacenter/"
+  },
+  {
+    "title": "中国数据中心有多大、建在哪、谁在租：SemiAnalysis 中国数据中心模型精读",
+    "url": "/03_ai_cluster_ops/04_datacenter/china-dc-boom-semianalysis.html"
+  },
+  {
     "title": "GPU 调度——从\"够不够\"到\"快不快\"",
     "url": "/03_ai_cluster_ops/04_gpu_scheduling/"
   },
@@ -1104,6 +1112,10 @@
     "url": "/08_agentic_system/agent_infra/docs/openharness-deep-dive.html"
   },
   {
+    "title": "4 个工具、42 家供应商、11 万 star：Pi 的极简 harness，与 DeepSeek Harness、OpenHarness 的路线对比",
+    "url": "/08_agentic_system/agent_infra/docs/pi-agent-deep-dive.html"
+  },
+  {
     "title": "扩展托管智能体：让决策与执行解耦，各行其职",
     "url": "/08_agentic_system/agent_infra/docs/scaling-managed-agents.html"
   },
@@ -1438,6 +1450,10 @@
   {
     "title": "DeepSeek-V3 H20 推理优化：基于 vLLM 源码的深度分析",
     "url": "/09_inference_system/deployment/deepseek_v3_h20_vllm_deep_dive.html"
+  },
+  {
+    "title": "大模型启动，七成时间花在加载权重上：FAST'26 论文用可编程页缓存把延迟砍了 79%",
+    "url": "/09_inference_system/deployment/fast26-programmable-page-cache.html"
   },
   {
     "title": "输出差了一点点？用 logprobs 分清「噪声」还是「bug」",
@@ -2214,6 +2230,10 @@
   {
     "title": "源笔记 03 · Jove Zhong《我在 AI 异世界重生为 FDE》",
     "url": "/11_ai_native_everything/fde/references/03-Jove-北美AI-Agent公司一线实录.html"
+  },
+  {
+    "title": "别让写代码的 Agent 评审自己：AI 代码评审的三道闸门",
+    "url": "/11_ai_native_everything/vibe_coding/docs/ai-code-review-three-gates.html"
   },
   {
     "title": "Agent Skills (AI 技能)",

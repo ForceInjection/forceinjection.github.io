@@ -17,7 +17,7 @@
 
 ## 1. 核心技能介绍
 
-针对复杂代码阅读、项目逆向工程、规范驱动开发等工程挑战，本项目封装了 19 个独立智能体技能，旨在通过多角色协同解决实际开发瓶颈。
+针对复杂代码阅读、项目逆向工程、规范驱动开发等工程挑战，本项目封装了 20 个独立智能体技能，旨在通过多角色协同解决实际开发瓶颈。
 
 | 技能                                                          | 功能                                                                                                                                                                          | 触发命令                                  |
 | ------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------- |
@@ -27,6 +27,7 @@
 | [`doc-reviewer`](./skills/doc-reviewer)                       | 文档评审：四种独立评审类型（大纲 / 内容 / 资产链接 / 格式），规则按需加载，支持用户授权下自动应用修复                                                                         | `/doc-reviewer <target-file>`             |
 | [`md-summarizer`](./skills/md-summarizer)                     | Markdown 总结器：提取核心概要、深度解析与关键要点，支持多文件综合对比分析，输出结构化中文报告                                                                                 | `/md-summarizer <file...>`                |
 | [`update-submitter`](./skills/update-submitter)               | 代码提交助手：分析 `git status`/`git diff`，将相关变更逻辑分组并生成符合 Conventional Commits 规范的提交信息，授权后执行提交                                                  | `/update-submitter <target-dir>`          |
+| [`self-review`](./skills/self-review)                         | 提交前 git diff 自评审：先确认改动所在仓/worktree → 读全量 diff → 跑机械门脚本 → 按六族失败清单逐条查 → 怀疑即实测，结论分「已修 / 待定 / 不成立」三档并留痕                  | 对话式工作流                              |
 | [`agent-skill-reviewer`](./skills/agent-skill-reviewer)       | Agent Skill 审查器：审查技能目录结构、YAML Frontmatter（描述公式）与指令清晰度，输出结构化审查报告                                                                            | `/agent-skill-reviewer <target-dir>`      |
 | [`openspec-assistant`](./skills/openspec-assistant)           | OpenSpec 规范驱动开发：架构师 / 开发 / QA 三角色协同，覆盖意图对齐、规范生成、代码实现与自动化验证，内置 `/opsx` 指令体系                                                     | `/openspec-assistant [执行意图]`          |
 | [`web-content-downloader`](./skills/web-content-downloader)   | 网页内容下载器：Jina Reader 正文提取 + 核心配图智能下载重命名 + HTML 表格转 Markdown，保留网页原始语言                                                                        | `/web-content-downloader <URL>`           |
