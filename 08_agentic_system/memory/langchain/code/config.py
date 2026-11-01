@@ -29,7 +29,7 @@ class LLMConfig:
         # MiniMax 配置
         self.minimax_api_key = os.getenv("MINIMAX_API_KEY", "")
         self.minimax_base_url = os.getenv("MINIMAX_BASE_URL", "https://api.minimax.io/v1")
-        self.minimax_model = os.getenv("MINIMAX_MODEL", "MiniMax-M2.7")
+        self.minimax_model = os.getenv("MINIMAX_MODEL", "MiniMax-M3")
         
         # 其他模型配置（如本地部署的模型）
         self.local_api_key = os.getenv("LOCAL_API_KEY", "")

@@ -122,7 +122,7 @@ PagedAttention [8] 是这一范式的奠基性里程碑。vLLM 团队观察到�
 
 GPU-CPU 协同卸载（Offloading）则将冷热分层的存储理念引入了 KV Cache 管理。2024 年，字节跳动提出的 ShadowKV [9] 采用了巧妙的非对称“影子”机制：将经过低秩压缩后的 Key Cache 保留在高带宽的 GPU HBM 上作为“热数据影子”（Key 在 GPU 侧以低秩近似形式留存）用于快速注意力筛选，而将庞大的、全精度的完整 Value Cache 卸载（Offload）至低成本的 CPU 内存作为“大本营”。在注意力计算时，模型仅按需通过 PCIe 将选出的稀疏 Value 数据传回 GPU 重建。在 A100 GPU 上（针对特定模型与长上下文设置），ShadowKV 实现了高达 6× 的批处理规模扩展和 3.04× 的吞吐量提升，甚至在 RULER 等长文本基准下，其性能表现超越了在同等调度约束下、假设显存无限时的全量缓存批处理基线。
 
-Prefix Caching（前缀缓存）是另一个在系统层被广泛采纳的 I/O 优化策略。由于多轮对话（Multi-turn Chat）、System Prompt 或检索增强生成（RAG）等场景中存在大量重复的前缀输入，系统可以将这部分已计算的 KV Cache 进行哈希签名并跨请求共享。当新请求到来时，若命中缓存，即可直接跳过重复的 Prefill（预填充）计算阶段，显著降低了 Time To First Token（TTFT）。例如 SGLang 的 RadixAttention 就将这一机制做到了极致。此外，如 LMCache 这样的层级缓存管理系统，也为系统维度的缓存调度提供了高性能的解决方案。
+Prefix Caching（前缀缓存）是另一个在系统层被广泛采纳的 I/O 优化策略。由于多轮对话（Multi-turn Chat）、System Prompt 或检索增强生成（RAG）等场景中存在大量重复的前缀输入，系统可以将这部分已计算的 KV Cache 进行哈希签名并跨请求共享。当新请求到来时，若命中缓存，即可直接跳过重复的 Prefill（预填充）计算阶段，显著降低了 Time To First Token（TTFT）。例如 SGLang 的 RadixAttention 就将这一机制做到了极致。此外，如 LMCache 这样的层级缓存管理系统，也为系统维度的缓存调度提供了高性能的解决方案。Prefix Caching 之后的两次复用扩展——文档级拼接（KVLink）与跨微调变体共享（DroidSpeak）——见 [KV Cache 复用系列](../../06_kv_reuse/kv-reuse-overview.md)。
 
 ### 2.6 混合方法
 
@@ -131,6 +131,8 @@ Prefix Caching（前缀缓存）是另一个在系统层被广泛采纳的 I/O �
 LeanKV [20] 是混合路线的典型代表，它敏锐地捕捉到了模型中普遍存在的“三层差异化”特性并以此构建了一个统一的无需重新训练（Training-free）的压缩框架：首先是 **KV 的不对称性**，即 Key 和 Value 对注意力输出的贡献度截然不同；其次是 **Token 的不均等性**，少数核心 Token 承载了大部分上下文语义；最后是 **Attention Head 的动态稀疏性**，不同注意力头在处理特定模式时表现出多样的稀疏激活行为。实验表明，LeanKV 可实现 2.7×–5.7× 的 KV Cache 压缩，吞吐量提升 1.9×–5.4×，且在复杂推理和长文本生成任务中保持了近乎无损的精度。另一方面，Compactor [21] 则基于近似杠杆分数（Approximate Leverage Scores），通过精确衡量不同 KV 对对最终注意力矩阵近似程度的相对重要性，在同样无需训练的条件下实现了 LongBench 评测集上高达 68% 的显存缩减。
 
 混合方法的理论收益毋庸置疑，但工程复杂度也随之呈指数级增加。将多种压缩算子（如 Token 剪枝决策、混合精度量化解码、非对称反量化机制）融合在一起，并深度集成到现有的高效推理框架（如 vLLM/TensorRT-LLM 的 PagedAttention 内核）中，不仅需要极高的 Kernel 编写技巧，还要在运行期动态调度计算与访存以防止“压缩带来的解码延迟掩盖了显存节省的红利”。这也是混合框架目前仍主要停留在“早期工程化”阶段的核心原因。
+
+2025–2026 年的三篇近作是这条联合路线的新样本：Self-Indexing KVCache 让 2-bit 量化的符号码兼任稀疏检索索引，SALS 在 pre-RoPE 低秩潜空间里选 token、只重建被选中的少数，EchoKV 丢弃部分维度后由轻量网络预测补回。逐篇精读与三篇的横向对照见 [KV Cache 压缩系列](../../07_kv_compression/kv-compression-overview.md)。
 
 ### 2.7 技术效果对比一览
 

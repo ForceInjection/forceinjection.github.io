@@ -284,6 +284,14 @@
     "url": "/02_gpu_programming/02_cuda/18_cuda_debugging.html"
   },
   {
+    "title": "GPU 访问系统内存：MMU、IOMMU、MMIO、mmap、ioremap 五种机制对照",
+    "url": "/02_gpu_programming/02_cuda/19_gpu_system_memory_access.html"
+  },
+  {
+    "title": "GPU 如何访问另一块 GPU 的显存：同进程 P2P、跨进程 IPC 与 VMM Fabric",
+    "url": "/02_gpu_programming/02_cuda/20_gpu_peer_memory_access.html"
+  },
+  {
     "title": "bank conflict visual",
     "url": "/02_gpu_programming/02_cuda/bank-conflict-visual.html"
   },
@@ -888,6 +896,18 @@
     "url": "/06_llm_theory_and_fundamentals/llm_basic_concepts/intent_detection/intent_detection_using_llm.zh-CN.html"
   },
   {
+    "title": "记忆原生模型",
+    "url": "/06_llm_theory_and_fundamentals/llm_basic_concepts/memory_native/"
+  },
+  {
+    "title": "EdgeRock-4B 拆解：把 KV Cache 变成固定容量记忆",
+    "url": "/06_llm_theory_and_fundamentals/llm_basic_concepts/memory_native/edgerock-4b-constant-memory.html"
+  },
+  {
+    "title": "当记忆成为模型状态：MemT-1.0 的架构、训练与边界",
+    "url": "/06_llm_theory_and_fundamentals/llm_basic_concepts/memory_native/memt_1_0_memory_native.html"
+  },
+  {
     "title": "混合专家系统（MoE）图解指南",
     "url": "/06_llm_theory_and_fundamentals/llm_basic_concepts/moe/mixture_of_experts_moe_visual_guide.zh-CN.html"
   },
@@ -1136,6 +1156,30 @@
     "url": "/08_agentic_system/agent_skills/docs/claude_skills_guide.html"
   },
   {
+    "title": "一个人调度四个角色：多会话协作 Skill 的实测与边界",
+    "url": "/08_agentic_system/agent_skills/docs/multi-role-agent-skill.html"
+  },
+  {
+    "title": "12 小时、636 个测试：自驱型 Skill 能走多远",
+    "url": "/08_agentic_system/agent_skills/docs/self-driving-skill-for-complex-projects.html"
+  },
+  {
+    "title": "multi-session-collab：评审、修改、测试、裁决的多会话协作 Skill",
+    "url": "/08_agentic_system/agent_skills/multi-session-collab/"
+  },
+  {
+    "title": "多会话协作（评审 / 修改 / 测试 / 裁决）",
+    "url": "/08_agentic_system/agent_skills/multi-session-collab/SKILL.html"
+  },
+  {
+    "title": "协作协议：任务卡、回报模板与裁决",
+    "url": "/08_agentic_system/agent_skills/multi-session-collab/references/protocol.html"
+  },
+  {
+    "title": "环境与配置：版本、命名、入站策略、排错",
+    "url": "/08_agentic_system/agent_skills/multi-session-collab/references/setup.html"
+  },
+  {
     "title": "PDF Translator Skill",
     "url": "/08_agentic_system/agent_skills/pdf_translator/"
   },
@@ -1204,6 +1248,14 @@
     "url": "/08_agentic_system/mcp/docs/01_deep_dive_into_mcp_and_the_future_of_ai_tooling.html"
   },
   {
+    "title": "用 agent 逆向一个 agent：REA 拆解 Codex.app 实战",
+    "url": "/08_agentic_system/mcp/docs/02_reverse_engineer_anything_in_practice.html"
+  },
+  {
+    "title": "REA 实践日志（文章事实底稿）",
+    "url": "/08_agentic_system/mcp/docs/references/01-rea-practice-log.html"
+  },
+  {
     "title": "MCP 智能体演示项目",
     "url": "/08_agentic_system/mcp/mcp_demo/"
   },
@@ -1264,6 +1316,10 @@
     "url": "/08_agentic_system/memory/research/theory/memory-systems-are-dead.html"
   },
   {
+    "title": "评审、修改、测试、裁决：Claude Code 多会话协作实践手册",
+    "url": "/08_agentic_system/multi_agent/docs/claude-code-multi-session-playbook.html"
+  },
+  {
     "title": "多智能体AI系统基础：理论与框架",
     "url": "/08_agentic_system/multi_agent/docs/part1_multi_agent_ai_fundamentals.html"
   },
@@ -1294,6 +1350,10 @@
   {
     "title": "推理系统技术体系",
     "url": "/09_inference_system/"
+  },
+  {
+    "title": "Agent 推理服务",
+    "url": "/09_inference_system/agent_serving/"
   },
   {
     "title": "当 Agent 流量成为推理系统的主要负载",
@@ -1432,8 +1492,24 @@
     "url": "/09_inference_system/cost_analysis/coding_plan/objective_pricing_comparison.html"
   },
   {
+    "title": "155 万亿 tokens/天，单卡运营利润率 93%：token 生意可以做成暴利",
+    "url": "/09_inference_system/cost_analysis/deepseek_inference_cluster_unit_economics.html"
+  },
+  {
     "title": "大模型 API 定价策略定量分析框架",
     "url": "/09_inference_system/cost_analysis/llm_api_pricing_analysis.html"
+  },
+  {
+    "title": "DeepInfer",
+    "url": "/09_inference_system/deepinfer/"
+  },
+  {
+    "title": "155 万亿 tokens/天背后的引擎 - DeepInfer 源码拆解",
+    "url": "/09_inference_system/deepinfer/deepinfer-source-deep-dive.html"
+  },
+  {
+    "title": "DeepSeek 昇腾开源栈",
+    "url": "/09_inference_system/deepseek_ascend/"
   },
   {
     "title": "DeepSeek 把家底搬上了昇腾：六个组件、三种双端模式与一份 950 微架构报告",
@@ -1672,6 +1748,162 @@
     "url": "/09_inference_system/kv_cache/02_systems/tair_kvcache/tair-kvcache-architecture-design.html"
   },
   {
+    "title": "当 AI 吃穿存储带宽：华为云把计算网络变成了传输通道",
+    "url": "/09_inference_system/kv_cache/03_fast26/aiturbo.html"
+  },
+  {
+    "title": "多轮对话的 KV 放上 SSD，延迟为什么反涨 3.8 倍",
+    "url": "/09_inference_system/kv_cache/03_fast26/bidaw.html"
+  },
+  {
+    "title": "Agent 的 KV 为什么复用不了：位置一漂移，前缀缓存就失效",
+    "url": "/09_inference_system/kv_cache/03_fast26/cacheslide.html"
+  },
+  {
+    "title": "当 KV Cache 装不进内存：FAST'26 五篇论文给出的五个不同答案",
+    "url": "/09_inference_system/kv_cache/03_fast26/fast26-kv-storage-five-scenarios.html"
+  },
+  {
+    "title": "AITURBO 精读报告（FAST'26）",
+    "url": "/09_inference_system/kv_cache/03_fast26/references/aiturbo-report.html"
+  },
+  {
+    "title": "Bidaw 精读报告（FAST'26）",
+    "url": "/09_inference_system/kv_cache/03_fast26/references/bidaw-report.html"
+  },
+  {
+    "title": "CacheSlide 精读报告（FAST'26）",
+    "url": "/09_inference_system/kv_cache/03_fast26/references/cacheslide-report.html"
+  },
+  {
+    "title": "SolidAttention 精读报告（FAST'26）",
+    "url": "/09_inference_system/kv_cache/03_fast26/references/solidattention-report.html"
+  },
+  {
+    "title": "128k 上下文塞进 16 GB 内存：FAST'26 把 KV Cache 拆碎了放 SSD",
+    "url": "/09_inference_system/kv_cache/03_fast26/solidattention.html"
+  },
+  {
+    "title": "不搬 KV 反而更快：OSDI'26 DirectKV 让显存少占 43%",
+    "url": "/09_inference_system/kv_cache/04_memory_tiering/directkv.html"
+  },
+  {
+    "title": "30.8% 的显存按 200K 上下文预留，实际只用 1%：eLLM 让 Activation 与 KV Cache 互相借内存",
+    "url": "/09_inference_system/kv_cache/04_memory_tiering/ellm.html"
+  },
+  {
+    "title": "当 KV 装不进显存：四篇论文的四种内存账，与一个「统一命名空间 + 成本旋钮」的设想",
+    "url": "/09_inference_system/kv_cache/04_memory_tiering/memory-tiering-overview.html"
+  },
+  {
+    "title": "显存卡死 batch 的 GPU 上：NEO 把 decoding attention 搬给了随卡白送的 CPU",
+    "url": "/09_inference_system/kv_cache/04_memory_tiering/neo.html"
+  },
+  {
+    "title": "DirectKV（OSDI '26）精读报告",
+    "url": "/09_inference_system/kv_cache/04_memory_tiering/references/directkv-report.html"
+  },
+  {
+    "title": "eLLM（DAC 2026）精读报告",
+    "url": "/09_inference_system/kv_cache/04_memory_tiering/references/ellm-report.html"
+  },
+  {
+    "title": "NEO（MLSys 2025）精读报告",
+    "url": "/09_inference_system/kv_cache/04_memory_tiering/references/neo-report.html"
+  },
+  {
+    "title": "Strata（OSDI '26）精读报告",
+    "url": "/09_inference_system/kv_cache/04_memory_tiering/references/strata-report.html"
+  },
+  {
+    "title": "8192 个 token 的 KV 只跑出 22% PCIe 带宽：Strata 重做分层缓存的搬运与调度",
+    "url": "/09_inference_system/kv_cache/04_memory_tiering/strata.html"
+  },
+  {
+    "title": "0.03 秒命中、0.1 秒未命中：ICML'25 审计发现 7 家 LLM API 跨用户共享 prompt 缓存",
+    "url": "/09_inference_system/kv_cache/05_kv_security/auditing-prompt-caching.html"
+  },
+  {
+    "title": "缓存命中的 1 个 bit 出卖了你：NDSS'25 PromptPeek 平均 99% 成功率复原他人 prompt",
+    "url": "/09_inference_system/kv_cache/05_kv_security/i-know-what-you-asked.html"
+  },
+  {
+    "title": "当 KV Cache 跨过信任边界：三篇论文给出的三种泄露面，与一个「共享层级 + 默认加密」的设想",
+    "url": "/09_inference_system/kv_cache/05_kv_security/kv-security-overview.html"
+  },
+  {
+    "title": "Auditing Prompt Caching（ICML 2025）精读报告",
+    "url": "/09_inference_system/kv_cache/05_kv_security/references/auditing-prompt-caching-report.html"
+  },
+  {
+    "title": "PromptPeek（NDSS '25）精读报告 ——《I Know What You Asked: Prompt Leakage via KV-Cache Sharing in Multi-Tenant LLM Serving》",
+    "url": "/09_inference_system/kv_cache/05_kv_security/references/i-know-what-you-asked-report.html"
+  },
+  {
+    "title": "D 线：KV Cache 复用 / 共享 / 安全类论文调研报告（2025–2026）",
+    "url": "/09_inference_system/kv_cache/05_kv_security/references/reuse-security-report.html"
+  },
+  {
+    "title": "Shadow in the Cache（NDSS '26）精读报告",
+    "url": "/09_inference_system/kv_cache/05_kv_security/references/shadow-in-the-cache-report.html"
+  },
+  {
+    "title": "你的 prompt 就存在 KV Cache 里：NDSS'26 三类攻击逐 token 复原输入，KV-Cloak 以 prefill 0.45% 的延迟挡住",
+    "url": "/09_inference_system/kv_cache/05_kv_security/shadow-in-the-cache.html"
+  },
+  {
+    "title": "借来的 KV 不能全借：NSDI'26 DroidSpeak 只重算约一成层，预填充最高快 3.1×",
+    "url": "/09_inference_system/kv_cache/06_kv_reuse/droidspeak.html"
+  },
+  {
+    "title": "当复用跨出同前缀与同模型：两篇论文给出的两条扩展路径",
+    "url": "/09_inference_system/kv_cache/06_kv_reuse/kv-reuse-overview.html"
+  },
+  {
+    "title": "缓存不必同前缀：NeurIPS 2025 KVLink 把 RAG 首 token 延迟最高降 96%",
+    "url": "/09_inference_system/kv_cache/06_kv_reuse/kvlink.html"
+  },
+  {
+    "title": "DroidSpeak（NSDI '26）精读报告",
+    "url": "/09_inference_system/kv_cache/06_kv_reuse/references/droidspeak-report.html"
+  },
+  {
+    "title": "KVLink（NeurIPS 2025）精读报告",
+    "url": "/09_inference_system/kv_cache/06_kv_reuse/references/kvlink-report.html"
+  },
+  {
+    "title": "丢掉的 KV 还能重建：NeurIPS 2026 EchoKV 缓存减半保住 97% 精度、可按需切换",
+    "url": "/09_inference_system/kv_cache/07_kv_compression/echokv.html"
+  },
+  {
+    "title": "当压缩表示被继续使用：三篇论文给出的三种二次决策",
+    "url": "/09_inference_system/kv_cache/07_kv_compression/kv-compression-overview.html"
+  },
+  {
+    "title": "C 线：KV Cache 压缩/驱逐论文调研报告（2025 末–2026）",
+    "url": "/09_inference_system/kv_cache/07_kv_compression/references/compression-report.html"
+  },
+  {
+    "title": "EchoKV 精读报告（NeurIPS 2026）",
+    "url": "/09_inference_system/kv_cache/07_kv_compression/references/echokv-report.html"
+  },
+  {
+    "title": "SALS（NeurIPS 2025）精读报告",
+    "url": "/09_inference_system/kv_cache/07_kv_compression/references/sals-report.html"
+  },
+  {
+    "title": "Self-Indexing KVCache 精读报告",
+    "url": "/09_inference_system/kv_cache/07_kv_compression/references/self-indexing-report.html"
+  },
+  {
+    "title": "压 KV 要赶在旋转之前：NeurIPS 2025 SALS 压到 1/8，访存只剩基线 5.8%",
+    "url": "/09_inference_system/kv_cache/07_kv_compression/sals.html"
+  },
+  {
+    "title": "压缩后的 Key 就是索引：AAAI'26 Self-Indexing KVCache 让 KV 内存少占 78%",
+    "url": "/09_inference_system/kv_cache/07_kv_compression/self-indexing.html"
+  },
+  {
     "title": "KV 压缩推到极限：从架构改造到分层缓存",
     "url": "/09_inference_system/kv_compression/"
   },
@@ -1724,6 +1956,10 @@
     "url": "/09_inference_system/model_optimization/dflash-block-diffusion-speculative-decoding.html"
   },
   {
+    "title": "draft 不再重建历史：DLite 的 history-free 投机解码",
+    "url": "/09_inference_system/model_optimization/dlite-history-free-speculative-decoding.html"
+  },
+  {
     "title": "图解投机解码",
     "url": "/09_inference_system/model_optimization/illustrated-speculative-decoding.html"
   },
@@ -1754,6 +1990,10 @@
   {
     "title": "parallelism visual",
     "url": "/09_inference_system/parallelism/parallelism_visual.html"
+  },
+  {
+    "title": "Prefill 与 Decode：两阶段的推理机制",
+    "url": "/09_inference_system/prefill_decode/"
   },
   {
     "title": "Continuous Batching 深度解析：从静态批处理到迭代级调度",
@@ -1817,7 +2057,7 @@
   },
   {
     "title": "十二、常见问题解答 (FAQ)",
-    "url": "/09_inference_system/reference_design/12-场景问题解答.html"
+    "url": "/09_inference_system/reference_design/12-常见问题解答.html"
   },
   {
     "title": "十三、实施检查清单",
@@ -1838,6 +2078,10 @@
   {
     "title": "SGLang Chunked Prefill — 原理与代码实现",
     "url": "/09_inference_system/sglang/chunked_prefill.html"
+  },
+  {
+    "title": "三本账：图解 GLM-5.3-Flash 的 KV Cache 布局",
+    "url": "/09_inference_system/sglang/glm53-flash-kv-layout.html"
   },
   {
     "title": "HiCache 深入详解",
@@ -2092,6 +2336,222 @@
     "url": "/10_ai_related_course/ai_infra_lecture/入门级/讲稿.html"
   },
   {
+    "title": "KV Cache 八讲：从 token 账本到生产引擎",
+    "url": "/10_ai_related_course/kv_cache_course/"
+  },
+  {
+    "title": "第 1 讲：KV Cache 为什么存在",
+    "url": "/10_ai_related_course/kv_cache_course/01-kv-cache-basics/"
+  },
+  {
+    "title": "第 1 讲：算清一个 token 的账",
+    "url": "/10_ai_related_course/kv_cache_course/01-kv-cache-basics/hands-on-exercise.html"
+  },
+  {
+    "title": "第 1 讲：课后作业",
+    "url": "/10_ai_related_course/kv_cache_course/01-kv-cache-basics/homework.html"
+  },
+  {
+    "title": "第 1 讲：实验环境",
+    "url": "/10_ai_related_course/kv_cache_course/01-kv-cache-basics/lab-environment.html"
+  },
+  {
+    "title": "第 1 讲：KV Cache 为什么存在 — PPT 大纲",
+    "url": "/10_ai_related_course/kv_cache_course/01-kv-cache-basics/ppt-outline.html"
+  },
+  {
+    "title": "第 1 讲：KV Cache 为什么存在 — 教学大纲",
+    "url": "/10_ai_related_course/kv_cache_course/01-kv-cache-basics/syllabus.html"
+  },
+  {
+    "title": "第 2 讲：KV Cache 怎么放",
+    "url": "/10_ai_related_course/kv_cache_course/02-kv-cache-layout/"
+  },
+  {
+    "title": "第 2 讲：走一遍 block table",
+    "url": "/10_ai_related_course/kv_cache_course/02-kv-cache-layout/hands-on-exercise.html"
+  },
+  {
+    "title": "第 2 讲：课后作业",
+    "url": "/10_ai_related_course/kv_cache_course/02-kv-cache-layout/homework.html"
+  },
+  {
+    "title": "第 2 讲：实验环境",
+    "url": "/10_ai_related_course/kv_cache_course/02-kv-cache-layout/lab-environment.html"
+  },
+  {
+    "title": "第 2 讲：KV Cache 怎么放 — PPT 大纲",
+    "url": "/10_ai_related_course/kv_cache_course/02-kv-cache-layout/ppt-outline.html"
+  },
+  {
+    "title": "第 2 讲：KV Cache 怎么放 — 教学大纲",
+    "url": "/10_ai_related_course/kv_cache_course/02-kv-cache-layout/syllabus.html"
+  },
+  {
+    "title": "第 3 讲：KV Cache 在 nano-vllm 里怎么实现",
+    "url": "/10_ai_related_course/kv_cache_course/03-nanovllm-kv-cache/"
+  },
+  {
+    "title": "第 3 讲：观察一次 preempt / swap",
+    "url": "/10_ai_related_course/kv_cache_course/03-nanovllm-kv-cache/hands-on-exercise.html"
+  },
+  {
+    "title": "第 3 讲：课后作业",
+    "url": "/10_ai_related_course/kv_cache_course/03-nanovllm-kv-cache/homework.html"
+  },
+  {
+    "title": "第 3 讲：实验环境",
+    "url": "/10_ai_related_course/kv_cache_course/03-nanovllm-kv-cache/lab-environment.html"
+  },
+  {
+    "title": "第 3 讲：KV Cache 在 nano-vllm 里怎么实现 — PPT 大纲",
+    "url": "/10_ai_related_course/kv_cache_course/03-nanovllm-kv-cache/ppt-outline.html"
+  },
+  {
+    "title": "第 3 讲：KV Cache 在 nano-vllm 里怎么实现 — 教学大纲",
+    "url": "/10_ai_related_course/kv_cache_course/03-nanovllm-kv-cache/syllabus.html"
+  },
+  {
+    "title": "第 4 讲：KV Cache 在 vLLM 里怎么调度与回收",
+    "url": "/10_ai_related_course/kv_cache_course/04-vllm-kv-cache/"
+  },
+  {
+    "title": "第 4 讲：instrumentation 片段与日志字段",
+    "url": "/10_ai_related_course/kv_cache_course/04-vllm-kv-cache/code/"
+  },
+  {
+    "title": "第 4 讲：对照 vLLM 的 KV 生命周期",
+    "url": "/10_ai_related_course/kv_cache_course/04-vllm-kv-cache/hands-on-exercise.html"
+  },
+  {
+    "title": "第 4 讲：课后作业",
+    "url": "/10_ai_related_course/kv_cache_course/04-vllm-kv-cache/homework.html"
+  },
+  {
+    "title": "第 4 讲：实验环境",
+    "url": "/10_ai_related_course/kv_cache_course/04-vllm-kv-cache/lab-environment.html"
+  },
+  {
+    "title": "第 4 讲：KV Cache 在 vLLM 里怎么调度与回收 — PPT 大纲",
+    "url": "/10_ai_related_course/kv_cache_course/04-vllm-kv-cache/ppt-outline.html"
+  },
+  {
+    "title": "第 4 讲：KV Cache 在 vLLM 里怎么调度与回收 — 教学大纲",
+    "url": "/10_ai_related_course/kv_cache_course/04-vllm-kv-cache/syllabus.html"
+  },
+  {
+    "title": "第 5 讲：KV Cache 怎么复用与分层",
+    "url": "/10_ai_related_course/kv_cache_course/05-kv-cache-reuse/"
+  },
+  {
+    "title": "第 5 讲：命中、驱逐、换出",
+    "url": "/10_ai_related_course/kv_cache_course/05-kv-cache-reuse/hands-on-exercise.html"
+  },
+  {
+    "title": "第 5 讲：课后作业",
+    "url": "/10_ai_related_course/kv_cache_course/05-kv-cache-reuse/homework.html"
+  },
+  {
+    "title": "第 5 讲：实验环境",
+    "url": "/10_ai_related_course/kv_cache_course/05-kv-cache-reuse/lab-environment.html"
+  },
+  {
+    "title": "第 5 讲：KV Cache 怎么复用与分层 — PPT 大纲",
+    "url": "/10_ai_related_course/kv_cache_course/05-kv-cache-reuse/ppt-outline.html"
+  },
+  {
+    "title": "第 5 讲：KV Cache 怎么复用与分层 — 教学大纲",
+    "url": "/10_ai_related_course/kv_cache_course/05-kv-cache-reuse/syllabus.html"
+  },
+  {
+    "title": "第 6 讲：KV Cache 在 GLM-5.3-Flash 里怎么变成三本账",
+    "url": "/10_ai_related_course/kv_cache_course/06-glm53-flash-kv-cache/"
+  },
+  {
+    "title": "第 6 讲：GLM-5.3-Flash 的三本账",
+    "url": "/10_ai_related_course/kv_cache_course/06-glm53-flash-kv-cache/hands-on-exercise.html"
+  },
+  {
+    "title": "第 6 讲：课后作业",
+    "url": "/10_ai_related_course/kv_cache_course/06-glm53-flash-kv-cache/homework.html"
+  },
+  {
+    "title": "第 6 讲：实验环境",
+    "url": "/10_ai_related_course/kv_cache_course/06-glm53-flash-kv-cache/lab-environment.html"
+  },
+  {
+    "title": "第 6 讲：KV Cache 在 GLM-5.3-Flash 里怎么变成三本账 — PPT 提纲",
+    "url": "/10_ai_related_course/kv_cache_course/06-glm53-flash-kv-cache/ppt-outline.html"
+  },
+  {
+    "title": "第 6 讲：KV Cache 在 GLM-5.3-Flash 里怎么变成三本账 — 教学大纲",
+    "url": "/10_ai_related_course/kv_cache_course/06-glm53-flash-kv-cache/syllabus.html"
+  },
+  {
+    "title": "第 7 讲：KV Cache 在 DeepSeek-V4.1-Flash 里怎么压缩",
+    "url": "/10_ai_related_course/kv_cache_course/07-deepseek-v41-kv-cache/"
+  },
+  {
+    "title": "第 7 讲：DeepSeek-V4.1-Flash 的 890 B/token",
+    "url": "/10_ai_related_course/kv_cache_course/07-deepseek-v41-kv-cache/hands-on-exercise.html"
+  },
+  {
+    "title": "第 7 讲：课后作业",
+    "url": "/10_ai_related_course/kv_cache_course/07-deepseek-v41-kv-cache/homework.html"
+  },
+  {
+    "title": "第 7 讲：实验环境",
+    "url": "/10_ai_related_course/kv_cache_course/07-deepseek-v41-kv-cache/lab-environment.html"
+  },
+  {
+    "title": "第 7 讲：KV Cache 在 DeepSeek-V4.1-Flash 里怎么压缩 — PPT 提纲",
+    "url": "/10_ai_related_course/kv_cache_course/07-deepseek-v41-kv-cache/ppt-outline.html"
+  },
+  {
+    "title": "第 7 讲：KV Cache 在 DeepSeek-V4.1-Flash 里怎么压缩 — 教学大纲",
+    "url": "/10_ai_related_course/kv_cache_course/07-deepseek-v41-kv-cache/syllabus.html"
+  },
+  {
+    "title": "第 8 讲：KV Cache 怎么算容量、怎么选引擎",
+    "url": "/10_ai_related_course/kv_cache_course/08-kv-capacity-planning/"
+  },
+  {
+    "title": "第 8 讲：容量规划课堂实验（兼结课实验）",
+    "url": "/10_ai_related_course/kv_cache_course/08-kv-capacity-planning/hands-on-exercise.html"
+  },
+  {
+    "title": "第 8 讲：课后作业",
+    "url": "/10_ai_related_course/kv_cache_course/08-kv-capacity-planning/homework.html"
+  },
+  {
+    "title": "第 8 讲：实验环境",
+    "url": "/10_ai_related_course/kv_cache_course/08-kv-capacity-planning/lab-environment.html"
+  },
+  {
+    "title": "第 8 讲：KV Cache 怎么算容量、怎么选引擎 — PPT 提纲",
+    "url": "/10_ai_related_course/kv_cache_course/08-kv-capacity-planning/ppt-outline.html"
+  },
+  {
+    "title": "第 8 讲：KV Cache 怎么算容量、怎么选引擎 — 教学大纲",
+    "url": "/10_ai_related_course/kv_cache_course/08-kv-capacity-planning/syllabus.html"
+  },
+  {
+    "title": "KV Cache 八讲 — 术语表",
+    "url": "/10_ai_related_course/kv_cache_course/glossary.html"
+  },
+  {
+    "title": "KV Cache 八讲 — 实验环境",
+    "url": "/10_ai_related_course/kv_cache_course/lab-environment.html"
+  },
+  {
+    "title": "KV Cache 八讲 — 课程总纲",
+    "url": "/10_ai_related_course/kv_cache_course/syllabus.html"
+  },
+  {
+    "title": "KV Cache 八讲 — 可复用配图",
+    "url": "/10_ai_related_course/kv_cache_course/visuals.html"
+  },
+  {
     "title": "多智能体 AI 系统培训材料",
     "url": "/10_ai_related_course/multi_agent_system/multi_agent_training/"
   },
@@ -2208,12 +2668,20 @@
     "url": "/11_ai_native_everything/"
   },
   {
+    "title": "代码只占三成：AI Native 的瓶颈为什么在代码之外",
+    "url": "/11_ai_native_everything/ai_native_handbook/ai-native-handbook-reading.html"
+  },
+  {
     "title": "24 个企业 AI 落地案例解读：FDE 最难的不是模型",
     "url": "/11_ai_native_everything/fde/fde-100-cases-analysis.html"
   },
   {
     "title": "《FDE：AI落地实战指南》：把 AI 塞进业务现场的操作手册",
     "url": "/11_ai_native_everything/fde/fde-ai-landing-guide.html"
+  },
+  {
+    "title": "FDE 落地最大的难点：有结果责任，没有组织权力",
+    "url": "/11_ai_native_everything/fde/fde-result-responsibility-without-authority.html"
   },
   {
     "title": "模型不稀缺了，稀缺的是把模型塞进业务的人",
@@ -2292,6 +2760,10 @@
     "url": "/21_openspec_practise/docs-en/openspec-v1.13.0-workflow-practice.html"
   },
   {
+    "title": "From Security Hardening to Linked Specs: OpenSpec v1.14.3 Workflow Practice",
+    "url": "/21_openspec_practise/docs-en/openspec-v1.14.3-workflow-practice.html"
+  },
+  {
     "title": "From Hardcoded to Dynamic Instructions: The Three Major Changes in OpenSpec v1.5.0",
     "url": "/21_openspec_practise/docs-en/openspec-v1.5.0-upgrade.html"
   },
@@ -2318,6 +2790,10 @@
   {
     "title": "把静默失败堵死：OpenSpec v1.13.0 工作流实践",
     "url": "/21_openspec_practise/docs/openspec-v1.13.0-workflow-practice.html"
+  },
+  {
+    "title": "从安全加固到链接 spec：OpenSpec v1.14.3 工作流实践",
+    "url": "/21_openspec_practise/docs/openspec-v1.14.3-workflow-practice.html"
   },
   {
     "title": "从硬编码到动态指令：OpenSpec v1.5.0 的三大变革",
@@ -2426,6 +2902,18 @@
   {
     "title": "tasks",
     "url": "/21_openspec_practise/openspec/changes/archive/2026-09-10-order-list-query/tasks.html"
+  },
+  {
+    "title": "design",
+    "url": "/21_openspec_practise/openspec/changes/archive/2026-10-19-python-order-get-by-id/design.html"
+  },
+  {
+    "title": "proposal",
+    "url": "/21_openspec_practise/openspec/changes/archive/2026-10-19-python-order-get-by-id/proposal.html"
+  },
+  {
+    "title": "Tasks",
+    "url": "/21_openspec_practise/openspec/changes/archive/2026-10-19-python-order-get-by-id/tasks.html"
   },
   {
     "title": "Cart Management Specification",
@@ -2570,6 +3058,10 @@
   {
     "title": "CLAUDE.md",
     "url": "/CLAUDE.html"
+  },
+  {
+    "title": "Demos：仓库内可运行的代码与 Notebook",
+    "url": "/demos.html"
   },
   {
     "title": "mermaid editor",

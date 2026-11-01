@@ -4,6 +4,7 @@
 
 > - **适用人群**：AI 工程师、系统架构师、GPU 编程开发者、大模型应用开发者、技术研究人员。
 > - **技术栈**：CUDA、GPU 架构、LLM、AI 系统、分布式计算、容器化部署、性能优化。
+> - **想直接跑代码？** 全仓库 12 处可运行 Demo 的总索引见 **[Demos 总索引](demos.md)**——含依赖要求、对应文章与验证状态。
 
 ---
 
@@ -241,6 +242,8 @@ LLM 核心理论与架构基石，深入解析 Tokenizer 分词机制、Embeddin
 
 - [基础理论与概念导航](06_llm_theory_and_fundamentals/llm_basic_concepts/README.md) - LLM 核心概念的完整学习路径。
 - [Transformer 架构详解](06_llm_theory_and_fundamentals/llm_basic_concepts/transformer/transformer_architecture.md) — 从 RNN 串行瓶颈到自注意力机制，拆解 Attention、FFN、位置编码、LayerNorm 等核心组件，目标是读完能看懂 `modeling_llama.py`。
+- [当记忆成为模型状态：MemT-1.0 的架构、训练与边界](06_llm_theory_and_fundamentals/llm_basic_concepts/memory_native/memt_1_0_memory_native.md) - 记忆原生基础模型：local/hyper memory、GDN-2、34B token 训练与 11 项记忆基准，含源码核对与许可/部署边界。
+- [EdgeRock-4B 拆解：把 KV Cache 变成固定容量记忆](06_llm_theory_and_fundamentals/llm_basic_concepts/memory_native/edgerock-4b-constant-memory.md) - 用 1024 token 局部窗口与 1024 条 RMA 锚点替换 8 层全注意力，历史固定 97.76 MiB/序列；拆 RMA 机制、训练路径、AIME/吞吐数据与口径边界。
 - [Andrej Karpathy ： Deep Dive into LLMs like ChatGPT （B 站视频）](https://www.bilibili.com/video/BV16cNEeXEer) - 深度学习领域权威专家的 LLM 技术解析。
 - [大模型基础组件 - Tokenizer](https://zhuanlan.zhihu.com/p/651430181) - 文本分词与编码的核心技术。
 - [解密大语言模型中的 Tokens](06_llm_theory_and_fundamentals/llm_basic_concepts/token/README.md) - Token 机制的深度解析与实践应用。
@@ -363,11 +366,20 @@ SFT 之后把推理能力推上去要靠 RL，而 RL 的 rollout 由推理引擎
 剖析现代推理系统的底层架构创新，重点解构 Mooncake 等以 KV Cache 为中心的高效 LLM 调度系统设计模式与性能调优策略。
 
 - [Mooncake 架构详解：以 KV Cache 为中心的高效 LLM 推理系统设计](09_inference_system/kv_cache/02_systems/mooncake/mooncake_architecture.md) - 新一代推理系统的架构创新与性能优化策略
+- [当 KV Cache 装不进内存：FAST'26 五篇论文给出的五个不同答案](09_inference_system/kv_cache/03_fast26/fast26-kv-storage-five-scenarios.md) - FAST'26「AI and LLMs」九篇论文中五篇精读的五象限汇总：端侧/智能体/对话/数据中心/冷启动各自的核心矛盾、招式与数字，共同支点是可复现的 I/O 特征；附 4 篇 Agent 精读报告
+- [当 KV 装不进显存：四篇论文的四种内存账，与一个「统一命名空间 + 成本旋钮」的设想](09_inference_system/kv_cache/04_memory_tiering/memory-tiering-overview.md) - DirectKV / NEO / eLLM / Strata 四篇论文内存层级路线的横切总纲：去搬运 / 挪计算 / 并账本 / 重排调度，附按条件选路的对号表与「数字怎么读」口径清单
+- [当 KV Cache 跨过信任边界：三篇论文给出的三种泄露面，与一个「共享层级 + 默认加密」的设想](09_inference_system/kv_cache/05_kv_security/kv-security-overview.md) - 读行为 / 读数据 / 读时延三种取证位置：PromptPeek / Shadow in the Cache / Auditing Prompt Caching，附按角色选路的对号表，以及取证距离与防御动作同轴的成本账
+- [当复用跨出同前缀与同模型：两篇论文给出的两条扩展路径](09_inference_system/kv_cache/06_kv_reuse/kv-reuse-overview.md) - KVLink（文档级预计算 + link token）与 DroidSpeak（跨微调变体共享 + 关键层重算）两条路径与「数字怎么读」口径清单
+- [当压缩表示被继续使用：三篇论文给出的三种二次决策](09_inference_system/kv_cache/07_kv_compression/kv-compression-overview.md) - Self-Indexing KVCache / SALS / EchoKV 把压缩产物继续用作检索索引、token 选择场与重建素材
 - [当 Agent 流量成为推理系统的主要负载](09_inference_system/agent_serving/agent-workload-serving.md) - KV 生命周期错配、调度语义失真、会话粘性与容量公式失效：Agent 负载下的四连锁问题与两引擎源码级现状
 - [约束解码的性能账单：vLLM 与 SGLang 的结构化输出实现拆解](09_inference_system/agent_serving/constrained-decoding-engines.md) - 结构化输出的编译账/每步账/交互账：双引擎实现逐项对照与 jump-forward 差异
 - [线性注意力与推理系统](09_inference_system/linear_attention/README.md) - delta-rule 一脉（KDA/Gated DeltaNet）落地后的系统挑战：prefill 串行化、状态检查点缓存、状态语义深水区——总览 + 机制/调度/状态语义四篇
-- [HBF 是 HBM 的替代吗：单位存储便宜了，Token 成本却可能更高](09_inference_system/hbf-vs-hbm.md) - Hot Chips 2026 的 (β, α) 坐标系与 $/token 公式：单位容量便宜 8–16 倍、单位容量带宽只有 HBM 的 1/25，折算成带宽单价反而贵 1.7 倍，HBF 只在一个很窄的低带宽区间里划算
+- [HBF 是 HBM 的替代吗？单位存储便宜了，Token 成本却可能更高](09_inference_system/hbf-vs-hbm.md) - Hot Chips 2026 的 (β, α) 坐标系与 $/token 公式：单位容量便宜 8–16 倍、单位容量带宽只有 HBM 的 1/25，折算成带宽单价反而贵 1.7 倍，HBF 只在一个很窄的低带宽区间里划算
+- [Engram：条件记忆与主机内存参数](09_inference_system/engram/README.md) - DeepSeek 条件记忆（N-gram Embedding）首篇源码深读：官方 422 行 demo + SGLang 巨页手术，LPDDR 换 HBM 的优势与代价逐项算账
 - [DeepSeek 把家底搬上了昇腾：六个组件、三种双端模式与一份 950 微架构报告](09_inference_system/deepseek_ascend/deepseek-ascend-open-source.md) - 逐仓拆解 TileLang/DeepGEMM/DeepEP/TileKernels/FlashMLA/DeepSelect 的昇腾版：三种双端模式、950 微架构要点与诚实缺口清单
+- [KV 压缩推到极限：从架构改造到分层缓存](09_inference_system/kv_compression/README.md) - V4 与 K3 架构重写后的 KV 体积账（1M 上下文 250GB 量级 → 个位数 GB）、V4.1-Flash 技术报告精读（CED / CSA2 / FP4 KV）与 HiCache 七池八池的系统后果，三篇互为时间线
+- [Prefill 与 Decode：两阶段的推理机制](09_inference_system/prefill_decode/README.md)（[交互可视化](09_inference_system/prefill_decode/prefill_decode_visual.html) · [校验脚本](09_inference_system/prefill_decode/prefill_decode_validate.py)） - 逐步标注每步矩阵形状与计算量，从 compute-bound vs memory-bound 推导 GQA、量化、PagedAttention、Offloading、PD 分离的必然性
+  - [Continuous Batching 深度解析](09_inference_system/prefill_decode/continuous_batching.md) - 静态批处理的三重浪费、vLLM V1 的 token-level 统一调度与 SGLang prefill-first 主动驱逐
 - [大模型推理并行策略](09_inference_system/parallelism/parallelism_strategies.md)（[交互可视化](09_inference_system/parallelism/parallelism_visual.html)） - DP、TP、PP、EP、SP 五种策略的统一拆解与混合部署案例
   - [专家并行（EP）深度解析](09_inference_system/parallelism/expert_parallelism_deep_dive.md) - EP 独立深度文章：DP/TP/PP 为什么解决不了 MoE、All-to-All 通信模式、EP+DP 耦合、DeepEP 低延迟后端、EPLB 负载均衡、选型决策
 
@@ -437,10 +449,11 @@ SGLang 以 RadixAttention 前缀缓存和高效调度器著称，涵盖 KV Cache
 
 - [SGLang 内容索引](09_inference_system/sglang/README.md) - 源码分析、案例研究与可视化演示导航
 - [SGLang UnifiedRadixTree：一棵树，四种注意力](09_inference_system/sglang/sglang-unified-radix-tree.md) - 0.5.16 默认化的统一 Radix Tree：FULL/MAMBA/SWA 统一索引与可插拔缓存语义
-- [SGLang 0.5.16 发布解读](09_inference_system/sglang/sglang-0.5.16-release.md) - 574 个 PR 的重大版本：DSpark 置信度驱动投机解码与 Inkling 975B Day-0 支持，含破坏性变更清单
+- [SGLang 0.5.16 解读：一棵 Radix Tree 统一四种 Attention，DSpark 让投机解码不再一刀切](09_inference_system/sglang/sglang-0.5.16-release.md) - 574 个 PR 的重大版本：DSpark 置信度驱动投机解码与 Inkling 975B Day-0 支持，含破坏性变更清单
 - [HiCache 深入详解](09_inference_system/sglang/hicache_deep_dive.md) - SGLang 分层 KV Cache 架构（L1/L2/L3）与 HiRadixTree 源码分析
 - [SGLang KV Pool 管理：物理存储、Radix Tree 索引与请求视图](09_inference_system/sglang/sglang-kv-pool-management.md) - KV Pool/Radix Tree/ReqToTokenPool 三层结构与 L1→L2→L3 多级逐出
   - [KV Cache L1↔L2 数据流深度分析](09_inference_system/sglang/sglang-kv-cache-dataflow-analysis.md) - write_backup/eviction/load_back 逐操作代码路径与 CXL 场景适配
+- [三本账：图解 GLM-5.3-Flash 的 KV Cache 布局](09_inference_system/sglang/glm53-flash-kv-layout.md) - 按一个 token、一个 request、HBM KV Pool + RadixTree、DRAM 四个问题拆 45 层里的三本账：11 层 MLA latent KV、11 层 DSA indexer、34 层 KDA state；含 7.26 KB/token 边界（KDA 默认 fp32、按 5 个 state slot/request 另算）、indexer page 布局、`value` / `host_value` 与 HiCache 覆盖范围（只换出 KV + KDA，indexer 和 compress tail 没有 HiCache 副本），配五张手绘图
 - [SGLang 调度器](09_inference_system/sglang/sglang-scheduler.md) - Prefill > Decode 优先级决策、PrefillAdder 五种准入预算与 retract_decode 内存压力保护
 - [SGLang Overlap Scheduling 深度解析](09_inference_system/sglang/sglang-overlap-scheduling.md) - CPU-GPU 双流水线：result_queue 打破串行依赖与 FutureMap relay 输入
 - [SGLang HiSparse 深度解析](09_inference_system/sglang/hisparse_deep_dive.md) - 将 DSA 稀疏选择提升到系统 coordinator 层：page 级选择性加载与双模式索引转换
@@ -480,6 +493,7 @@ SGLang 以 RadixAttention 前缀缓存和高效调度器著称，涵盖 KV Cache
 - [NVIDIA 模型优化器](09_inference_system/model_optimization/nvidia_model_optimizer.md) - NVIDIA 模型优化工具链详解
 - [图解投机解码](09_inference_system/model_optimization/illustrated-speculative-decoding.md) - Speculative Decoding 的核心思想、系统实现与工程调优要点
 - [一次前向，白赚 4 个 token：DFlash 2 块扩散投机解码技术详解](09_inference_system/model_optimization/dflash-block-diffusion-speculative-decoding.md) - 块扩散式的投机解码架构与实现深度解析
+- [draft 不再重建历史：DLite 的 history-free 投机解码](09_inference_system/model_optimization/dlite-history-free-speculative-decoding.md) - Agent 负载下把历史建模留给 target 的投机解码：2.07–2.74× 加速、两阶段训练与工程边界
 - [vLLM GB200 优化](09_inference_system/vllm/hardware_optimization/gb200_optimization.pptx) - vLLM 在 GB200 硬件上的性能优化策略
 
 ### 9.5 推理优化参考设计
@@ -511,16 +525,17 @@ SGLang 以 RadixAttention 前缀缓存和高效调度器著称，涵盖 KV Cache
 
 - [实施建议与最佳实践](09_inference_system/reference_design/07-实施建议与最佳实践.md) - 落地实施的指导建议
 - [实施检查清单](09_inference_system/reference_design/13-实施检查清单.md) - 推理系统上线检查清单
-- [场景问题解答](09_inference_system/reference_design/12-场景问题解答.md) - 常见问题与解决方案
+- [常见问题解答（FAQ）](09_inference_system/reference_design/12-常见问题解答.md) - 常见问题与解决方案
 - [参考资料与延伸阅读](09_inference_system/reference_design/08-参考资料与延伸阅读.md) - 推荐阅读与延伸资料
 - [总结与展望](09_inference_system/reference_design/14-总结与展望.md) - 推理优化技术发展趋势
 
 ### 9.6 推理成本与容量规划
 
-大模型推理成本的定量分析与容量规划决策，涵盖 API 按量计费与 Coding Plan 包月订阅的定价数据建模，以及基于业务前缀复用率的 KV Cache 各级存储（HBM/DRAM/NVMe）容量推演。
+大模型推理成本的定量分析与容量规划决策，涵盖 API 按量计费、Coding Plan 包月订阅的定价数据建模、DeepSeek 推理集群的单卡生产经济学，以及基于业务前缀复用率的 KV Cache 各级存储（HBM/DRAM/NVMe）容量推演。
 
 - [推理成本分析](09_inference_system/cost_analysis/llm_api_pricing_analysis.md) — 基于 OpenRouter 的多模型成本测算与动态抓取脚本
 - [Coding Plan 订阅对比](09_inference_system/cost_analysis/coding_plan/coding_plan_report.md) — 11 款 AI 编程工具订阅成本与隐藏条款解析
+- [DeepSeek 推理集群单卡经济学](09_inference_system/cost_analysis/deepseek_inference_cluster_unit_economics.md) — 155 万亿 tokens/天、96% 缓存命中、38 美元/卡时：单卡年收入 33 万美元、93–96% 运营利润率，附价格/成本假设与敏感性
 - **[Token Factory：AI 推理的成本革命（图文讲解）](99_misc/token_factory_talk/talk-illustrated.md)** — 对外演讲的 PPT 24 页逐页配图讲解：AI 白菜化与 Token 单位化 → 从「算力房东」到「产品制造商」→ 提升产能的成本革命 → 让 token 更值钱，附国产算力差距的现场互动。配套素材库（可排练提纲 + 产能度量文档 + 12 份参考资料）见 [项目 README](99_misc/token_factory_talk/README.md)
 
   <img src="./99_misc/token_factory_talk/img/cover.jpg" width="600" alt="Token Factory：AI 推理的成本革命 — 演讲封面"/>
@@ -549,6 +564,7 @@ DeepSeek 模型极致性能优化实战，深度解析 vLLM 宽端点 (Wide Endp
 - [vLLM WideEP 架构](09_inference_system/vllm/hardware_optimization/deepseek_blackwell_wide_ep.md) - vLLM 宽端点 (Wide Endpoint) 架构解析
 - [Scaling DeepSeek on Blackwell](09_inference_system/vllm/hardware_optimization/scaling_deepseek_blackwell.pptx) - DeepSeek 在 Blackwell 平台上的扩展性优化
 - [从 MLA 到 CSA + HCA：DeepSeek 注意力架构的进化之路](09_inference_system/vllm/module_analysis/deepseek_attention_evolution_mla_to_csa_hca.md) - 结合 vLLM 推理引擎源码，深度解析 DeepSeek 注意力机制演进
+- [DeepInfer 源码拆解：155 万亿 tokens/天背后的引擎，开源了哪一半](09_inference_system/deepinfer/deepinfer-source-deep-dive.md) - DeepSeek V4.1-Flash 生产推理引擎的源码级拆解：ZOS 异步流水线、DSpark 变长验证、YOCO/SWA 截断与 Wide-EP；引擎核心在仓库里，3FS KV 存储、Entrypoint 前缀匹配、请求级 LB 不在
 
 ---
 
@@ -566,6 +582,7 @@ DeepSeek 模型极致性能优化实战，深度解析 vLLM 宽端点 (Wide Endp
 
 - [理论基础与框架](08_agentic_system/multi_agent/docs/part1_multi_agent_ai_fundamentals.md) - BDI 架构、多 Agent 协作机制与企业级落地
 - [企业级构建实战](08_agentic_system/multi_agent/docs/part2_enterprise_multi_agent_system_implementation.md) - 基于 LangGraph 的架构设计与企业级代码落地
+- [Claude Code 多会话协作实践手册](08_agentic_system/multi_agent/docs/claude-code-multi-session-playbook.md) - 从上下文隔离与多视角评审出发，跨窗口消息、Agent Teams 与 Dynamic Workflow 三种协作路线，含评判者设计与排错
 
 **智能体设计模式**：
 
@@ -603,11 +620,14 @@ DeepSeek 模型极致性能优化实战，深度解析 vLLM 宽端点 (Wide Endp
 **工具及协议**：
 
 - [Model Context Protocol (MCP)](08_agentic_system/mcp/docs/01_deep_dive_into_mcp_and_the_future_of_ai_tooling.md) - MCP 原理与实战，探讨 AI 工具链的未来
+  - [用 agent 逆向一个 agent：REA 拆解 Codex.app 实战](08_agentic_system/mcp/docs/02_reverse_engineer_anything_in_practice.md) - 27 万 star 的逆向工程 MCP 本机实测：fail-closed 三道闸门、预算对照实验与视图投影阶梯，附手绘图
 
 **Agent Skill**：
 
 - [Claude Skills 开发指南](08_agentic_system/agent_skills/docs/claude_skills_guide.md) - 扩展智能体能力的工具定义规范与最佳实践
   - [构建完整指南 (PDF)](08_agentic_system/agent_skills/docs/the_complete_guide_to_building_skill_for_claude.pdf)
+  - [一个人调度四个角色：多会话协作 Skill 的实测与边界](08_agentic_system/agent_skills/docs/multi-role-agent-skill.md) - 四个角色各开一个会话：三层结构 + 端到端实测与边界
+  - [12 小时、636 个测试：自驱型 Skill 能走多远](08_agentic_system/agent_skills/docs/self-driving-skill-for-complex-projects.md) - 从 SPARQLite 实验切入，拆 Skill 的策略层与运行时：单会话有界任务可只用 Skill，跨 session 复杂项目要 Workflow 或 Agent SDK harness
 - [Agent Skill 开发指南](https://github.com/ForceInjection/awesome-skills)（[在线版](https://forceinjection.github.io/awesome-skills/)）- 由原力注入博主维护的优秀认知技能（Agent Skill）合集，包含深度代码阅读、架构分析、文档评审等自动化工作流。
 - [CUDA Code Skill](https://github.com/ForceInjection/cuda-code-skill) - 面向 AI IDE（Claude Code、Trae 等）的 CUDA 知识增强代码生成与性能分析技能库。
 - [mmx-cli](https://github.com/MiniMax-AI/cli) - MiniMax AI 平台的 CLI 技能，支持文本、图片、视频、语音、音乐生成与 Web 搜索，遵循 agentskills.io 标准。
@@ -641,6 +661,7 @@ DeepSeek 模型极致性能优化实战，深度解析 vLLM 宽端点 (Wide Endp
 - [LangChain 记忆功能集成](08_agentic_system/memory/langchain/code/README.md) - 包含基础记忆类型、智能客服应用和 LangGraph 记忆管理的演示
   - [代码实现示例](08_agentic_system/memory/langchain/langchain_memory.md)
 - [Agent Skill：PDF 智能翻译器](08_agentic_system/agent_skills/pdf_translator/README.md) - 结合 OCR 与 LLM 的多模态文档处理工具
+- [Agent Skill：多会话协作（评审/修改/测试/裁决）](08_agentic_system/agent_skills/multi-session-collab/README.md) - 跨窗口消息 / Agent Teams / Workflow 的协作协议与启动清单
 
 ### 10.4 前沿学术与行业研究
 
@@ -705,7 +726,7 @@ RAG 技术全景演进导航，对比不同检索架构优劣势，系统评估�
 
 ## 12. 课程体系与学习路径
 
-系统化学习路径与进阶指南集合，包含 ZOMI 酱 AI System 全栈硬件架构、大模型底层原理与演进基础、Trae AI 辅助编程实战，以及基于 LangGraph 的企业级多智能体系统培训资源。
+系统化学习路径与进阶指南集合，包含 ZOMI 酱 AI System 全栈硬件架构、大模型底层原理与演进基础、Trae AI 辅助编程实战、KV Cache 专题课，以及基于 LangGraph 的企业级多智能体系统培训资源。
 
 ### 12.1 AI System 全栈课程（ZOMI 酱）
 
@@ -754,7 +775,15 @@ ZOMI 酱主导的高分开源 AI 基础设施架构体系，从底层 AI 芯片�
 
 - [多智能体 AI 系统培训材料](10_ai_related_course/multi_agent_system/multi_agent_training/README.md)：涵盖 LangGraph 框架深度解析、LangSmith 监控集成及企业级架构设计。
 
-### 12.5 微软 AI Agents for Beginners 课程
+### 12.5 KV Cache 八讲
+
+从 token 账本、page/slot 口径到 nano-vllm / vLLM / SGLang 源码，再到 GLM-5.3-Flash 与 DeepSeek-V4.1-Flash 的容量分析。详见 [KV Cache 八讲](10_ai_related_course/kv_cache_course/README.md)。
+
+- **课程结构**：8 讲 × 120 分钟；前四讲公式、分页与引擎，第五讲复用与分层，第六、七讲模型源码，第八讲容量规划与选型。
+- **课程产出**：token/state 容量表、源码映射、Agent 长会话选型备忘。
+- **术语与实验**：[术语表](10_ai_related_course/kv_cache_course/glossary.md)、[实验环境](10_ai_related_course/kv_cache_course/lab-environment.md)。
+
+### 12.6 微软 AI Agents for Beginners 课程
 
 由微软提供的初学者课程，旨在帮助学习者全面了解 AI Agent 的构建与应用。
 
@@ -780,6 +809,7 @@ AI 进入**开发流程**与**应用架构**之外，还有一条线：进入**�
 
 - [模型不稀缺了，稀缺的是把模型塞进业务的人](11_ai_native_everything/fde/forward-deployed-engineer.md) - 从 80/95/99 规律出发讲清 FDE：是什么、不是什么（不是售前、不是驻场外包、不是咨询顾问、不是产品工程师）；三道成本门槛如何被 AI 拉低；本体层、Skill 与连接器如何构成规模化的地基。含腾讯研究院报告与范冰开源手册两份材料的用法指引
 - [《FDE：AI落地实战指南》导读](11_ai_native_everything/fde/fde-ai-landing-guide.md) - 樊中恺（百度主任架构师、文心应用技术负责人）著，人民邮电出版社 2026 年 10 月出版。七篇三十章的骨架，五种死法、访谈提问法与"工作化石"三处要点，以及第 22 章按周复盘的案例写法
+- [FDE 落地最大的难点：有结果责任，没有组织权力](11_ai_native_everything/fde/fde-result-responsibility-without-authority.md) - 把五种死法、24 个案例与 80/95/99 归结为责任、权力、激励三个错位；提出责任、权限、能力、知识四次移交，以及合同、效果基线与产品化闸门的落地做法
 - [别让写代码的 Agent 评审自己：AI 代码评审的三道闸门](11_ai_native_everything/vibe_coding/docs/ai-code-review-three-gates.md) - 生成成本归零后评审成为新瓶颈：METR 实验自评 +20% 实测 −19% 的感知差、LLM 评审的否定盲区、假统计传播三个信号失真；给出机械门（确定性脚本）、流程门（六步自评审）、多 Agent 门（Builder–Critic 信息边界）三道闸门，融合 OpenCodeReview 三阶段架构与公开研究数据，含 6 张手绘图
 
 ---
