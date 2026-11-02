@@ -256,6 +256,90 @@ render_with_liquid: true
   display: none;
 }
 
+/* ─── Recent updates (latest.json) ─── */
+.hp-recent-box {
+  max-width: 900px;
+  margin: 0 auto;
+  background: var(--card-bg);
+  border: 1.5px solid var(--card-border);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 16px var(--card-shadow);
+}
+.hp-recent-list { list-style: none; margin: 0; padding: 0; }
+.hp-recent-item {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  padding: 11px 18px;
+  border-bottom: 1px solid var(--card-border);
+  transition: background .15s;
+}
+.hp-recent-item:last-child { border-bottom: none; }
+.hp-recent-item:hover { background: rgba(127,127,127,.07); }
+.hp-recent-date {
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-size: 12px;
+  color: var(--text-muted);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.hp-recent-title {
+  flex: 1;
+  min-width: 0;
+  font-size: .92em;
+  color: var(--text-heading);
+  text-decoration: none;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.hp-recent-title:hover { color: var(--text-link); text-decoration: none; }
+.hp-recent-title.is-new { font-weight: 600; }
+.hp-recent-badge {
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 1px 7px;
+  border-radius: 4px;
+  border: 1px solid;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.hp-badge-new  { color: #1a7f37; border-color: rgba(26,127,55,.45); background: rgba(26,127,55,.08); }
+.hp-badge-upd  { color: #0b5cad; border-color: rgba(11,92,173,.4);  background: rgba(11,92,173,.07); }
+[data-theme="dark"] .hp-badge-new { color: #3fb950; border-color: rgba(63,185,80,.4);  background: rgba(63,185,80,.1); }
+[data-theme="dark"] .hp-badge-upd { color: #58a6ff; border-color: rgba(88,166,255,.35); background: rgba(88,166,255,.1); }
+.hp-recent-module {
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--tag-text);
+  background: var(--tag-bg);
+  padding: 2px 8px;
+  border-radius: 4px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.hp-recent-more { text-align: center; margin-top: 26px; }
+.hp-recent-more a {
+  font-size: 13px;
+  font-weight: 600;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  color: var(--text-link);
+  text-decoration: none;
+  padding: 6px 16px;
+  border: 1.5px solid var(--border);
+  border-radius: 6px;
+  transition: all .15s;
+}
+.hp-recent-more a:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--accent-contrast);
+  text-decoration: none;
+}
+
 /* Footer handled by _includes/footer.html + _sass/custom.scss */
 
 /* ─── Responsive ─── */
@@ -265,6 +349,9 @@ render_with_liquid: true
   .hp-term-out { margin-left: 14px; }
   .hp-grid  { grid-template-columns: 1fr; }
   .hp-section { padding: 48px 16px; }
+  .hp-recent-module { display: none; }
+  .hp-recent-item { gap: 8px; padding: 10px 12px; }
+  .hp-recent-date { font-size: 10px; }
 }
 </style>
 
@@ -299,6 +386,61 @@ render_with_liquid: true
     </a>
   </div>
 </section>
+
+<!-- ═══ RECENT UPDATES ═══ -->
+<div class="hp-section" id="recent">
+  <div class="hp-section-hd">
+    <h2>git log --since="30 days"</h2>
+    <p>最近 30 天新增与更新的文章，随每次同步自动刷新</p>
+  </div>
+  <div class="hp-recent-box">
+    <ol class="hp-recent-list" id="hp-recent-list"></ol>
+  </div>
+  <div class="hp-recent-more">
+    <a href="/updates/">查看全部更新 →</a>
+  </div>
+</div>
+<script>
+(function () {
+  var list = document.getElementById('hp-recent-list');
+  var section = document.getElementById('recent');
+  if (!list || !section) return;
+  fetch('{{ "/latest.json" | relative_url }}')
+    .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+    .then(function (data) {
+      var items = (data && data.items) || [];
+      if (!items.length) { section.style.display = 'none'; return; }
+      var frag = document.createDocumentFragment();
+      items.slice(0, 10).forEach(function (it) {
+        var li = document.createElement('li');
+        li.className = 'hp-recent-item';
+        var d = document.createElement('span');
+        d.className = 'hp-recent-date';
+        d.textContent = it.date;
+        var a = document.createElement('a');
+        a.className = 'hp-recent-title';
+        a.href = it.url;
+        a.textContent = it.title;
+        if (it.status === 'new') a.classList.add('is-new');
+        var badge = document.createElement('span');
+        badge.className = 'hp-recent-badge ' + (it.status === 'new' ? 'hp-badge-new' : 'hp-badge-upd');
+        badge.textContent = it.status === 'new' ? 'NEW' : 'UPD';
+        li.appendChild(d);
+        li.appendChild(a);
+        li.appendChild(badge);
+        if (it.module) {
+          var m = document.createElement('span');
+          m.className = 'hp-recent-module';
+          m.textContent = it.module;
+          li.appendChild(m);
+        }
+        frag.appendChild(li);
+      });
+      list.appendChild(frag);
+    })
+    .catch(function () { section.style.display = 'none'; });
+})();
+</script>
 
 <!-- ═══ MODULES GRID ═══ -->
 <div class="hp-section" id="modules">

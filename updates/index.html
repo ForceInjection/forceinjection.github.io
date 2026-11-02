@@ -1,0 +1,174 @@
+---
+layout: page
+title: 最近更新
+---
+<style>
+  /* ─── /updates/ 更新日志(latest.json 渲染)─── */
+  .updates-meta {
+    color: var(--text-muted);
+    font-size: .9em;
+    margin-bottom: 28px;
+  }
+  .updates-meta code {
+    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+    font-size: .92em;
+  }
+  .updates-month {
+    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+    font-size: 1.05em;
+    font-weight: 700;
+    color: var(--text-heading);
+    border-bottom: 1.5px solid var(--card-border);
+    padding-bottom: 8px;
+    margin: 34px 0 6px;
+  }
+  .updates-month::before {
+    content: '$ ';
+    color: var(--term-prompt);
+  }
+  .updates-list { list-style: none; margin: 0; padding: 0; }
+  .updates-item {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    padding: 9px 4px;
+    border-bottom: 1px solid var(--card-border);
+    font-size: .95em;
+  }
+  .updates-item:last-child { border-bottom: none; }
+  .updates-date {
+    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+    font-size: .78em;
+    color: var(--text-muted);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .updates-title {
+    flex: 1;
+    min-width: 0;
+    color: var(--text-heading);
+    text-decoration: none;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .updates-title:hover { color: var(--text-link); text-decoration: none; }
+  .updates-title.is-new { font-weight: 600; }
+  .updates-badge {
+    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 1px 7px;
+    border-radius: 4px;
+    border: 1px solid;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .hp-badge-new  { color: #1a7f37; border-color: rgba(26,127,55,.45); background: rgba(26,127,55,.08); }
+  .hp-badge-upd  { color: #0b5cad; border-color: rgba(11,92,173,.4);  background: rgba(11,92,173,.07); }
+  [data-theme="dark"] .hp-badge-new { color: #3fb950; border-color: rgba(63,185,80,.4);  background: rgba(63,185,80,.1); }
+  [data-theme="dark"] .hp-badge-upd { color: #58a6ff; border-color: rgba(88,166,255,.35); background: rgba(88,166,255,.1); }
+  .updates-module {
+    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+    font-size: .72em;
+    font-weight: 600;
+    color: var(--tag-text);
+    background: var(--tag-bg);
+    padding: 2px 8px;
+    border-radius: 4px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .updates-error { color: var(--text-muted); }
+  @media (max-width: 640px) {
+    .updates-module { display: none; }
+    .updates-item { gap: 8px; }
+  }
+</style>
+
+<p class="updates-meta" id="updates-meta">加载中……</p>
+<div id="updates-body" aria-live="polite">
+  <noscript>请启用 JavaScript 查看更新日志,或直接使用顶部搜索。</noscript>
+</div>
+
+<script>
+(function () {
+  var meta = document.getElementById('updates-meta');
+  var body = document.getElementById('updates-body');
+  if (!meta || !body) return;
+
+  function badge(it) {
+    var b = document.createElement('span');
+    b.className = 'updates-badge ' + (it.status === 'new' ? 'hp-badge-new' : 'hp-badge-upd');
+    b.textContent = it.status === 'new' ? 'NEW' : 'UPD';
+    return b;
+  }
+  function row(it) {
+    var li = document.createElement('li');
+    li.className = 'updates-item';
+    var d = document.createElement('span');
+    d.className = 'updates-date';
+    d.textContent = it.date.slice(5);
+    var a = document.createElement('a');
+    a.className = 'updates-title';
+    a.href = it.url;
+    a.textContent = it.title;
+    if (it.status === 'new') a.classList.add('is-new');
+    li.appendChild(d);
+    li.appendChild(a);
+    li.appendChild(badge(it));
+    if (it.module) {
+      var m = document.createElement('span');
+      m.className = 'updates-module';
+      m.textContent = it.module;
+      li.appendChild(m);
+    }
+    return li;
+  }
+
+  fetch('/latest.json')
+    .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+    .then(function (data) {
+      var items = (data && data.items) || [];
+      if (!items.length) {
+        meta.textContent = '最近 ' + ((data && data.window_days) || 30) + ' 天内没有文章更新。';
+        return;
+      }
+      var added = items.filter(function (it) { return it.status === 'new'; }).length;
+      meta.innerHTML = '';
+      meta.appendChild(document.createTextNode(
+        '最近 ' + (data.window_days || 30) + ' 天共 ' + items.length +
+        ' 篇更新(新增 ' + added + '、更新 ' + (items.length - added) +
+        '),生成于 ' + (data.generated_at || '').slice(0, 10) + '。数据由 git log 在每次同步时生成。'
+      ));
+
+      // 按月分组(数据已按日期降序)
+      var frag = document.createDocumentFragment();
+      var currentMonth = null;
+      var currentList = null;
+      items.forEach(function (it) {
+        var month = it.date.slice(0, 7);
+        if (month !== currentMonth) {
+          currentMonth = month;
+          var h = document.createElement('h3');
+          h.className = 'updates-month';
+          h.textContent = month.replace('-', ' 年 ') + ' 月';
+          var ol = document.createElement('ol');
+          ol.className = 'updates-list';
+          currentList = ol;
+          frag.appendChild(h);
+          frag.appendChild(ol);
+        }
+        currentList.appendChild(row(it));
+      });
+      body.appendChild(frag);
+    })
+    .catch(function () {
+      meta.textContent = '';
+      var p = document.createElement('p');
+      p.className = 'updates-error';
+      p.textContent = '更新日志加载失败,请稍后刷新重试。';
+      body.appendChild(p);
+    });
+})();
+</script>
