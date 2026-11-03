@@ -1,4 +1,4 @@
-# 155 万亿 tokens/天背后的引擎 - DeepInfer 源码拆解
+# 155 万亿 tokens/天背后的引擎：DeepInfer 源码拆解
 
 > 2026-10-20 | 源码深读。基于 [deepseek-ai/DeepInfer](https://github.com/deepseek-ai/DeepInfer) HEAD `774ce24`（2026-10-20）的 README、`doc/inference_deployment_qa.md` 与源码；未在 SM100 / Ascend 950 上实测，性能数字除注明外均为官方口径。以下路径均相对 DeepInfer 仓库根目录。
 

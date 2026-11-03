@@ -1504,7 +1504,7 @@
     "url": "/09_inference_system/deepinfer/"
   },
   {
-    "title": "155 万亿 tokens/天背后的引擎 - DeepInfer 源码拆解",
+    "title": "155 万亿 tokens/天背后的引擎：DeepInfer 源码拆解",
     "url": "/09_inference_system/deepinfer/deepinfer-source-deep-dive.html"
   },
   {
@@ -2764,6 +2764,10 @@
     "url": "/21_openspec_practise/docs-en/openspec-v1.14.3-workflow-practice.html"
   },
   {
+    "title": "When the Validator Can't Read Your Gherkin: OpenSpec v1.16.0 Workflow Practice",
+    "url": "/21_openspec_practise/docs-en/openspec-v1.16.0-workflow-practice.html"
+  },
+  {
     "title": "From Hardcoded to Dynamic Instructions: The Three Major Changes in OpenSpec v1.5.0",
     "url": "/21_openspec_practise/docs-en/openspec-v1.5.0-upgrade.html"
   },
@@ -2794,6 +2798,10 @@
   {
     "title": "从安全加固到链接 spec：OpenSpec v1.14.3 工作流实践",
     "url": "/21_openspec_practise/docs/openspec-v1.14.3-workflow-practice.html"
+  },
+  {
+    "title": "当校验器认不得你的 Gherkin：OpenSpec v1.16.0 工作流实践",
+    "url": "/21_openspec_practise/docs/openspec-v1.16.0-workflow-practice.html"
   },
   {
     "title": "从硬编码到动态指令：OpenSpec v1.5.0 的三大变革",
@@ -2914,6 +2922,18 @@
   {
     "title": "Tasks",
     "url": "/21_openspec_practise/openspec/changes/archive/2026-10-19-python-order-get-by-id/tasks.html"
+  },
+  {
+    "title": "design",
+    "url": "/21_openspec_practise/openspec/changes/archive/2026-11-02-scenario-step-format-migration/design.html"
+  },
+  {
+    "title": "proposal",
+    "url": "/21_openspec_practise/openspec/changes/archive/2026-11-02-scenario-step-format-migration/proposal.html"
+  },
+  {
+    "title": "Tasks",
+    "url": "/21_openspec_practise/openspec/changes/archive/2026-11-02-scenario-step-format-migration/tasks.html"
   },
   {
     "title": "Cart Management Specification",
@@ -3066,5 +3086,9 @@
   {
     "title": "mermaid editor",
     "url": "/mermaid_editor.html"
+  },
+  {
+    "title": "最近更新",
+    "url": "/updates/"
   }
 ]
