@@ -1,8 +1,120 @@
 {
-  "generated_at": "2026-11-03T06:10:29Z",
+  "generated_at": "2026-11-04T04:07:45Z",
   "window_days": 30,
-  "count": 126,
+  "count": 137,
   "items": [
+    {
+      "title": "155 万亿 tokens/天背后的引擎：DeepInfer 源码拆解",
+      "url": "/09_inference_system/deepinfer/deepinfer-source-deep-dive.html",
+      "date": "2026-11-03",
+      "status": "new",
+      "module": "推理系统"
+    },
+    {
+      "title": "Changelog",
+      "url": "/21_openspec_practise/CHANGELOG.html",
+      "date": "2026-11-03",
+      "status": "updated",
+      "module": "OpenSpec"
+    },
+    {
+      "title": "CLAUDE.md",
+      "url": "/21_openspec_practise/CLAUDE.html",
+      "date": "2026-11-03",
+      "status": "updated",
+      "module": "OpenSpec"
+    },
+    {
+      "title": "OpenSpec Practise",
+      "url": "/21_openspec_practise/README-en.html",
+      "date": "2026-11-03",
+      "status": "updated",
+      "module": "OpenSpec"
+    },
+    {
+      "title": "When the Validator Can't Read Your Gherkin: OpenSpec v1.16.0 Workflow Practice",
+      "url": "/21_openspec_practise/docs-en/openspec-v1.16.0-workflow-practice.html",
+      "date": "2026-11-03",
+      "status": "new",
+      "module": "OpenSpec"
+    },
+    {
+      "title": "当校验器认不得你的 Gherkin：OpenSpec v1.16.0 工作流实践",
+      "url": "/21_openspec_practise/docs/openspec-v1.16.0-workflow-practice.html",
+      "date": "2026-11-03",
+      "status": "new",
+      "module": "OpenSpec"
+    },
+    {
+      "title": "design",
+      "url": "/21_openspec_practise/openspec/changes/archive/2026-11-02-scenario-step-format-migration/design.html",
+      "date": "2026-11-03",
+      "status": "new",
+      "module": "OpenSpec"
+    },
+    {
+      "title": "proposal",
+      "url": "/21_openspec_practise/openspec/changes/archive/2026-11-02-scenario-step-format-migration/proposal.html",
+      "date": "2026-11-03",
+      "status": "new",
+      "module": "OpenSpec"
+    },
+    {
+      "title": "Tasks",
+      "url": "/21_openspec_practise/openspec/changes/archive/2026-11-02-scenario-step-format-migration/tasks.html",
+      "date": "2026-11-03",
+      "status": "new",
+      "module": "OpenSpec"
+    },
+    {
+      "title": "Cart Management Specification",
+      "url": "/21_openspec_practise/openspec/specs/cart-management/spec.html",
+      "date": "2026-11-03",
+      "status": "updated",
+      "module": "OpenSpec"
+    },
+    {
+      "title": "Catalog Management Specification",
+      "url": "/21_openspec_practise/openspec/specs/catalog-management/spec.html",
+      "date": "2026-11-03",
+      "status": "updated",
+      "module": "OpenSpec"
+    },
+    {
+      "title": "Domain Model Specification",
+      "url": "/21_openspec_practise/openspec/specs/domain-model/spec.html",
+      "date": "2026-11-03",
+      "status": "updated",
+      "module": "OpenSpec"
+    },
+    {
+      "title": "Error Handling Specification",
+      "url": "/21_openspec_practise/openspec/specs/error-handling/spec.html",
+      "date": "2026-11-03",
+      "status": "updated",
+      "module": "OpenSpec"
+    },
+    {
+      "title": "Order Management Specification",
+      "url": "/21_openspec_practise/openspec/specs/order-management/spec.html",
+      "date": "2026-11-03",
+      "status": "updated",
+      "module": "OpenSpec"
+    },
+    {
+      "title": "Payment Specification",
+      "url": "/21_openspec_practise/openspec/specs/payment/spec.html",
+      "date": "2026-11-03",
+      "status": "updated",
+      "module": "OpenSpec"
+    },
+    {
+      "title": "CLAUDE.md",
+      "url": "/CLAUDE.html",
+      "date": "2026-11-03",
+      "status": "updated",
+      "module": ""
+    },
     {
       "title": "GPU 内存管理——从推理工程师的日常问题出发",
       "url": "/02_gpu_programming/02_cuda/12_gpu_memory_management.html",
@@ -111,13 +223,6 @@
     {
       "title": "155 万亿 tokens/天，单卡运营利润率 93%：token 生意可以做成暴利",
       "url": "/09_inference_system/cost_analysis/deepseek_inference_cluster_unit_economics.html",
-      "date": "2026-11-02",
-      "status": "new",
-      "module": "推理系统"
-    },
-    {
-      "title": "155 万亿 tokens/天背后的引擎：DeepInfer 源码拆解",
-      "url": "/09_inference_system/deepinfer/deepinfer-source-deep-dive.html",
       "date": "2026-11-02",
       "status": "new",
       "module": "推理系统"
@@ -774,27 +879,6 @@
       "module": "AI Native"
     },
     {
-      "title": "Changelog",
-      "url": "/21_openspec_practise/CHANGELOG.html",
-      "date": "2026-11-02",
-      "status": "updated",
-      "module": "OpenSpec"
-    },
-    {
-      "title": "CLAUDE.md",
-      "url": "/21_openspec_practise/CLAUDE.html",
-      "date": "2026-11-02",
-      "status": "updated",
-      "module": "OpenSpec"
-    },
-    {
-      "title": "OpenSpec Practise",
-      "url": "/21_openspec_practise/README-en.html",
-      "date": "2026-11-02",
-      "status": "updated",
-      "module": "OpenSpec"
-    },
-    {
       "title": "From Security Hardening to Linked Specs: OpenSpec v1.14.3 Workflow Practice",
       "url": "/21_openspec_practise/docs-en/openspec-v1.14.3-workflow-practice.html",
       "date": "2026-11-02",
@@ -828,13 +912,6 @@
       "date": "2026-11-02",
       "status": "new",
       "module": "OpenSpec"
-    },
-    {
-      "title": "CLAUDE.md",
-      "url": "/CLAUDE.html",
-      "date": "2026-11-02",
-      "status": "updated",
-      "module": ""
     },
     {
       "title": "Demos：仓库内可运行的代码与 Notebook",

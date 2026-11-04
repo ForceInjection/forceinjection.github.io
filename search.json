@@ -16,6 +16,14 @@
     "url": "/01_hardware_architecture/ascend/Ascend950_稀疏注意力Forward算子与优化技术简析.html"
   },
   {
+    "title": "DMA engine",
+    "url": "/01_hardware_architecture/dma/"
+  },
+  {
+    "title": "DMA engine：从描述符到完成，一次搬运发生了什么",
+    "url": "/01_hardware_architecture/dma/01_dma_engine.html"
+  },
+  {
     "title": "GPUDirect 家族",
     "url": "/01_hardware_architecture/gpudirect/"
   },
