@@ -7,10 +7,10 @@
 > | `nvidia/`      | GPU 架构（Volta → Blackwell）、GPGPU vs NPU             | Tensor Core, HBM, SM         | §2.1               |
 > | `tpu/`         | Google TPU 脉动阵列架构                                 | Systolic Array, XLA          | §2.2               |
 > | `ascend/`      | 华为昇腾 950 微架构、DSA 稀疏注意力算子优化             | Cube + Vector, FixPipe       | §2.4               |
-> | `pcie/`        | PCIe 协议、拓扑层次、P2PDMA、BAR1、AER                  | Gen3–Gen6, Root Complex      | §3.1               |
+> | `pcie/`        | PCIe 协议、拓扑层次、P2PDMA、BAR1、AER、CXL             | Gen1–Gen7, Root Complex      | §3.1               |
 > | `nvlink/`      | NVLink / NVSwitch 高速互连                              | 1.8 TB/s, GPU-to-GPU         | §3.2               |
 > | `dma/`         | DMA engine、copy engine、设备直连 DMA                   | Descriptor, Doorbell         | §3.3               |
-> | `gpudirect/`   | GPUDirect P2P / RDMA / Storage (GDS)                    | Zero-copy, Bounce Buffer     | §4.1 / §4.2 / §4.3 |
+> | `gpudirect/`   | GPUDirect P2P / RDMA / Storage (GDS)                    | Zero-copy, Bounce Buffer     | §4                 |
 > | `superchips/`  | NVLink-C2C、GB300 NVL72 机架级架构                      | Chip-to-Chip, Rack-Scale     | §5.1               |
 > | `performance/` | NUMA 亲和性、延迟金字塔、带宽速查表、AMX vs Tensor Core | Latency Hierarchy, Bandwidth | §2.3 / §5.2 / §5.3 |
 > | `assets/`      | GPU↔CPU 数据路径、GPU 物理数据路径全景图                | Topology Atlas, SVG          | §6.1 / §6.2        |
@@ -47,7 +47,7 @@ AI 加速器大致沿两条路线发展。一条是以 **NVIDIA GPU** 为代表�
 > 延伸阅读：Blackwell 代际已从“单卡”进化为“机架级单域”（NVL72、NVLink-C2C），其部署形态与并行策略影响请参阅 §5.1 [AI Superchip 与机架级架构](#51-ai-superchip-与机架级架构)。
 
 - **[NVIDIA 硬件架构与算力解析（子目录总览）](nvidia/README.md)**：NVIDIA 路线下的导航页，串联 GPU 内部结构与 GPGPU vs NPU 选型两条主线。
-- **[深入理解 GPU 架构](nvidia/understand_gpu_architecture/README.md)**：包含 GPU 与 CPU 的特性对比、内存层次模型（全局内存、共享内存等），以及 Tesla V100、RTX 5000 等具体硬件实例的分析。
+- **[GPU 架构深入理解](nvidia/understand_gpu_architecture/README.md)**：包含 GPU 与 CPU 的特性对比、内存层次模型（全局内存、共享内存等），以及 Tesla V100、RTX 5000 等具体硬件实例的分析。
 - **[GPGPU vs NPU：大模型推理训练对比](nvidia/GPGPU_vs_NPU_大模型推理训练对比.md)**：探讨在大语言模型时代，不同架构芯片在训练与推理场景下的优劣势与选型指南。
 - **[MIG 配置与实操](nvidia/mig_hands_on.md)**：基于 A100 现场查询的 MIG GPU 实例分区实操指南，含 profile 列表、GI/CI 创建命令和 CUDA 设备枚举影响。
 
@@ -55,7 +55,7 @@ AI 加速器大致沿两条路线发展。一条是以 **NVIDIA GPU** 为代表�
 
 TPU 是 Google 为深度学习量身打造的另一条路径。它的核心思想是用**脉动阵列（Systolic Array）**把矩阵乘法做到极致，以换取在特定负载下远高于通用 GPU 的能效比。
 
-- **[TPU 101：深度学习专用加速器架构解析](tpu/tpu%20101.md)**：探索 TPU 的设计哲学、核心计算单元原理及其与 GPU 的差异。
+- **[TPU 101：深度学习专用加速器架构解析](tpu/tpu_101.md)**：探索 TPU 的设计哲学、核心计算单元原理及其与 GPU 的差异。
 
 ### 2.3 CPU 矩阵加速：AMX
 
@@ -85,7 +85,7 @@ PCIe 是异构通信（CPU↔GPU、GPU↔NIC、GPU↔NVMe）的通用标准，�
 - **[PCIe 总线技术大全](pcie/01_pcie_comprehensive_guide.md)**：从物理层到协议层全面解析 PCIe 总线架构及带宽演进。
 - **[Linux PCIe P2PDMA 技术介绍](pcie/02_p2pdma_technology.md)**：从 PCIe 硬件机制、Linux 内核实现到 GPUDirect Storage (GDS) 场景实践，全面解析设备直连 DMA 技术。
 - **[GPU BAR1 内存映射](pcie/05_bar1_memory_mapping.md)**：BAR1 窗口大小对 Unified Memory 性能的影响、ReBAR 状态检查、BAR1 vs FB 对比。
-- **[CXL 互联协议全景解读](pcie/08_cxl_interconnect_overview.md)**：基于 arXiv 2306.11227 综述，以 C-I-S-T 叙事拆解 CXL 1.1/2.0/3.0 三代协议（一致性、内存语义、池化、织网）与延迟/带宽实测数据，含 Linux 下 CPU 访问 CXL 内存的设备形态源码分析与对 AI 基础设施的启示。
+- **[CXL 互联协议全景解读](pcie/08_cxl_interconnect_overview.md)**：基于 arXiv 2306.11227 综述，以 C-I-S-T 叙事拆解 CXL 1.1/2.0/3.0 三代协议（一致性、内存语义、池化、Fabric）与延迟/带宽实测数据，含 Linux 下 CPU 访问 CXL 内存的设备形态源码分析与对 AI 基础设施的启示。
 - **[CXL 命令行工具链全景](pcie/09_cxl_cli_tools.md)**：cxl / daxctl / ndctl 三工具的分工与内核模块依赖、五族子命令与协议概念的映射、从插卡到可用内存的完整命令序列（create-region → enable-region → 形态转换）、无设备环境的输出画像与排查顺序、memtier 性能验证与工具链成熟度边界（含版本差异实测发现）。
 
 **拓扑层次与可视化**：
@@ -122,6 +122,9 @@ GPUDirect 让设备间直接 DMA，把 CPU **Bounce Buffer** 从数据路径上�
 | P2P           | 同节点多 GPU | GPU ↔ GPU（经 PCIe/NVLink） | [P2P 技术详解](gpudirect/02_gpudirect_p2p.md)                      |
 | RDMA          | 跨节点       | NIC → 远端 GPU VRAM         | [RDMA 与 Storage 技术详解](gpudirect/01_gpudirect_technology.md)   |
 | Storage (GDS) | 存储加载     | NVMe → GPU VRAM（绕过 CPU） | [GDS 基础（GDS 1.13.1 + 3×NVMe 实测）](gpudirect/03_gds_basics.md) |
+| RDMA 实战     | 跨节点验证   | H100 → IB HDR → H100        | [GPUDirect RDMA 跨节点验证](gpudirect/04_gpudirect_rdma_verification.md) |
+
+> 与 GPU 编程侧的 P2P/显存互访实践（`cudaDeviceCanAccessPeer`、`cudaMemcpyPeer`、事件同步）见 [02_gpu_programming/02_cuda](../02_gpu_programming/02_cuda/README.md) 的 15/19/20 三篇。
 
 ---
 
@@ -140,19 +143,20 @@ Blackwell 代际把 AI 机器边界从“单机”推到“机架级单域”：
 
 互连拓扑的最终落脚点是性能：GPU 插在哪个 PCIe 槽、属于哪个 NUMA node，直接影响 H2D/D2H 带宽和跨 socket 延迟。
 
-- **[单卡 GPU 拓扑与 NUMA 深入分析](performance/02_single_gpu_topology_analysis.md)**：单 GPU 场景下 `nvidia-smi topo -m` 输出解读、NUMA 亲和性验证与跨 socket 延迟分析（含 taskset 实测数据）。
-- **[多 PCIe Domain 与 NUMA 映射](performance/04_pcie_domain_numa.md)**：Sapphire Rapids 多 domain 架构、BDF 编码的 NUMA 推断、跨 socket PCIe 访问的性能评估。
+- **[单卡 GPU 拓扑与 NUMA 分析](performance/02_single_gpu_topology_analysis.md)**：单 GPU 场景下 `nvidia-smi topo -m` 输出解读、NUMA 亲和性验证与跨 socket 延迟分析（含 taskset 实测数据）。
+- **[多 PCIe 根总线段与 NUMA 映射](performance/04_pcie_domain_numa.md)**：Sapphire Rapids 多根总线段架构、BDF 编码的 NUMA 推断、跨 socket PCIe 访问的性能评估。
 
 ### 5.3 性能参考指标
 
 系统访问延迟跨越 **5–6 个数量级**，是 KV Cache 分层、容量规划、集合通信调度的决策基准——**“别让热数据跑到慢介质上”**：
 
-| 层级        | 延迟量级 | 相对寄存器倍数 |
-| ----------- | -------- | -------------- |
-| 寄存器 / L1 | ~1 ns    | 1×             |
-| HBM         | ~100 ns  | ~100×          |
-| 跨节点 RDMA | ~2 μs    | ~2,000×        |
-| NVMe 存储   | ~100 μs  | ~100,000×      |
+| 层级            | 延迟量级                           | 相对寄存器倍数 |
+| --------------- | ---------------------------------- | -------------- |
+| 寄存器 / L1     | ~1 ns                              | 1×             |
+| NVLink 硬件 hop | ~100 ns 级（含软件栈端到端 ~2 μs） | ~100×          |
+| HBM             | ~250-350 ns（HBM3）                | ~250-350×      |
+| 跨节点 RDMA     | ~2 μs                              | ~2,000×        |
+| NVMe 存储       | ~100 μs                            | ~100,000×      |
 
 - **[HBM 显存技术演进](performance/01_hbm_evolution.md)**：从 HBM2 到 HBM3e 的技术迭代，A100 HBM2e vs RTX 5090 GDDR7 实测对比，含 3D 封装原理与 L2 Cache 加速效应。
 - **[AI 基础设施延迟金字塔](performance/ai_latency_pyramid.md)**：寄存器→内存→跨节点网络的各级延迟基准。

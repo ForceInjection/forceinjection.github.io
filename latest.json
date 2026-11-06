@@ -1,8 +1,204 @@
 {
-  "generated_at": "2026-11-04T04:07:45Z",
+  "generated_at": "2026-11-06T02:11:34Z",
   "window_days": 30,
-  "count": 137,
+  "count": 161,
   "items": [
+    {
+      "title": "DMA engine：从描述符到完成，一次搬运发生了什么",
+      "url": "/01_hardware_architecture/dma/01_dma_engine.html",
+      "date": "2026-11-04",
+      "status": "new",
+      "module": "硬件架构"
+    },
+    {
+      "title": "NVIDIA GPUDirect RDMA 与 Storage 技术详解",
+      "url": "/01_hardware_architecture/gpudirect/01_gpudirect_technology.html",
+      "date": "2026-11-04",
+      "status": "updated",
+      "module": "硬件架构"
+    },
+    {
+      "title": "NVIDIA GPUDirect P2P 技术详解：节点内 GPU 高速互联",
+      "url": "/01_hardware_architecture/gpudirect/02_gpudirect_p2p.html",
+      "date": "2026-11-04",
+      "status": "updated",
+      "module": "硬件架构"
+    },
+    {
+      "title": "NVIDIA GPU 容器环境：原理与构建指南",
+      "url": "/02_gpu_programming/01_environment/01_nvidia_container_setup.html",
+      "date": "2026-11-04",
+      "status": "updated",
+      "module": "GPU 编程"
+    },
+    {
+      "title": "大模型训练与推理框架的 GPU 镜像构建深度解析",
+      "url": "/02_gpu_programming/01_environment/02_cuda_image_build_analysis.html",
+      "date": "2026-11-04",
+      "status": "updated",
+      "module": "GPU 编程"
+    },
+    {
+      "title": "裸金属 CUDA 环境安装指南 (Ubuntu 22.04)",
+      "url": "/02_gpu_programming/01_environment/03_cuda_metal_install_guide.html",
+      "date": "2026-11-04",
+      "status": "updated",
+      "module": "GPU 编程"
+    },
+    {
+      "title": "GPU Architecture and Programming — An Introduction",
+      "url": "/02_gpu_programming/02_cuda/01_gpu_programming_introduction.html",
+      "date": "2026-11-04",
+      "status": "updated",
+      "module": "GPU 编程"
+    },
+    {
+      "title": "深入了解 Nvidia CUDA 核心",
+      "url": "/02_gpu_programming/02_cuda/02_cuda_cores.html",
+      "date": "2026-11-04",
+      "status": "updated",
+      "module": "GPU 编程"
+    },
+    {
+      "title": "CUDA Streams 介绍",
+      "url": "/02_gpu_programming/02_cuda/03_cuda_streams.html",
+      "date": "2026-11-04",
+      "status": "updated",
+      "module": "GPU 编程"
+    },
+    {
+      "title": "从 SIMT 到 Tile-Based：GPU 编程范式的演进与实战解析 —— 以矩阵乘法为例",
+      "url": "/02_gpu_programming/02_cuda/04_simt_vs_tile_based.html",
+      "date": "2026-11-04",
+      "status": "updated",
+      "module": "GPU 编程"
+    },
+    {
+      "title": "CUDA NUMA API 编程实践",
+      "url": "/02_gpu_programming/02_cuda/05_cuda_numa_api.html",
+      "date": "2026-11-04",
+      "status": "updated",
+      "module": "GPU 编程"
+    },
+    {
+      "title": "GPU 原子操作与 PCIe 能力查询",
+      "url": "/02_gpu_programming/02_cuda/06_device_attributes.html",
+      "date": "2026-11-04",
+      "status": "updated",
+      "module": "GPU 编程"
+    },
+    {
+      "title": "CUDA Streams 并发实战",
+      "url": "/02_gpu_programming/02_cuda/07_cuda_streams_concurrency.html",
+      "date": "2026-11-04",
+      "status": "updated",
+      "module": "GPU 编程"
+    },
+    {
+      "title": "CUDA Kernel Launch 开销测量",
+      "url": "/02_gpu_programming/02_cuda/08_kernel_launch_latency.html",
+      "date": "2026-11-04",
+      "status": "updated",
+      "module": "GPU 编程"
+    },
+    {
+      "title": "CUDA Graphs 编程",
+      "url": "/02_gpu_programming/02_cuda/09_cuda_graphs.html",
+      "date": "2026-11-04",
+      "status": "updated",
+      "module": "GPU 编程"
+    },
+    {
+      "title": "Reduction：从朴素实现到 Warp Shuffle",
+      "url": "/02_gpu_programming/02_cuda/10_reduction.html",
+      "date": "2026-11-04",
+      "status": "updated",
+      "module": "GPU 编程"
+    },
+    {
+      "title": "Tensor Core GEMM 性能实测",
+      "url": "/02_gpu_programming/02_cuda/11_tensor_core_gemm.html",
+      "date": "2026-11-04",
+      "status": "updated",
+      "module": "GPU 编程"
+    },
+    {
+      "title": "GPU 内存管理——从推理工程师的日常问题出发",
+      "url": "/02_gpu_programming/02_cuda/12_gpu_memory_management.html",
+      "date": "2026-11-04",
+      "status": "updated",
+      "module": "GPU 编程"
+    },
+    {
+      "title": "Shared Memory 与 Bank Conflict——从原理到实战",
+      "url": "/02_gpu_programming/02_cuda/13_shared_memory_bank_conflict.html",
+      "date": "2026-11-04",
+      "status": "updated",
+      "module": "GPU 编程"
+    },
+    {
+      "title": "Warp-level Programming——从 Shuffle 到 Cooperative Groups",
+      "url": "/02_gpu_programming/02_cuda/14_warp_level_programming.html",
+      "date": "2026-11-04",
+      "status": "updated",
+      "module": "GPU 编程"
+    },
+    {
+      "title": "Multi-GPU CUDA 编程——从 P2P 到 NCCL 的多卡协作",
+      "url": "/02_gpu_programming/02_cuda/15_multi_gpu_programming.html",
+      "date": "2026-11-04",
+      "status": "updated",
+      "module": "GPU 编程"
+    },
+    {
+      "title": "异步拷贝与现代 Pipeline——从 cp.async 到 memcpy_async",
+      "url": "/02_gpu_programming/02_cuda/16_async_copy_pipeline.html",
+      "date": "2026-11-04",
+      "status": "updated",
+      "module": "GPU 编程"
+    },
+    {
+      "title": "CUDA 性能调优方法论——从 Roofline Model 到 ncu 诊断",
+      "url": "/02_gpu_programming/02_cuda/17_roofline_optimization.html",
+      "date": "2026-11-04",
+      "status": "updated",
+      "module": "GPU 编程"
+    },
+    {
+      "title": "CUDA 调试实战——从 cuda-gdb 到 compute-sanitizer",
+      "url": "/02_gpu_programming/02_cuda/18_cuda_debugging.html",
+      "date": "2026-11-04",
+      "status": "updated",
+      "module": "GPU 编程"
+    },
+    {
+      "title": "GPU 访问系统内存：MMU、IOMMU、MMIO、mmap、ioremap 五种机制对照",
+      "url": "/02_gpu_programming/02_cuda/19_gpu_system_memory_access.html",
+      "date": "2026-11-04",
+      "status": "new",
+      "module": "GPU 编程"
+    },
+    {
+      "title": "GPU 如何访问另一块 GPU 的显存：同进程 P2P、跨进程 IPC 与 VMM Fabric",
+      "url": "/02_gpu_programming/02_cuda/20_gpu_peer_memory_access.html",
+      "date": "2026-11-04",
+      "status": "new",
+      "module": "GPU 编程"
+    },
+    {
+      "title": "GPU P2P 带宽实测：NVLink vs PCIe",
+      "url": "/02_gpu_programming/04_profiling/08_p2p_bandwidth.html",
+      "date": "2026-11-04",
+      "status": "updated",
+      "module": "GPU 编程"
+    },
+    {
+      "title": "GPU 间数据传输方法实测：从 P2P 到 Unified Memory 的 119 倍差距",
+      "url": "/02_gpu_programming/04_profiling/09_gpu_transfer_methods.html",
+      "date": "2026-11-04",
+      "status": "updated",
+      "module": "GPU 编程"
+    },
     {
       "title": "155 万亿 tokens/天背后的引擎：DeepInfer 源码拆解",
       "url": "/09_inference_system/deepinfer/deepinfer-source-deep-dive.html",
@@ -114,27 +310,6 @@
       "date": "2026-11-03",
       "status": "updated",
       "module": ""
-    },
-    {
-      "title": "GPU 内存管理——从推理工程师的日常问题出发",
-      "url": "/02_gpu_programming/02_cuda/12_gpu_memory_management.html",
-      "date": "2026-11-02",
-      "status": "updated",
-      "module": "GPU 编程"
-    },
-    {
-      "title": "GPU 访问系统内存：MMU、IOMMU、MMIO、mmap、ioremap 五种机制对照",
-      "url": "/02_gpu_programming/02_cuda/19_gpu_system_memory_access.html",
-      "date": "2026-11-02",
-      "status": "new",
-      "module": "GPU 编程"
-    },
-    {
-      "title": "GPU 如何访问另一块 GPU 的显存：同进程 P2P、跨进程 IPC 与 VMM Fabric",
-      "url": "/02_gpu_programming/02_cuda/20_gpu_peer_memory_access.html",
-      "date": "2026-11-02",
-      "status": "new",
-      "module": "GPU 编程"
     },
     {
       "title": "GPU 虚拟化与资源管理技术深度解析 - 第二部分：虚拟化技术篇",
@@ -919,13 +1094,6 @@
       "date": "2026-11-02",
       "status": "new",
       "module": ""
-    },
-    {
-      "title": "中国数据中心有多大、建在哪、谁在租：SemiAnalysis 中国数据中心模型精读",
-      "url": "/03_ai_cluster_ops/04_datacenter/china-dc-boom-semianalysis.html",
-      "date": "2026-10-10",
-      "status": "new",
-      "module": "集群运维"
     },
     {
       "title": "Claude Code Sandbox 安全隔离机制解析",

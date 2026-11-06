@@ -1,6 +1,6 @@
 # PCIe 拓扑层次：Root Complex、Switch、Bridge 与 Device
 
-> 基于双路 Sapphire Rapids (24 个 PCIe domain) + RTX 5090 实测。从 sysfs 出发，逐层解析 PCIe 拓扑的四个核心组件。
+> 基于双路 Sapphire Rapids (24 个 PCIe 根总线段) + RTX 5090 实测。从 sysfs 出发，逐层解析 PCIe 拓扑的四个核心组件。
 
 ---
 
@@ -19,7 +19,7 @@ CPU Socket
 | --------------------- | -------------------------------- | -------------------------------------------------------- |
 | **Root Complex (RC)** | —                                | CPU 内部，连接 CPU 与 PCIe 总线，每个 domain 对应一个 RC |
 | **Root Port**         | 0x060400                         | RC 的下行端口，一个 domain 可有多个 Root Port            |
-| **PCIe Switch**       | 0x060400 (upstream)              | 扩展 PCIe 端口：1 个上行 + N 个下行端口                  |
+| **PCIe Switch**       | 0x060400（上行/下行端口同值）    | 扩展 PCIe 端口：1 个上行 + N 个下行端口                  |
 | **PCIe Bridge**       | 0x060400                         | 简单的 1:1 桥接，无端口扩展                              |
 | **Endpoint**          | 0x030000 (VGA) / 0x010802 (NVMe) | 终端设备：GPU、NVMe、网卡等                              |
 
@@ -29,15 +29,15 @@ CPU Socket
 
 ## 2. sysfs 识别各层
 
-### 2.1 识别 PCIe Domains (Root Complex)
+### 2.1 识别根总线段 (Root Complex)
 
-每个 `pci0000:XX` 目录是一个独立的 PCIe domain，对应一个 Root Complex：
+每个 `pci0000:XX` 目录是一个根总线段（都在 domain 0000 内，各占一段 bus 号），对应一个 RC stack：
 
 ```bash
 ls /sys/devices/ | grep pci
 ```
 
-本环境输出（24 个 domain）：
+本环境输出（24 个根总线段）：
 
 ```text
 pci0000:00  pci0000:15  pci0000:26  ...  pci0000:7f  pci0000:80
@@ -91,7 +91,7 @@ readlink -f /sys/bus/pci/devices/0000:98:00.0
 #                ↑RC      ↑Bridge       ↑GPU
 ```
 
-解析：`pci0000:97` (Root Complex) → `0000:97:01.0` (Bridge, Intel 0x352a) → `0000:98:00.0` (GPU)。
+解析：`pci0000:97`（根总线）→ `0000:97:01.0`（Bridge, Intel 0x352a，完整身份以 `lspci -s 97:01.0` 输出为准）→ `0000:98:00.0`（GPU）。
 
 ---
 
@@ -126,11 +126,11 @@ Socket 1 (NUMA node 1)
 # Root Port 通常在 domain 根目录下 (BDF 的 device=00)
 ls /sys/devices/pci0000:97/ | grep "0000:97:00"
 # 0000:97:00.0  0000:97:00.1  0000:97:00.2  0000:97:00.4
-# 这些是 Root Port (在 domain 的 bus 0 上)
+# 这些是 Root Port（BDF 的 bus = 0x97，即 domain 根总线）
 
-# Bridge 在 Root Port 下游 (bus 01)
+# Bridge 挂在 Root Port 下游（device=01；bridge 自身仍在 bus 0x97 上，其下游 secondary bus 是 0x98）
 ls /sys/devices/pci0000:97/ | grep "0000:97:01"
-# 0000:97:01.0  ← Bridge，连接在 bus 1 上
+# 0000:97:01.0  ← Bridge
 ```
 
 Root Port 的特征：BDF 中 bus = domain bus (通常是 0x97)，device = 0x00。
