@@ -952,6 +952,10 @@
     "url": "/06_llm_theory_and_fundamentals/llm_basic_concepts/token/"
   },
   {
+    "title": "手搓 Tokenizer：从字符级到 BPE，看懂 tiktoken 在做什么",
+    "url": "/06_llm_theory_and_fundamentals/llm_basic_concepts/token/hand_roll_bpe_tokenizer.html"
+  },
+  {
     "title": "解密 LLM 中的 Tokens",
     "url": "/06_llm_theory_and_fundamentals/llm_basic_concepts/token/llm_token_intro.html"
   },
@@ -1112,76 +1116,84 @@
     "url": "/08_agentic_system/agent_design/docs/writing-agentic-agent.html"
   },
   {
-    "title": "Agent Sandbox 的演进与设计范式",
-    "url": "/08_agentic_system/agent_infra/docs/agent-sandbox-design.html"
+    "title": "Agent 基础设施（Agent Infra）",
+    "url": "/08_agentic_system/agent_infra/"
   },
   {
     "title": "AI Agent 基础设施——三个决定性层次：工具、数据、编排",
-    "url": "/08_agentic_system/agent_infra/docs/ai-agent-infra-stack.html"
-  },
-  {
-    "title": "Claude Code Sandbox 安全隔离机制解析",
-    "url": "/08_agentic_system/agent_infra/docs/claude-code-sandbox.html"
-  },
-  {
-    "title": "深度解析 Kagent：从零打造 Kubernetes 运维智能体",
-    "url": "/08_agentic_system/agent_infra/docs/deep-dive-kagent-k8s-ops-agent.html"
-  },
-  {
-    "title": "DeepSeek Harness：一本书讲透 Agent 怎么组织",
-    "url": "/08_agentic_system/agent_infra/docs/deepseek-harness-book-charts.html"
-  },
-  {
-    "title": "一切皆插件：DeepSeek Harness 是怎么把 Agent 装起来的",
-    "url": "/08_agentic_system/agent_infra/docs/deepseek-harness-deep-dive.html"
-  },
-  {
-    "title": "DeepSeek-TUI 实战：榨干 DeepSeek V4 长上下文红利的命令行编程 Agent 实战指南",
-    "url": "/08_agentic_system/agent_infra/docs/deepseek-tui-in-practice.html"
-  },
-  {
-    "title": "一天 300 万个沙盒：DeepSeek 怎么给 Agent 造环境",
-    "url": "/08_agentic_system/agent_infra/docs/dsec-deep-dive.html"
-  },
-  {
-    "title": "云原生 AI Agent 基础设施：OpenClaw Operator 架构深度解析",
-    "url": "/08_agentic_system/agent_infra/docs/openclaw-operator-deep-dive.html"
-  },
-  {
-    "title": "OpenHarness 深入浅出：解密开源智能体基础设施",
-    "url": "/08_agentic_system/agent_infra/docs/openharness-deep-dive.html"
-  },
-  {
-    "title": "4 个工具、42 家供应商、11 万 star：Pi 的极简 harness，与 DeepSeek Harness、OpenHarness 的路线对比",
-    "url": "/08_agentic_system/agent_infra/docs/pi-agent-deep-dive.html"
-  },
-  {
-    "title": "扩展托管智能体：让决策与执行解耦，各行其职",
-    "url": "/08_agentic_system/agent_infra/docs/scaling-managed-agents.html"
+    "url": "/08_agentic_system/agent_infra/01_ai-agent-infra-stack.html"
   },
   {
     "title": "AI Agent 基础设施的崛起",
-    "url": "/08_agentic_system/agent_infra/docs/the-rise-of-ai-agent-infrastructure.html"
+    "url": "/08_agentic_system/agent_infra/02_the-rise-of-ai-agent-infrastructure.html"
   },
   {
-    "title": "Implementing a virtual filesystem over Elasticsearch",
-    "url": "/08_agentic_system/agent_infra/docs/virtual-filesystem-elasticsearch.html"
+    "title": "OpenHarness 深入浅出：解密开源智能体基础设施",
+    "url": "/08_agentic_system/agent_infra/03_openharness-deep-dive.html"
+  },
+  {
+    "title": "4 个工具、42 家供应商、11 万 star：Pi 的极简 harness，与 DeepSeek Harness、OpenHarness 的路线对比",
+    "url": "/08_agentic_system/agent_infra/04_pi-agent-deep-dive.html"
+  },
+  {
+    "title": "一切皆插件：DeepSeek Harness 是怎么把 Agent 装起来的",
+    "url": "/08_agentic_system/agent_infra/05_deepseek-harness-deep-dive.html"
+  },
+  {
+    "title": "DeepSeek Harness：一本书讲透 Agent 怎么组织",
+    "url": "/08_agentic_system/agent_infra/06_deepseek-harness-book-charts.html"
+  },
+  {
+    "title": "一天 300 万个沙盒：DeepSeek 怎么给 Agent 造环境",
+    "url": "/08_agentic_system/agent_infra/07_dsec-deep-dive.html"
+  },
+  {
+    "title": "Agent Sandbox 的演进与设计范式",
+    "url": "/08_agentic_system/agent_infra/08_agent-sandbox-design.html"
+  },
+  {
+    "title": "深度解析 Kagent：从零打造 Kubernetes 运维智能体",
+    "url": "/08_agentic_system/agent_infra/09_deep-dive-kagent-k8s-ops-agent.html"
+  },
+  {
+    "title": "云原生 AI Agent 基础设施：OpenClaw Operator 架构深度解析",
+    "url": "/08_agentic_system/agent_infra/10_openclaw-operator-deep-dive.html"
+  },
+  {
+    "title": "Claude Code Sandbox 安全隔离机制解析",
+    "url": "/08_agentic_system/agent_infra/11_claude-code-sandbox.html"
+  },
+  {
+    "title": "DeepSeek-TUI 实战：榨干 DeepSeek V4 长上下文红利的命令行编程 Agent 实战指南",
+    "url": "/08_agentic_system/agent_infra/12_deepseek-tui-in-practice.html"
+  },
+  {
+    "title": "扩展托管智能体：让决策与执行解耦，各行其职",
+    "url": "/08_agentic_system/agent_infra/13_scaling-managed-agents.html"
   },
   {
     "title": "在 Elasticsearch 之上实现一个虚拟文件系统",
-    "url": "/08_agentic_system/agent_infra/docs/virtual-filesystem-elasticsearch_zh.html"
+    "url": "/08_agentic_system/agent_infra/14_virtual-filesystem-elasticsearch_zh.html"
+  },
+  {
+    "title": "Implementing a virtual filesystem over Elasticsearch",
+    "url": "/08_agentic_system/agent_infra/15_virtual-filesystem-elasticsearch.html"
+  },
+  {
+    "title": "Agent Skills（智能体技能）",
+    "url": "/08_agentic_system/agent_skills/"
   },
   {
     "title": "给 Claude 写本“标准操作手册”：Agent Skills 实战与深度解析",
-    "url": "/08_agentic_system/agent_skills/docs/claude_skills_guide.html"
+    "url": "/08_agentic_system/agent_skills/01_claude_skills_guide.html"
   },
   {
     "title": "一个人调度四个角色：多会话协作 Skill 的实测与边界",
-    "url": "/08_agentic_system/agent_skills/docs/multi-role-agent-skill.html"
+    "url": "/08_agentic_system/agent_skills/02_multi-role-agent-skill.html"
   },
   {
     "title": "12 小时、636 个测试：自驱型 Skill 能走多远",
-    "url": "/08_agentic_system/agent_skills/docs/self-driving-skill-for-complex-projects.html"
+    "url": "/08_agentic_system/agent_skills/03_self-driving-skill-for-complex-projects.html"
   },
   {
     "title": "multi-session-collab：评审、修改、测试、裁决的多会话协作 Skill",
@@ -1336,16 +1348,20 @@
     "url": "/08_agentic_system/memory/research/theory/memory-systems-are-dead.html"
   },
   {
+    "title": "多智能体协作（Multi-Agent）",
+    "url": "/08_agentic_system/multi_agent/"
+  },
+  {
     "title": "评审、修改、测试、裁决：Claude Code 多会话协作实践手册",
-    "url": "/08_agentic_system/multi_agent/docs/claude-code-multi-session-playbook.html"
+    "url": "/08_agentic_system/multi_agent/01_claude-code-multi-session-playbook.html"
   },
   {
     "title": "多智能体AI系统基础：理论与框架",
-    "url": "/08_agentic_system/multi_agent/docs/part1_multi_agent_ai_fundamentals.html"
+    "url": "/08_agentic_system/multi_agent/02_part1_multi_agent_ai_fundamentals.html"
   },
   {
     "title": "企业级多智能体 AI 系统构建实战",
-    "url": "/08_agentic_system/multi_agent/docs/part2_enterprise_multi_agent_system_implementation.html"
+    "url": "/08_agentic_system/multi_agent/03_part2_enterprise_multi_agent_system_implementation.html"
   },
   {
     "title": "企业级多智能体 AI 系统",
@@ -1576,212 +1592,220 @@
     "url": "/09_inference_system/kv_cache/"
   },
   {
-    "title": "不同注意力类型的 KV Cache 到底长什么样——MHA、GQA、MQA、MLA、CSA/HCA 的存储形态",
-    "url": "/09_inference_system/kv_cache/01_concepts/basic/attention_kv_cache_formats.html"
-  },
-  {
     "title": "KV Cache 原理简介",
-    "url": "/09_inference_system/kv_cache/01_concepts/basic/kv_cache_basics.html"
+    "url": "/09_inference_system/kv_cache/01_concepts/01_basic/01_kv_cache_basics.html"
   },
   {
     "title": "PagedAttention：当 KV Cache 遇到操作系统分页",
-    "url": "/09_inference_system/kv_cache/01_concepts/basic/paged_attention.html"
+    "url": "/09_inference_system/kv_cache/01_concepts/01_basic/02_paged_attention.html"
   },
   {
-    "title": "paged attention visual",
-    "url": "/09_inference_system/kv_cache/01_concepts/basic/paged_attention_visual.html"
+    "title": "02 paged attention visual",
+    "url": "/09_inference_system/kv_cache/01_concepts/01_basic/02_paged_attention_visual.html"
   },
   {
-    "title": "稀疏注意力分类学：读什么、不读什么、以及为什么读得少不等于存得少",
-    "url": "/09_inference_system/kv_cache/01_concepts/basic/sparse_attention_taxonomy.html"
+    "title": "手搓 KV Cache：从静态预留到 PagedAttention 的页表",
+    "url": "/09_inference_system/kv_cache/01_concepts/01_basic/03_hand_roll_kv_cache.html"
   },
   {
     "title": "KV Cache 为什么叫 KV Cache？——Q 去哪了",
-    "url": "/09_inference_system/kv_cache/01_concepts/basic/why_only_kv.html"
+    "url": "/09_inference_system/kv_cache/01_concepts/01_basic/04_why_only_kv.html"
   },
   {
-    "title": "GLM-5 模型 KV Cache 容量规划报告",
-    "url": "/09_inference_system/kv_cache/01_concepts/capacity_planning/glm5_kv_cache_capacity_planning.html"
+    "title": "不同注意力类型的 KV Cache 到底长什么样——MHA、GQA、MQA、MLA、CSA/HCA 的存储形态",
+    "url": "/09_inference_system/kv_cache/01_concepts/01_basic/05_attention_kv_cache_formats.html"
   },
   {
-    "title": "L2 还有大半空着，TTFT 为什么先崩了？L1 KV Pool 才是系统并发的上限",
-    "url": "/09_inference_system/kv_cache/01_concepts/capacity_planning/hbm_kv_pool_concurrency.html"
-  },
-  {
-    "title": "【企业 AI Infra 决策者】大模型推理引入 `KV Cache` 收益评估分析",
-    "url": "/09_inference_system/kv_cache/01_concepts/capacity_planning/kv_cache_roi.html"
-  },
-  {
-    "title": "大模型 KV Cache 压缩技术详解：原理、架构与趋势",
-    "url": "/09_inference_system/kv_cache/01_concepts/compression/kv_cache_compression.html"
-  },
-  {
-    "title": "KV Cache 量化深度解析：Per-Tensor、Per-Token-Head 与 NVFP4",
-    "url": "/09_inference_system/kv_cache/01_concepts/compression/kv_cache_quantization.html"
-  },
-  {
-    "title": "把 14B 的 KV 交给 32B：跨模型复用的可能与代价",
-    "url": "/09_inference_system/kv_cache/01_concepts/cross_model/cross_model_kv_transfer.html"
-  },
-  {
-    "title": "KV Cache 淘汰策略：从滑动窗口到注意力引导的精确淘汰",
-    "url": "/09_inference_system/kv_cache/01_concepts/eviction/attention_sinks_and_eviction.html"
-  },
-  {
-    "title": "Key-Key Semantic Affinity：用 Key 向量替代注意力分数的 KV Cache 重要性评估",
-    "url": "/09_inference_system/kv_cache/01_concepts/eviction/key_key_semantic_affinity.html"
-  },
-  {
-    "title": "CUDA Graph 与 KV Cache：静态执行图如何容纳动态 Block Table？",
-    "url": "/09_inference_system/kv_cache/01_concepts/execution/01_vllm_cuda_graph.html"
-  },
-  {
-    "title": "vLLM KV Offloading Connector 与 LMCacheConnector：架构设计与性能深度对比",
-    "url": "/09_inference_system/kv_cache/01_concepts/offloading/01_kv_offloading.html"
-  },
-  {
-    "title": "KV Cache 层级流水线并行",
-    "url": "/09_inference_system/kv_cache/01_concepts/offloading/02_layerwise_pipeline.html"
-  },
-  {
-    "title": "KV Cache Prefetching：三层预取如何隐藏 KV 访问延迟",
-    "url": "/09_inference_system/kv_cache/01_concepts/offloading/03_kv_cache_prefetching.html"
-  },
-  {
-    "title": "稀疏注意力 × KV Cache Offloading：跨层联动必须回答的八个问题",
-    "url": "/09_inference_system/kv_cache/01_concepts/offloading/sparse_attention_driven_offloading_problems.html"
-  },
-  {
-    "title": "PD 分离架构下的 KV Cache 传输：Push 还是 Pull？算完再传还是边算边传？",
-    "url": "/09_inference_system/kv_cache/01_concepts/pd_transfer/01_disaggregated_prefill_kv_transfer.html"
-  },
-  {
-    "title": "压缩、重叠、复用、隔离：PD 状态交接优化的四条轴",
-    "url": "/09_inference_system/kv_cache/01_concepts/pd_transfer/02-pd-state-handoff-optimization-map.html"
-  },
-  {
-    "title": "分卡之后再跨机：DCP 与 PD 分离叠加时的 KV 传输",
-    "url": "/09_inference_system/kv_cache/01_concepts/pd_transfer/03-dcp-pd-transfer.html"
-  },
-  {
-    "title": "Claude 提示词缓存机制与源码实现深度分析",
-    "url": "/09_inference_system/kv_cache/01_concepts/prefix_caching/claude_prompt_caching.html"
-  },
-  {
-    "title": "Prefix Caching 技术详解：从原理到 vLLM/LMCache 实践",
-    "url": "/09_inference_system/kv_cache/01_concepts/prefix_caching/prefix_caching.html"
+    "title": "稀疏注意力分类学：读什么、不读什么、以及为什么读得少不等于存得少",
+    "url": "/09_inference_system/kv_cache/01_concepts/01_basic/06_sparse_attention_taxonomy.html"
   },
   {
     "title": "RadixAttention 技术详解：从原理到 SGLang 实践及 vLLM APC 对比",
-    "url": "/09_inference_system/kv_cache/01_concepts/prefix_caching/radix_attention.html"
+    "url": "/09_inference_system/kv_cache/01_concepts/02_prefix_caching/01_radix_attention.html"
+  },
+  {
+    "title": "Prefix Caching 技术详解：从原理到 vLLM/LMCache 实践",
+    "url": "/09_inference_system/kv_cache/01_concepts/02_prefix_caching/02_prefix_caching.html"
+  },
+  {
+    "title": "Claude 提示词缓存机制与源码实现深度分析",
+    "url": "/09_inference_system/kv_cache/01_concepts/02_prefix_caching/03_claude_prompt_caching.html"
   },
   {
     "title": "RoPE 与 Prefix Caching：位置编码如何决定 KV 能否复用",
-    "url": "/09_inference_system/kv_cache/01_concepts/prefix_caching/rope_and_prefix_caching.html"
+    "url": "/09_inference_system/kv_cache/01_concepts/02_prefix_caching/04_rope_and_prefix_caching.html"
   },
   {
     "title": "vLLM Chunked Prefill 如何改变 KV Cache 管理",
-    "url": "/09_inference_system/kv_cache/01_concepts/scheduling/01_vllm_chunked_prefill.html"
+    "url": "/09_inference_system/kv_cache/01_concepts/03_scheduling/01_vllm_chunked_prefill.html"
   },
   {
     "title": "投机解码如何与 KV Cache 交互：Placeholder、回滚与草稿 KV",
-    "url": "/09_inference_system/kv_cache/01_concepts/scheduling/02_vllm_spec_decode.html"
+    "url": "/09_inference_system/kv_cache/01_concepts/03_scheduling/02_vllm_spec_decode.html"
   },
   {
-    "title": "KV Block Manager (KVBM) 深度解析",
-    "url": "/09_inference_system/kv_cache/02_systems/kvbm/KVBM_Analysis.html"
+    "title": "CUDA Graph 与 KV Cache：静态执行图如何容纳动态 Block Table？",
+    "url": "/09_inference_system/kv_cache/01_concepts/04_execution/01_vllm_cuda_graph.html"
+  },
+  {
+    "title": "KV Cache 淘汰策略：从滑动窗口到注意力引导的精确淘汰",
+    "url": "/09_inference_system/kv_cache/01_concepts/05_eviction/01_attention_sinks_and_eviction.html"
+  },
+  {
+    "title": "Key-Key Semantic Affinity：用 Key 向量替代注意力分数的 KV Cache 重要性评估",
+    "url": "/09_inference_system/kv_cache/01_concepts/05_eviction/02_key_key_semantic_affinity.html"
+  },
+  {
+    "title": "大模型 KV Cache 压缩技术详解：原理、架构与趋势",
+    "url": "/09_inference_system/kv_cache/01_concepts/06_compression/01_kv_cache_compression.html"
+  },
+  {
+    "title": "KV Cache 量化深度解析：Per-Tensor、Per-Token-Head 与 NVFP4",
+    "url": "/09_inference_system/kv_cache/01_concepts/06_compression/02_kv_cache_quantization.html"
+  },
+  {
+    "title": "vLLM KV Offloading Connector 与 LMCacheConnector：架构设计与性能深度对比",
+    "url": "/09_inference_system/kv_cache/01_concepts/07_offloading/01_kv_offloading.html"
+  },
+  {
+    "title": "KV Cache 层级流水线并行",
+    "url": "/09_inference_system/kv_cache/01_concepts/07_offloading/02_layerwise_pipeline.html"
+  },
+  {
+    "title": "KV Cache Prefetching：三层预取如何隐藏 KV 访问延迟",
+    "url": "/09_inference_system/kv_cache/01_concepts/07_offloading/03_kv_cache_prefetching.html"
+  },
+  {
+    "title": "稀疏注意力 × KV Cache Offloading：跨层联动必须回答的八个问题",
+    "url": "/09_inference_system/kv_cache/01_concepts/07_offloading/04_sparse_attention_driven_offloading_problems.html"
+  },
+  {
+    "title": "PD 分离架构下的 KV Cache 传输：Push 还是 Pull？算完再传还是边算边传？",
+    "url": "/09_inference_system/kv_cache/01_concepts/08_pd_transfer/01_disaggregated_prefill_kv_transfer.html"
+  },
+  {
+    "title": "压缩、重叠、复用、隔离：PD 状态交接优化的四条轴",
+    "url": "/09_inference_system/kv_cache/01_concepts/08_pd_transfer/02_pd_state_handoff_optimization_map.html"
+  },
+  {
+    "title": "分卡之后再跨机：DCP 与 PD 分离叠加时的 KV 传输",
+    "url": "/09_inference_system/kv_cache/01_concepts/08_pd_transfer/03_dcp-pd-transfer.html"
+  },
+  {
+    "title": "把 14B 的 KV 交给 32B：跨模型复用的可能与代价",
+    "url": "/09_inference_system/kv_cache/01_concepts/09_cross_model/01_cross_model_kv_transfer.html"
+  },
+  {
+    "title": "L2 还有大半空着，TTFT 为什么先崩了？L1 KV Pool 才是系统并发的上限",
+    "url": "/09_inference_system/kv_cache/01_concepts/10_capacity_planning/01_hbm_kv_pool_concurrency.html"
+  },
+  {
+    "title": "【企业 AI Infra 决策者】大模型推理引入 `KV Cache` 收益评估分析",
+    "url": "/09_inference_system/kv_cache/01_concepts/10_capacity_planning/02_kv_cache_roi.html"
+  },
+  {
+    "title": "GLM-5 模型 KV Cache 容量规划报告",
+    "url": "/09_inference_system/kv_cache/01_concepts/10_capacity_planning/03_glm5_kv_cache_capacity_planning.html"
   },
   {
     "title": "LMCache 源码分析指南",
-    "url": "/09_inference_system/kv_cache/02_systems/lmcache/"
-  },
-  {
-    "title": "CacheBlend 技术详解：RAG 场景下的 KV Cache 动态融合机制与源码剖析",
-    "url": "/09_inference_system/kv_cache/02_systems/lmcache/cache_blend.html"
-  },
-  {
-    "title": "CacheGen 技术详解：KV Cache 的高效压缩与流式传输",
-    "url": "/09_inference_system/kv_cache/02_systems/lmcache/cachegen.html"
-  },
-  {
-    "title": "GdsBackend 源码分析",
-    "url": "/09_inference_system/kv_cache/02_systems/lmcache/gds_backend.html"
-  },
-  {
-    "title": "LMCacheConnector (vLLM 集成) 代码分析",
-    "url": "/09_inference_system/kv_cache/02_systems/lmcache/lmcache_connector.html"
-  },
-  {
-    "title": "LMCache Controller (控制平面) 架构剖析",
-    "url": "/09_inference_system/kv_cache/02_systems/lmcache/lmcache_controller.html"
-  },
-  {
-    "title": "LMCacheEngine 核心引擎代码分析",
-    "url": "/09_inference_system/kv_cache/02_systems/lmcache/lmcache_engine.html"
+    "url": "/09_inference_system/kv_cache/02_systems/01_lmcache/"
   },
   {
     "title": "LMCache 架构概览",
-    "url": "/09_inference_system/kv_cache/02_systems/lmcache/lmcache_overview.html"
+    "url": "/09_inference_system/kv_cache/02_systems/01_lmcache/01_lmcache_overview.html"
   },
   {
-    "title": "LMCache Server 源码分析",
-    "url": "/09_inference_system/kv_cache/02_systems/lmcache/lmcache_server.html"
+    "title": "LMCacheConnector (vLLM 集成) 代码分析",
+    "url": "/09_inference_system/kv_cache/02_systems/01_lmcache/02_lmcache_connector.html"
+  },
+  {
+    "title": "LMCacheEngine 核心引擎代码分析",
+    "url": "/09_inference_system/kv_cache/02_systems/01_lmcache/03_lmcache_engine.html"
+  },
+  {
+    "title": "LMCache Controller (控制平面) 架构剖析",
+    "url": "/09_inference_system/kv_cache/02_systems/01_lmcache/04_lmcache_controller.html"
   },
   {
     "title": "LMCache 分层存储架构与调度机制详解",
-    "url": "/09_inference_system/kv_cache/02_systems/lmcache/lmcache_storage_overview.html"
+    "url": "/09_inference_system/kv_cache/02_systems/01_lmcache/05_lmcache_storage_overview.html"
   },
   {
     "title": "LocalCPUBackend 源码分析",
-    "url": "/09_inference_system/kv_cache/02_systems/lmcache/local_cpu_backend.html"
-  },
-  {
-    "title": "LocalDiskBackend 源码分析",
-    "url": "/09_inference_system/kv_cache/02_systems/lmcache/local_disk_backend.html"
-  },
-  {
-    "title": "NixlStorageBackend 源码分析",
-    "url": "/09_inference_system/kv_cache/02_systems/lmcache/nixl_backend.html"
+    "url": "/09_inference_system/kv_cache/02_systems/01_lmcache/06_local_cpu_backend.html"
   },
   {
     "title": "P2PBackend 源码分析",
-    "url": "/09_inference_system/kv_cache/02_systems/lmcache/p2p_backend.html"
+    "url": "/09_inference_system/kv_cache/02_systems/01_lmcache/07_p2p_backend.html"
   },
   {
     "title": "PDBackend (预填充-解码分离后端) 源码分析",
-    "url": "/09_inference_system/kv_cache/02_systems/lmcache/pd_backend.html"
+    "url": "/09_inference_system/kv_cache/02_systems/01_lmcache/08_pd_backend.html"
+  },
+  {
+    "title": "LocalDiskBackend 源码分析",
+    "url": "/09_inference_system/kv_cache/02_systems/01_lmcache/09_local_disk_backend.html"
+  },
+  {
+    "title": "GdsBackend 源码分析",
+    "url": "/09_inference_system/kv_cache/02_systems/01_lmcache/10_gds_backend.html"
+  },
+  {
+    "title": "NixlStorageBackend 源码分析",
+    "url": "/09_inference_system/kv_cache/02_systems/01_lmcache/11_nixl_backend.html"
   },
   {
     "title": "Remote Connector (远程连接器) 源码分析",
-    "url": "/09_inference_system/kv_cache/02_systems/lmcache/remote_connector.html"
+    "url": "/09_inference_system/kv_cache/02_systems/01_lmcache/12_remote_connector.html"
   },
   {
-    "title": "Mooncake 架构概览：以 KV Cache 为中心的高效 LLM 推理系统设计",
-    "url": "/09_inference_system/kv_cache/02_systems/mooncake/mooncake_architecture.html"
+    "title": "LMCache Server 源码分析",
+    "url": "/09_inference_system/kv_cache/02_systems/01_lmcache/13_lmcache_server.html"
   },
   {
-    "title": "NIXL (NVIDIA Inference Xfer Library) 简介",
-    "url": "/09_inference_system/kv_cache/02_systems/nixl/nixl_introduction.html"
+    "title": "CacheBlend 技术详解：RAG 场景下的 KV Cache 动态融合机制与源码剖析",
+    "url": "/09_inference_system/kv_cache/02_systems/01_lmcache/14_cache_blend.html"
+  },
+  {
+    "title": "CacheGen 技术详解：KV Cache 的高效压缩与流式传输",
+    "url": "/09_inference_system/kv_cache/02_systems/01_lmcache/15_cachegen.html"
   },
   {
     "title": "Tair KVCache 架构与设计深度分析",
-    "url": "/09_inference_system/kv_cache/02_systems/tair_kvcache/tair-kvcache-architecture-design.html"
+    "url": "/09_inference_system/kv_cache/02_systems/02_tair_kvcache/01_tair-kvcache-architecture-design.html"
   },
   {
-    "title": "当 AI 吃穿存储带宽：华为云把计算网络变成了传输通道",
-    "url": "/09_inference_system/kv_cache/03_fast26/aiturbo.html"
+    "title": "KV Block Manager (KVBM) 深度解析",
+    "url": "/09_inference_system/kv_cache/02_systems/03_kvbm/01_KVBM_Analysis.html"
   },
   {
-    "title": "多轮对话的 KV 放上 SSD，延迟为什么反涨 3.8 倍",
-    "url": "/09_inference_system/kv_cache/03_fast26/bidaw.html"
+    "title": "Mooncake 架构概览：以 KV Cache 为中心的高效 LLM 推理系统设计",
+    "url": "/09_inference_system/kv_cache/02_systems/04_mooncake/01_mooncake_architecture.html"
   },
   {
-    "title": "Agent 的 KV 为什么复用不了：位置一漂移，前缀缓存就失效",
-    "url": "/09_inference_system/kv_cache/03_fast26/cacheslide.html"
+    "title": "NIXL (NVIDIA Inference Xfer Library) 简介",
+    "url": "/09_inference_system/kv_cache/02_systems/05_nixl/01_nixl_introduction.html"
   },
   {
     "title": "当 KV Cache 装不进内存：FAST'26 五篇论文给出的五个不同答案",
-    "url": "/09_inference_system/kv_cache/03_fast26/fast26-kv-storage-five-scenarios.html"
+    "url": "/09_inference_system/kv_cache/03_fast26/01_fast26-kv-storage-five-scenarios.html"
+  },
+  {
+    "title": "128k 上下文塞进 16 GB 内存：FAST'26 把 KV Cache 拆碎了放 SSD",
+    "url": "/09_inference_system/kv_cache/03_fast26/02_solidattention.html"
+  },
+  {
+    "title": "Agent 的 KV 为什么复用不了：位置一漂移，前缀缓存就失效",
+    "url": "/09_inference_system/kv_cache/03_fast26/03_cacheslide.html"
+  },
+  {
+    "title": "多轮对话的 KV 放上 SSD，延迟为什么反涨 3.8 倍",
+    "url": "/09_inference_system/kv_cache/03_fast26/04_bidaw.html"
+  },
+  {
+    "title": "当 AI 吃穿存储带宽：华为云把计算网络变成了传输通道",
+    "url": "/09_inference_system/kv_cache/03_fast26/05_aiturbo.html"
   },
   {
     "title": "AITURBO 精读报告（FAST'26）",
@@ -1800,24 +1824,24 @@
     "url": "/09_inference_system/kv_cache/03_fast26/references/solidattention-report.html"
   },
   {
-    "title": "128k 上下文塞进 16 GB 内存：FAST'26 把 KV Cache 拆碎了放 SSD",
-    "url": "/09_inference_system/kv_cache/03_fast26/solidattention.html"
+    "title": "当 KV 装不进显存：四篇论文的四种内存账，与一个「统一命名空间 + 成本旋钮」的设想",
+    "url": "/09_inference_system/kv_cache/04_memory_tiering/01_memory-tiering-overview.html"
   },
   {
     "title": "不搬 KV 反而更快：OSDI'26 DirectKV 让显存少占 43%",
-    "url": "/09_inference_system/kv_cache/04_memory_tiering/directkv.html"
-  },
-  {
-    "title": "30.8% 的显存按 200K 上下文预留，实际只用 1%：eLLM 让 Activation 与 KV Cache 互相借内存",
-    "url": "/09_inference_system/kv_cache/04_memory_tiering/ellm.html"
-  },
-  {
-    "title": "当 KV 装不进显存：四篇论文的四种内存账，与一个「统一命名空间 + 成本旋钮」的设想",
-    "url": "/09_inference_system/kv_cache/04_memory_tiering/memory-tiering-overview.html"
+    "url": "/09_inference_system/kv_cache/04_memory_tiering/02_directkv.html"
   },
   {
     "title": "显存卡死 batch 的 GPU 上：NEO 把 decoding attention 搬给了随卡白送的 CPU",
-    "url": "/09_inference_system/kv_cache/04_memory_tiering/neo.html"
+    "url": "/09_inference_system/kv_cache/04_memory_tiering/03_neo.html"
+  },
+  {
+    "title": "30.8% 的显存按 200K 上下文预留，实际只用 1%：eLLM 让 Activation 与 KV Cache 互相借内存",
+    "url": "/09_inference_system/kv_cache/04_memory_tiering/04_ellm.html"
+  },
+  {
+    "title": "8192 个 token 的 KV 只跑出 22% PCIe 带宽：Strata 重做分层缓存的搬运与调度",
+    "url": "/09_inference_system/kv_cache/04_memory_tiering/05_strata.html"
   },
   {
     "title": "DirectKV（OSDI '26）精读报告",
@@ -1836,20 +1860,20 @@
     "url": "/09_inference_system/kv_cache/04_memory_tiering/references/strata-report.html"
   },
   {
-    "title": "8192 个 token 的 KV 只跑出 22% PCIe 带宽：Strata 重做分层缓存的搬运与调度",
-    "url": "/09_inference_system/kv_cache/04_memory_tiering/strata.html"
-  },
-  {
-    "title": "0.03 秒命中、0.1 秒未命中：ICML'25 审计发现 7 家 LLM API 跨用户共享 prompt 缓存",
-    "url": "/09_inference_system/kv_cache/05_kv_security/auditing-prompt-caching.html"
+    "title": "当 KV Cache 跨过信任边界：三篇论文给出的三种泄露面，与一个「共享层级 + 默认加密」的设想",
+    "url": "/09_inference_system/kv_cache/05_kv_security/01_kv-security-overview.html"
   },
   {
     "title": "缓存命中的 1 个 bit 出卖了你：NDSS'25 PromptPeek 平均 99% 成功率复原他人 prompt",
-    "url": "/09_inference_system/kv_cache/05_kv_security/i-know-what-you-asked.html"
+    "url": "/09_inference_system/kv_cache/05_kv_security/02_i-know-what-you-asked.html"
   },
   {
-    "title": "当 KV Cache 跨过信任边界：三篇论文给出的三种泄露面，与一个「共享层级 + 默认加密」的设想",
-    "url": "/09_inference_system/kv_cache/05_kv_security/kv-security-overview.html"
+    "title": "你的 prompt 就存在 KV Cache 里：NDSS'26 三类攻击逐 token 复原输入，KV-Cloak 以 prefill 0.45% 的延迟挡住",
+    "url": "/09_inference_system/kv_cache/05_kv_security/03_shadow-in-the-cache.html"
+  },
+  {
+    "title": "0.03 秒命中、0.1 秒未命中：ICML'25 审计发现 7 家 LLM API 跨用户共享 prompt 缓存",
+    "url": "/09_inference_system/kv_cache/05_kv_security/04_auditing-prompt-caching.html"
   },
   {
     "title": "Auditing Prompt Caching（ICML 2025）精读报告",
@@ -1868,20 +1892,16 @@
     "url": "/09_inference_system/kv_cache/05_kv_security/references/shadow-in-the-cache-report.html"
   },
   {
-    "title": "你的 prompt 就存在 KV Cache 里：NDSS'26 三类攻击逐 token 复原输入，KV-Cloak 以 prefill 0.45% 的延迟挡住",
-    "url": "/09_inference_system/kv_cache/05_kv_security/shadow-in-the-cache.html"
-  },
-  {
-    "title": "借来的 KV 不能全借：NSDI'26 DroidSpeak 只重算约一成层，预填充最高快 3.1×",
-    "url": "/09_inference_system/kv_cache/06_kv_reuse/droidspeak.html"
-  },
-  {
     "title": "当复用跨出同前缀与同模型：两篇论文给出的两条扩展路径",
-    "url": "/09_inference_system/kv_cache/06_kv_reuse/kv-reuse-overview.html"
+    "url": "/09_inference_system/kv_cache/06_kv_reuse/01_kv-reuse-overview.html"
   },
   {
     "title": "缓存不必同前缀：NeurIPS 2025 KVLink 把 RAG 首 token 延迟最高降 96%",
-    "url": "/09_inference_system/kv_cache/06_kv_reuse/kvlink.html"
+    "url": "/09_inference_system/kv_cache/06_kv_reuse/02_kvlink.html"
+  },
+  {
+    "title": "借来的 KV 不能全借：NSDI'26 DroidSpeak 只重算约一成层，预填充最高快 3.1×",
+    "url": "/09_inference_system/kv_cache/06_kv_reuse/03_droidspeak.html"
   },
   {
     "title": "DroidSpeak（NSDI '26）精读报告",
@@ -1892,12 +1912,36 @@
     "url": "/09_inference_system/kv_cache/06_kv_reuse/references/kvlink-report.html"
   },
   {
-    "title": "丢掉的 KV 还能重建：NeurIPS 2026 EchoKV 缓存减半保住 97% 精度、可按需切换",
-    "url": "/09_inference_system/kv_cache/07_kv_compression/echokv.html"
+    "title": "KV 压缩：论文专题与架构重构",
+    "url": "/09_inference_system/kv_cache/07_kv_compression/"
   },
   {
     "title": "当压缩表示被继续使用：三篇论文给出的三种二次决策",
-    "url": "/09_inference_system/kv_cache/07_kv_compression/kv-compression-overview.html"
+    "url": "/09_inference_system/kv_cache/07_kv_compression/01_kv-compression-overview.html"
+  },
+  {
+    "title": "压缩后的 Key 就是索引：AAAI'26 Self-Indexing KVCache 让 KV 内存少占 78%",
+    "url": "/09_inference_system/kv_cache/07_kv_compression/02_self-indexing.html"
+  },
+  {
+    "title": "压 KV 要赶在旋转之前：NeurIPS 2025 SALS 压到 1/8，访存只剩基线 5.8%",
+    "url": "/09_inference_system/kv_cache/07_kv_compression/03_sals.html"
+  },
+  {
+    "title": "丢掉的 KV 还能重建：NeurIPS 2026 EchoKV 缓存减半保住 97% 精度、可按需切换",
+    "url": "/09_inference_system/kv_cache/07_kv_compression/04_echokv.html"
+  },
+  {
+    "title": "当百万 Token KV Cache 从 250GB 降到 5GB：推理系统的新挑战",
+    "url": "/09_inference_system/kv_cache/07_kv_compression/05-post-kv-cache-era.html"
+  },
+  {
+    "title": "把 KV Cache 压缩推到极限：DeepSeek-V4.1-Flash 技术报告精读",
+    "url": "/09_inference_system/kv_cache/07_kv_compression/06-deepseek-v41-flash.html"
+  },
+  {
+    "title": "七池与八池：HiCache 支持 DeepSeek V4 与 V4.1 的不同接法",
+    "url": "/09_inference_system/kv_cache/07_kv_compression/07-multilevel-cache.html"
   },
   {
     "title": "C 线：KV Cache 压缩/驱逐论文调研报告（2025 末–2026）",
@@ -1914,30 +1958,6 @@
   {
     "title": "Self-Indexing KVCache 精读报告",
     "url": "/09_inference_system/kv_cache/07_kv_compression/references/self-indexing-report.html"
-  },
-  {
-    "title": "压 KV 要赶在旋转之前：NeurIPS 2025 SALS 压到 1/8，访存只剩基线 5.8%",
-    "url": "/09_inference_system/kv_cache/07_kv_compression/sals.html"
-  },
-  {
-    "title": "压缩后的 Key 就是索引：AAAI'26 Self-Indexing KVCache 让 KV 内存少占 78%",
-    "url": "/09_inference_system/kv_cache/07_kv_compression/self-indexing.html"
-  },
-  {
-    "title": "KV 压缩推到极限：从架构改造到分层缓存",
-    "url": "/09_inference_system/kv_compression/"
-  },
-  {
-    "title": "当百万 Token KV Cache 从 250GB 降到 5GB：推理系统的新挑战",
-    "url": "/09_inference_system/kv_compression/01-post-kv-cache-era.html"
-  },
-  {
-    "title": "把 KV Cache 压缩推到极限：DeepSeek-V4.1-Flash 技术报告精读",
-    "url": "/09_inference_system/kv_compression/02-deepseek-v41-flash.html"
-  },
-  {
-    "title": "七池与八池：HiCache 支持 DeepSeek V4 与 V4.1 的不同接法",
-    "url": "/09_inference_system/kv_compression/03-multilevel-cache.html"
   },
   {
     "title": "线性注意力与推理系统",

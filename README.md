@@ -262,6 +262,7 @@ LLM 核心理论与架构基石，深入解析 Tokenizer 分词机制、Embeddin
 - [大模型基础组件 - Tokenizer](https://zhuanlan.zhihu.com/p/651430181) - 文本分词与编码的核心技术。
 - [解密大语言模型中的 Tokens](06_llm_theory_and_fundamentals/llm_basic_concepts/token/README.md) - Token 机制的深度解析与实践应用。
   - [LLM Token 机制详解](06_llm_theory_and_fundamentals/llm_basic_concepts/token/llm_token_intro.md) - Token 的基础概念与应用原理。
+  - [手搓 Tokenizer：从字符级到 BPE](06_llm_theory_and_fundamentals/llm_basic_concepts/token/hand_roll_bpe_tokenizer.md) - 一百行 Python 手搓 BPE，压缩曲线与过拟合实测，tiktoken 同语料对照。
   - [Tiktokenizer 在线版](https://tiktokenizer.vercel.app/?model=gpt-4o) - 交互式 Token 分析工具。
 - [一文读懂思维链（Chain-of-Thought, CoT）](06_llm_theory_and_fundamentals/llm_basic_concepts/cot/chain_of_thought_cot_intro.md) - 推理能力增强的核心技术。
 - [大模型的幻觉及其应对措施](06_llm_theory_and_fundamentals/llm_basic_concepts/hallucination/llm_hallucination_and_mitigation.md) - 幻觉问题的成因分析与解决方案。
@@ -379,19 +380,20 @@ SFT 之后把推理能力推上去要靠 RL，而 RL 的 rollout 由推理引擎
 
 剖析现代推理系统的底层架构创新，重点解构 Mooncake 等以 KV Cache 为中心的高效 LLM 调度系统设计模式与性能调优策略。
 
-- [Mooncake 架构详解：以 KV Cache 为中心的高效 LLM 推理系统设计](09_inference_system/kv_cache/02_systems/mooncake/mooncake_architecture.md) - 新一代推理系统的架构创新与性能优化策略
-- [当 KV Cache 装不进内存：FAST'26 五篇论文给出的五个不同答案](09_inference_system/kv_cache/03_fast26/fast26-kv-storage-five-scenarios.md) - FAST'26「AI and LLMs」九篇论文中五篇精读的五象限汇总：端侧/智能体/对话/数据中心/冷启动各自的核心矛盾、招式与数字，共同支点是可复现的 I/O 特征；附 4 篇 Agent 精读报告
-- [当 KV 装不进显存：四篇论文的四种内存账，与一个「统一命名空间 + 成本旋钮」的设想](09_inference_system/kv_cache/04_memory_tiering/memory-tiering-overview.md) - DirectKV / NEO / eLLM / Strata 四篇论文内存层级路线的横切总纲：去搬运 / 挪计算 / 并账本 / 重排调度，附按条件选路的对号表与「数字怎么读」口径清单
-- [当 KV Cache 跨过信任边界：三篇论文给出的三种泄露面，与一个「共享层级 + 默认加密」的设想](09_inference_system/kv_cache/05_kv_security/kv-security-overview.md) - 读行为 / 读数据 / 读时延三种取证位置：PromptPeek / Shadow in the Cache / Auditing Prompt Caching，附按角色选路的对号表，以及取证距离与防御动作同轴的成本账
-- [当复用跨出同前缀与同模型：两篇论文给出的两条扩展路径](09_inference_system/kv_cache/06_kv_reuse/kv-reuse-overview.md) - KVLink（文档级预计算 + link token）与 DroidSpeak（跨微调变体共享 + 关键层重算）两条路径与「数字怎么读」口径清单
-- [当压缩表示被继续使用：三篇论文给出的三种二次决策](09_inference_system/kv_cache/07_kv_compression/kv-compression-overview.md) - Self-Indexing KVCache / SALS / EchoKV 把压缩产物继续用作检索索引、token 选择场与重建素材
+- [手搓 KV Cache：从静态预留到 PagedAttention 的页表](09_inference_system/kv_cache/01_concepts/01_basic/03_hand_roll_kv_cache.md) - 可运行模拟器实测三种显存管理策略：碎片入住失败与 5 倍容量的数字来源。
+- [Mooncake 架构详解：以 KV Cache 为中心的高效 LLM 推理系统设计](09_inference_system/kv_cache/02_systems/04_mooncake/01_mooncake_architecture.md) - 新一代推理系统的架构创新与性能优化策略
+- [当 KV Cache 装不进内存：FAST'26 五篇论文给出的五个不同答案](09_inference_system/kv_cache/03_fast26/01_fast26-kv-storage-five-scenarios.md) - FAST'26「AI and LLMs」九篇论文中五篇精读的五象限汇总：端侧/智能体/对话/数据中心/冷启动各自的核心矛盾、招式与数字，共同支点是可复现的 I/O 特征；附 4 篇 Agent 精读报告
+- [当 KV 装不进显存：四篇论文的四种内存账，与一个「统一命名空间 + 成本旋钮」的设想](09_inference_system/kv_cache/04_memory_tiering/01_memory-tiering-overview.md) - DirectKV / NEO / eLLM / Strata 四篇论文内存层级路线的横切总纲：去搬运 / 挪计算 / 并账本 / 重排调度，附按条件选路的对号表与「数字怎么读」口径清单
+- [当 KV Cache 跨过信任边界：三篇论文给出的三种泄露面，与一个「共享层级 + 默认加密」的设想](09_inference_system/kv_cache/05_kv_security/01_kv-security-overview.md) - 读行为 / 读数据 / 读时延三种取证位置：PromptPeek / Shadow in the Cache / Auditing Prompt Caching，附按角色选路的对号表，以及取证距离与防御动作同轴的成本账
+- [当复用跨出同前缀与同模型：两篇论文给出的两条扩展路径](09_inference_system/kv_cache/06_kv_reuse/01_kv-reuse-overview.md) - KVLink（文档级预计算 + link token）与 DroidSpeak（跨微调变体共享 + 关键层重算）两条路径与「数字怎么读」口径清单
+- [当压缩表示被继续使用：三篇论文给出的三种二次决策](09_inference_system/kv_cache/07_kv_compression/01_kv-compression-overview.md) - Self-Indexing KVCache / SALS / EchoKV 把压缩产物继续用作检索索引、token 选择场与重建素材
 - [当 Agent 流量成为推理系统的主要负载](09_inference_system/agent_serving/agent-workload-serving.md) - KV 生命周期错配、调度语义失真、会话粘性与容量公式失效：Agent 负载下的四连锁问题与两引擎源码级现状
 - [约束解码的性能账单：vLLM 与 SGLang 的结构化输出实现拆解](09_inference_system/agent_serving/constrained-decoding-engines.md) - 结构化输出的编译账/每步账/交互账：双引擎实现逐项对照与 jump-forward 差异
 - [线性注意力与推理系统](09_inference_system/linear_attention/README.md) - delta-rule 一脉（KDA/Gated DeltaNet）落地后的系统挑战：prefill 串行化、状态检查点缓存、状态语义深水区——总览 + 机制/调度/状态语义四篇
 - [HBF 是 HBM 的替代吗？单位存储便宜了，Token 成本却可能更高](09_inference_system/hbf-vs-hbm.md) - Hot Chips 2026 的 (β, α) 坐标系与 $/token 公式：单位容量便宜 8–16 倍、单位容量带宽只有 HBM 的 1/25，折算成带宽单价反而贵 1.7 倍，HBF 只在一个很窄的低带宽区间里划算
 - [Engram：条件记忆与主机内存参数](09_inference_system/engram/README.md) - DeepSeek 条件记忆（N-gram Embedding）首篇源码深读：官方 422 行 demo + SGLang 巨页手术，LPDDR 换 HBM 的优势与代价逐项算账
 - [DeepSeek 把家底搬上了昇腾：六个组件、三种双端模式与一份 950 微架构报告](09_inference_system/deepseek_ascend/deepseek-ascend-open-source.md) - 逐仓拆解 TileLang/DeepGEMM/DeepEP/TileKernels/FlashMLA/DeepSelect 的昇腾版：三种双端模式、950 微架构要点与诚实缺口清单
-- [KV 压缩推到极限：从架构改造到分层缓存](09_inference_system/kv_compression/README.md) - V4 与 K3 架构重写后的 KV 体积账（1M 上下文 250GB 量级 → 个位数 GB）、V4.1-Flash 技术报告精读（CED / CSA2 / FP4 KV）与 HiCache 七池八池的系统后果，三篇互为时间线
+- [KV 压缩推到极限：从架构改造到分层缓存](09_inference_system/kv_cache/07_kv_compression/README.md) - V4 与 K3 架构重写后的 KV 体积账（1M 上下文 250GB 量级 → 个位数 GB）、V4.1-Flash 技术报告精读（CED / CSA2 / FP4 KV）与 HiCache 七池八池的系统后果，三篇互为时间线
 - [Prefill 与 Decode：两阶段的推理机制](09_inference_system/prefill_decode/README.md)（[交互可视化](09_inference_system/prefill_decode/prefill_decode_visual.html) · [校验脚本](09_inference_system/prefill_decode/prefill_decode_validate.py)） - 逐步标注每步矩阵形状与计算量，从 compute-bound vs memory-bound 推导 GQA、量化、PagedAttention、Offloading、PD 分离的必然性
   - [Continuous Batching 深度解析](09_inference_system/prefill_decode/continuous_batching.md) - 静态批处理的三重浪费、vLLM V1 的 token-level 统一调度与 SGLang prefill-first 主动驱逐
 - [大模型推理并行策略](09_inference_system/parallelism/parallelism_strategies.md)（[交互可视化](09_inference_system/parallelism/parallelism_visual.html)） - DP、TP、PP、EP、SP 五种策略的统一拆解与混合部署案例
@@ -411,9 +413,9 @@ SFT 之后把推理能力推上去要靠 RL，而 RL 的 rollout 由推理引擎
 长文本与高并发推理的核心瓶颈突破，解析自回归生成机制、Prefix Caching 前缀缓存与 RadixTree 自动复用原理，并深度对比 LMCache 分层架构与阿里云 Tair KVCache 的企业级分布式部署方案。
 
 - [KV Cache 技术体系](09_inference_system/kv_cache/README.md) - KV Cache 技术体系全景指南
-- [KV Cache 原理简介](09_inference_system/kv_cache/01_concepts/basic/kv_cache_basics.md) - 自回归生成的挑战与 KV Cache 的工作机制
-- [Prefix Caching 技术详解](09_inference_system/kv_cache/01_concepts/prefix_caching/prefix_caching.md) ([配套 PPT](09_inference_system/kv_cache/01_concepts/prefix_caching/prefix_caching.pptx)) - 从原理到 vLLM/LMCache 实践的前缀缓存技术
-- [RadixAttention 技术详解](09_inference_system/kv_cache/01_concepts/prefix_caching/radix_attention.md) ([配套 PPT](09_inference_system/kv_cache/01_concepts/prefix_caching/radix_attention.pptx)) - 基于 Radix Tree 自动复用 KV Cache 的核心原理与 SGLang 实践
+- [KV Cache 原理简介](09_inference_system/kv_cache/01_concepts/01_basic/01_kv_cache_basics.md) - 自回归生成的挑战与 KV Cache 的工作机制
+- [Prefix Caching 技术详解](09_inference_system/kv_cache/01_concepts/02_prefix_caching/02_prefix_caching.md) ([配套 PPT](09_inference_system/kv_cache/01_concepts/02_prefix_caching/02_prefix_caching.pptx)) - 从原理到 vLLM/LMCache 实践的前缀缓存技术
+- [RadixAttention 技术详解](09_inference_system/kv_cache/01_concepts/02_prefix_caching/01_radix_attention.md) ([配套 PPT](09_inference_system/kv_cache/01_concepts/02_prefix_caching/01_radix_attention.pptx)) - 基于 Radix Tree 自动复用 KV Cache 的核心原理与 SGLang 实践
 
 #### 9.3.1 LMCache 核心架构与后端实现
 
@@ -421,41 +423,41 @@ SFT 之后把推理能力推上去要靠 RL，而 RL 的 rollout 由推理引擎
 
 **基础与架构概览**：
 
-- [LMCache 源码分析指南](09_inference_system/kv_cache/02_systems/lmcache/README.md) - 完整学习路径与文档索引
-- [LMCache 架构概览](09_inference_system/kv_cache/02_systems/lmcache/lmcache_overview.md) - 四层存储架构 (L1-L4)、核心组件交互与典型工作流
-- [vLLM KV Offloading 与 LMCache 深度对比](09_inference_system/kv_cache/01_concepts/offloading/01_kv_offloading.md) - 架构设计、存储层级及跨实例共享能力上的核心差异与性能权衡
+- [LMCache 源码分析指南](09_inference_system/kv_cache/02_systems/01_lmcache/README.md) - 完整学习路径与文档索引
+- [LMCache 架构概览](09_inference_system/kv_cache/02_systems/01_lmcache/01_lmcache_overview.md) - 四层存储架构 (L1-L4)、核心组件交互与典型工作流
+- [vLLM KV Offloading 与 LMCache 深度对比](09_inference_system/kv_cache/01_concepts/07_offloading/01_kv_offloading.md) - 架构设计、存储层级及跨实例共享能力上的核心差异与性能权衡
 
 **核心运行时组件**：
 
-- [LMCacheEngine 源码分析](09_inference_system/kv_cache/02_systems/lmcache/lmcache_engine.md) - 核心调度中枢、异步事件管理与层级流水线
-- [LMCacheConnector 源码分析](09_inference_system/kv_cache/02_systems/lmcache/lmcache_connector.md) - vLLM 集成适配器、视图转换与流水线加载
-- [分层存储架构与调度机制](09_inference_system/kv_cache/02_systems/lmcache/lmcache_storage_overview.md) - StorageManager 调度器、Write-All 策略与 Waterfall 检索
+- [LMCacheEngine 源码分析](09_inference_system/kv_cache/02_systems/01_lmcache/03_lmcache_engine.md) - 核心调度中枢、异步事件管理与层级流水线
+- [LMCacheConnector 源码分析](09_inference_system/kv_cache/02_systems/01_lmcache/02_lmcache_connector.md) - vLLM 集成适配器、视图转换与流水线加载
+- [分层存储架构与调度机制](09_inference_system/kv_cache/02_systems/01_lmcache/05_lmcache_storage_overview.md) - StorageManager 调度器、Write-All 策略与 Waterfall 检索
 
 **存储后端实现**：
 
-- [LocalCPUBackend 源码分析](09_inference_system/kv_cache/02_systems/lmcache/local_cpu_backend.md) - 本地 CPU 内存后端与并发控制
-- [LocalDiskBackend 源码分析](09_inference_system/kv_cache/02_systems/lmcache/local_disk_backend.md) - O_DIRECT 直通 I/O 与异步优化
-- [P2PBackend 源码分析](09_inference_system/kv_cache/02_systems/lmcache/p2p_backend.md) - RDMA 零拷贝与去中心化传输
-- [GdsBackend 源码分析](09_inference_system/kv_cache/02_systems/lmcache/gds_backend.md) - GPUDirect Storage 零拷贝
-- [NixlStorageBackend 源码分析](09_inference_system/kv_cache/02_systems/lmcache/nixl_backend.md) - 高性能网络存储、S3 对象存储对接
-- [Remote Connector 源码分析](09_inference_system/kv_cache/02_systems/lmcache/remote_connector.md) - Redis/S3/Mooncake 多后端适配
-- [PDBackend 源码分析](09_inference_system/kv_cache/02_systems/lmcache/pd_backend.md) - 预填充-解码分离、Push-based 主动推送机制
+- [LocalCPUBackend 源码分析](09_inference_system/kv_cache/02_systems/01_lmcache/06_local_cpu_backend.md) - 本地 CPU 内存后端与并发控制
+- [LocalDiskBackend 源码分析](09_inference_system/kv_cache/02_systems/01_lmcache/09_local_disk_backend.md) - O_DIRECT 直通 I/O 与异步优化
+- [P2PBackend 源码分析](09_inference_system/kv_cache/02_systems/01_lmcache/07_p2p_backend.md) - RDMA 零拷贝与去中心化传输
+- [GdsBackend 源码分析](09_inference_system/kv_cache/02_systems/01_lmcache/10_gds_backend.md) - GPUDirect Storage 零拷贝
+- [NixlStorageBackend 源码分析](09_inference_system/kv_cache/02_systems/01_lmcache/11_nixl_backend.md) - 高性能网络存储、S3 对象存储对接
+- [Remote Connector 源码分析](09_inference_system/kv_cache/02_systems/01_lmcache/12_remote_connector.md) - Redis/S3/Mooncake 多后端适配
+- [PDBackend 源码分析](09_inference_system/kv_cache/02_systems/01_lmcache/08_pd_backend.md) - 预填充-解码分离、Push-based 主动推送机制
 
 **控制面**：
 
-- [LMCache Controller (控制平面)](09_inference_system/kv_cache/02_systems/lmcache/lmcache_controller.md) - 集群元数据管理、ZMQ 三通道通信与节点协调
-- [LMCache Server 源码分析](09_inference_system/kv_cache/02_systems/lmcache/lmcache_server.md) - 轻量级中心化存储服务、自定义 TCP 协议
+- [LMCache Controller (控制平面)](09_inference_system/kv_cache/02_systems/01_lmcache/04_lmcache_controller.md) - 集群元数据管理、ZMQ 三通道通信与节点协调
+- [LMCache Server 源码分析](09_inference_system/kv_cache/02_systems/01_lmcache/13_lmcache_server.md) - 轻量级中心化存储服务、自定义 TCP 协议
 
 **高级特性**：
 
-- [CacheBlend 技术详解](09_inference_system/kv_cache/02_systems/lmcache/cache_blend.md) - RAG 场景下的动态融合机制、选择性重算与精度保持
-- [CacheGen 技术详解](09_inference_system/kv_cache/02_systems/lmcache/cachegen.md) - KV Cache 压缩与流式传输、自适应量化与算术编码
+- [CacheBlend 技术详解](09_inference_system/kv_cache/02_systems/01_lmcache/14_cache_blend.md) - RAG 场景下的动态融合机制、选择性重算与精度保持
+- [CacheGen 技术详解](09_inference_system/kv_cache/02_systems/01_lmcache/15_cachegen.md) - KV Cache 压缩与流式传输、自适应量化与算术编码
 
 #### 9.3.2 阿里云 Tair KVCache
 
 本小节介绍阿里云企业级的 KVCache 管理系统架构及大规模部署实践。
 
-- [Tair KVCache 架构与设计深度分析](09_inference_system/kv_cache/02_systems/tair_kvcache/tair-kvcache-architecture-design.md) - 阿里云企业级 KVCache 管理系统架构详解，包含与 LMCache 的全面对比分析、中心化管理模式及大规模部署最佳实践
+- [Tair KVCache 架构与设计深度分析](09_inference_system/kv_cache/02_systems/02_tair_kvcache/01_tair-kvcache-architecture-design.md) - 阿里云企业级 KVCache 管理系统架构详解，包含与 LMCache 的全面对比分析、中心化管理模式及大规模部署最佳实践
 
 #### 9.3.3 SGLang 推理引擎
 
@@ -497,13 +499,13 @@ SGLang 以 RadixAttention 前缀缓存和高效调度器著称，涵盖 KV Cache
 **显存与缓存优化**：
 
 - [LLM 显存占用分析与计算](09_inference_system/memory_calc/memory_analysis.md) - 模型参数、KV Cache 与中间激活值的显存估算方法
-- [KV Block Manager 分析](09_inference_system/kv_cache/02_systems/kvbm/KVBM_Analysis.md) - KV Cache 内存管理机制深度解析
-- [分层流水线技术](09_inference_system/kv_cache/01_concepts/offloading/02_layerwise_pipeline.md) - Layer-wise Pipeline 技术原理与性能优化
+- [KV Block Manager 分析](09_inference_system/kv_cache/02_systems/03_kvbm/01_KVBM_Analysis.md) - KV Cache 内存管理机制深度解析
+- [分层流水线技术](09_inference_system/kv_cache/01_concepts/07_offloading/02_layerwise_pipeline.md) - Layer-wise Pipeline 技术原理与性能优化
 
 **网络与模型工具**：
 
 - [模型优化导航](09_inference_system/model_optimization/README.md) - 模型优化技术概览与导读
-- [NIXL 网络存储介绍](09_inference_system/kv_cache/02_systems/nixl/nixl_introduction.md) - 高性能网络存储架构与应用
+- [NIXL 网络存储介绍](09_inference_system/kv_cache/02_systems/05_nixl/01_nixl_introduction.md) - 高性能网络存储架构与应用
 - [NVIDIA 模型优化器](09_inference_system/model_optimization/nvidia_model_optimizer.md) - NVIDIA 模型优化工具链详解
 - [图解投机解码](09_inference_system/model_optimization/illustrated-speculative-decoding.md) - Speculative Decoding 的核心思想、系统实现与工程调优要点
 - [一次前向，白赚 4 个 token：DFlash 2 块扩散投机解码技术详解](09_inference_system/model_optimization/dflash-block-diffusion-speculative-decoding.md) - 块扩散式的投机解码架构与实现深度解析
@@ -554,10 +556,10 @@ SGLang 以 RadixAttention 前缀缓存和高效调度器著称，涵盖 KV Cache
 
   <img src="./99_misc/token_factory_talk/img/cover.jpg" width="600" alt="Token Factory：AI 推理的成本革命 — 演讲封面"/>
 
-- [L1 KV Pool 与系统并发上限](09_inference_system/kv_cache/01_concepts/capacity_planning/hbm_kv_pool_concurrency.md) — 并发上限公式、三态记账与指标观测；为什么 L2 空余救不了 P99 TTFT（SGLang/vLLM 对照）
-- [KV Cache 容量规划](09_inference_system/kv_cache/01_concepts/capacity_planning/glm5_kv_cache_capacity_planning.md) — GLM-5 显存容量推演与 ROI 评估
-- [KV Cache 压缩技术](09_inference_system/kv_cache/01_concepts/compression/kv_cache_compression.md) — INT8/FP8 量化、稀疏化与注意力优化
-- [Claude Prompt Caching 机制分析](09_inference_system/kv_cache/01_concepts/prefix_caching/claude_prompt_caching.md) — 提示词缓存的终端 Agent 源码实现与成本优化
+- [L1 KV Pool 与系统并发上限](09_inference_system/kv_cache/01_concepts/10_capacity_planning/01_hbm_kv_pool_concurrency.md) — 并发上限公式、三态记账与指标观测；为什么 L2 空余救不了 P99 TTFT（SGLang/vLLM 对照）
+- [KV Cache 容量规划](09_inference_system/kv_cache/01_concepts/10_capacity_planning/03_glm5_kv_cache_capacity_planning.md) — GLM-5 显存容量推演与 ROI 评估
+- [KV Cache 压缩技术](09_inference_system/kv_cache/01_concepts/06_compression/01_kv_cache_compression.md) — INT8/FP8 量化、稀疏化与注意力优化
+- [Claude Prompt Caching 机制分析](09_inference_system/kv_cache/01_concepts/02_prefix_caching/03_claude_prompt_caching.md) — 提示词缓存的终端 Agent 源码实现与成本优化
 
 ### 9.7 模型部署与运维实践
 
@@ -594,9 +596,9 @@ DeepSeek 模型极致性能优化实战，深度解析 vLLM 宽端点 (Wide Endp
 
 **多智能体系统**：
 
-- [理论基础与框架](08_agentic_system/multi_agent/docs/part1_multi_agent_ai_fundamentals.md) - BDI 架构、多 Agent 协作机制与企业级落地
-- [企业级构建实战](08_agentic_system/multi_agent/docs/part2_enterprise_multi_agent_system_implementation.md) - 基于 LangGraph 的架构设计与企业级代码落地
-- [Claude Code 多会话协作实践手册](08_agentic_system/multi_agent/docs/claude-code-multi-session-playbook.md) - 从上下文隔离与多视角评审出发，跨窗口消息、Agent Teams 与 Dynamic Workflow 三种协作路线，含评判者设计与排错
+- [理论基础与框架](08_agentic_system/multi_agent/02_part1_multi_agent_ai_fundamentals.md) - BDI 架构、多 Agent 协作机制与企业级落地
+- [企业级构建实战](08_agentic_system/multi_agent/03_part2_enterprise_multi_agent_system_implementation.md) - 基于 LangGraph 的架构设计与企业级代码落地
+- [Claude Code 多会话协作实践手册](08_agentic_system/multi_agent/01_claude-code-multi-session-playbook.md) - 从上下文隔离与多视角评审出发，跨窗口消息、Agent Teams 与 Dynamic Workflow 三种协作路线，含评判者设计与排错
 
 **智能体设计模式**：
 
@@ -638,27 +640,27 @@ DeepSeek 模型极致性能优化实战，深度解析 vLLM 宽端点 (Wide Endp
 
 **Agent Skill**：
 
-- [Claude Skills 开发指南](08_agentic_system/agent_skills/docs/claude_skills_guide.md) - 扩展智能体能力的工具定义规范与最佳实践
-  - [构建完整指南 (PDF)](08_agentic_system/agent_skills/docs/the_complete_guide_to_building_skill_for_claude.pdf)
-  - [一个人调度四个角色：多会话协作 Skill 的实测与边界](08_agentic_system/agent_skills/docs/multi-role-agent-skill.md) - 四个角色各开一个会话：三层结构 + 端到端实测与边界
-  - [12 小时、636 个测试：自驱型 Skill 能走多远](08_agentic_system/agent_skills/docs/self-driving-skill-for-complex-projects.md) - 从 SPARQLite 实验切入，拆 Skill 的策略层与运行时：单会话有界任务可只用 Skill，跨 session 复杂项目要 Workflow 或 Agent SDK harness
+- [Claude Skills 开发指南](08_agentic_system/agent_skills/01_claude_skills_guide.md) - 扩展智能体能力的工具定义规范与最佳实践
+  - [构建完整指南 (PDF)](08_agentic_system/agent_skills/01_the_complete_guide_to_building_skill_for_claude.pdf)
+  - [一个人调度四个角色：多会话协作 Skill 的实测与边界](08_agentic_system/agent_skills/02_multi-role-agent-skill.md) - 四个角色各开一个会话：三层结构 + 端到端实测与边界
+  - [12 小时、636 个测试：自驱型 Skill 能走多远](08_agentic_system/agent_skills/03_self-driving-skill-for-complex-projects.md) - 从 SPARQLite 实验切入，拆 Skill 的策略层与运行时：单会话有界任务可只用 Skill，跨 session 复杂项目要 Workflow 或 Agent SDK harness
 - [Agent Skill 开发指南](https://github.com/ForceInjection/awesome-skills)（[在线版](https://forceinjection.github.io/awesome-skills/)）- 由原力注入博主维护的优秀认知技能（Agent Skill）合集，包含深度代码阅读、架构分析、文档评审等自动化工作流。
 - [CUDA Code Skill](https://github.com/ForceInjection/cuda-code-skill) - 面向 AI IDE（Claude Code、Trae 等）的 CUDA 知识增强代码生成与性能分析技能库。
 - [mmx-cli](https://github.com/MiniMax-AI/cli) - MiniMax AI 平台的 CLI 技能，支持文本、图片、视频、语音、音乐生成与 Web 搜索，遵循 agentskills.io 标准。
 
 **AI Agent Infra**：
 
-- [基础设施技术栈](08_agentic_system/agent_infra/docs/ai-agent-infra-stack.md) - 全面梳理工具层、数据层与编排层
-- [基础设施的崛起](08_agentic_system/agent_infra/docs/the-rise-of-ai-agent-infrastructure.md) - 生态演进趋势与未来投资方向
-- [OpenHarness 深入浅出：解密开源智能体基础设施](08_agentic_system/agent_infra/docs/openharness-deep-dive.md) ([配套 PPT](08_agentic_system/agent_infra/docs/openharness-deep-dive.pptx)) - 大型语言模型 (LLM) 在推理与生成能力上取得了突破性进展，但它们本身受限于静态的上下文窗口，无法直接与真实世界进行交互。要让模型成为能够自主解决复杂任务的工程化智能体 (Agent) ，必须为其配备执行动作的工具、持久化的记忆以及安全隔离的运行边界。这就是“智能体基础设施” (Agent Harness) 的核心使命。
-- [4 个工具、42 家供应商、11 万 star：Pi 的极简 harness，与 DeepSeek Harness、OpenHarness 的路线对比](08_agentic_system/agent_infra/docs/pi-agent-deep-dive.md) - 极简 harness 源码深读：默认 4 工具、系统提示 677 token、可替换协议与 42 家供应商；含与 DeepSeek Harness、OpenHarness 的三路线对比
-- [Agent Sandbox 的演进与设计范式](08_agentic_system/agent_infra/docs/agent-sandbox-design.md) ([配套 PPT](08_agentic_system/agent_infra/docs/agent-sandbox-design.pptx)) - 探讨 Agent Sandbox 的核心设计理念，对比 OpenShell、Sandlock 等沙箱方案，揭示从“硬件级隔离”向“策略优先”演进的技术趋势。
-- [深度解析 Kagent：以构建 Kubernetes 运维智能体为例](08_agentic_system/agent_infra/docs/deep-dive-kagent-k8s-ops-agent.md) ([配套 PPT](08_agentic_system/agent_infra/docs/deep-dive-kagent-k8s-ops-agent.pptx)) - 深度解析 Kagent 的核心架构与工作机制，并以“构建阿里云 ACK 运维智能体”为实战案例，展示大模型与运维工具的编排。
-- [OpenClaw Operator 架构深度解析](08_agentic_system/agent_infra/docs/openclaw-operator-deep-dive.md) - 云原生时代 AI Agent 运行时环境编排机制
-- [DeepSeek-TUI 实战](08_agentic_system/agent_infra/docs/deepseek-tui-in-practice.md) - 榨干 DeepSeek V4 长上下文红利的命令行编程 Agent 实战指南
-- [Claude Code Sandbox 安全隔离机制解析](08_agentic_system/agent_infra/docs/claude-code-sandbox.md) - Linux 环境下基于 Bubblewrap 的底层隔离架构
-- [扩展托管智能体](08_agentic_system/agent_infra/docs/scaling-managed-agents.md) - 让决策与执行解耦，各行其职的 AI 原生基础设施
-- [在 Elasticsearch 之上实现虚拟文件系统](08_agentic_system/agent_infra/docs/virtual-filesystem-elasticsearch_zh.md) - Elasticsearch 虚拟文件系统实现解析（[英文原文](08_agentic_system/agent_infra/docs/virtual-filesystem-elasticsearch.md)）
+- [基础设施技术栈](08_agentic_system/agent_infra/01_ai-agent-infra-stack.md) - 全面梳理工具层、数据层与编排层
+- [基础设施的崛起](08_agentic_system/agent_infra/02_the-rise-of-ai-agent-infrastructure.md) - 生态演进趋势与未来投资方向
+- [OpenHarness 深入浅出：解密开源智能体基础设施](08_agentic_system/agent_infra/03_openharness-deep-dive.md) ([配套 PPT](08_agentic_system/agent_infra/03_openharness-deep-dive.pptx)) - 大型语言模型 (LLM) 在推理与生成能力上取得了突破性进展，但它们本身受限于静态的上下文窗口，无法直接与真实世界进行交互。要让模型成为能够自主解决复杂任务的工程化智能体 (Agent) ，必须为其配备执行动作的工具、持久化的记忆以及安全隔离的运行边界。这就是“智能体基础设施” (Agent Harness) 的核心使命。
+- [4 个工具、42 家供应商、11 万 star：Pi 的极简 harness，与 DeepSeek Harness、OpenHarness 的路线对比](08_agentic_system/agent_infra/04_pi-agent-deep-dive.md) - 极简 harness 源码深读：默认 4 工具、系统提示 677 token、可替换协议与 42 家供应商；含与 DeepSeek Harness、OpenHarness 的三路线对比
+- [Agent Sandbox 的演进与设计范式](08_agentic_system/agent_infra/08_agent-sandbox-design.md) ([配套 PPT](08_agentic_system/agent_infra/08_agent-sandbox-design.pptx)) - 探讨 Agent Sandbox 的核心设计理念，对比 OpenShell、Sandlock 等沙箱方案，揭示从“硬件级隔离”向“策略优先”演进的技术趋势。
+- [深度解析 Kagent：以构建 Kubernetes 运维智能体为例](08_agentic_system/agent_infra/09_deep-dive-kagent-k8s-ops-agent.md) ([配套 PPT](08_agentic_system/agent_infra/09_deep-dive-kagent-k8s-ops-agent.pptx)) - 深度解析 Kagent 的核心架构与工作机制，并以“构建阿里云 ACK 运维智能体”为实战案例，展示大模型与运维工具的编排。
+- [OpenClaw Operator 架构深度解析](08_agentic_system/agent_infra/10_openclaw-operator-deep-dive.md) - 云原生时代 AI Agent 运行时环境编排机制
+- [DeepSeek-TUI 实战](08_agentic_system/agent_infra/12_deepseek-tui-in-practice.md) - 榨干 DeepSeek V4 长上下文红利的命令行编程 Agent 实战指南
+- [Claude Code Sandbox 安全隔离机制解析](08_agentic_system/agent_infra/11_claude-code-sandbox.md) - Linux 环境下基于 Bubblewrap 的底层隔离架构
+- [扩展托管智能体](08_agentic_system/agent_infra/13_scaling-managed-agents.md) - 让决策与执行解耦，各行其职的 AI 原生基础设施
+- [在 Elasticsearch 之上实现虚拟文件系统](08_agentic_system/agent_infra/14_virtual-filesystem-elasticsearch_zh.md) - Elasticsearch 虚拟文件系统实现解析（[英文原文](08_agentic_system/agent_infra/15_virtual-filesystem-elasticsearch.md)）
 
 ### 10.3 实战代码与演示项目
 

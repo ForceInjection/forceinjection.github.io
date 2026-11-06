@@ -1,8 +1,1310 @@
 {
-  "generated_at": "2026-11-06T02:11:34Z",
+  "generated_at": "2026-11-06T07:02:57Z",
   "window_days": 30,
-  "count": 161,
+  "count": 299,
   "items": [
+    {
+      "title": "Ascend 950 微架构速查：来自 FlashMLA 算子报告的硬件信息整理",
+      "url": "/01_hardware_architecture/ascend/Ascend950_微架构速查.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "硬件架构"
+    },
+    {
+      "title": "Ascend Sparse Attention Forward 算法与优化技术简析",
+      "url": "/01_hardware_architecture/ascend/Ascend950_稀疏注意力Forward算子与优化技术简析.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "硬件架构"
+    },
+    {
+      "title": "GPU Direct Storage (GDS) 基础",
+      "url": "/01_hardware_architecture/gpudirect/03_gds_basics.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "硬件架构"
+    },
+    {
+      "title": "GPGPU vs NPU：大模型推理与训练的算力选择指南",
+      "url": "/01_hardware_architecture/nvidia/GPGPU_vs_NPU_大模型推理训练对比.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "硬件架构"
+    },
+    {
+      "title": "MIG 配置与实操",
+      "url": "/01_hardware_architecture/nvidia/mig_hands_on.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "硬件架构"
+    },
+    {
+      "title": "GPU Characteristics（GPU 特性）",
+      "url": "/01_hardware_architecture/nvidia/understand_gpu_architecture/01_gpu_characteristics.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "硬件架构"
+    },
+    {
+      "title": "GPU Memory (GPU 内存)",
+      "url": "/01_hardware_architecture/nvidia/understand_gpu_architecture/02_gpu_memory.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "硬件架构"
+    },
+    {
+      "title": "GPU Example: Tesla V100",
+      "url": "/01_hardware_architecture/nvidia/understand_gpu_architecture/03_tesla_v100.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "硬件架构"
+    },
+    {
+      "title": "GPU Example: RTX 5000",
+      "url": "/01_hardware_architecture/nvidia/understand_gpu_architecture/04_rtx_5000.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "硬件架构"
+    },
+    {
+      "title": "Exercise: Device Query",
+      "url": "/01_hardware_architecture/nvidia/understand_gpu_architecture/05_exer_device_query.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "硬件架构"
+    },
+    {
+      "title": "Exercise: Device Bandwidth",
+      "url": "/01_hardware_architecture/nvidia/understand_gpu_architecture/06_exer_device_bandwidth.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "硬件架构"
+    },
+    {
+      "title": "GPU 架构实例：NVIDIA A100 (Ampere)",
+      "url": "/01_hardware_architecture/nvidia/understand_gpu_architecture/07_a100_architecture.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "硬件架构"
+    },
+    {
+      "title": "NVLink 诊断与实操",
+      "url": "/01_hardware_architecture/nvlink/nvlink_diagnostics.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "硬件架构"
+    },
+    {
+      "title": "NVLink 技术入门",
+      "url": "/01_hardware_architecture/nvlink/nvlink_intro.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "硬件架构"
+    },
+    {
+      "title": "PCIe 总线技术大全",
+      "url": "/01_hardware_architecture/pcie/01_pcie_comprehensive_guide.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "硬件架构"
+    },
+    {
+      "title": "Linux PCIe P2PDMA 技术介绍",
+      "url": "/01_hardware_architecture/pcie/02_p2pdma_technology.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "硬件架构"
+    },
+    {
+      "title": "PCIe 拓扑可视化：从 sysfs 到 nvidia-smi",
+      "url": "/01_hardware_architecture/pcie/03_pcie_topology_visualization.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "硬件架构"
+    },
+    {
+      "title": "PCIe AER 错误监控与链路健康检查",
+      "url": "/01_hardware_architecture/pcie/04_pcie_aer_monitoring.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "硬件架构"
+    },
+    {
+      "title": "GPU BAR1 内存映射机制",
+      "url": "/01_hardware_architecture/pcie/05_bar1_memory_mapping.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "硬件架构"
+    },
+    {
+      "title": "PCIe 拓扑层次：Root Complex、Switch、Bridge 与 Device",
+      "url": "/01_hardware_architecture/pcie/06_pcie_topology_hierarchy.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "硬件架构"
+    },
+    {
+      "title": "PCIe Switch 识别与验证",
+      "url": "/01_hardware_architecture/pcie/07_pcie_switch_vs_bridge.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "硬件架构"
+    },
+    {
+      "title": "CXL 互联协议全景解读：从 PCIe 时代到可组合数据中心",
+      "url": "/01_hardware_architecture/pcie/08_cxl_interconnect_overview.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "硬件架构"
+    },
+    {
+      "title": "CXL 命令行工具链全景：cxl / daxctl / ndctl 从查看到配置",
+      "url": "/01_hardware_architecture/pcie/09_cxl_cli_tools.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "硬件架构"
+    },
+    {
+      "title": "HBM 显存技术演进：从 HBM2 到 HBM3e",
+      "url": "/01_hardware_architecture/performance/01_hbm_evolution.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "硬件架构"
+    },
+    {
+      "title": "单卡 GPU 拓扑与 NUMA 分析",
+      "url": "/01_hardware_architecture/performance/02_single_gpu_topology_analysis.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "硬件架构"
+    },
+    {
+      "title": "CPU AMX vs GPU Tensor Core：混合计算场景分析",
+      "url": "/01_hardware_architecture/performance/03_amx_vs_tensorcore.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "硬件架构"
+    },
+    {
+      "title": "多 PCIe 根总线段与 NUMA 映射",
+      "url": "/01_hardware_architecture/performance/04_pcie_domain_numa.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "硬件架构"
+    },
+    {
+      "title": "PCIe & NVLink 带宽速查表",
+      "url": "/01_hardware_architecture/performance/05_pcie_nvlink_speed_reference.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "硬件架构"
+    },
+    {
+      "title": "AI 基础设施延迟金字塔",
+      "url": "/01_hardware_architecture/performance/ai_latency_pyramid.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "硬件架构"
+    },
+    {
+      "title": "NVIDIA GB300 NVL72 架构解析与性能测试报告",
+      "url": "/01_hardware_architecture/superchips/nvidia_gb300.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "硬件架构"
+    },
+    {
+      "title": "NVLink-C2C 技术详解：构建 AI Superchip 的关键互连技术",
+      "url": "/01_hardware_architecture/superchips/nvlink_c2c.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "硬件架构"
+    },
+    {
+      "title": "Google TPU 101",
+      "url": "/01_hardware_architecture/tpu/tpu_101.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "硬件架构"
+    },
+    {
+      "title": "NVIDIA GPU 容器环境：原理与构建指南",
+      "url": "/02_gpu_programming/01_environment/01_nvidia_container_setup.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "GPU 编程"
+    },
+    {
+      "title": "CUDA NUMA API 编程实践",
+      "url": "/02_gpu_programming/02_cuda/05_cuda_numa_api.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "GPU 编程"
+    },
+    {
+      "title": "手搓 Attention：从三行循环到看懂 FlashAttention",
+      "url": "/02_gpu_programming/02_cuda/21_write_attention_from_scratch.html",
+      "date": "2026-11-06",
+      "status": "new",
+      "module": "GPU 编程"
+    },
+    {
+      "title": "TileLang 快速入门",
+      "url": "/02_gpu_programming/03_tilelang/01_tilelang_quick_start.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "GPU 编程"
+    },
+    {
+      "title": "57 行代码的 FlashAttention：TileLang 前向算子源码级拆解",
+      "url": "/02_gpu_programming/03_tilelang/02_tilelang_flash_attention.html",
+      "date": "2026-11-06",
+      "status": "new",
+      "module": "GPU 编程"
+    },
+    {
+      "title": "把权重压到 4-bit：TileLang 反量化 GEMM 源码级拆解",
+      "url": "/02_gpu_programming/03_tilelang/03_dequant_gemm_lowprecision.html",
+      "date": "2026-11-06",
+      "status": "new",
+      "module": "GPU 编程"
+    },
+    {
+      "title": "nvbandwidth：用法、原理与测试项详解",
+      "url": "/02_gpu_programming/04_profiling/01_nvbandwidth_best_practices.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "GPU 编程"
+    },
+    {
+      "title": "PCIe 链路状态与主机-设备带宽实测",
+      "url": "/02_gpu_programming/04_profiling/02_pcie_bandwidth_measurement.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "GPU 编程"
+    },
+    {
+      "title": "GPU 显存带宽测试：片内 vs 片外",
+      "url": "/02_gpu_programming/04_profiling/03_hbm_bandwidth_test.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "GPU 编程"
+    },
+    {
+      "title": "GPU 功耗管理实战",
+      "url": "/02_gpu_programming/04_profiling/04_power_management.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "GPU 编程"
+    },
+    {
+      "title": "PCIe 传输效率曲线：从小包到大块",
+      "url": "/02_gpu_programming/04_profiling/05_pcie_transfer_efficiency.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "GPU 编程"
+    },
+    {
+      "title": "Nsight Compute CLI (`ncu`) 实战",
+      "url": "/02_gpu_programming/04_profiling/06_nsight_compute_cli.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "GPU 编程"
+    },
+    {
+      "title": "Nsight Systems CLI (`nsys`) 快速入门",
+      "url": "/02_gpu_programming/04_profiling/07_nsight_systems_cli.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "GPU 编程"
+    },
+    {
+      "title": "GPU P2P 带宽实测：NVLink vs PCIe",
+      "url": "/02_gpu_programming/04_profiling/08_p2p_bandwidth.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "GPU 编程"
+    },
+    {
+      "title": "GPU 间数据传输方法实测：从 P2P 到 Unified Memory 的 119 倍差距",
+      "url": "/02_gpu_programming/04_profiling/09_gpu_transfer_methods.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "GPU 编程"
+    },
+    {
+      "title": "GPU 设备属性查询：写 Kernel 前先查这张卡的并行上限",
+      "url": "/03_ai_cluster_ops/01_gpu_ops/01_device_query.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "集群运维"
+    },
+    {
+      "title": "GPU 利用率是一个误导性指标",
+      "url": "/03_ai_cluster_ops/01_gpu_ops/02_gpu_utilization_myth.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "集群运维"
+    },
+    {
+      "title": "nvidia-smi 场景速查",
+      "url": "/03_ai_cluster_ops/01_gpu_ops/03_nvidia_smi_guide.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "集群运维"
+    },
+    {
+      "title": "nvtop 快速入门",
+      "url": "/03_ai_cluster_ops/01_gpu_ops/04_nvtop_guide.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "集群运维"
+    },
+    {
+      "title": "DCGM 监控实操",
+      "url": "/03_ai_cluster_ops/01_gpu_ops/05_dcgm_monitoring.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "集群运维"
+    },
+    {
+      "title": "GPU 集群健康检查",
+      "url": "/03_ai_cluster_ops/01_gpu_ops/06_gpu_health_check.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "集群运维"
+    },
+    {
+      "title": "GPU 进程与资源管理",
+      "url": "/03_ai_cluster_ops/01_gpu_ops/07_gpu_process_management.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "集群运维"
+    },
+    {
+      "title": "GPU 驱动故障速查——nvidia-smi 不可用时的排查路径",
+      "url": "/03_ai_cluster_ops/01_gpu_ops/08_gpu_driver_troubleshooting.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "集群运维"
+    },
+    {
+      "title": "GPU 忙不忙怎么判断",
+      "url": "/03_ai_cluster_ops/01_gpu_ops/09_gpu_busy_check.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "集群运维"
+    },
+    {
+      "title": "InfiniBand 网络理论与实践",
+      "url": "/03_ai_cluster_ops/02_infiniband/01_ib_network_theory.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "集群运维"
+    },
+    {
+      "title": "NCCL 技术理论深度解析",
+      "url": "/03_ai_cluster_ops/03_nccl/01_nccl_theory.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "集群运维"
+    },
+    {
+      "title": "NCCL 单卡验证指南",
+      "url": "/03_ai_cluster_ops/03_nccl/02_nccl_helloworld.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "集群运维"
+    },
+    {
+      "title": "NCCL 测试验证工具说明文档",
+      "url": "/03_ai_cluster_ops/03_nccl/03_nccl_tutorial.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "集群运维"
+    },
+    {
+      "title": "NCCL 基准测试方法论",
+      "url": "/03_ai_cluster_ops/03_nccl/04_nccl_benchmark.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "集群运维"
+    },
+    {
+      "title": "NCCL Debug 输出实战解读",
+      "url": "/03_ai_cluster_ops/03_nccl/05_nccl_debug_output.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "集群运维"
+    },
+    {
+      "title": "NCCL 通信路径逐层压测——从 NVLink 到 PCIe Fallback",
+      "url": "/03_ai_cluster_ops/03_nccl/06_nccl_path_benchmark.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "集群运维"
+    },
+    {
+      "title": "GPU 调度为什么比 CPU 调度难——碎片化、拓扑、Gang Scheduling",
+      "url": "/03_ai_cluster_ops/04_gpu_scheduling/01_gpu_scheduling_problem.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "集群运维"
+    },
+    {
+      "title": "Gang Scheduling——分布式训练的 All-or-Nothing 调度",
+      "url": "/03_ai_cluster_ops/04_gpu_scheduling/02_gang_scheduling_for_training.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "集群运维"
+    },
+    {
+      "title": "拓扑感知调度——让调度器知道 NVLink 和 NUMA",
+      "url": "/03_ai_cluster_ops/04_gpu_scheduling/03_topology_aware_scheduling.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "集群运维"
+    },
+    {
+      "title": "GPU 共享调度——MIG、MPS、Time-slicing 在 K8s 中的表达",
+      "url": "/03_ai_cluster_ops/04_gpu_scheduling/04_gpu_sharing_scheduling.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "集群运维"
+    },
+    {
+      "title": "中国数据中心有多大、建在哪、谁在租：SemiAnalysis 中国数据中心模型精读",
+      "url": "/03_ai_cluster_ops/05_datacenter/china-dc-boom-semianalysis.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "集群运维"
+    },
+    {
+      "title": "GPU 虚拟化与资源管理技术深度解析 - 第一部分：基础理论篇",
+      "url": "/04_cloud_native_ai_platform/gpu_manager/01_basic_theory.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "云原生 AI"
+    },
+    {
+      "title": "GPU 虚拟化与资源管理技术深度解析 - 第二部分：虚拟化技术篇",
+      "url": "/04_cloud_native_ai_platform/gpu_manager/02_virtualization.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "云原生 AI"
+    },
+    {
+      "title": "GPU 虚拟化与资源管理技术深度解析 - 第三部分：资源管理与优化篇",
+      "url": "/04_cloud_native_ai_platform/gpu_manager/03_resource_management.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "云原生 AI"
+    },
+    {
+      "title": "GPU 虚拟化与资源管理技术深度解析 - 第四部分：实践应用篇",
+      "url": "/04_cloud_native_ai_platform/gpu_manager/04_practice.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "云原生 AI"
+    },
+    {
+      "title": "Nvidia KAI Scheduler 功能架构解析",
+      "url": "/04_cloud_native_ai_platform/gpu_manager/hami/KAI_vs_HAMi_Comparison.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "云原生 AI"
+    },
+    {
+      "title": "GPU-Virtual-Service 深度剖析：CUDA 劫持机制、全链路流程与 HAMi-Core 对比",
+      "url": "/04_cloud_native_ai_platform/gpu_manager/hami/flex_ai_intro.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "云原生 AI"
+    },
+    {
+      "title": "HAMi GPU 资源管理完整指南",
+      "url": "/04_cloud_native_ai_platform/gpu_manager/hami/hami-gpu-resources-guide.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "云原生 AI"
+    },
+    {
+      "title": "NVIDIA Container Toolkit 原理分析与代码深度解析",
+      "url": "/04_cloud_native_ai_platform/k8s/01_nvidia_container_toolkit_analysis.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "云原生 AI"
+    },
+    {
+      "title": "Nvidia K8s Device Plugin 原理解析和源码分析",
+      "url": "/04_cloud_native_ai_platform/k8s/02_nvidia_k8s_device_plugin_analysis.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "云原生 AI"
+    },
+    {
+      "title": "Kueue + HAMi：Kubernetes 原生的 AI 工作负载管理与 GPU 虚拟化解决方案",
+      "url": "/04_cloud_native_ai_platform/k8s/03_kueue_hami_integration.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "云原生 AI"
+    },
+    {
+      "title": "vLLM + LWS：Kubernetes 上的多机多卡推理方案",
+      "url": "/04_cloud_native_ai_platform/k8s/04_lws_intro.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "云原生 AI"
+    },
+    {
+      "title": "云原生高性能分布式 LLM 推理框架 llm-d 介绍",
+      "url": "/04_cloud_native_ai_platform/k8s/05_llm_d_intro.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "云原生 AI"
+    },
+    {
+      "title": "容易被忽略的 containerd 运行时日志",
+      "url": "/04_cloud_native_ai_platform/k8s/06_containerd_log_analysis.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "云原生 AI"
+    },
+    {
+      "title": "设计笔记",
+      "url": "/04_cloud_native_ai_platform/storage/deepseek_3fs/01_deepseek_3fs_design_notes.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "云原生 AI"
+    },
+    {
+      "title": "NVIDIA Inference Context Memory Storage：为长上下文与 Agentic AI 推理打造的 G3.5 上下文存储层",
+      "url": "/04_cloud_native_ai_platform/storage/inference_context_memory_storage/01_icms_architecture.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "云原生 AI"
+    },
+    {
+      "title": "JuiceFS 文件修改时 chunk/slice/block 更新机制分析",
+      "url": "/04_cloud_native_ai_platform/storage/juicefs/01_juicefs_file_modification_mechanism_analysis.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "云原生 AI"
+    },
+    {
+      "title": "JuiceFS 后端存储迁移指南",
+      "url": "/04_cloud_native_ai_platform/storage/juicefs/02_juicefs_backend_storage_migration_guide.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "云原生 AI"
+    },
+    {
+      "title": "DeepWiki 使用方法与技术原理深度分析",
+      "url": "/06_llm_theory_and_fundamentals/deep_research/deepwiki/deepwiki_usage_and_technical_analysis.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "LLM 理论"
+    },
+    {
+      "title": "订单履约 Agent 需求分析",
+      "url": "/06_llm_theory_and_fundamentals/deep_research/design/order_fulfillment_agent_requirement_analysis.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "LLM 理论"
+    },
+    {
+      "title": "订单履约 Agent 系统设计文档",
+      "url": "/06_llm_theory_and_fundamentals/deep_research/design/order_fulfillment_agent_system_design.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "LLM 理论"
+    },
+    {
+      "title": "科研助手 Agent 需求与场景清单",
+      "url": "/06_llm_theory_and_fundamentals/deep_research/design/research_assistant.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "LLM 理论"
+    },
+    {
+      "title": "《Building Research Agents for Tech Insights》深度解读",
+      "url": "/06_llm_theory_and_fundamentals/deep_research/research_agents/building_research_agents_for_tech_insights.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "LLM 理论"
+    },
+    {
+      "title": "Cursor IDE 架构概览",
+      "url": "/06_llm_theory_and_fundamentals/deep_research/research_agents/cursor-deepsearch.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "LLM 理论"
+    },
+    {
+      "title": "Databricks Assistant Data Science Agent 使用场景指南",
+      "url": "/06_llm_theory_and_fundamentals/deep_research/research_agents/databricks_data_agent.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "LLM 理论"
+    },
+    {
+      "title": "深度解读「通义 DeepResearch」：ReAct 范式驱动的智能 Agent 架构",
+      "url": "/06_llm_theory_and_fundamentals/deep_research/research_agents/qwen_deepresearch_analysis.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "LLM 理论"
+    },
+    {
+      "title": "图解注意力算力账：从 171.7 亿格，到 2048 格",
+      "url": "/06_llm_theory_and_fundamentals/llm_basic_concepts/architecture_evolution/attention_compute_fifteen_charts.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "LLM 理论"
+    },
+    {
+      "title": "Attention 演进与 KV Cache 之变：每 token 从 4.5 MiB 到 890 B",
+      "url": "/06_llm_theory_and_fundamentals/llm_basic_concepts/architecture_evolution/attention_evolution_kv_cache.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "LLM 理论"
+    },
+    {
+      "title": "从 GPT-2 到 Kimi K3：注意力机制的演进史",
+      "url": "/06_llm_theory_and_fundamentals/llm_basic_concepts/architecture_evolution/from_gpt2_to_kimi_k3_attention_evolution.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "LLM 理论"
+    },
+    {
+      "title": "7 年前，AI 记住一个字要 4.5 MiB；今天只要 890 B——七张图讲透 KV Cache",
+      "url": "/06_llm_theory_and_fundamentals/llm_basic_concepts/architecture_evolution/kv_cache_seven_charts.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "LLM 理论"
+    },
+    {
+      "title": "LLM 架构演进史——从 GPT-1 到 DeepSeek-V3 的七个拐点",
+      "url": "/06_llm_theory_and_fundamentals/llm_basic_concepts/architecture_evolution/llm_architecture_evolution.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "LLM 理论"
+    },
+    {
+      "title": "一文读懂思维链（Chain-of-Thought, CoT）",
+      "url": "/06_llm_theory_and_fundamentals/llm_basic_concepts/cot/chain_of_thought_cot_intro.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "LLM 理论"
+    },
+    {
+      "title": "LLM 嵌入技术详解：图文指南",
+      "url": "/06_llm_theory_and_fundamentals/llm_basic_concepts/embedding/LLM_embeddings_explained_visual_guide.zh-CN.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "LLM 理论"
+    },
+    {
+      "title": "大模型 Embedding 层与独立 Embedding 模型：区别与联系",
+      "url": "/06_llm_theory_and_fundamentals/llm_basic_concepts/embedding/embedding.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "LLM 理论"
+    },
+    {
+      "title": "深入了解文本嵌入技术",
+      "url": "/06_llm_theory_and_fundamentals/llm_basic_concepts/embedding/text_embeddings_comprehensive_guide.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "LLM 理论"
+    },
+    {
+      "title": "LLM 评估体系——方法、基准与判断力",
+      "url": "/06_llm_theory_and_fundamentals/llm_basic_concepts/evaluation/llm_evaluation.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "LLM 理论"
+    },
+    {
+      "title": "大模型文件格式完整指南",
+      "url": "/06_llm_theory_and_fundamentals/llm_basic_concepts/file_formats/llm_file_formats_complete_guide.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "LLM 理论"
+    },
+    {
+      "title": "大模型的幻觉及其应对措施",
+      "url": "/06_llm_theory_and_fundamentals/llm_basic_concepts/hallucination/llm_hallucination_and_mitigation.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "LLM 理论"
+    },
+    {
+      "title": "让用户\"说半句\"话也能懂：ChatBox 的意图识别与语义理解机制解析",
+      "url": "/06_llm_theory_and_fundamentals/llm_basic_concepts/intent_detection/chatbox_intent_recognition_and_semantic_understanding.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "LLM 理论"
+    },
+    {
+      "title": "基于大型语言模型的意图检测",
+      "url": "/06_llm_theory_and_fundamentals/llm_basic_concepts/intent_detection/intent_detection_using_llm.zh-CN.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "LLM 理论"
+    },
+    {
+      "title": "EdgeRock-4B 拆解：把 KV Cache 变成固定容量记忆",
+      "url": "/06_llm_theory_and_fundamentals/llm_basic_concepts/memory_native/edgerock-4b-constant-memory.html",
+      "date": "2026-11-06",
+      "status": "new",
+      "module": "LLM 理论"
+    },
+    {
+      "title": "当记忆成为模型状态：MemT-1.0 的架构、训练与边界",
+      "url": "/06_llm_theory_and_fundamentals/llm_basic_concepts/memory_native/memt_1_0_memory_native.html",
+      "date": "2026-11-06",
+      "status": "new",
+      "module": "LLM 理论"
+    },
+    {
+      "title": "混合专家系统（MoE）图解指南",
+      "url": "/06_llm_theory_and_fundamentals/llm_basic_concepts/moe/mixture_of_experts_moe_visual_guide.zh-CN.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "LLM 理论"
+    },
+    {
+      "title": "位置编码：从 Sinusoidal 到 RoPE",
+      "url": "/06_llm_theory_and_fundamentals/llm_basic_concepts/positional_encoding/positional_encoding.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "LLM 理论"
+    },
+    {
+      "title": "量化技术可视化指南",
+      "url": "/06_llm_theory_and_fundamentals/llm_basic_concepts/quantization/visual_guide_to_quantization.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "LLM 理论"
+    },
+    {
+      "title": "Scaling Laws——参数、数据、算力的三角博弈",
+      "url": "/06_llm_theory_and_fundamentals/llm_basic_concepts/scaling_laws/scaling_laws.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "LLM 理论"
+    },
+    {
+      "title": "解密 LLM 中的 Tokens",
+      "url": "/06_llm_theory_and_fundamentals/llm_basic_concepts/token/llm_token_intro.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "LLM 理论"
+    },
+    {
+      "title": "Transformer 架构详解——从自注意力到完整解码器",
+      "url": "/06_llm_theory_and_fundamentals/llm_basic_concepts/transformer/transformer_architecture.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "LLM 理论"
+    },
+    {
+      "title": "AI 水印：道高一尺，魔高一丈",
+      "url": "/06_llm_theory_and_fundamentals/llm_basic_concepts/watermark/ai_watermark_attack_and_defense.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "LLM 理论"
+    },
+    {
+      "title": "Coze 部署和配置手册",
+      "url": "/06_llm_theory_and_fundamentals/workflow/coze_deployment_and_configuration_guide.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "LLM 理论"
+    },
+    {
+      "title": "使用 n8n 构建多智能体系统的实践指南",
+      "url": "/06_llm_theory_and_fundamentals/workflow/n8n_multi_agent_guide.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "LLM 理论"
+    },
+    {
+      "title": "开源大模型应用编排平台：Dify、AnythingLLM、RAGFlow、n8n 与 Coze Studio 的功能与商用许可对比分析",
+      "url": "/06_llm_theory_and_fundamentals/workflow/open_source_llm_orchestration_platforms_comparison.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "LLM 理论"
+    },
+    {
+      "title": "约束解码的性能账单：vLLM 与 SGLang 的结构化输出实现拆解",
+      "url": "/09_inference_system/agent_serving/constrained-decoding-engines.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "推理系统"
+    },
+    {
+      "title": "每月花多少才不冤？2026 年国内外 11 款 Coding Plan 深度对比与避坑指南",
+      "url": "/09_inference_system/cost_analysis/coding_plan/coding_plan_report.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "推理系统"
+    },
+    {
+      "title": "pricing table",
+      "url": "/09_inference_system/cost_analysis/coding_plan/data/pricing_table.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "推理系统"
+    },
+    {
+      "title": "附录：2026 年国内外主流 Coding Plan 真实数据看板",
+      "url": "/09_inference_system/cost_analysis/coding_plan/objective_pricing_comparison.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "推理系统"
+    },
+    {
+      "title": "155 万亿 tokens/天，单卡运营利润率 93%：token 生意可以做成暴利",
+      "url": "/09_inference_system/cost_analysis/deepseek_inference_cluster_unit_economics.html",
+      "date": "2026-11-06",
+      "status": "new",
+      "module": "推理系统"
+    },
+    {
+      "title": "大模型 API 定价策略定量分析框架",
+      "url": "/09_inference_system/cost_analysis/llm_api_pricing_analysis.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "推理系统"
+    },
+    {
+      "title": "155 万亿 tokens/天背后的引擎：DeepInfer 源码拆解",
+      "url": "/09_inference_system/deepinfer/deepinfer-source-deep-dive.html",
+      "date": "2026-11-06",
+      "status": "new",
+      "module": "推理系统"
+    },
+    {
+      "title": "DeepSeek 把家底搬上了昇腾：六个组件、三种双端模式与一份 950 微架构报告",
+      "url": "/09_inference_system/deepseek_ascend/deepseek-ascend-open-source.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "推理系统"
+    },
+    {
+      "title": "B300 上的模型部署与 KV Cache：官方手册最佳实践",
+      "url": "/09_inference_system/deployment/b300-deployment-and-kv-cache.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "推理系统"
+    },
+    {
+      "title": "DeepSeek-V3 H20 推理优化：基于 vLLM 源码的深度分析",
+      "url": "/09_inference_system/deployment/deepseek_v3_h20_vllm_deep_dive.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "推理系统"
+    },
+    {
+      "title": "输出差了一点点？用 logprobs 分清「噪声」还是「bug」",
+      "url": "/09_inference_system/deployment/logprobs-precision-diagnosis.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "推理系统"
+    },
+    {
+      "title": "Qwen2-VL-7B-Instruct 昇腾部署指南",
+      "url": "/09_inference_system/deployment/qwen2_vl_7b_huawei.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "推理系统"
+    },
+    {
+      "title": "条件记忆：DeepSeek V4.1 Engram 如何用 O(1) 查表换掉一层计算",
+      "url": "/09_inference_system/engram/01-engram-deep-dive.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "推理系统"
+    },
+    {
+      "title": "HBF 是 HBM 的替代吗？单位存储便宜了，Token 成本却可能更高",
+      "url": "/09_inference_system/hbf-vs-hbm.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "推理系统"
+    },
+    {
+      "title": "AITURBO 精读报告（FAST'26）",
+      "url": "/09_inference_system/kv_cache/03_fast26/references/aiturbo-report.html",
+      "date": "2026-11-06",
+      "status": "new",
+      "module": "推理系统"
+    },
+    {
+      "title": "Bidaw 精读报告（FAST'26）",
+      "url": "/09_inference_system/kv_cache/03_fast26/references/bidaw-report.html",
+      "date": "2026-11-06",
+      "status": "new",
+      "module": "推理系统"
+    },
+    {
+      "title": "CacheSlide 精读报告（FAST'26）",
+      "url": "/09_inference_system/kv_cache/03_fast26/references/cacheslide-report.html",
+      "date": "2026-11-06",
+      "status": "new",
+      "module": "推理系统"
+    },
+    {
+      "title": "DirectKV（OSDI '26）精读报告",
+      "url": "/09_inference_system/kv_cache/04_memory_tiering/references/directkv-report.html",
+      "date": "2026-11-06",
+      "status": "new",
+      "module": "推理系统"
+    },
+    {
+      "title": "D 线：KV Cache 复用 / 共享 / 安全类论文调研报告（2025–2026）",
+      "url": "/09_inference_system/kv_cache/05_kv_security/references/reuse-security-report.html",
+      "date": "2026-11-06",
+      "status": "new",
+      "module": "推理系统"
+    },
+    {
+      "title": "LLM 模型推理显存占用深度的分析",
+      "url": "/09_inference_system/memory_calc/memory_analysis.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "推理系统"
+    },
+    {
+      "title": "DFlash 2 块扩散投机解码技术详解",
+      "url": "/09_inference_system/model_optimization/dflash-block-diffusion-speculative-decoding.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "推理系统"
+    },
+    {
+      "title": "图解投机解码",
+      "url": "/09_inference_system/model_optimization/illustrated-speculative-decoding.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "推理系统"
+    },
+    {
+      "title": "推理量化技术基础：FP8、INT8 与 FP4 的格式、粒度与算法",
+      "url": "/09_inference_system/model_optimization/inference_quantization.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "推理系统"
+    },
+    {
+      "title": "MTP 深度解析：把投机能力训进模型里",
+      "url": "/09_inference_system/model_optimization/mtp-multi-token-prediction.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "推理系统"
+    },
+    {
+      "title": "NVIDIA Model Optimizer 技术详解：功能、原理与实现",
+      "url": "/09_inference_system/model_optimization/nvidia_model_optimizer.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "推理系统"
+    },
+    {
+      "title": "专家并行（EP）深度解析——MoE 时代的第五种并行维度",
+      "url": "/09_inference_system/parallelism/expert_parallelism_deep_dive.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "推理系统"
+    },
+    {
+      "title": "大模型推理并行策略——DP、TP、PP、EP 到底在切什么",
+      "url": "/09_inference_system/parallelism/parallelism_strategies.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "推理系统"
+    },
+    {
+      "title": "Continuous Batching 深度解析：从静态批处理到迭代级调度",
+      "url": "/09_inference_system/prefill_decode/continuous_batching.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "推理系统"
+    },
+    {
+      "title": "为什么 GPU 生成每个 token 时利用率不到 5%？——Prefill 与 Decode 深度拆解",
+      "url": "/09_inference_system/prefill_decode/prefill_decode_qkv_calculation.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "推理系统"
+    },
+    {
+      "title": "一、大模型推理优化：背景与目标",
+      "url": "/09_inference_system/reference_design/01-背景与目标.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "推理系统"
+    },
+    {
+      "title": "二、大模型推理优化：集群规模分类与特征分析",
+      "url": "/09_inference_system/reference_design/02-集群规模分类与特征分析.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "推理系统"
+    },
+    {
+      "title": "三、核心推理优化技术深度解析",
+      "url": "/09_inference_system/reference_design/03-核心推理优化技术深度解析.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "推理系统"
+    },
+    {
+      "title": "四、不同集群规模的技术选型策略",
+      "url": "/09_inference_system/reference_design/04-不同集群规模的技术选型策略.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "推理系统"
+    },
+    {
+      "title": "五、性能评估指标体系",
+      "url": "/09_inference_system/reference_design/05-性能评估指标体系.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "推理系统"
+    },
+    {
+      "title": "六、推理服务架构设计",
+      "url": "/09_inference_system/reference_design/06-推理服务架构设计.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "推理系统"
+    },
+    {
+      "title": "七、实施建议与最佳实践",
+      "url": "/09_inference_system/reference_design/07-实施建议与最佳实践.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "推理系统"
+    },
+    {
+      "title": "八、参考资料与延伸阅读",
+      "url": "/09_inference_system/reference_design/08-参考资料与延伸阅读.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "推理系统"
+    },
+    {
+      "title": "九、安全性与合规性",
+      "url": "/09_inference_system/reference_design/09-安全性与合规性.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "推理系统"
+    },
+    {
+      "title": "十、多模态推理优化",
+      "url": "/09_inference_system/reference_design/10-多模态推理优化.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "推理系统"
+    },
+    {
+      "title": "十一、边缘推理优化",
+      "url": "/09_inference_system/reference_design/11-边缘推理优化.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "推理系统"
+    },
+    {
+      "title": "十二、常见问题解答 (FAQ)",
+      "url": "/09_inference_system/reference_design/12-常见问题解答.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "推理系统"
+    },
+    {
+      "title": "十三、实施检查清单",
+      "url": "/09_inference_system/reference_design/13-实施检查清单.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "推理系统"
+    },
+    {
+      "title": "十四、总结与展望",
+      "url": "/09_inference_system/reference_design/14-总结与展望.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "推理系统"
+    },
+    {
+      "title": "十五、面向推理执行图的异构调度系统架构设计",
+      "url": "/09_inference_system/reference_design/15-异构调度系统架构设计.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "推理系统"
+    },
+    {
+      "title": "SGLang Chunked Prefill — 原理与代码实现",
+      "url": "/09_inference_system/sglang/chunked_prefill.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "推理系统"
+    },
+    {
+      "title": "HiCache 深入详解",
+      "url": "/09_inference_system/sglang/hicache_deep_dive.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "推理系统"
+    },
+    {
+      "title": "SGLang HiSparse：当稀疏注意力从算法变为系统组件",
+      "url": "/09_inference_system/sglang/hisparse_deep_dive.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "推理系统"
+    },
+    {
+      "title": "SGLang 0.5.16 解读：一棵 Radix Tree 统一四种 Attention，DSpark 让投机解码不再一刀切",
+      "url": "/09_inference_system/sglang/sglang-0.5.16-release.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "推理系统"
+    },
+    {
+      "title": "KV Cache L1↔L2 数据流深度分析",
+      "url": "/09_inference_system/sglang/sglang-kv-cache-dataflow-analysis.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "推理系统"
+    },
+    {
+      "title": "SGLang KV Pool 管理：物理存储、Radix Tree 索引与请求视图",
+      "url": "/09_inference_system/sglang/sglang-kv-pool-management.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "推理系统"
+    },
+    {
+      "title": "SGLang Overlap Scheduling 深度解析：CPU 与 GPU 的双流水线",
+      "url": "/09_inference_system/sglang/sglang-overlap-scheduling.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "推理系统"
+    },
+    {
+      "title": "SGLang UnifiedRadixTree：一棵树，四种注意力",
+      "url": "/09_inference_system/sglang/sglang-unified-radix-tree.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "推理系统"
+    },
+    {
+      "title": "从 H200 到 Blackwell 的飞跃：vLLM 助力 DeepSeek 吞吐量飙升 5 倍的五大技术内幕",
+      "url": "/09_inference_system/vllm/hardware_optimization/deepseek_blackwell_wide_ep.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "推理系统"
+    },
+    {
+      "title": "vLLM 注意力机制演进与支持全景：从 MHA 到 MLA 及其稀疏变体的架构解析",
+      "url": "/09_inference_system/vllm/module_analysis/attention_mha_mla_nsa.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "推理系统"
+    },
+    {
+      "title": "从 MLA 到 CSA + HCA：DeepSeek 注意力架构的进化之路",
+      "url": "/09_inference_system/vllm/module_analysis/deepseek_attention_evolution_mla_to_csa_hca.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "推理系统"
+    },
+    {
+      "title": "DeepSeek-V3 端到端推理 Pipeline 走读：一个 Token 的 61 层旅程",
+      "url": "/09_inference_system/vllm/module_analysis/deepseek_v3_inference_pipeline.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "推理系统"
+    },
+    {
+      "title": "DeepSeek-V4 端到端推理 Pipeline 走读：多流残差、MQA 压缩与哈希路由",
+      "url": "/09_inference_system/vllm/module_analysis/deepseek_v4_inference_pipeline.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "推理系统"
+    },
+    {
+      "title": "FlashAttention 深度解析：从 IO-Aware Tiling 到 Hopper 异步计算",
+      "url": "/09_inference_system/vllm/module_analysis/flashattention_deep_dive.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "推理系统"
+    },
+    {
+      "title": "gpu-memory-utilization 的谢幕：vLLM 如何用「实测」替代「估算」",
+      "url": "/09_inference_system/vllm/module_analysis/gpu-memory-utilization-retirement.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "推理系统"
+    },
+    {
+      "title": "Hybrid KV Cache Manager 深度解析",
+      "url": "/09_inference_system/vllm/module_analysis/hybrid_kv_cache_manager_deep_dive.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "推理系统"
+    },
+    {
+      "title": "MLA 的 TP 切分：为什么 8 张 GPU 存了同一份 KV cache",
+      "url": "/09_inference_system/vllm/module_analysis/mla_tp_kv_redundancy.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "推理系统"
+    },
+    {
+      "title": "vLLM 内置 KV Cache Offloading 模块解析",
+      "url": "/09_inference_system/vllm/module_analysis/native_kv_offloading.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "推理系统"
+    },
+    {
+      "title": "PagedAttention 这个让 vLLM 成名的技术，为什么走到了尽头？",
+      "url": "/09_inference_system/vllm/module_analysis/pagedattention_retirement.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "推理系统"
+    },
+    {
+      "title": "vLLM 投机解码方法全景：六种草拟方法的工程选择",
+      "url": "/09_inference_system/vllm/module_analysis/speculative_decoding_landscape.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "推理系统"
+    },
+    {
+      "title": "vLLM Router：高性能 LLM 推理网关",
+      "url": "/09_inference_system/vllm/routing/router.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "推理系统"
+    },
+    {
+      "title": "vLLM Semantic Router 深度剖析",
+      "url": "/09_inference_system/vllm/routing/semantic_router_deep_dive.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "推理系统"
+    },
+    {
+      "title": "从芯片到 Agent：AI 基础设施的阅读地图 ——「AI 原力注入」好书推荐合集",
+      "url": "/99_misc/book-recommendations.html",
+      "date": "2026-11-06",
+      "status": "updated",
+      "module": "杂项"
+    },
     {
       "title": "DMA engine：从描述符到完成，一次搬运发生了什么",
       "url": "/01_hardware_architecture/dma/01_dma_engine.html",
@@ -23,13 +1325,6 @@
       "date": "2026-11-04",
       "status": "updated",
       "module": "硬件架构"
-    },
-    {
-      "title": "NVIDIA GPU 容器环境：原理与构建指南",
-      "url": "/02_gpu_programming/01_environment/01_nvidia_container_setup.html",
-      "date": "2026-11-04",
-      "status": "updated",
-      "module": "GPU 编程"
     },
     {
       "title": "大模型训练与推理框架的 GPU 镜像构建深度解析",
@@ -69,13 +1364,6 @@
     {
       "title": "从 SIMT 到 Tile-Based：GPU 编程范式的演进与实战解析 —— 以矩阵乘法为例",
       "url": "/02_gpu_programming/02_cuda/04_simt_vs_tile_based.html",
-      "date": "2026-11-04",
-      "status": "updated",
-      "module": "GPU 编程"
-    },
-    {
-      "title": "CUDA NUMA API 编程实践",
-      "url": "/02_gpu_programming/02_cuda/05_cuda_numa_api.html",
       "date": "2026-11-04",
       "status": "updated",
       "module": "GPU 编程"
@@ -186,27 +1474,6 @@
       "module": "GPU 编程"
     },
     {
-      "title": "GPU P2P 带宽实测：NVLink vs PCIe",
-      "url": "/02_gpu_programming/04_profiling/08_p2p_bandwidth.html",
-      "date": "2026-11-04",
-      "status": "updated",
-      "module": "GPU 编程"
-    },
-    {
-      "title": "GPU 间数据传输方法实测：从 P2P 到 Unified Memory 的 119 倍差距",
-      "url": "/02_gpu_programming/04_profiling/09_gpu_transfer_methods.html",
-      "date": "2026-11-04",
-      "status": "updated",
-      "module": "GPU 编程"
-    },
-    {
-      "title": "155 万亿 tokens/天背后的引擎：DeepInfer 源码拆解",
-      "url": "/09_inference_system/deepinfer/deepinfer-source-deep-dive.html",
-      "date": "2026-11-03",
-      "status": "new",
-      "module": "推理系统"
-    },
-    {
       "title": "Changelog",
       "url": "/21_openspec_practise/CHANGELOG.html",
       "date": "2026-11-03",
@@ -312,48 +1579,6 @@
       "module": ""
     },
     {
-      "title": "GPU 虚拟化与资源管理技术深度解析 - 第二部分：虚拟化技术篇",
-      "url": "/04_cloud_native_ai_platform/gpu_manager/02_virtualization.html",
-      "date": "2026-11-02",
-      "status": "updated",
-      "module": "云原生 AI"
-    },
-    {
-      "title": "GPU 虚拟化与资源管理技术深度解析 - 第三部分：资源管理与优化篇",
-      "url": "/04_cloud_native_ai_platform/gpu_manager/03_resource_management.html",
-      "date": "2026-11-02",
-      "status": "updated",
-      "module": "云原生 AI"
-    },
-    {
-      "title": "EdgeRock-4B 拆解：把 KV Cache 变成固定容量记忆",
-      "url": "/06_llm_theory_and_fundamentals/llm_basic_concepts/memory_native/edgerock-4b-constant-memory.html",
-      "date": "2026-11-02",
-      "status": "new",
-      "module": "LLM 理论"
-    },
-    {
-      "title": "当记忆成为模型状态：MemT-1.0 的架构、训练与边界",
-      "url": "/06_llm_theory_and_fundamentals/llm_basic_concepts/memory_native/memt_1_0_memory_native.html",
-      "date": "2026-11-02",
-      "status": "new",
-      "module": "LLM 理论"
-    },
-    {
-      "title": "一个人调度四个角色：多会话协作 Skill 的实测与边界",
-      "url": "/08_agentic_system/agent_skills/docs/multi-role-agent-skill.html",
-      "date": "2026-11-02",
-      "status": "new",
-      "module": "智能体"
-    },
-    {
-      "title": "12 小时、636 个测试：自驱型 Skill 能走多远",
-      "url": "/08_agentic_system/agent_skills/docs/self-driving-skill-for-complex-projects.html",
-      "date": "2026-11-02",
-      "status": "new",
-      "module": "智能体"
-    },
-    {
       "title": "多会话协作（评审 / 修改 / 测试 / 裁决）",
       "url": "/08_agentic_system/agent_skills/multi-session-collab/SKILL.html",
       "date": "2026-11-02",
@@ -389,20 +1614,6 @@
       "module": "智能体"
     },
     {
-      "title": "评审、修改、测试、裁决：Claude Code 多会话协作实践手册",
-      "url": "/08_agentic_system/multi_agent/docs/claude-code-multi-session-playbook.html",
-      "date": "2026-11-02",
-      "status": "new",
-      "module": "智能体"
-    },
-    {
-      "title": "155 万亿 tokens/天，单卡运营利润率 93%：token 生意可以做成暴利",
-      "url": "/09_inference_system/cost_analysis/deepseek_inference_cluster_unit_economics.html",
-      "date": "2026-11-02",
-      "status": "new",
-      "module": "推理系统"
-    },
-    {
       "title": "大模型启动，七成时间花在加载权重上：FAST'26 论文用可编程页缓存把延迟砍了 79%",
       "url": "/09_inference_system/deployment/fast26-programmable-page-cache.html",
       "date": "2026-11-02",
@@ -410,113 +1621,8 @@
       "module": "推理系统"
     },
     {
-      "title": "大模型 KV Cache 压缩技术详解：原理、架构与趋势",
-      "url": "/09_inference_system/kv_cache/01_concepts/compression/kv_cache_compression.html",
-      "date": "2026-11-02",
-      "status": "updated",
-      "module": "推理系统"
-    },
-    {
-      "title": "KV Cache 量化深度解析：Per-Tensor、Per-Token-Head 与 NVFP4",
-      "url": "/09_inference_system/kv_cache/01_concepts/compression/kv_cache_quantization.html",
-      "date": "2026-11-02",
-      "status": "updated",
-      "module": "推理系统"
-    },
-    {
-      "title": "当 AI 吃穿存储带宽：华为云把计算网络变成了传输通道",
-      "url": "/09_inference_system/kv_cache/03_fast26/aiturbo.html",
-      "date": "2026-11-02",
-      "status": "new",
-      "module": "推理系统"
-    },
-    {
-      "title": "多轮对话的 KV 放上 SSD，延迟为什么反涨 3.8 倍",
-      "url": "/09_inference_system/kv_cache/03_fast26/bidaw.html",
-      "date": "2026-11-02",
-      "status": "new",
-      "module": "推理系统"
-    },
-    {
-      "title": "Agent 的 KV 为什么复用不了：位置一漂移，前缀缓存就失效",
-      "url": "/09_inference_system/kv_cache/03_fast26/cacheslide.html",
-      "date": "2026-11-02",
-      "status": "new",
-      "module": "推理系统"
-    },
-    {
-      "title": "当 KV Cache 装不进内存：FAST'26 五篇论文给出的五个不同答案",
-      "url": "/09_inference_system/kv_cache/03_fast26/fast26-kv-storage-five-scenarios.html",
-      "date": "2026-11-02",
-      "status": "new",
-      "module": "推理系统"
-    },
-    {
-      "title": "AITURBO 精读报告（FAST'26）",
-      "url": "/09_inference_system/kv_cache/03_fast26/references/aiturbo-report.html",
-      "date": "2026-11-02",
-      "status": "new",
-      "module": "推理系统"
-    },
-    {
-      "title": "Bidaw 精读报告（FAST'26）",
-      "url": "/09_inference_system/kv_cache/03_fast26/references/bidaw-report.html",
-      "date": "2026-11-02",
-      "status": "new",
-      "module": "推理系统"
-    },
-    {
-      "title": "CacheSlide 精读报告（FAST'26）",
-      "url": "/09_inference_system/kv_cache/03_fast26/references/cacheslide-report.html",
-      "date": "2026-11-02",
-      "status": "new",
-      "module": "推理系统"
-    },
-    {
       "title": "SolidAttention 精读报告（FAST'26）",
       "url": "/09_inference_system/kv_cache/03_fast26/references/solidattention-report.html",
-      "date": "2026-11-02",
-      "status": "new",
-      "module": "推理系统"
-    },
-    {
-      "title": "128k 上下文塞进 16 GB 内存：FAST'26 把 KV Cache 拆碎了放 SSD",
-      "url": "/09_inference_system/kv_cache/03_fast26/solidattention.html",
-      "date": "2026-11-02",
-      "status": "new",
-      "module": "推理系统"
-    },
-    {
-      "title": "不搬 KV 反而更快：OSDI'26 DirectKV 让显存少占 43%",
-      "url": "/09_inference_system/kv_cache/04_memory_tiering/directkv.html",
-      "date": "2026-11-02",
-      "status": "new",
-      "module": "推理系统"
-    },
-    {
-      "title": "30.8% 的显存按 200K 上下文预留，实际只用 1%：eLLM 让 Activation 与 KV Cache 互相借内存",
-      "url": "/09_inference_system/kv_cache/04_memory_tiering/ellm.html",
-      "date": "2026-11-02",
-      "status": "new",
-      "module": "推理系统"
-    },
-    {
-      "title": "当 KV 装不进显存：四篇论文的四种内存账，与一个「统一命名空间 + 成本旋钮」的设想",
-      "url": "/09_inference_system/kv_cache/04_memory_tiering/memory-tiering-overview.html",
-      "date": "2026-11-02",
-      "status": "new",
-      "module": "推理系统"
-    },
-    {
-      "title": "显存卡死 batch 的 GPU 上：NEO 把 decoding attention 搬给了随卡白送的 CPU",
-      "url": "/09_inference_system/kv_cache/04_memory_tiering/neo.html",
-      "date": "2026-11-02",
-      "status": "new",
-      "module": "推理系统"
-    },
-    {
-      "title": "DirectKV（OSDI '26）精读报告",
-      "url": "/09_inference_system/kv_cache/04_memory_tiering/references/directkv-report.html",
       "date": "2026-11-02",
       "status": "new",
       "module": "推理系统"
@@ -543,34 +1649,6 @@
       "module": "推理系统"
     },
     {
-      "title": "8192 个 token 的 KV 只跑出 22% PCIe 带宽：Strata 重做分层缓存的搬运与调度",
-      "url": "/09_inference_system/kv_cache/04_memory_tiering/strata.html",
-      "date": "2026-11-02",
-      "status": "new",
-      "module": "推理系统"
-    },
-    {
-      "title": "0.03 秒命中、0.1 秒未命中：ICML'25 审计发现 7 家 LLM API 跨用户共享 prompt 缓存",
-      "url": "/09_inference_system/kv_cache/05_kv_security/auditing-prompt-caching.html",
-      "date": "2026-11-02",
-      "status": "new",
-      "module": "推理系统"
-    },
-    {
-      "title": "缓存命中的 1 个 bit 出卖了你：NDSS'25 PromptPeek 平均 99% 成功率复原他人 prompt",
-      "url": "/09_inference_system/kv_cache/05_kv_security/i-know-what-you-asked.html",
-      "date": "2026-11-02",
-      "status": "new",
-      "module": "推理系统"
-    },
-    {
-      "title": "当 KV Cache 跨过信任边界：三篇论文给出的三种泄露面，与一个「共享层级 + 默认加密」的设想",
-      "url": "/09_inference_system/kv_cache/05_kv_security/kv-security-overview.html",
-      "date": "2026-11-02",
-      "status": "new",
-      "module": "推理系统"
-    },
-    {
       "title": "Auditing Prompt Caching（ICML 2025）精读报告",
       "url": "/09_inference_system/kv_cache/05_kv_security/references/auditing-prompt-caching-report.html",
       "date": "2026-11-02",
@@ -585,43 +1663,8 @@
       "module": "推理系统"
     },
     {
-      "title": "D 线：KV Cache 复用 / 共享 / 安全类论文调研报告（2025–2026）",
-      "url": "/09_inference_system/kv_cache/05_kv_security/references/reuse-security-report.html",
-      "date": "2026-11-02",
-      "status": "new",
-      "module": "推理系统"
-    },
-    {
       "title": "Shadow in the Cache（NDSS '26）精读报告",
       "url": "/09_inference_system/kv_cache/05_kv_security/references/shadow-in-the-cache-report.html",
-      "date": "2026-11-02",
-      "status": "new",
-      "module": "推理系统"
-    },
-    {
-      "title": "你的 prompt 就存在 KV Cache 里：NDSS'26 三类攻击逐 token 复原输入，KV-Cloak 以 prefill 0.45% 的延迟挡住",
-      "url": "/09_inference_system/kv_cache/05_kv_security/shadow-in-the-cache.html",
-      "date": "2026-11-02",
-      "status": "new",
-      "module": "推理系统"
-    },
-    {
-      "title": "借来的 KV 不能全借：NSDI'26 DroidSpeak 只重算约一成层，预填充最高快 3.1×",
-      "url": "/09_inference_system/kv_cache/06_kv_reuse/droidspeak.html",
-      "date": "2026-11-02",
-      "status": "new",
-      "module": "推理系统"
-    },
-    {
-      "title": "当复用跨出同前缀与同模型：两篇论文给出的两条扩展路径",
-      "url": "/09_inference_system/kv_cache/06_kv_reuse/kv-reuse-overview.html",
-      "date": "2026-11-02",
-      "status": "new",
-      "module": "推理系统"
-    },
-    {
-      "title": "缓存不必同前缀：NeurIPS 2025 KVLink 把 RAG 首 token 延迟最高降 96%",
-      "url": "/09_inference_system/kv_cache/06_kv_reuse/kvlink.html",
       "date": "2026-11-02",
       "status": "new",
       "module": "推理系统"
@@ -636,20 +1679,6 @@
     {
       "title": "KVLink（NeurIPS 2025）精读报告",
       "url": "/09_inference_system/kv_cache/06_kv_reuse/references/kvlink-report.html",
-      "date": "2026-11-02",
-      "status": "new",
-      "module": "推理系统"
-    },
-    {
-      "title": "丢掉的 KV 还能重建：NeurIPS 2026 EchoKV 缓存减半保住 97% 精度、可按需切换",
-      "url": "/09_inference_system/kv_cache/07_kv_compression/echokv.html",
-      "date": "2026-11-02",
-      "status": "new",
-      "module": "推理系统"
-    },
-    {
-      "title": "当压缩表示被继续使用：三篇论文给出的三种二次决策",
-      "url": "/09_inference_system/kv_cache/07_kv_compression/kv-compression-overview.html",
       "date": "2026-11-02",
       "status": "new",
       "module": "推理系统"
@@ -683,20 +1712,6 @@
       "module": "推理系统"
     },
     {
-      "title": "压 KV 要赶在旋转之前：NeurIPS 2025 SALS 压到 1/8，访存只剩基线 5.8%",
-      "url": "/09_inference_system/kv_cache/07_kv_compression/sals.html",
-      "date": "2026-11-02",
-      "status": "new",
-      "module": "推理系统"
-    },
-    {
-      "title": "压缩后的 Key 就是索引：AAAI'26 Self-Indexing KVCache 让 KV 内存少占 78%",
-      "url": "/09_inference_system/kv_cache/07_kv_compression/self-indexing.html",
-      "date": "2026-11-02",
-      "status": "new",
-      "module": "推理系统"
-    },
-    {
       "title": "draft 不再重建历史：DLite 的 history-free 投机解码",
       "url": "/09_inference_system/model_optimization/dlite-history-free-speculative-decoding.html",
       "date": "2026-11-02",
@@ -704,31 +1719,10 @@
       "module": "推理系统"
     },
     {
-      "title": "一、大模型推理优化：背景与目标",
-      "url": "/09_inference_system/reference_design/01-背景与目标.html",
-      "date": "2026-11-02",
-      "status": "updated",
-      "module": "推理系统"
-    },
-    {
-      "title": "十二、常见问题解答 (FAQ)",
-      "url": "/09_inference_system/reference_design/12-常见问题解答.html",
-      "date": "2026-11-02",
-      "status": "updated",
-      "module": "推理系统"
-    },
-    {
       "title": "三本账：图解 GLM-5.3-Flash 的 KV Cache 布局",
       "url": "/09_inference_system/sglang/glm53-flash-kv-layout.html",
       "date": "2026-11-02",
       "status": "new",
-      "module": "推理系统"
-    },
-    {
-      "title": "SGLang UnifiedRadixTree：一棵树，四种注意力",
-      "url": "/09_inference_system/sglang/sglang-unified-radix-tree.html",
-      "date": "2026-11-02",
-      "status": "updated",
       "module": "推理系统"
     },
     {
@@ -1094,34 +2088,6 @@
       "date": "2026-11-02",
       "status": "new",
       "module": ""
-    },
-    {
-      "title": "Claude Code Sandbox 安全隔离机制解析",
-      "url": "/08_agentic_system/agent_infra/docs/claude-code-sandbox.html",
-      "date": "2026-10-10",
-      "status": "updated",
-      "module": "智能体"
-    },
-    {
-      "title": "云原生 AI Agent 基础设施：OpenClaw Operator 架构深度解析",
-      "url": "/08_agentic_system/agent_infra/docs/openclaw-operator-deep-dive.html",
-      "date": "2026-10-10",
-      "status": "updated",
-      "module": "智能体"
-    },
-    {
-      "title": "OpenHarness 深入浅出：解密开源智能体基础设施",
-      "url": "/08_agentic_system/agent_infra/docs/openharness-deep-dive.html",
-      "date": "2026-10-10",
-      "status": "updated",
-      "module": "智能体"
-    },
-    {
-      "title": "4 个工具、42 家供应商、11 万 star：Pi 的极简 harness，与 DeepSeek Harness、OpenHarness 的路线对比",
-      "url": "/08_agentic_system/agent_infra/docs/pi-agent-deep-dive.html",
-      "date": "2026-10-10",
-      "status": "new",
-      "module": "智能体"
     },
     {
       "title": "别让写代码的 Agent 评审自己：AI 代码评审的三道闸门",
