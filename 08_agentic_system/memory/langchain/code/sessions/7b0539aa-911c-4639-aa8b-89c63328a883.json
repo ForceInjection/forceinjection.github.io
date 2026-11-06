@@ -1,0 +1,40 @@
+{
+  "session_info": {
+    "session_id": "7b0539aa-911c-4639-aa8b-89c63328a883",
+    "user_id": "user_002",
+    "created_at": "2026-11-06T16:08:38.542924",
+    "last_active": "2026-11-06T16:09:01.054635",
+    "message_count": 4,
+    "memory_type": "buffer",
+    "metadata": {
+      "user_name": "李四"
+    }
+  },
+  "performance_metrics": [
+    {
+      "response_time": 2.7393178939819336,
+      "token_usage": 230,
+      "memory_size": 322,
+      "timestamp": "2026-11-06T16:08:43.652692"
+    },
+    {
+      "response_time": 2.5193121433258057,
+      "token_usage": 240,
+      "memory_size": 654,
+      "timestamp": "2026-11-06T16:08:49.733816"
+    },
+    {
+      "response_time": 4.247579097747803,
+      "token_usage": 462,
+      "memory_size": 1208,
+      "timestamp": "2026-11-06T16:08:56.080813"
+    },
+    {
+      "response_time": 3.51297926902771,
+      "token_usage": 367,
+      "memory_size": 1667,
+      "timestamp": "2026-11-06T16:09:01.054651"
+    }
+  ],
+  "_note": "对话正文由 LangGraph checkpointer 持久化；本文件仅保存会话元数据与统计指标。"
+}

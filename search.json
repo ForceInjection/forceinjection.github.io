@@ -1296,11 +1296,11 @@
     "url": "/08_agentic_system/memory/"
   },
   {
-    "title": "LangChain 记忆功能演示（LangChain 0.3+）",
+    "title": "LangChain 记忆功能演示（LangChain 1.x）",
     "url": "/08_agentic_system/memory/langchain/code/"
   },
   {
-    "title": "使用 LangChain 实现智能对话机器人的记忆功能（LangChain 0.3+ / LangGraph 版）",
+    "title": "使用 LangChain 实现智能对话机器人的记忆功能（LangChain 1.x / LangGraph 版）",
     "url": "/08_agentic_system/memory/langchain/langchain_memory.html"
   },
   {
