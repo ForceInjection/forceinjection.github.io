@@ -256,6 +256,7 @@ LLM 核心理论与架构基石，深入解析 Tokenizer 分词机制、Embeddin
 
 - [基础理论与概念导航](06_llm_theory_and_fundamentals/llm_basic_concepts/README.md) - LLM 核心概念的完整学习路径。
 - [Transformer 架构详解](06_llm_theory_and_fundamentals/llm_basic_concepts/transformer/transformer_architecture.md) — 从 RNN 串行瓶颈到自注意力机制，拆解 Attention、FFN、位置编码、LayerNorm 等核心组件，目标是读完能看懂 `modeling_llama.py`。
+- [手搓 RoPE：一百行 numpy 讲透旋转位置编码](06_llm_theory_and_fundamentals/llm_basic_concepts/positional_encoding/hand_roll_rope.md) - 一百行 numpy 实测 RoPE 全部主张：配对约定差 3.385、相对不变性 3e-13、随机向量无衰减、三种外推策略频率谱，配 5 张手绘图。
 - [当记忆成为模型状态：MemT-1.0 的架构、训练与边界](06_llm_theory_and_fundamentals/llm_basic_concepts/memory_native/memt_1_0_memory_native.md) - 记忆原生基础模型：local/hyper memory、GDN-2、34B token 训练与 11 项记忆基准，含源码核对与许可/部署边界。
 - [EdgeRock-4B 拆解：把 KV Cache 变成固定容量记忆](06_llm_theory_and_fundamentals/llm_basic_concepts/memory_native/edgerock-4b-constant-memory.md) - 用 1024 token 局部窗口与 1024 条 RMA 锚点替换 8 层全注意力，历史固定 97.76 MiB/序列；拆 RMA 机制、训练路径、AIME/吞吐数据与口径边界。
 - [Andrej Karpathy ： Deep Dive into LLMs like ChatGPT （B 站视频）](https://www.bilibili.com/video/BV16cNEeXEer) - 深度学习领域权威专家的 LLM 技术解析。
@@ -387,6 +388,7 @@ SFT 之后把推理能力推上去要靠 RL，而 RL 的 rollout 由推理引擎
 - [当 KV Cache 跨过信任边界：三篇论文给出的三种泄露面，与一个「共享层级 + 默认加密」的设想](09_inference_system/kv_cache/05_kv_security/01_kv-security-overview.md) - 读行为 / 读数据 / 读时延三种取证位置：PromptPeek / Shadow in the Cache / Auditing Prompt Caching，附按角色选路的对号表，以及取证距离与防御动作同轴的成本账
 - [当复用跨出同前缀与同模型：两篇论文给出的两条扩展路径](09_inference_system/kv_cache/06_kv_reuse/01_kv-reuse-overview.md) - KVLink（文档级预计算 + link token）与 DroidSpeak（跨微调变体共享 + 关键层重算）两条路径与「数字怎么读」口径清单
 - [当压缩表示被继续使用：三篇论文给出的三种二次决策](09_inference_system/kv_cache/07_kv_compression/01_kv-compression-overview.md) - Self-Indexing KVCache / SALS / EchoKV 把压缩产物继续用作检索索引、token 选择场与重建素材
+- [TTFT 多了 15 毫秒之后：一套实证过的 KV Cache 性能分析方法论](09_inference_system/kv_cache/08_methodology/01_kv-cache-perf-methodology.md) - 真机排查总结的六件工具与六类问题：时钟链闭合、排除链判死、仪器纪律、native 对齐，配操作清单与脱敏后的实测数字
 - [当 Agent 流量成为推理系统的主要负载](09_inference_system/agent_serving/agent-workload-serving.md) - KV 生命周期错配、调度语义失真、会话粘性与容量公式失效：Agent 负载下的四连锁问题与两引擎源码级现状
 - [约束解码的性能账单：vLLM 与 SGLang 的结构化输出实现拆解](09_inference_system/agent_serving/constrained-decoding-engines.md) - 结构化输出的编译账/每步账/交互账：双引擎实现逐项对照与 jump-forward 差异
 - [线性注意力与推理系统](09_inference_system/linear_attention/README.md) - delta-rule 一脉（KDA/Gated DeltaNet）落地后的系统挑战：prefill 串行化、状态检查点缓存、状态语义深水区——总览 + 机制/调度/状态语义四篇

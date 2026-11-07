@@ -932,6 +932,10 @@
     "url": "/06_llm_theory_and_fundamentals/llm_basic_concepts/moe/mixture_of_experts_moe_visual_guide.zh-CN.html"
   },
   {
+    "title": "手搓 RoPE：一百行 numpy 讲透旋转位置编码",
+    "url": "/06_llm_theory_and_fundamentals/llm_basic_concepts/positional_encoding/hand_roll_rope.html"
+  },
+  {
     "title": "位置编码：从 Sinusoidal 到 RoPE",
     "url": "/06_llm_theory_and_fundamentals/llm_basic_concepts/positional_encoding/positional_encoding.html"
   },
@@ -1958,6 +1962,10 @@
   {
     "title": "Self-Indexing KVCache 精读报告",
     "url": "/09_inference_system/kv_cache/07_kv_compression/references/self-indexing-report.html"
+  },
+  {
+    "title": "TTFT 多了 15 毫秒之后：一套实证过的 KV Cache 性能分析方法论",
+    "url": "/09_inference_system/kv_cache/08_methodology/01_kv-cache-perf-methodology.html"
   },
   {
     "title": "线性注意力与推理系统",
