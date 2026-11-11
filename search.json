@@ -380,6 +380,14 @@
     "url": "/02_gpu_programming/04_profiling/gpu-transfer-methods-visual.html"
   },
   {
+    "title": "Kernel 编译器与 Megakernel",
+    "url": "/02_gpu_programming/05_compiler/"
+  },
+  {
+    "title": "launch、occupancy、overlap：什么时候手写 kernel，什么时候交给编译器",
+    "url": "/02_gpu_programming/05_compiler/01_kernel-compiler-megakernel.html"
+  },
+  {
     "title": "华为 NPU 编程入门",
     "url": "/02_npu_programming/"
   },
@@ -1404,6 +1412,14 @@
     "url": "/09_inference_system/agent_serving/constrained-decoding-engines.html"
   },
   {
+    "title": "CloudMatrix384 与 CloudMatrix-Infer",
+    "url": "/09_inference_system/cloudmatrix_infer/"
+  },
+  {
+    "title": "一座 384 卡的 TokenFactory：CloudMatrix384 论文精读",
+    "url": "/09_inference_system/cloudmatrix_infer/cloudmatrix384-tokenfactory.html"
+  },
+  {
     "title": "推理成本分析",
     "url": "/09_inference_system/cost_analysis/"
   },
@@ -1622,6 +1638,10 @@
   {
     "title": "稀疏注意力分类学：读什么、不读什么、以及为什么读得少不等于存得少",
     "url": "/09_inference_system/kv_cache/01_concepts/01_basic/06_sparse_attention_taxonomy.html"
+  },
+  {
+    "title": "手搓 MLA：从 MHA 到 weight absorption，看懂 DeepSeek 的 KV 压缩",
+    "url": "/09_inference_system/kv_cache/01_concepts/01_basic/07_hand_roll_mla.html"
   },
   {
     "title": "RadixAttention 技术详解：从原理到 SGLang 实践及 vLLM APC 对比",
@@ -1896,7 +1916,7 @@
     "url": "/09_inference_system/kv_cache/05_kv_security/references/shadow-in-the-cache-report.html"
   },
   {
-    "title": "当复用跨出同前缀与同模型：两篇论文给出的两条扩展路径",
+    "title": "当复用跨出同前缀与同模型：四条路线与四种对齐开销",
     "url": "/09_inference_system/kv_cache/06_kv_reuse/01_kv-reuse-overview.html"
   },
   {
@@ -2382,6 +2402,10 @@
   {
     "title": "Token Factory：AI 推理的成本革命 - 演讲稿",
     "url": "/10_ai_related_course/ai_infra_lecture/入门级/讲稿.html"
+  },
+  {
+    "title": "哈佛 CS2680 · Modern AI Systems",
+    "url": "/10_ai_related_course/cs2680_modern_ai_systems/"
   },
   {
     "title": "KV Cache 八讲：从 token 账本到生产引擎",
@@ -3130,6 +3154,10 @@
   {
     "title": "Demos：仓库内可运行的代码与 Notebook",
     "url": "/demos.html"
+  },
+  {
+    "title": "手搓系列导航",
+    "url": "/hand_roll_series.html"
   },
   {
     "title": "mermaid editor",

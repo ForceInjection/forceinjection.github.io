@@ -1,8 +1,29 @@
 {
-  "generated_at": "2026-11-07T23:28:22Z",
+  "generated_at": "2026-11-11T06:22:01Z",
   "window_days": 30,
   "count": 300,
   "items": [
+    {
+      "title": "手搓 RoPE：一百行 numpy 讲透旋转位置编码",
+      "url": "/06_llm_theory_and_fundamentals/llm_basic_concepts/positional_encoding/hand_roll_rope.html",
+      "date": "2026-11-07",
+      "status": "new",
+      "module": "LLM 理论"
+    },
+    {
+      "title": "位置编码：从 Sinusoidal 到 RoPE",
+      "url": "/06_llm_theory_and_fundamentals/llm_basic_concepts/positional_encoding/positional_encoding.html",
+      "date": "2026-11-07",
+      "status": "updated",
+      "module": "LLM 理论"
+    },
+    {
+      "title": "TTFT 多了 15 毫秒之后：一套实证过的 KV Cache 性能分析方法论",
+      "url": "/09_inference_system/kv_cache/08_methodology/01_kv-cache-perf-methodology.html",
+      "date": "2026-11-07",
+      "status": "new",
+      "module": "推理系统"
+    },
     {
       "title": "使用 LangChain 实现智能对话机器人的记忆功能（LangChain 1.x / LangGraph 版）",
       "url": "/08_agentic_system/memory/langchain/langchain_memory.html",
@@ -767,7 +788,7 @@
       "module": "推理系统"
     },
     {
-      "title": "当复用跨出同前缀与同模型：两篇论文给出的两条扩展路径",
+      "title": "当复用跨出同前缀与同模型：四条路线与四种对齐开销",
       "url": "/09_inference_system/kv_cache/06_kv_reuse/01_kv-reuse-overview.html",
       "date": "2026-11-06",
       "status": "updated",
@@ -1768,13 +1789,6 @@
       "module": "LLM 理论"
     },
     {
-      "title": "位置编码：从 Sinusoidal 到 RoPE",
-      "url": "/06_llm_theory_and_fundamentals/llm_basic_concepts/positional_encoding/positional_encoding.html",
-      "date": "2026-11-06",
-      "status": "updated",
-      "module": "LLM 理论"
-    },
-    {
       "title": "量化技术可视化指南",
       "url": "/06_llm_theory_and_fundamentals/llm_basic_concepts/quantization/visual_guide_to_quantization.html",
       "date": "2026-11-06",
@@ -2085,20 +2099,6 @@
     {
       "title": "HiCache 深入详解",
       "url": "/09_inference_system/sglang/hicache_deep_dive.html",
-      "date": "2026-11-06",
-      "status": "updated",
-      "module": "推理系统"
-    },
-    {
-      "title": "SGLang 0.5.16 解读：一棵 Radix Tree 统一四种 Attention，DSpark 让投机解码不再一刀切",
-      "url": "/09_inference_system/sglang/sglang-0.5.16-release.html",
-      "date": "2026-11-06",
-      "status": "updated",
-      "module": "推理系统"
-    },
-    {
-      "title": "KV Cache L1↔L2 数据流深度分析",
-      "url": "/09_inference_system/sglang/sglang-kv-cache-dataflow-analysis.html",
       "date": "2026-11-06",
       "status": "updated",
       "module": "推理系统"
