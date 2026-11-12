@@ -151,6 +151,12 @@
 
 - [launch、occupancy、overlap：什么时候手写 kernel，什么时候交给编译器](./02_gpu_programming/05_compiler/01_kernel-compiler-megakernel.md)：TVM（schedule 分离）、Mirage（三层联合超优）、MPK（整模型 megakernel）三级递进，配三 regime 决策轴与 launch-bound 微基准
 
+**量化 GEMM 算子**：
+
+- [Marlin 深拆](./02_gpu_programming/06_quant_gemm/01_marlin-deep-dive.md)：W4A16 反量化三笔税与三个设计（repack 布局/lop3 位技巧/双缓冲流水），配套 numpy CPU 语义复现
+- [Humming 深拆](./02_gpu_programming/06_quant_gemm/02_humming-arch-jit.md)：蚂蚁 + vLLM 社区 JIT kernel 库，500 KB wheel 的按需编译链路与 SASS 位补丁解锁隐藏格式
+- [UMMA 深拆](./02_gpu_programming/06_quant_gemm/03_umma-deep-dive.md)：tcgen05 时代 kernel 内部，五类线程分工与 TMEM 中央舞台，反量化结果直写操作数地盘
+
 **性能分析与调优**：
 
 - [nvbandwidth 最佳实践](./02_gpu_programming/04_profiling/01_nvbandwidth_best_practices.md)：显存带宽与 PCIe 传输带宽测量指南
@@ -386,7 +392,7 @@ SFT 之后把推理能力推上去要靠 RL，而 RL 的 rollout 由推理引擎
 剖析现代推理系统的底层架构创新，重点解构 Mooncake 等以 KV Cache 为中心的高效 LLM 调度系统设计模式与性能调优策略。
 
 - [手搓 KV Cache：从静态预留到 PagedAttention 的页表](09_inference_system/kv_cache/01_concepts/01_basic/03_hand_roll_kv_cache.md) - 可运行模拟器实测三种显存管理策略：碎片入住失败与 5 倍容量的数字来源。
-- [手搓 MLA：从 MHA 到 weight absorption](09_inference_system/kv_cache/01_concepts/01_basic/07_hand_roll_mla.md) - 四版注意力递进 + 真实权重验证吸收等价（fp32 逐位一致），KV 压缩三口径辨析。
+- [手搓 MLA：从 MHA 到 weight absorption](09_inference_system/kv_cache/01_concepts/01_basic/07_hand_roll_mla.md) - 四种注意力变体递进 + 真实权重验证吸收等价（fp32 逐位一致），KV 压缩三口径辨析。
 - [手搓系列导航](hand_roll_series.md) - 手搓系列 5 篇的阅读顺序与实测产出汇总。
 - [Mooncake 架构详解：以 KV Cache 为中心的高效 LLM 推理系统设计](09_inference_system/kv_cache/02_systems/04_mooncake/01_mooncake_architecture.md) - 新一代推理系统的架构创新与性能优化策略
 - [当 KV Cache 装不进内存：FAST'26 五篇论文给出的五个不同答案](09_inference_system/kv_cache/03_fast26/01_fast26-kv-storage-five-scenarios.md) - FAST'26「AI and LLMs」九篇论文中五篇精读的五象限汇总：端侧/智能体/对话/数据中心/冷启动各自的核心矛盾、招式与数字，共同支点是可复现的 I/O 特征；附 4 篇 Agent 精读报告

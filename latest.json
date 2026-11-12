@@ -1,8 +1,71 @@
 {
-  "generated_at": "2026-11-12T06:19:40Z",
+  "generated_at": "2026-11-12T23:26:33Z",
   "window_days": 30,
   "count": 300,
   "items": [
+    {
+      "title": "训练不稳，可能是推理引擎的锅：Miles 的三条对齐路线",
+      "url": "/05_model_training_and_fine_tuning/rl_training/miles-train-rollout-alignment.html",
+      "date": "2026-11-12",
+      "status": "updated",
+      "module": "训练与微调"
+    },
+    {
+      "title": "把轨迹当状态：推理时间 Scaling 的一个新维度",
+      "url": "/06_llm_theory_and_fundamentals/llm_basic_concepts/scaling_laws/test_time_scaling.html",
+      "date": "2026-11-12",
+      "status": "updated",
+      "module": "LLM 理论"
+    },
+    {
+      "title": "当 Agent 流量成为推理系统的主要负载",
+      "url": "/09_inference_system/agent_serving/01_agent-workload-serving.html",
+      "date": "2026-11-12",
+      "status": "updated",
+      "module": "推理系统"
+    },
+    {
+      "title": "Phase 切换从 681 秒到 6.2 秒：Evolving Infra 论文精读",
+      "url": "/09_inference_system/agent_serving/02_evolving-infra.html",
+      "date": "2026-11-12",
+      "status": "new",
+      "module": "推理系统"
+    },
+    {
+      "title": "基础设施的回应：当 serving 开始读懂 harness",
+      "url": "/09_inference_system/agent_serving/03_infra-response.html",
+      "date": "2026-11-12",
+      "status": "new",
+      "module": "推理系统"
+    },
+    {
+      "title": "约束解码的性能账单：vLLM 与 SGLang 的结构化输出实现拆解",
+      "url": "/09_inference_system/agent_serving/04_constrained-decoding-engines.html",
+      "date": "2026-11-12",
+      "status": "updated",
+      "module": "推理系统"
+    },
+    {
+      "title": "当复用跨出同前缀与同模型：四条路线与四种对齐开销",
+      "url": "/09_inference_system/kv_cache/06_kv_reuse/01_kv-reuse-overview.html",
+      "date": "2026-11-12",
+      "status": "updated",
+      "module": "推理系统"
+    },
+    {
+      "title": "四条路线，一条落地：vLLM 与 SGLang 的 KV 复用支持现状",
+      "url": "/09_inference_system/kv_cache/06_kv_reuse/04_framework-kv-reuse-support.html",
+      "date": "2026-11-12",
+      "status": "new",
+      "module": "推理系统"
+    },
+    {
+      "title": "没有 KV Cache 的模型：delta-rule 线性注意力的推理挑战",
+      "url": "/09_inference_system/linear_attention/linear-attention-serving.html",
+      "date": "2026-11-12",
+      "status": "updated",
+      "module": "推理系统"
+    },
     {
       "title": "手搓 Attention：从三行循环到看懂 FlashAttention",
       "url": "/02_gpu_programming/02_cuda/21_write_attention_from_scratch.html",
@@ -60,13 +123,6 @@
       "module": "推理系统"
     },
     {
-      "title": "当复用跨出同前缀与同模型：四条路线与四种对齐开销",
-      "url": "/09_inference_system/kv_cache/06_kv_reuse/01_kv-reuse-overview.html",
-      "date": "2026-11-11",
-      "status": "updated",
-      "module": "推理系统"
-    },
-    {
       "title": "手搓系列导航",
       "url": "/hand_roll_series.html",
       "date": "2026-11-11",
@@ -102,13 +158,6 @@
       "module": "云原生 AI"
     },
     {
-      "title": "训练不稳，可能是推理引擎的锅：Miles 的三条对齐路线",
-      "url": "/05_model_training_and_fine_tuning/rl_training/miles-train-rollout-alignment.html",
-      "date": "2026-11-06",
-      "status": "updated",
-      "module": "训练与微调"
-    },
-    {
       "title": "Attention 演进与 KV Cache 之变：每 token 从 4.5 MiB 到 890 B",
       "url": "/06_llm_theory_and_fundamentals/llm_basic_concepts/architecture_evolution/attention_evolution_kv_cache.html",
       "date": "2026-11-06",
@@ -125,13 +174,6 @@
     {
       "title": "7 年前，AI 记住一个字要 4.5 MiB；今天只要 890 B——七张图讲透 KV Cache",
       "url": "/06_llm_theory_and_fundamentals/llm_basic_concepts/architecture_evolution/kv_cache_seven_charts.html",
-      "date": "2026-11-06",
-      "status": "updated",
-      "module": "LLM 理论"
-    },
-    {
-      "title": "把轨迹当状态：推理时间 Scaling 的一个新维度",
-      "url": "/06_llm_theory_and_fundamentals/llm_basic_concepts/scaling_laws/test_time_scaling.html",
       "date": "2026-11-06",
       "status": "updated",
       "module": "LLM 理论"
@@ -897,13 +939,6 @@
       "url": "/09_inference_system/kv_cache/07_kv_compression/references/self-indexing-report.html",
       "date": "2026-11-06",
       "status": "new",
-      "module": "推理系统"
-    },
-    {
-      "title": "没有 KV Cache 的模型：delta-rule 线性注意力的推理挑战",
-      "url": "/09_inference_system/linear_attention/linear-attention-serving.html",
-      "date": "2026-11-06",
-      "status": "updated",
       "module": "推理系统"
     },
     {
@@ -2064,41 +2099,6 @@
     {
       "title": "十、多模态推理优化",
       "url": "/09_inference_system/reference_design/10-多模态推理优化.html",
-      "date": "2026-11-06",
-      "status": "updated",
-      "module": "推理系统"
-    },
-    {
-      "title": "十一、边缘推理优化",
-      "url": "/09_inference_system/reference_design/11-边缘推理优化.html",
-      "date": "2026-11-06",
-      "status": "updated",
-      "module": "推理系统"
-    },
-    {
-      "title": "十二、常见问题解答 (FAQ)",
-      "url": "/09_inference_system/reference_design/12-常见问题解答.html",
-      "date": "2026-11-06",
-      "status": "updated",
-      "module": "推理系统"
-    },
-    {
-      "title": "十三、实施检查清单",
-      "url": "/09_inference_system/reference_design/13-实施检查清单.html",
-      "date": "2026-11-06",
-      "status": "updated",
-      "module": "推理系统"
-    },
-    {
-      "title": "十四、总结与展望",
-      "url": "/09_inference_system/reference_design/14-总结与展望.html",
-      "date": "2026-11-06",
-      "status": "updated",
-      "module": "推理系统"
-    },
-    {
-      "title": "十五、面向推理执行图的异构调度系统架构设计",
-      "url": "/09_inference_system/reference_design/15-异构调度系统架构设计.html",
       "date": "2026-11-06",
       "status": "updated",
       "module": "推理系统"

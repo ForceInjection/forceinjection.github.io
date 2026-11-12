@@ -388,6 +388,22 @@
     "url": "/02_gpu_programming/05_compiler/01_kernel-compiler-megakernel.html"
   },
   {
+    "title": "量化 GEMM 算子：从 Marlin 到 Humming",
+    "url": "/02_gpu_programming/06_quant_gemm/"
+  },
+  {
+    "title": "Marlin 深拆：反量化不是免费，但可以藏进访存里",
+    "url": "/02_gpu_programming/06_quant_gemm/01_marlin-deep-dive.html"
+  },
+  {
+    "title": "Humming 深拆：不预制 kernel，把组合爆炸交给 JIT",
+    "url": "/02_gpu_programming/06_quant_gemm/02_humming-arch-jit.html"
+  },
+  {
+    "title": "UMMA 深拆：tcgen05 上，反量化结果写进 TMEM",
+    "url": "/02_gpu_programming/06_quant_gemm/03_umma-deep-dive.html"
+  },
+  {
     "title": "华为 NPU 编程入门",
     "url": "/02_npu_programming/"
   },
