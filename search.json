@@ -1405,11 +1405,19 @@
   },
   {
     "title": "当 Agent 流量成为推理系统的主要负载",
-    "url": "/09_inference_system/agent_serving/agent-workload-serving.html"
+    "url": "/09_inference_system/agent_serving/01_agent-workload-serving.html"
+  },
+  {
+    "title": "Phase 切换从 681 秒到 6.2 秒：Evolving Infra 论文精读",
+    "url": "/09_inference_system/agent_serving/02_evolving-infra.html"
+  },
+  {
+    "title": "基础设施的回应：当 serving 开始读懂 harness",
+    "url": "/09_inference_system/agent_serving/03_infra-response.html"
   },
   {
     "title": "约束解码的性能账单：vLLM 与 SGLang 的结构化输出实现拆解",
-    "url": "/09_inference_system/agent_serving/constrained-decoding-engines.html"
+    "url": "/09_inference_system/agent_serving/04_constrained-decoding-engines.html"
   },
   {
     "title": "CloudMatrix384 与 CloudMatrix-Infer",
@@ -1926,6 +1934,10 @@
   {
     "title": "借来的 KV 不能全借：NSDI'26 DroidSpeak 只重算约一成层，预填充最高快 3.1×",
     "url": "/09_inference_system/kv_cache/06_kv_reuse/03_droidspeak.html"
+  },
+  {
+    "title": "四条路线，一条落地：vLLM 与 SGLang 的 KV 复用支持现状",
+    "url": "/09_inference_system/kv_cache/06_kv_reuse/04_framework-kv-reuse-support.html"
   },
   {
     "title": "DroidSpeak（NSDI '26）精读报告",

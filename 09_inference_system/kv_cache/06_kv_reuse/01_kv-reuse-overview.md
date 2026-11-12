@@ -92,6 +92,8 @@
 
 一个历史对照：动态链接也曾困在「这个二进制能不能链接到那个库」的试错上，直到符号版本化（symbol versioning）把兼容性变成可声明的接口——今天没人靠试错判断 ABI。KV 复用缺的正是这一层：把「这缓存跟谁兼容」从论文实验变成缓存自带的字段。
 
+工程侧的第一批雏形已经出现：Evolving Infra（arXiv 2611.12304）在集群级 KV 目录里给每个块维护「活跃分支计数」字段，harness 上报 branch ID 与 compaction 版本号，驱逐按零计数优先——出处与生命周期成了缓存自带的属性（[精读见 Agent 推理服务系列](../../agent_serving/02_evolving-infra.md)）；KVTether 从 harness 导出上下文操作映射到 KV 生命周期状态，是同一方向。两者都还是单系统私有字段，不是跨系统接口。
+
 需要防的一个误读：说明书不消除对齐成本。KVLink 该训还是要训，DroidSpeak 该 profile 还是要 profile；变化的是借用方终于可以在**借之前**看清账单，而不是借完之后才发现精度塌了。
 
 ![KV 复用的兼容性：从隐式条件到可声明接口](img/kvreuse-04-portability.png)
@@ -105,6 +107,7 @@
 
 - [缓存不必同前缀：NeurIPS 2025 KVLink 把 RAG 首 token 延迟最高降 96%](02_kvlink.md)——**文档级复用**（NeurIPS 2025）
 - [借来的 KV 不能全借：NSDI'26 DroidSpeak 只重算约一成层，预填充最高快 3.1×](03_droidspeak.md)——**跨变体复用**（NSDI '26）
+- [四条路线，一条落地：vLLM 与 SGLang 的 KV 复用支持现状](04_framework-kv-reuse-support.md)——**引擎落地盘点**（路线 1 已卷到跨实例纵深，路线 2 只剩 LMCache 独木桥，路线 3/4 零实现；以三仓 HEAD 源码核对）
 - 精读报告（逐条页码核对版）：[KVLink](references/kvlink-report.md) · [DroidSpeak](references/droidspeak-report.md)；论文原文 PDF 在 `references/papers/`
 
 ## 诚实声明
