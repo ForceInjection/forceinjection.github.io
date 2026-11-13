@@ -1,8 +1,43 @@
 {
-  "generated_at": "2026-11-12T23:26:33Z",
+  "generated_at": "2026-11-13T22:00:06Z",
   "window_days": 30,
   "count": 300,
   "items": [
+    {
+      "title": "把权重压到 4-bit：TileLang 反量化 GEMM 源码级拆解",
+      "url": "/02_gpu_programming/03_tilelang/03_dequant_gemm_lowprecision.html",
+      "date": "2026-11-12",
+      "status": "new",
+      "module": "GPU 编程"
+    },
+    {
+      "title": "Marlin 深拆：反量化不是免费，但可以藏进访存里",
+      "url": "/02_gpu_programming/06_quant_gemm/01_marlin-deep-dive.html",
+      "date": "2026-11-12",
+      "status": "new",
+      "module": "GPU 编程"
+    },
+    {
+      "title": "Humming 深拆：不预制 kernel，把组合爆炸交给 JIT",
+      "url": "/02_gpu_programming/06_quant_gemm/02_humming-arch-jit.html",
+      "date": "2026-11-12",
+      "status": "new",
+      "module": "GPU 编程"
+    },
+    {
+      "title": "UMMA 深拆：tcgen05 上，反量化结果写进 TMEM",
+      "url": "/02_gpu_programming/06_quant_gemm/03_umma-deep-dive.html",
+      "date": "2026-11-12",
+      "status": "new",
+      "module": "GPU 编程"
+    },
+    {
+      "title": "手搓 MLA：从 MHA 到 weight absorption，看懂 DeepSeek 的 KV 压缩",
+      "url": "/09_inference_system/kv_cache/01_concepts/01_basic/07_hand_roll_mla.html",
+      "date": "2026-11-12",
+      "status": "new",
+      "module": "推理系统"
+    },
     {
       "title": "训练不稳，可能是推理引擎的锅：Miles 的三条对齐路线",
       "url": "/05_model_training_and_fine_tuning/rl_training/miles-train-rollout-alignment.html",
@@ -104,13 +139,6 @@
     {
       "title": "手搓 KV Cache：从静态预留到 PagedAttention 的页表",
       "url": "/09_inference_system/kv_cache/01_concepts/01_basic/03_hand_roll_kv_cache.html",
-      "date": "2026-11-11",
-      "status": "new",
-      "module": "推理系统"
-    },
-    {
-      "title": "手搓 MLA：从 MHA 到 weight absorption，看懂 DeepSeek 的 KV 压缩",
-      "url": "/09_inference_system/kv_cache/01_concepts/01_basic/07_hand_roll_mla.html",
       "date": "2026-11-11",
       "status": "new",
       "module": "推理系统"
@@ -1362,13 +1390,6 @@
       "module": "GPU 编程"
     },
     {
-      "title": "把权重压到 4-bit：TileLang 反量化 GEMM 源码级拆解",
-      "url": "/02_gpu_programming/03_tilelang/03_dequant_gemm_lowprecision.html",
-      "date": "2026-11-06",
-      "status": "new",
-      "module": "GPU 编程"
-    },
-    {
       "title": "nvbandwidth：用法、原理与测试项详解",
       "url": "/02_gpu_programming/04_profiling/01_nvbandwidth_best_practices.html",
       "date": "2026-11-06",
@@ -2078,27 +2099,6 @@
     {
       "title": "七、实施建议与最佳实践",
       "url": "/09_inference_system/reference_design/07-实施建议与最佳实践.html",
-      "date": "2026-11-06",
-      "status": "updated",
-      "module": "推理系统"
-    },
-    {
-      "title": "八、参考资料与延伸阅读",
-      "url": "/09_inference_system/reference_design/08-参考资料与延伸阅读.html",
-      "date": "2026-11-06",
-      "status": "updated",
-      "module": "推理系统"
-    },
-    {
-      "title": "九、安全性与合规性",
-      "url": "/09_inference_system/reference_design/09-安全性与合规性.html",
-      "date": "2026-11-06",
-      "status": "updated",
-      "module": "推理系统"
-    },
-    {
-      "title": "十、多模态推理优化",
-      "url": "/09_inference_system/reference_design/10-多模态推理优化.html",
       "date": "2026-11-06",
       "status": "updated",
       "module": "推理系统"

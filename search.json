@@ -692,6 +692,10 @@
     "url": "/03_ai_cluster_ops/05_datacenter/china-dc-boom-semianalysis.html"
   },
   {
+    "title": "GPUDirect Async 深拆：把通信的控制权从 CPU 手里拿回来",
+    "url": "/03_ai_cluster_ops/06_gpudirect_async/01_gpudirect-async-deep-dive.html"
+  },
+  {
     "title": "云原生 AI 平台",
     "url": "/04_cloud_native_ai_platform/"
   },
