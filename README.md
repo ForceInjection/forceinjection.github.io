@@ -418,6 +418,7 @@ SFT 之后把推理能力推上去要靠 RL，而 RL 的 rollout 由推理引擎
   - [Continuous Batching 深度解析](09_inference_system/prefill_decode/continuous_batching.md) - 静态批处理的三重浪费、vLLM V1 的 token-level 统一调度与 SGLang prefill-first 主动驱逐
 - [大模型推理并行策略](09_inference_system/parallelism/parallelism_strategies.md)（[交互可视化](09_inference_system/parallelism/parallelism_visual.html)） - DP、TP、PP、EP、SP 五种策略的统一拆解与混合部署案例
   - [专家并行（EP）深度解析](09_inference_system/parallelism/expert_parallelism_deep_dive.md) - EP 独立深度文章：DP/TP/PP 为什么解决不了 MoE、All-to-All 通信模式、EP+DP 耦合、DeepEP 低延迟后端、EPLB 负载均衡、选型决策
+- [从推理调度到 CXL 一致性：SOSP 2026 十三篇系统论文精读](09_inference_system/sosp2026/sosp2026-systems-review.md) - OS 顶会 13 篇综述（AI 相关 9 篇 + CXL 介质层 4 篇）：Janus 多 LLM 调度、Bedrock 全球多区域服务、LLM-42 确定性推理、ACDC 离线推理刻画、StreamEP 无屏障 MoE 解码、CrystalLLM 训练仿真、Ave agentic 内核优化、YoloFS Agent 原生文件系统、Skill VM、Borges CXL 共享日志、Disk-Based LSMs 索引、StarfishOS 单系统映像、XTRA 分布式事务，四条主线 + 折扣清单，分篇笔记与 PDF 同目录归档
 
 ### 9.2 核心框架与平台
 
@@ -622,13 +623,13 @@ DeepSeek 模型极致性能优化实战，深度解析 vLLM 宽端点 (Wide Endp
 
 **智能体设计模式**：
 
-- [ReAct Agent 模式详解](08_agentic_system/agent_design/docs/react-agent.md) - 推理与行动深度协同的经典机制
-- [写作 Agent 设计](08_agentic_system/agent_design/docs/writing-agentic-agent.md) - 针对复杂长文本内容创作的架构设计
-- [指代消解系统设计](08_agentic_system/agent_design/docs/coreference-resolution-dialogue-system.md) - 高级对话状态管理与多轮交互技术
+- [ReAct Agent 模式详解](08_agentic_system/agent_design/deep-dives/01_react-agent.md) - 推理与行动深度协同的经典机制
+- [写作 Agent 设计](08_agentic_system/agent_design/deep-dives/03_writing-agentic-agent.md) - 针对复杂长文本内容创作的架构设计
+- [指代消解系统设计](08_agentic_system/agent_design/deep-dives/04_coreference-resolution-dialogue-system.md) - 高级对话状态管理与多轮交互技术
 - [12-Factor Agents](08_agentic_system/concepts/12-factor-agents-intro.md) - 构建高可靠、可扩展 LLM 应用的 12 要素原则
-- [TradingAgents-CN 设计](08_agentic_system/agent_design/docs/trading-agents-cn.md) - 交易领域的智能体设计与交互分析
-- [AI Agent 设计模式](08_agentic_system/agent_design/docs/ai-agent-design-patterns.pptx) - 企业级智能体架构设计模式
-- [All Agentic Architectures 深入详解](08_agentic_system/agent_design/docs/all-agentic-architectures-deep-dive.md) - 17 种 Agent 架构深度对比与实现解析
+- [TradingAgents-CN 设计](08_agentic_system/agent_design/deep-dives/05_trading-agents-cn.md) - 交易领域的智能体设计与交互分析
+- [AI Agent 设计模式](08_agentic_system/agent_design/deep-dives/ai-agent-design-patterns.pptx) - 企业级智能体架构设计模式
+- [All Agentic Architectures 深入详解](08_agentic_system/agent_design/deep-dives/02_all-agentic-architectures-deep-dive.md) - 17 种 Agent 架构深度对比与实现解析
 
 **数据智能体 (Data Agents)**：
 

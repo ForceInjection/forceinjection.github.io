@@ -1,8 +1,36 @@
 {
-  "generated_at": "2026-11-13T22:00:06Z",
+  "generated_at": "2026-11-14T22:00:05Z",
   "window_days": 30,
   "count": 300,
   "items": [
+    {
+      "title": "GPUDirect Async 深拆：把通信的控制权从 CPU 手里拿回来",
+      "url": "/03_ai_cluster_ops/06_gpudirect_async/01_gpudirect-async-deep-dive.html",
+      "date": "2026-11-13",
+      "status": "new",
+      "module": "集群运维"
+    },
+    {
+      "title": "PagedAttention：当 KV Cache 遇到操作系统分页",
+      "url": "/09_inference_system/kv_cache/01_concepts/01_basic/02_paged_attention.html",
+      "date": "2026-11-13",
+      "status": "updated",
+      "module": "推理系统"
+    },
+    {
+      "title": "L2 还有大半空着，TTFT 为什么先崩了？L1 KV Pool 才是系统并发的上限",
+      "url": "/09_inference_system/kv_cache/01_concepts/10_capacity_planning/01_hbm_kv_pool_concurrency.html",
+      "date": "2026-11-13",
+      "status": "updated",
+      "module": "推理系统"
+    },
+    {
+      "title": "8192 个 token 的 KV 只跑出 22% PCIe 带宽：Strata 重做分层缓存的搬运与调度",
+      "url": "/09_inference_system/kv_cache/04_memory_tiering/05_strata.html",
+      "date": "2026-11-13",
+      "status": "updated",
+      "module": "推理系统"
+    },
     {
       "title": "把权重压到 4-bit：TileLang 反量化 GEMM 源码级拆解",
       "url": "/02_gpu_programming/03_tilelang/03_dequant_gemm_lowprecision.html",
@@ -424,13 +452,6 @@
       "module": "推理系统"
     },
     {
-      "title": "PagedAttention：当 KV Cache 遇到操作系统分页",
-      "url": "/09_inference_system/kv_cache/01_concepts/01_basic/02_paged_attention.html",
-      "date": "2026-11-06",
-      "status": "updated",
-      "module": "推理系统"
-    },
-    {
       "title": "02 paged attention visual",
       "url": "/09_inference_system/kv_cache/01_concepts/01_basic/02_paged_attention_visual.html",
       "date": "2026-11-06",
@@ -587,13 +608,6 @@
     {
       "title": "把 14B 的 KV 交给 32B：跨模型复用的可能与代价",
       "url": "/09_inference_system/kv_cache/01_concepts/09_cross_model/01_cross_model_kv_transfer.html",
-      "date": "2026-11-06",
-      "status": "updated",
-      "module": "推理系统"
-    },
-    {
-      "title": "L2 还有大半空着，TTFT 为什么先崩了？L1 KV Pool 才是系统并发的上限",
-      "url": "/09_inference_system/kv_cache/01_concepts/10_capacity_planning/01_hbm_kv_pool_concurrency.html",
       "date": "2026-11-06",
       "status": "updated",
       "module": "推理系统"
@@ -811,13 +825,6 @@
     {
       "title": "30.8% 的显存按 200K 上下文预留，实际只用 1%：eLLM 让 Activation 与 KV Cache 互相借内存",
       "url": "/09_inference_system/kv_cache/04_memory_tiering/04_ellm.html",
-      "date": "2026-11-06",
-      "status": "updated",
-      "module": "推理系统"
-    },
-    {
-      "title": "8192 个 token 的 KV 只跑出 22% PCIe 带宽：Strata 重做分层缓存的搬运与调度",
-      "url": "/09_inference_system/kv_cache/04_memory_tiering/05_strata.html",
       "date": "2026-11-06",
       "status": "updated",
       "module": "推理系统"
@@ -2092,13 +2099,6 @@
     {
       "title": "六、推理服务架构设计",
       "url": "/09_inference_system/reference_design/06-推理服务架构设计.html",
-      "date": "2026-11-06",
-      "status": "updated",
-      "module": "推理系统"
-    },
-    {
-      "title": "七、实施建议与最佳实践",
-      "url": "/09_inference_system/reference_design/07-实施建议与最佳实践.html",
       "date": "2026-11-06",
       "status": "updated",
       "module": "推理系统"
