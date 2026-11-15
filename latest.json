@@ -1,8 +1,197 @@
 {
-  "generated_at": "2026-11-14T22:00:05Z",
+  "generated_at": "2026-11-15T22:00:07Z",
   "window_days": 30,
   "count": 300,
   "items": [
+    {
+      "title": "2026 年 AI Agent 学习路线图：先跑通，再理解，最后造轮子",
+      "url": "/08_agentic_system/agent_course_hub/2026-agent-learning-roadmap-blog.html",
+      "date": "2026-11-14",
+      "status": "updated",
+      "module": "智能体"
+    },
+    {
+      "title": "Agent 术语速查",
+      "url": "/08_agentic_system/agent_course_hub/glossary.html",
+      "date": "2026-11-14",
+      "status": "updated",
+      "module": "智能体"
+    },
+    {
+      "title": "Agent 学习路线图：先跑通，再理解，最后造轮子",
+      "url": "/08_agentic_system/agent_course_hub/learning-roadmap.html",
+      "date": "2026-11-14",
+      "status": "updated",
+      "module": "智能体"
+    },
+    {
+      "title": "Cursor IDE ReAct Agent 技术架构深度分析",
+      "url": "/08_agentic_system/agent_design/deep-dives/01_react-agent.html",
+      "date": "2026-11-14",
+      "status": "new",
+      "module": "智能体"
+    },
+    {
+      "title": "All Agentic Architectures 深入详解",
+      "url": "/08_agentic_system/agent_design/deep-dives/02_all-agentic-architectures-deep-dive.html",
+      "date": "2026-11-14",
+      "status": "updated",
+      "module": "智能体"
+    },
+    {
+      "title": "技术博客撰写 Agentic RAG Agent 系统设计",
+      "url": "/08_agentic_system/agent_design/deep-dives/03_writing-agentic-agent.html",
+      "date": "2026-11-14",
+      "status": "updated",
+      "module": "智能体"
+    },
+    {
+      "title": "支持多轮对话指代消解的 ChatBot 系统：架构设计与实现详解",
+      "url": "/08_agentic_system/agent_design/deep-dives/04_coreference-resolution-dialogue-system.html",
+      "date": "2026-11-14",
+      "status": "new",
+      "module": "智能体"
+    },
+    {
+      "title": "TradingAgents-CN 多智能体设计与交互分析",
+      "url": "/08_agentic_system/agent_design/deep-dives/05_trading-agents-cn.html",
+      "date": "2026-11-14",
+      "status": "updated",
+      "module": "智能体"
+    },
+    {
+      "title": "确定性工程驯服不确定的 Agent：OpenCodeReview 三阶段架构深度解析",
+      "url": "/08_agentic_system/agent_design/deep-dives/06_open-code-review-deep-dive.html",
+      "date": "2026-11-14",
+      "status": "updated",
+      "module": "智能体"
+    },
+    {
+      "title": "DeepSeek 把整个 App 开放成了 API：全家桶应用 API 深拆",
+      "url": "/08_agentic_system/agent_design/deep-dives/07_deepseek-app-api-deep-dive.html",
+      "date": "2026-11-14",
+      "status": "new",
+      "module": "智能体"
+    },
+    {
+      "title": "Agent Substrate 深拆：Google 给百万级 Agent 造的沙箱底座",
+      "url": "/08_agentic_system/agent_infra/16_substrate-deep-dive.html",
+      "date": "2026-11-14",
+      "status": "new",
+      "module": "智能体"
+    },
+    {
+      "title": "01 · Janus：生产规模的多 LLM 服务",
+      "url": "/09_inference_system/sosp2026/references/01-janus-multi-llm-serving.html",
+      "date": "2026-11-14",
+      "status": "new",
+      "module": "推理系统"
+    },
+    {
+      "title": "02 · Amazon Bedrock：全球规模的基础模型服务",
+      "url": "/09_inference_system/sosp2026/references/02-bedrock-fm-serving.html",
+      "date": "2026-11-14",
+      "status": "new",
+      "module": "推理系统"
+    },
+    {
+      "title": "03 · LLM-42：用验证投机实现确定性 LLM 推理",
+      "url": "/09_inference_system/sosp2026/references/03-llm-42-determinism.html",
+      "date": "2026-11-14",
+      "status": "new",
+      "module": "推理系统"
+    },
+    {
+      "title": "04 · CrystalLLM：用少量 GPU 忠实仿真大规模 LLM 训练",
+      "url": "/09_inference_system/sosp2026/references/04-crystalllm-training-emulation.html",
+      "date": "2026-11-14",
+      "status": "new",
+      "module": "推理系统"
+    },
+    {
+      "title": "05 · Ave：用数据流不变量指导 Agentic GPU 优化",
+      "url": "/09_inference_system/sosp2026/references/05-ave-agentic-gpu-optimization.html",
+      "date": "2026-11-14",
+      "status": "new",
+      "module": "推理系统"
+    },
+    {
+      "title": "06 · StreamEP：无通信屏障的容错 MoE 解码",
+      "url": "/09_inference_system/sosp2026/references/06-streamep-moe-decoding.html",
+      "date": "2026-11-14",
+      "status": "new",
+      "module": "推理系统"
+    },
+    {
+      "title": "07 · Skill VM：Agent Skill 的一次编写、处处高效执行",
+      "url": "/09_inference_system/sosp2026/references/07-skill-vm.html",
+      "date": "2026-11-14",
+      "status": "new",
+      "module": "推理系统"
+    },
+    {
+      "title": "08 · Agent 原生文件系统：别让 AI Agent 随意动你的文件",
+      "url": "/09_inference_system/sosp2026/references/08-agent-native-filesystems.html",
+      "date": "2026-11-14",
+      "status": "new",
+      "module": "推理系统"
+    },
+    {
+      "title": "09 · ACDC：生产环境离线 LLM 推理的刻画与优化",
+      "url": "/09_inference_system/sosp2026/references/09-acdc-offline-inference.html",
+      "date": "2026-11-14",
+      "status": "new",
+      "module": "推理系统"
+    },
+    {
+      "title": "10 · Borges：CXL 内存/SSD 混合上的低延迟分布式共享日志",
+      "url": "/09_inference_system/sosp2026/references/10-borges-cxl-shared-log.html",
+      "date": "2026-11-14",
+      "status": "new",
+      "module": "推理系统"
+    },
+    {
+      "title": "11 · Disk-Based LSMs：部分一致 CXL 内存上的意外好索引",
+      "url": "/09_inference_system/sosp2026/references/11-disk-based-lsms-cxl.html",
+      "date": "2026-11-14",
+      "status": "new",
+      "module": "推理系统"
+    },
+    {
+      "title": "12 · StarfishOS：CXL 上重访单系统映像",
+      "url": "/09_inference_system/sosp2026/references/12-starfishos-cxl-ssi.html",
+      "date": "2026-11-14",
+      "status": "new",
+      "module": "推理系统"
+    },
+    {
+      "title": "13 · XTRA：CXL Pod 里统一缓存一致性与并发控制",
+      "url": "/09_inference_system/sosp2026/references/13-xtra-cxl-transactions.html",
+      "date": "2026-11-14",
+      "status": "new",
+      "module": "推理系统"
+    },
+    {
+      "title": "从推理调度到 CXL 一致性：SOSP 2026 十三篇系统论文精读",
+      "url": "/09_inference_system/sosp2026/sosp2026-systems-review.html",
+      "date": "2026-11-14",
+      "status": "new",
+      "module": "推理系统"
+    },
+    {
+      "title": "别让写代码的 Agent 评审自己：AI 代码评审的三道闸门",
+      "url": "/11_ai_native_everything/vibe_coding/docs/ai-code-review-three-gates.html",
+      "date": "2026-11-14",
+      "status": "updated",
+      "module": "AI Native"
+    },
+    {
+      "title": "Demos：仓库内可运行的代码与 Notebook",
+      "url": "/demos.html",
+      "date": "2026-11-14",
+      "status": "new",
+      "module": ""
+    },
     {
       "title": "GPUDirect Async 深拆：把通信的控制权从 CPU 手里拿回来",
       "url": "/03_ai_cluster_ops/06_gpudirect_async/01_gpudirect-async-deep-dive.html",
@@ -235,29 +424,8 @@
       "module": "LLM 理论"
     },
     {
-      "title": "2026 年 AI Agent 学习路线图：先跑通，再理解，最后造轮子",
-      "url": "/08_agentic_system/agent_course_hub/2026-agent-learning-roadmap-blog.html",
-      "date": "2026-11-06",
-      "status": "updated",
-      "module": "智能体"
-    },
-    {
       "title": "Agent 学习课程 Hub",
       "url": "/08_agentic_system/agent_course_hub/agent-course-hub.html",
-      "date": "2026-11-06",
-      "status": "updated",
-      "module": "智能体"
-    },
-    {
-      "title": "Agent 术语速查",
-      "url": "/08_agentic_system/agent_course_hub/glossary.html",
-      "date": "2026-11-06",
-      "status": "updated",
-      "module": "智能体"
-    },
-    {
-      "title": "Agent 学习路线图：先跑通，再理解，最后造轮子",
-      "url": "/08_agentic_system/agent_course_hub/learning-roadmap.html",
       "date": "2026-11-06",
       "status": "updated",
       "module": "智能体"
@@ -1138,13 +1306,6 @@
       "module": "杂项"
     },
     {
-      "title": "Demos：仓库内可运行的代码与 Notebook",
-      "url": "/demos.html",
-      "date": "2026-11-06",
-      "status": "new",
-      "module": ""
-    },
-    {
       "title": "Ascend 950 微架构速查：来自 FlashMLA 算子报告的硬件信息整理",
       "url": "/01_hardware_architecture/ascend/Ascend950_微架构速查.html",
       "date": "2026-11-06",
@@ -1938,167 +2099,6 @@
     {
       "title": "pricing table",
       "url": "/09_inference_system/cost_analysis/coding_plan/data/pricing_table.html",
-      "date": "2026-11-06",
-      "status": "updated",
-      "module": "推理系统"
-    },
-    {
-      "title": "附录：2026 年国内外主流 Coding Plan 真实数据看板",
-      "url": "/09_inference_system/cost_analysis/coding_plan/objective_pricing_comparison.html",
-      "date": "2026-11-06",
-      "status": "updated",
-      "module": "推理系统"
-    },
-    {
-      "title": "155 万亿 tokens/天，单卡运营利润率 93%：token 生意可以做成暴利",
-      "url": "/09_inference_system/cost_analysis/deepseek_inference_cluster_unit_economics.html",
-      "date": "2026-11-06",
-      "status": "new",
-      "module": "推理系统"
-    },
-    {
-      "title": "大模型 API 定价策略定量分析框架",
-      "url": "/09_inference_system/cost_analysis/llm_api_pricing_analysis.html",
-      "date": "2026-11-06",
-      "status": "updated",
-      "module": "推理系统"
-    },
-    {
-      "title": "155 万亿 tokens/天背后的引擎：DeepInfer 源码拆解",
-      "url": "/09_inference_system/deepinfer/deepinfer-source-deep-dive.html",
-      "date": "2026-11-06",
-      "status": "new",
-      "module": "推理系统"
-    },
-    {
-      "title": "DeepSeek-V3 H20 推理优化：基于 vLLM 源码的深度分析",
-      "url": "/09_inference_system/deployment/deepseek_v3_h20_vllm_deep_dive.html",
-      "date": "2026-11-06",
-      "status": "updated",
-      "module": "推理系统"
-    },
-    {
-      "title": "输出差了一点点？用 logprobs 分清「噪声」还是「bug」",
-      "url": "/09_inference_system/deployment/logprobs-precision-diagnosis.html",
-      "date": "2026-11-06",
-      "status": "updated",
-      "module": "推理系统"
-    },
-    {
-      "title": "Qwen2-VL-7B-Instruct 昇腾部署指南",
-      "url": "/09_inference_system/deployment/qwen2_vl_7b_huawei.html",
-      "date": "2026-11-06",
-      "status": "updated",
-      "module": "推理系统"
-    },
-    {
-      "title": "AITURBO 精读报告（FAST'26）",
-      "url": "/09_inference_system/kv_cache/03_fast26/references/aiturbo-report.html",
-      "date": "2026-11-06",
-      "status": "new",
-      "module": "推理系统"
-    },
-    {
-      "title": "Bidaw 精读报告（FAST'26）",
-      "url": "/09_inference_system/kv_cache/03_fast26/references/bidaw-report.html",
-      "date": "2026-11-06",
-      "status": "new",
-      "module": "推理系统"
-    },
-    {
-      "title": "CacheSlide 精读报告（FAST'26）",
-      "url": "/09_inference_system/kv_cache/03_fast26/references/cacheslide-report.html",
-      "date": "2026-11-06",
-      "status": "new",
-      "module": "推理系统"
-    },
-    {
-      "title": "D 线：KV Cache 复用 / 共享 / 安全类论文调研报告（2025–2026）",
-      "url": "/09_inference_system/kv_cache/05_kv_security/references/reuse-security-report.html",
-      "date": "2026-11-06",
-      "status": "new",
-      "module": "推理系统"
-    },
-    {
-      "title": "LLM 模型推理显存占用深度的分析",
-      "url": "/09_inference_system/memory_calc/memory_analysis.html",
-      "date": "2026-11-06",
-      "status": "updated",
-      "module": "推理系统"
-    },
-    {
-      "title": "DFlash 2 块扩散投机解码技术详解",
-      "url": "/09_inference_system/model_optimization/dflash-block-diffusion-speculative-decoding.html",
-      "date": "2026-11-06",
-      "status": "updated",
-      "module": "推理系统"
-    },
-    {
-      "title": "图解投机解码",
-      "url": "/09_inference_system/model_optimization/illustrated-speculative-decoding.html",
-      "date": "2026-11-06",
-      "status": "updated",
-      "module": "推理系统"
-    },
-    {
-      "title": "NVIDIA Model Optimizer 技术详解：功能、原理与实现",
-      "url": "/09_inference_system/model_optimization/nvidia_model_optimizer.html",
-      "date": "2026-11-06",
-      "status": "updated",
-      "module": "推理系统"
-    },
-    {
-      "title": "专家并行（EP）深度解析——MoE 时代的第五种并行维度",
-      "url": "/09_inference_system/parallelism/expert_parallelism_deep_dive.html",
-      "date": "2026-11-06",
-      "status": "updated",
-      "module": "推理系统"
-    },
-    {
-      "title": "Continuous Batching 深度解析：从静态批处理到迭代级调度",
-      "url": "/09_inference_system/prefill_decode/continuous_batching.html",
-      "date": "2026-11-06",
-      "status": "updated",
-      "module": "推理系统"
-    },
-    {
-      "title": "一、大模型推理优化：背景与目标",
-      "url": "/09_inference_system/reference_design/01-背景与目标.html",
-      "date": "2026-11-06",
-      "status": "updated",
-      "module": "推理系统"
-    },
-    {
-      "title": "二、大模型推理优化：集群规模分类与特征分析",
-      "url": "/09_inference_system/reference_design/02-集群规模分类与特征分析.html",
-      "date": "2026-11-06",
-      "status": "updated",
-      "module": "推理系统"
-    },
-    {
-      "title": "三、核心推理优化技术深度解析",
-      "url": "/09_inference_system/reference_design/03-核心推理优化技术深度解析.html",
-      "date": "2026-11-06",
-      "status": "updated",
-      "module": "推理系统"
-    },
-    {
-      "title": "四、不同集群规模的技术选型策略",
-      "url": "/09_inference_system/reference_design/04-不同集群规模的技术选型策略.html",
-      "date": "2026-11-06",
-      "status": "updated",
-      "module": "推理系统"
-    },
-    {
-      "title": "五、性能评估指标体系",
-      "url": "/09_inference_system/reference_design/05-性能评估指标体系.html",
-      "date": "2026-11-06",
-      "status": "updated",
-      "module": "推理系统"
-    },
-    {
-      "title": "六、推理服务架构设计",
-      "url": "/09_inference_system/reference_design/06-推理服务架构设计.html",
       "date": "2026-11-06",
       "status": "updated",
       "module": "推理系统"
