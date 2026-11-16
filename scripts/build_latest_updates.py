@@ -3,9 +3,15 @@
 Build latest-updates list for the Jekyll site.
 Run locally after sync (sync.sh calls this automatically):
     python3 scripts/build_latest_updates.py
-Scans the Pages repo's git log for content files touched within the last
-N days, extracts title + URL (reusing build_search_index helpers), and
-writes latest.json for the homepage section and /updates/ page.
+Scans the SOURCE repo's (AI-fundamentals) git log for content files
+committed within the last N days, extracts title + URL (reusing
+build_search_index helpers), and writes latest.json for the homepage
+section and /updates/ page.
+
+Why the source repo, not the Pages repo: the Pages repo's log reflects
+sync runs (rsync covers whatever changed on disk at sync time), so a
+date there means "when sync copied it", not "when the content changed".
+The source repo's per-file commit history is the ground truth for both.
 """
 import json
 import subprocess
@@ -16,6 +22,7 @@ from pathlib import Path
 from build_search_index import ROOT, EXCLUDE_DIRS, extract_title, url_for
 
 OUT = ROOT / "latest.json"
+SRC_REPO = Path("/Users/wangtianqing/Project/wechat/AI-fundamentals")
 DAYS = 30
 MAX_ITEMS = 300
 
@@ -60,10 +67,10 @@ def is_content_file(rel: Path) -> bool:
 
 
 def collect_git_changes(days: int) -> dict[str, dict]:
-    """Walk git log once; return {path: {last_ts, added_in_window}}."""
+    """Walk the source repo's git log once; return {path: {last_ts, added_in_window}}."""
     since_ts = int((datetime.now(timezone.utc) - timedelta(days=days)).timestamp())
     out = subprocess.run(
-        ["git", "-C", str(ROOT), "log", "--name-status",
+        ["git", "-C", str(SRC_REPO), "log", "--name-status",
          "--format=%ct", f"--since={days} days ago"],
         capture_output=True, text=True, check=True,
     ).stdout
