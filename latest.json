@@ -1,8 +1,15 @@
 {
-  "generated_at": "2026-11-16T02:46:59Z",
+  "generated_at": "2026-11-16T22:00:03Z",
   "window_days": 30,
   "count": 300,
   "items": [
+    {
+      "title": "Humming 深拆：不预制 kernel，把组合爆炸交给 JIT",
+      "url": "/02_gpu_programming/06_quant_gemm/02_humming-arch-jit.html",
+      "date": "2026-11-16",
+      "status": "new",
+      "module": "GPU 编程"
+    },
     {
       "title": "从推理调度到 CXL 一致性：SOSP 2026 十三篇系统论文精读",
       "url": "/09_inference_system/sosp2026/sosp2026-systems-review.html",
@@ -219,13 +226,6 @@
       "date": "2026-11-13",
       "status": "new",
       "module": "集群运维"
-    },
-    {
-      "title": "Humming 深拆：不预制 kernel，把组合爆炸交给 JIT",
-      "url": "/02_gpu_programming/06_quant_gemm/02_humming-arch-jit.html",
-      "date": "2026-11-13",
-      "status": "new",
-      "module": "GPU 编程"
     },
     {
       "title": "手搓 MLA：从 MHA 到 weight absorption，看懂 DeepSeek 的 KV 压缩",
