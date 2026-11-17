@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-16T22:00:03Z",
+  "generated_at": "2026-11-17T22:00:03Z",
   "window_days": 30,
   "count": 300,
   "items": [
@@ -539,7 +539,7 @@
       "title": "多会话协作（评审 / 修改 / 测试 / 裁决）",
       "url": "/08_agentic_system/agent_skills/multi-session-collab/SKILL.html",
       "date": "2026-11-06",
-      "status": "new",
+      "status": "updated",
       "module": "智能体"
     },
     {
