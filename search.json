@@ -1900,7 +1900,7 @@
     "url": "/09_inference_system/kv_cache/03_fast26/references/solidattention-report.html"
   },
   {
-    "title": "当 KV 装不进显存：四篇论文的四种内存账，与一个「统一命名空间 + 成本旋钮」的设想",
+    "title": "当 KV 装不进显存：五篇论文的五种内存账，与一个「统一命名空间 + 成本旋钮」的设想",
     "url": "/09_inference_system/kv_cache/04_memory_tiering/01_memory-tiering-overview.html"
   },
   {
@@ -1918,6 +1918,10 @@
   {
     "title": "8192 个 token 的 KV 只跑出 22% PCIe 带宽：Strata 重做分层缓存的搬运与调度",
     "url": "/09_inference_system/kv_cache/04_memory_tiering/05_strata.html"
+  },
+  {
+    "title": "分层存储的两个前提同时破产：FlatCake 把 DRAM 和 SSD 放到同一层",
+    "url": "/09_inference_system/kv_cache/04_memory_tiering/06_flatcake.html"
   },
   {
     "title": "DirectKV（OSDI '26）精读报告",
@@ -2318,6 +2322,14 @@
   {
     "title": "从 H200 到 Blackwell 的飞跃：vLLM 助力 DeepSeek 吞吐量飙升 5 倍的五大技术内幕",
     "url": "/09_inference_system/vllm/hardware_optimization/deepseek_blackwell_wide_ep.html"
+  },
+  {
+    "title": "素材快照：Mixture-of-Experts kernel engineering on Amazon SageMaker AI",
+    "url": "/09_inference_system/vllm/hardware_optimization/references/aws-blog-moe-kernel.html"
+  },
+  {
+    "title": "一行 do_not_specialize，9% TTFT：vLLM fused MoE 的低成本 kernel 优化",
+    "url": "/09_inference_system/vllm/hardware_optimization/vllm_fused_moe_hopper_optimization.html"
   },
   {
     "title": "vLLM 注意力机制演进与支持全景：从 MHA 到 MLA 及其稀疏变体的架构解析",
@@ -2964,6 +2976,10 @@
     "url": "/21_openspec_practise/docs-en/openspec-v1.7.0-workflow-practice.html"
   },
   {
+    "title": "Commands Exit, Skills Take the Stage: OpenSpec 2.1.0 Workflow Practice",
+    "url": "/21_openspec_practise/docs-en/openspec-v2.1.0-workflow-practice.html"
+  },
+  {
     "title": "OpenSpec 实战指南：AI 辅助软件工程全流程深度复盘",
     "url": "/21_openspec_practise/docs/openspec-ai-workflow-analysis.html"
   },
@@ -2998,6 +3014,10 @@
   {
     "title": "用 /opsx:update 完善需求：OpenSpec v1.7.0 完整工作流实践",
     "url": "/21_openspec_practise/docs/openspec-v1.7.0-workflow-practice.html"
+  },
+  {
+    "title": "命令退场，技能登场：OpenSpec 2.1.0 工作流实践",
+    "url": "/21_openspec_practise/docs/openspec-v2.1.0-workflow-practice.html"
   },
   {
     "title": "Design: Ecommerce Mini Architecture",
@@ -3122,6 +3142,18 @@
   {
     "title": "Tasks",
     "url": "/21_openspec_practise/openspec/changes/archive/2026-11-02-scenario-step-format-migration/tasks.html"
+  },
+  {
+    "title": "design",
+    "url": "/21_openspec_practise/openspec/changes/archive/2026-11-18-payment-implementation/design.html"
+  },
+  {
+    "title": "proposal",
+    "url": "/21_openspec_practise/openspec/changes/archive/2026-11-18-payment-implementation/proposal.html"
+  },
+  {
+    "title": "Tasks",
+    "url": "/21_openspec_practise/openspec/changes/archive/2026-11-18-payment-implementation/tasks.html"
   },
   {
     "title": "Cart Management Specification",

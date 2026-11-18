@@ -1,8 +1,43 @@
 {
-  "generated_at": "2026-11-18T07:15:14Z",
+  "generated_at": "2026-11-18T22:00:06Z",
   "window_days": 30,
   "count": 300,
   "items": [
+    {
+      "title": "从 H200 到 Blackwell 的飞跃：vLLM 助力 DeepSeek 吞吐量飙升 5 倍的五大技术内幕",
+      "url": "/09_inference_system/vllm/hardware_optimization/deepseek_blackwell_wide_ep.html",
+      "date": "2026-11-18",
+      "status": "updated",
+      "module": "推理系统"
+    },
+    {
+      "title": "素材快照：Mixture-of-Experts kernel engineering on Amazon SageMaker AI",
+      "url": "/09_inference_system/vllm/hardware_optimization/references/aws-blog-moe-kernel.html",
+      "date": "2026-11-18",
+      "status": "new",
+      "module": "推理系统"
+    },
+    {
+      "title": "一行 do_not_specialize，9% TTFT：vLLM fused MoE 的低成本 kernel 优化",
+      "url": "/09_inference_system/vllm/hardware_optimization/vllm_fused_moe_hopper_optimization.html",
+      "date": "2026-11-18",
+      "status": "new",
+      "module": "推理系统"
+    },
+    {
+      "title": "当 KV 装不进显存：五篇论文的五种内存账，与一个「统一命名空间 + 成本旋钮」的设想",
+      "url": "/09_inference_system/kv_cache/04_memory_tiering/01_memory-tiering-overview.html",
+      "date": "2026-11-18",
+      "status": "updated",
+      "module": "推理系统"
+    },
+    {
+      "title": "分层存储的两个前提同时破产：FlatCake 把 DRAM 和 SSD 放到同一层",
+      "url": "/09_inference_system/kv_cache/04_memory_tiering/06_flatcake.html",
+      "date": "2026-11-18",
+      "status": "new",
+      "module": "推理系统"
+    },
     {
       "title": "Skill 生态扫描：2026 年论文与项目盘点",
       "url": "/08_agentic_system/agent_skills/references/02-ecosystem-scan-2026-11.html",
@@ -1019,13 +1054,6 @@
       "module": "推理系统"
     },
     {
-      "title": "当 KV 装不进显存：四篇论文的四种内存账，与一个「统一命名空间 + 成本旋钮」的设想",
-      "url": "/09_inference_system/kv_cache/04_memory_tiering/01_memory-tiering-overview.html",
-      "date": "2026-11-06",
-      "status": "updated",
-      "module": "推理系统"
-    },
-    {
       "title": "不搬 KV 反而更快：OSDI'26 DirectKV 让显存少占 43%",
       "url": "/09_inference_system/kv_cache/04_memory_tiering/02_directkv.html",
       "date": "2026-11-06",
@@ -1964,13 +1992,6 @@
       "module": "推理系统"
     },
     {
-      "title": "从 H200 到 Blackwell 的飞跃：vLLM 助力 DeepSeek 吞吐量飙升 5 倍的五大技术内幕",
-      "url": "/09_inference_system/vllm/hardware_optimization/deepseek_blackwell_wide_ep.html",
-      "date": "2026-11-05",
-      "status": "updated",
-      "module": "推理系统"
-    },
-    {
       "title": "vLLM 注意力机制演进与支持全景：从 MHA 到 MLA 及其稀疏变体的架构解析",
       "url": "/09_inference_system/vllm/module_analysis/attention_mha_mla_nsa.html",
       "date": "2026-11-05",
@@ -2078,27 +2099,6 @@
     {
       "title": "GPGPU vs NPU：大模型推理与训练的算力选择指南",
       "url": "/01_hardware_architecture/nvidia/GPGPU_vs_NPU_大模型推理训练对比.html",
-      "date": "2026-11-05",
-      "status": "updated",
-      "module": "硬件架构"
-    },
-    {
-      "title": "MIG 配置与实操",
-      "url": "/01_hardware_architecture/nvidia/mig_hands_on.html",
-      "date": "2026-11-05",
-      "status": "updated",
-      "module": "硬件架构"
-    },
-    {
-      "title": "GPU Characteristics（GPU 特性）",
-      "url": "/01_hardware_architecture/nvidia/understand_gpu_architecture/01_gpu_characteristics.html",
-      "date": "2026-11-05",
-      "status": "updated",
-      "module": "硬件架构"
-    },
-    {
-      "title": "GPU Memory (GPU 内存)",
-      "url": "/01_hardware_architecture/nvidia/understand_gpu_architecture/02_gpu_memory.html",
       "date": "2026-11-05",
       "status": "updated",
       "module": "硬件架构"
