@@ -1240,6 +1240,10 @@
     "url": "/08_agentic_system/agent_skills/03_self-driving-skill-for-complex-projects.html"
   },
   {
+    "title": "四分之一的 Agent Skill 有漏洞：NVIDIA 把安装前的扫描器开源了",
+    "url": "/08_agentic_system/agent_skills/04_skillspector-security-scanner.html"
+  },
+  {
     "title": "multi-session-collab：评审、修改、测试、裁决的多会话协作 Skill",
     "url": "/08_agentic_system/agent_skills/multi-session-collab/"
   },
@@ -1270,6 +1274,14 @@
   {
     "title": "Translated Document",
     "url": "/08_agentic_system/agent_skills/pdf_translator/test_output.html"
+  },
+  {
+    "title": "《Agent Skills in the Wild》论文总结",
+    "url": "/08_agentic_system/agent_skills/references/01-agent-skills-in-the-wild.html"
+  },
+  {
+    "title": "Skill 生态扫描：2026 年论文与项目盘点",
+    "url": "/08_agentic_system/agent_skills/references/02-ecosystem-scan-2026-11.html"
   },
   {
     "title": "12-Factor Agents - 构建可靠 LLM 应用的原则",
@@ -3170,6 +3182,26 @@
   {
     "title": "杂项与专题合集",
     "url": "/99_misc/"
+  },
+  {
+    "title": "AI Infra / Agent 岗位 JD 数据集",
+    "url": "/99_misc/ai_infra_jd_survey/"
+  },
+  {
+    "title": "312 条 JD 里的 AI Infra 技能版图",
+    "url": "/99_misc/ai_infra_jd_survey/01-岗位技能版图.html"
+  },
+  {
+    "title": "JD 分类报告",
+    "url": "/99_misc/ai_infra_jd_survey/analysis/classification.html"
+  },
+  {
+    "title": "AI Infra / Agent 岗位技能树",
+    "url": "/99_misc/ai_infra_jd_survey/analysis/skill-tree.html"
+  },
+  {
+    "title": "visualization",
+    "url": "/99_misc/ai_infra_jd_survey/visualization.html"
   },
   {
     "title": "从芯片到 Agent：AI 基础设施的阅读地图 ——「AI 原力注入」好书推荐合集",

@@ -1,8 +1,43 @@
 {
-  "generated_at": "2026-11-17T22:00:03Z",
+  "generated_at": "2026-11-18T07:03:09Z",
   "window_days": 30,
   "count": 300,
   "items": [
+    {
+      "title": "312 条 JD 里的 AI Infra 技能版图",
+      "url": "/99_misc/ai_infra_jd_survey/01-岗位技能版图.html",
+      "date": "2026-11-18",
+      "status": "new",
+      "module": "杂项"
+    },
+    {
+      "title": "visualization",
+      "url": "/99_misc/ai_infra_jd_survey/visualization.html",
+      "date": "2026-11-18",
+      "status": "new",
+      "module": "杂项"
+    },
+    {
+      "title": "Skill 生态扫描：2026 年论文与项目盘点",
+      "url": "/08_agentic_system/agent_skills/references/02-ecosystem-scan-2026-11.html",
+      "date": "2026-11-18",
+      "status": "new",
+      "module": "智能体"
+    },
+    {
+      "title": "四分之一的 Agent Skill 有漏洞：NVIDIA 把安装前的扫描器开源了",
+      "url": "/08_agentic_system/agent_skills/04_skillspector-security-scanner.html",
+      "date": "2026-11-18",
+      "status": "new",
+      "module": "智能体"
+    },
+    {
+      "title": "《Agent Skills in the Wild》论文总结",
+      "url": "/08_agentic_system/agent_skills/references/01-agent-skills-in-the-wild.html",
+      "date": "2026-11-18",
+      "status": "new",
+      "module": "智能体"
+    },
     {
       "title": "Humming 深拆：不预制 kernel，把组合爆炸交给 JIT",
       "url": "/02_gpu_programming/06_quant_gemm/02_humming-arch-jit.html",
@@ -2064,41 +2099,6 @@
     {
       "title": "GPU Memory (GPU 内存)",
       "url": "/01_hardware_architecture/nvidia/understand_gpu_architecture/02_gpu_memory.html",
-      "date": "2026-11-05",
-      "status": "updated",
-      "module": "硬件架构"
-    },
-    {
-      "title": "GPU Example: Tesla V100",
-      "url": "/01_hardware_architecture/nvidia/understand_gpu_architecture/03_tesla_v100.html",
-      "date": "2026-11-05",
-      "status": "updated",
-      "module": "硬件架构"
-    },
-    {
-      "title": "GPU Example: RTX 5000",
-      "url": "/01_hardware_architecture/nvidia/understand_gpu_architecture/04_rtx_5000.html",
-      "date": "2026-11-05",
-      "status": "updated",
-      "module": "硬件架构"
-    },
-    {
-      "title": "Exercise: Device Query",
-      "url": "/01_hardware_architecture/nvidia/understand_gpu_architecture/05_exer_device_query.html",
-      "date": "2026-11-05",
-      "status": "updated",
-      "module": "硬件架构"
-    },
-    {
-      "title": "Exercise: Device Bandwidth",
-      "url": "/01_hardware_architecture/nvidia/understand_gpu_architecture/06_exer_device_bandwidth.html",
-      "date": "2026-11-05",
-      "status": "updated",
-      "module": "硬件架构"
-    },
-    {
-      "title": "GPU 架构实例：NVIDIA A100 (Ampere)",
-      "url": "/01_hardware_architecture/nvidia/understand_gpu_architecture/07_a100_architecture.html",
       "date": "2026-11-05",
       "status": "updated",
       "module": "硬件架构"
