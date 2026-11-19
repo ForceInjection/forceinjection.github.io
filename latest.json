@@ -1,8 +1,36 @@
 {
-  "generated_at": "2026-11-18T22:00:06Z",
+  "generated_at": "2026-11-19T22:00:05Z",
   "window_days": 30,
   "count": 300,
   "items": [
+    {
+      "title": "AI Agents for Beginners 课程之 AI Agent及使用场景简介",
+      "url": "/10_ai_related_course/AI Agents for Beginners 课程之 AI Agent及使用场景简介.html",
+      "date": "2026-11-19",
+      "status": "updated",
+      "module": "课程"
+    },
+    {
+      "title": "UC Berkeley · LLM Agents（MOOC）",
+      "url": "/10_ai_related_course/university_courses/berkeley-llm-agents.html",
+      "date": "2026-11-19",
+      "status": "new",
+      "module": "课程"
+    },
+    {
+      "title": "CMU 11-868 · Large Language Model Systems",
+      "url": "/10_ai_related_course/university_courses/cmu-11-868.html",
+      "date": "2026-11-19",
+      "status": "new",
+      "module": "课程"
+    },
+    {
+      "title": "Stanford CS336 · Language Modeling from Scratch",
+      "url": "/10_ai_related_course/university_courses/stanford-cs336.html",
+      "date": "2026-11-19",
+      "status": "new",
+      "module": "课程"
+    },
     {
       "title": "从 H200 到 Blackwell 的飞跃：vLLM 助力 DeepSeek 吞吐量飙升 5 倍的五大技术内幕",
       "url": "/09_inference_system/vllm/hardware_optimization/deepseek_blackwell_wide_ep.html",
@@ -46,15 +74,8 @@
       "module": "智能体"
     },
     {
-      "title": "312 条 JD 里的 AI Infra 技能版图",
+      "title": "6740 条 JD 里的 AI Infra 技能版图",
       "url": "/99_misc/ai_infra_jd_survey/01-岗位技能版图.html",
-      "date": "2026-11-18",
-      "status": "new",
-      "module": "杂项"
-    },
-    {
-      "title": "visualization",
-      "url": "/99_misc/ai_infra_jd_survey/visualization.html",
       "date": "2026-11-18",
       "status": "new",
       "module": "杂项"
@@ -1736,7 +1757,7 @@
       "title": "155 万亿 tokens/天，单卡运营利润率 93%：token 生意可以做成暴利",
       "url": "/09_inference_system/cost_analysis/deepseek_inference_cluster_unit_economics.html",
       "date": "2026-11-05",
-      "status": "new",
+      "status": "updated",
       "module": "推理系统"
     },
     {
@@ -1750,7 +1771,7 @@
       "title": "155 万亿 tokens/天背后的引擎：DeepInfer 源码拆解",
       "url": "/09_inference_system/deepinfer/deepinfer-source-deep-dive.html",
       "date": "2026-11-05",
-      "status": "new",
+      "status": "updated",
       "module": "推理系统"
     },
     {
@@ -2078,27 +2099,6 @@
     {
       "title": "Ascend 950 微架构速查：来自 FlashMLA 算子报告的硬件信息整理",
       "url": "/01_hardware_architecture/ascend/Ascend950_微架构速查.html",
-      "date": "2026-11-05",
-      "status": "updated",
-      "module": "硬件架构"
-    },
-    {
-      "title": "Ascend Sparse Attention Forward 算法与优化技术简析",
-      "url": "/01_hardware_architecture/ascend/Ascend950_稀疏注意力Forward算子与优化技术简析.html",
-      "date": "2026-11-05",
-      "status": "updated",
-      "module": "硬件架构"
-    },
-    {
-      "title": "GPU Direct Storage (GDS) 基础",
-      "url": "/01_hardware_architecture/gpudirect/03_gds_basics.html",
-      "date": "2026-11-05",
-      "status": "updated",
-      "module": "硬件架构"
-    },
-    {
-      "title": "GPGPU vs NPU：大模型推理与训练的算力选择指南",
-      "url": "/01_hardware_architecture/nvidia/GPGPU_vs_NPU_大模型推理训练对比.html",
       "date": "2026-11-05",
       "status": "updated",
       "module": "硬件架构"

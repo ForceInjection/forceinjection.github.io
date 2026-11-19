@@ -2520,22 +2520,6 @@
     "url": "/10_ai_related_course/ai_infra_course/入门级/"
   },
   {
-    "title": "Token Factory：AI 推理的成本革命",
-    "url": "/10_ai_related_course/ai_infra_lecture/入门级/"
-  },
-  {
-    "title": "Token Factory：AI 推理的成本革命 - PPT 大纲设计（2026 年 8 月）",
-    "url": "/10_ai_related_course/ai_infra_lecture/入门级/AI Infra 课程 PPT 大纲.html"
-  },
-  {
-    "title": "Token Factory：AI 推理的成本革命 - 演讲稿",
-    "url": "/10_ai_related_course/ai_infra_lecture/入门级/讲稿.html"
-  },
-  {
-    "title": "哈佛 CS2680 · Modern AI Systems",
-    "url": "/10_ai_related_course/cs2680_modern_ai_systems/"
-  },
-  {
     "title": "KV Cache 八讲：从 token 账本到生产引擎",
     "url": "/10_ai_related_course/kv_cache_course/"
   },
@@ -2862,6 +2846,26 @@
   {
     "title": "第十四章 项目管理与团队协作",
     "url": "/10_ai_related_course/trae/第四部分-团队协作与最佳实践/第十四章-项目管理与团队协作.html"
+  },
+  {
+    "title": "大学公开课档案",
+    "url": "/10_ai_related_course/university_courses/"
+  },
+  {
+    "title": "UC Berkeley · LLM Agents（MOOC）",
+    "url": "/10_ai_related_course/university_courses/berkeley-llm-agents.html"
+  },
+  {
+    "title": "CMU 11-868 · Large Language Model Systems",
+    "url": "/10_ai_related_course/university_courses/cmu-11-868.html"
+  },
+  {
+    "title": "哈佛 CS2680 · Modern AI Systems",
+    "url": "/10_ai_related_course/university_courses/harvard-cs2680/"
+  },
+  {
+    "title": "Stanford CS336 · Language Modeling from Scratch",
+    "url": "/10_ai_related_course/university_courses/stanford-cs336.html"
   },
   {
     "title": "AI Native 全栈实践",
@@ -3220,7 +3224,7 @@
     "url": "/99_misc/ai_infra_jd_survey/"
   },
   {
-    "title": "312 条 JD 里的 AI Infra 技能版图",
+    "title": "6740 条 JD 里的 AI Infra 技能版图",
     "url": "/99_misc/ai_infra_jd_survey/01-岗位技能版图.html"
   },
   {
@@ -3232,8 +3236,20 @@
     "url": "/99_misc/ai_infra_jd_survey/analysis/skill-tree.html"
   },
   {
-    "title": "visualization",
-    "url": "/99_misc/ai_infra_jd_survey/visualization.html"
+    "title": "jobs campus",
+    "url": "/99_misc/ai_infra_jd_survey/jobs-campus.html"
+  },
+  {
+    "title": "jobs society",
+    "url": "/99_misc/ai_infra_jd_survey/jobs-society.html"
+  },
+  {
+    "title": "skill map campus",
+    "url": "/99_misc/ai_infra_jd_survey/skill-map-campus.html"
+  },
+  {
+    "title": "skill map society",
+    "url": "/99_misc/ai_infra_jd_survey/skill-map-society.html"
   },
   {
     "title": "从芯片到 Agent：AI 基础设施的阅读地图 ——「AI 原力注入」好书推荐合集",

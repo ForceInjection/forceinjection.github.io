@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """JD 数据集分析：分类统计 + 岗位技能树生成。
 
-用法：python3 scripts/analyze.py [data/jd_2026-11-18.jsonl]
+用法：python3 scripts/analyze.py [可选：指定单个 jsonl；默认合并 data/ 全部批次]
 输出：analysis/classification.md（分类报告）+ analysis/skill-tree.md（技能树）
 可重复运行，数据集更新后重跑即刷新。
 """
@@ -10,39 +10,22 @@ from pathlib import Path
 from collections import Counter, defaultdict
 
 BASE = Path(__file__).resolve().parent.parent
-DATA = BASE / "data" / "jd_2026-11-18.jsonl"
+DATA = BASE / "data"  # 默认合并目录下全部 jd_*.jsonl 批次；显式传单文件路径则只用该文件
 OUT = BASE / "analysis"
+CATALOG = json.loads((BASE / "data" / "skill_catalog.json").read_text(encoding="utf-8"))
+CAT_ORDER = CATALOG["category"]["order"]
 
-# 技能归一化：变体 → 规范名（小写匹配）
-SKILL_NORMALIZE = {
-    "k8s": "Kubernetes", "kubernetes": "Kubernetes", "k8s集群": "Kubernetes",
-    "vllm": "vLLM", "sglang": "SGLang", "tensorrt": "TensorRT", "tensorrt-llm": "TensorRT-LLM",
-    "tensorrtllm": "TensorRT-LLM", "cuda": "CUDA", "triton": "Triton", "cutlass": "CUTLASS",
-    "go": "Go", "golang": "Go", "python": "Python", "rust": "Rust", "java": "Java", "c++": "C++",
-    "nccl": "NCCL", "ray": "Ray", "docker": "Docker", "prometheus": "Prometheus",
-    "grafana": "Grafana", "linux": "Linux", "megatron": "Megatron", "deepspeed": "DeepSpeed",
-    "flashattention": "FlashAttention", "kv cache": "KV Cache", "kvcache": "KV Cache",
-    "langchain": "LangChain", "langgraph": "LangGraph", "rag": "RAG", "mcp": "MCP",
-    "slurm": "Slurm", "ib": "InfiniBand", "infiniband": "InfiniBand", "rdma": "RDMA",
-    "roce": "RoCE", "dcgm": "DCGM", "mig": "MIG", "gpu": "GPU", "nvidia-smi": "nvidia-smi",
-    "ttft": "TTFT", "tpot": "TPOT", "sla": "SLA/SLO", "slo": "SLA/SLO", "sre": "SRE",
-    "gpu池化": "GPU池化", "可观测性": "可观测性", "量化": "模型量化", "分布式训练": "分布式训练",
-    "性能调优": "性能优化", "shell": "Shell", "spark": "Spark", "flink": "Flink",
-    "clickhouse": "ClickHouse", "redis": "Redis", "mysql": "MySQL", "kafka": "Kafka",
-    "elasticsearch": "Elasticsearch", "terraform": "Terraform", "ansible": "Ansible",
-    "ci/cd": "CI/CD", "git": "Git", "aws": "AWS", "gcp": "GCP", "azure": "Azure",
-    "openai": "OpenAI API", "function calling": "Function Calling", "agent": "Agent框架",
-    "agents": "Agent框架", "ai agents": "Agent框架", "agentic systems": "Agent框架",
-    "agentic engineering": "Agent框架", "agentic engineer": "Agent框架",
-    "llm": "大模型/LLM", "大模型": "大模型/LLM", "llms": "大模型/LLM",
-    "多模态": "多模态", "模型部署": "模型部署", "wasm": "WASM", "envoy": "Envoy",
-    "istio": "Istio", "grpc": "gRPC", "protobuf": "Protobuf", "faiss": "FAISS",
-    "milvus": "Milvus", "elk": "ELK", "zabbix": "Zabbix", "vmware": "VMware",
-    "bdsl": "BDSL", "nvme": "NVMe", "ibof": "IBoF", "xpu": "XPU",
-    "故障处理": "故障排查",
-}
+# 技能归一化：变体 → 规范名（唯一定义源是 data/skill_catalog.json 的 skill.aliases）
+SKILL_NORMALIZE = CATALOG["skill"]["aliases"]
 
-CAT_ORDER = ["研发", "算法", "测试", "SRE", "运维", "其他"]
+# sub_category 口径：入库时已按 data/skill_catalog.json 的 sub_category.rules
+# 写入标准方向名（行业通用岗位名），分析端不再做任何改名，只兜空值。
+
+
+def norm_sub(s):
+    """sub_category 只兜空值；标准名以 catalog 为唯一口径。"""
+    s = (s or "").strip()
+    return s if s else "未标注"
 
 
 def norm_skill(s: str) -> str:
@@ -67,8 +50,12 @@ def pct(n: int, total: int) -> str:
 
 
 def main():
-    data_path = Path(sys.argv[1]) if len(sys.argv) > 1 else DATA
-    recs = load(data_path)
+    if len(sys.argv) > 1:
+        recs = load(Path(sys.argv[1]))
+    else:
+        recs = []
+        for p in sorted(DATA.glob("jd_*.jsonl")):
+            recs.extend(load(p))
     total = len(recs)
     OUT.mkdir(exist_ok=True)
 
@@ -82,7 +69,7 @@ def main():
     for r in recs:
         c = r["category"]
         cat_company[c][r.get("company") or "（未显示）"] += 1
-        sub = r.get("sub_category") or "未标注"
+        sub = norm_sub(r.get("sub_category"))
         by_sub[c][sub] += 1
         loc = r.get("location") or "未标注"
         by_loc[loc.split("/")[0].split("、")[0].strip()] += 1
@@ -94,7 +81,7 @@ def main():
     cat_skills = defaultdict(Counter)
     for r in recs:
         c = r["category"]
-        sub = r.get("sub_category") or "未标注"
+        sub = norm_sub(r.get("sub_category"))
         sub_jd_count[c][sub] += 1
         skills = {norm_skill(s) for s in (r.get("skills") or [])}
         for s in skills:
@@ -106,7 +93,7 @@ def main():
 
     # ── 输出 1：分类报告 ──
     lines = ["# JD 分类报告", "",
-             f"> 数据：`data/jd_2026-11-18.jsonl`，{total} 条，采集 2026-11-18。分析脚本：`scripts/analyze.py`（可重跑刷新）", ""]
+             f"> 数据：`data/` 全部批次（jd_*.jsonl），{total} 条。分析脚本：`scripts/analyze.py`（可重跑刷新）", ""]
     lines += ["## 一、按岗位类别", "", "| 类别 | 条数 | 占比 |", "| --- | --- | --- |"]
     for c in CAT_ORDER:
         if by_cat.get(c):
@@ -141,7 +128,7 @@ def main():
 
     # ── 输出 2：技能树 ──
     t = ["# AI Infra / Agent 岗位技能树", "",
-         f"> 从 {total} 条 JD（2026-11-18 采集）的 skills 标签聚合生成，括号内为要求该技能的 JD 条数。",
+         f"> 从 {total} 条 JD 的 skills 标签聚合生成，括号内为要求该技能的 JD 条数。",
          "> 生成：`scripts/analyze.py`；用途：技能学习材料的组织索引。", ""]
     # 全局高频
     t += ["## 全局技能 Top 30", "", "| 排名 | 技能 | JD 数 | 占比 |", "| --- | --- | --- | --- |"]
