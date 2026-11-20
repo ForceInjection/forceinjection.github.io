@@ -1,8 +1,15 @@
 {
-  "generated_at": "2026-11-20T05:43:16Z",
+  "generated_at": "2026-11-20T11:10:31Z",
   "window_days": 30,
   "count": 300,
   "items": [
+    {
+      "title": "visualization",
+      "url": "/99_misc/ai_infra_jd_survey/visualization.html",
+      "date": "2026-11-20",
+      "status": "new",
+      "module": "杂项"
+    },
     {
       "title": "6819 条 JD 里的 AI Infra 技能版图",
       "url": "/99_misc/ai_infra_jd_survey/01-岗位技能版图.html",
@@ -1582,7 +1589,7 @@
       "title": "EdgeRock-4B 拆解：把 KV Cache 变成固定容量记忆",
       "url": "/06_llm_theory_and_fundamentals/llm_basic_concepts/memory_native/edgerock-4b-constant-memory.html",
       "date": "2026-11-05",
-      "status": "new",
+      "status": "updated",
       "module": "LLM 理论"
     },
     {
@@ -2092,13 +2099,6 @@
     {
       "title": "gpu-memory-utilization 的谢幕：vLLM 如何用「实测」替代「估算」",
       "url": "/09_inference_system/vllm/module_analysis/gpu-memory-utilization-retirement.html",
-      "date": "2026-11-05",
-      "status": "updated",
-      "module": "推理系统"
-    },
-    {
-      "title": "Hybrid KV Cache Manager 深度解析",
-      "url": "/09_inference_system/vllm/module_analysis/hybrid_kv_cache_manager_deep_dive.html",
       "date": "2026-11-05",
       "status": "updated",
       "module": "推理系统"
