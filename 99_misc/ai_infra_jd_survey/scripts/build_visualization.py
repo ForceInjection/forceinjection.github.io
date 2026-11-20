@@ -1,11 +1,13 @@
 #!/usr/bin/env python3
-"""生成 JD 数据集两份独立可视化页面（技能地图 + 岗位版图）。
+"""生成 JD 数据集四份独立可视化页面（社招/校招 × 技能地图/岗位版图）。
 
 用法：python3 scripts/build_visualization.py
-输出：skill-map.html —— 技能地图（一 技能谱系树 / 二 学习路线 / 三 大类→细分→技能 Sankey / 四 UpSet）
-      jobs.html      —— 岗位版图（一 岗位堆叠条+公司表 / 二 城市×类别热力矩阵 / 三 JD 明细表）
-两份均零外部依赖、离线可打开，各自独立成页；数据更新后重跑即刷新。
-技能归一化复用 analyze.py 的映射表。
+输出：skill-map-{society|campus}.html —— 技能地图（〇 三视角总览 / 一 技能谱系树 / 二 学习路线 / 三 技术栈×岗位类别热力）
+      jobs-{society|campus}.html      —— 岗位版图（一 岗位堆叠条+公司表 / 二 城市×类别热力矩阵 / 三 JD 明细表）
+四份为零外部 JS/CSS 依赖的单文件 HTML（页首 logo 引用同仓库 img/ 图片），按渠道各自独立成页；
+数据更新后重跑即刷新。
+技能归一化复用 analyze.py 的映射表；技能的 kind/type/scope/work_type 归属读 catalog 的
+skill.taxonomy（唯一定义源），build 内不硬编码。
 """
 import json, re, sys
 from pathlib import Path
@@ -16,15 +18,112 @@ from analyze import norm_skill, norm_sub  # noqa: E402
 
 BASE = Path(__file__).resolve().parent.parent
 
-TOP_SKILL_BAR_MAX = 30      # 全局条形数量
 SUB_SKILL_SHOW = 18         # 每方向展示技能叶数
-COOC_TOP = 12               # 共现矩阵维度（保留在 md 报告中）
 COMPANY_SHOW = 12           # 公司表行数
+HEAT_TOP = 25               # 热力矩阵行数（仅 technique 词）
 
 CATALOG = json.loads((BASE / "data" / "skill_catalog.json").read_text(encoding="utf-8"))
 CAT_ORDER = CATALOG["category"]["order"]
 FAMILY_DEF = CATALOG["skill_family"]["items"]
 ROADMAPS = CATALOG["roadmaps"]
+
+
+def build_tax() -> dict:
+    """catalog taxonomy → 页面用精简映射表（kind 归属的唯一定义源，build 内不硬编码）。"""
+    tax = {}
+    for x in CATALOG.get("skill", {}).get("taxonomy", []):
+        d = {"kind": x["kind"]}
+        if x.get("type"):
+            d["type"] = x["type"]
+        if x.get("scope"):
+            d["scope"] = x["scope"]
+        if x.get("scope_facets"):
+            d["sf"] = x["scope_facets"]
+        if x.get("work_type"):
+            d["wt"] = x["work_type"]
+        if x.get("base"):
+            d["base"] = True
+        tax[x["name"]] = d
+    return tax
+
+
+def compute_kind_views(rows: list) -> dict:
+    """从 JD 记录 + catalog taxonomy 聚合三视角总览数据（topic / technique / work）。
+
+    计数前先过 norm_skill 归一化（与 analyze.py / 页面树同口径），否则别名
+    计数会散落在 taxonomy 之外、三视角合计对不上 skill-tree*.md。
+    """
+    sk_n = Counter()
+    for r in rows:
+        sk_n.update({norm_skill(s) for s in (r.get("skills") or [])})
+    total = len(rows)
+
+    kind_of, ttype_of, scope_of, wt_of = {}, {}, {}, {}
+    base_of = {}
+    for x in CATALOG.get("skill", {}).get("taxonomy", []):
+        name = x["name"]
+        kind_of[name] = x["kind"]
+        base_of[name] = bool(x.get("base"))
+        if x["kind"] == "technique":
+            ttype_of[name] = x.get("type", "")
+            scope_of[name] = x.get("scope", "")
+        if x["kind"] == "work":
+            wt_of[name] = x.get("work_type", "")
+
+    TYPE_LABEL = {
+        "language": "编程/建模语言", "framework": "开发框架与库",
+        "platform-tool": "工具、平台与协议", "hardware-interface": "物理硬件与互联接口",
+        "data-system": "数据存储与处理系统", "method": "具名方法与范式",
+    }
+    SCOPE_LABEL = {"ai-infra": "AI Infra", "agent-infra": "Agent Infra", "general": "通用底座"}
+    WORK_LABEL = {"action": "岗位动作", "role": "角色", "metric": "指标", "capability": "能力保障"}
+
+    # topic：base 行业默认词置顶单独返回，其余按提及率降序（两段不合并排名）
+    all_topic = sorted(
+        [{"name": s, "count": sk_n[s], "pct": round(sk_n[s] / total * 100, 1)}
+         for s in kind_of if kind_of[s] == "topic" and sk_n.get(s, 0) > 0],
+        key=lambda x: -x["count"])
+    topic = {
+        "base": [x for x in all_topic if base_of.get(x["name"])],
+        "items": [x for x in all_topic if not base_of.get(x["name"])],
+    }
+
+    # technique：按 type 分组 → scope 分块 → 词列表
+    # （Python 3.15 起 defaultdict 不再继承 list，两层聚合须逐层下标取 list）
+    tech_by_type = defaultdict(lambda: defaultdict(list))
+    for s in kind_of:
+        if kind_of[s] == "technique" and sk_n.get(s, 0) > 0:
+            tech_by_type[ttype_of.get(s, "?")][scope_of.get(s, "")].append(
+                {"name": s, "count": sk_n[s], "scope": scope_of.get(s, "")})
+    technique = []
+    for tp in ["language", "framework", "platform-tool", "hardware-interface", "data-system", "method"]:
+        group = tech_by_type.get(tp)
+        if not group:
+            continue
+        scope_blocks = []
+        for sc in ["ai-infra", "agent-infra", "general"]:
+            items = sorted(group.get(sc) or [], key=lambda x: -x["count"])
+            if items:
+                scope_blocks.append({"scope": sc, "label": SCOPE_LABEL.get(sc, sc), "items": items})
+        if scope_blocks:
+            technique.append({"type": tp, "label": TYPE_LABEL.get(tp, tp), "scope_blocks": scope_blocks})
+
+    # work：按 work_type 分组
+    work_groups = []
+    for wt, label in [("action", "岗位动作"), ("role", "角色"), ("metric", "指标"), ("capability", "能力保障")]:
+        members = sorted(
+            [{"name": s, "count": sk_n[s]} for s in kind_of
+             if kind_of[s] == "work" and wt_of.get(s) == wt and sk_n.get(s, 0) > 0],
+            key=lambda x: -x["count"])
+        if members:
+            work_groups.append({"work_type": wt, "label": label, "items": members})
+
+    return {
+        "total": total,
+        "topic": topic,
+        "technique": technique,
+        "work": work_groups,
+    }
 
 
 def load(path: Path):
@@ -56,27 +155,8 @@ def aggregate(recs):
     n_firms = len([k for k in companies if k != "（未显示）"])
     n_skills = len({norm_skill(s) for r in recs for s in (r.get("skills") or [])})
 
-    # 共现矩阵（取研发+算法合线的 Top 技能，与 analyze 口径一致）
-    dev = [r for r in recs if r["category"] in ("研发", "算法")]
-    dev_skills = Counter()
-    dev_sets = []
-    for r in dev:
-        ss = {norm_skill(s) for s in (r.get("skills") or [])}
-        dev_sets.append(ss)
-        dev_skills.update(ss)
-    top = [s for s, _ in dev_skills.most_common(COOC_TOP)]
-    idx = {s: i for i, s in enumerate(top)}
-    mat = [[0] * len(top) for _ in top]
-    for ss in dev_sets:
-        hit = sorted(idx[s] for s in ss if s in idx)
-        for a in range(len(hit)):
-            mat[hit[a]][hit[a]] += 1
-            for b in range(a + 1, len(hit)):
-                mat[hit[a]][hit[b]] += 1
-                mat[hit[b]][hit[a]] += 1
-
     # 城市 × 类别矩阵：国内中文 location 按提及计（一条 JD 涉多城分别计入）；
-    # HN 英文原文不进矩阵（在明细表中按原文检索）。
+    # 海外城市不进矩阵（在明细表中按原文检索）。
     cn_re = re.compile(r"[一-鿿]")
     city_cat = defaultdict(Counter)
     city_total = Counter()
@@ -91,35 +171,7 @@ def aggregate(recs):
                 city_total[city] += 1
     cities_sorted = [c for c, _ in city_total.most_common()]
 
-    # Sankey：大类 → 归并细分 → 全局 Top15 技能。cat→sub 按 JD 条数；sub→skill 按技能展开
-    sankey_link = Counter()
-    sankey_subskill = defaultdict(Counter)
-    glob_skill = Counter()
-    for r in recs:
-        c = r["category"]
-        s = norm_sub(r.get("sub_category"))
-        sankey_link[(c, s)] += 1
-        for sk in {norm_skill(x) for x in (r.get("skills") or [])}:
-            sankey_subskill[s][sk] += 1
-            glob_skill[sk] += 1
-    top15 = [s for s, _ in glob_skill.most_common(15)]
-    # sub 层「其他」与 cat 层「其他」撞名（同名节点会被归进同一层），改名区分
-    links = [{"source": c, "target": ("其他（细分）" if s == "其他" else s), "value": n}
-             for (c, s), n in sankey_link.items()]
-    for s, cnt in sankey_subskill.items():
-        for sk in top15:
-            if cnt.get(sk):
-                links.append({"source": s, "target": sk, "value": cnt[sk]})
-
-    # UpSet：研发+算法线 Top12 技能的精确组合交集（≥2 技能的 JD 按其观测组合计数）
-    exact = Counter()
-    for ss in dev_sets:
-        hit = frozenset(x for x in top if x in ss)
-        if len(hit) >= 2:
-            exact[hit] += 1
-    combos = [{"set": sorted(k), "n": v} for k, v in exact.most_common(12)]
-
-    # 明细表精简记录（逐条浏览与联动过滤用）
+    # 明细表精简记录（逐条浏览与联动过滤用；技能全量保留，kind 由页面查 TAX）
     records = [{
         "co": r.get("company") or "—",
         "t": r["title"],
@@ -128,7 +180,7 @@ def aggregate(recs):
         "loc": r.get("location") or "",
         "ty": r.get("employment_type") or "",
         "sa": r.get("salary") or "",
-        "sk": [norm_skill(x) for x in (r.get("skills") or [])][:10],
+        "sk": [norm_skill(x) for x in (r.get("skills") or [])],
         "u": r.get("source_url") or "",
         "p": r.get("source_platform") or "",
     } for r in recs]
@@ -136,23 +188,19 @@ def aggregate(recs):
     return {
         "total": total, "n_firms": n_firms, "n_skills": n_skills,
         "cat_n": dict(cat_n), "companies": dict(companies.most_common(COMPANY_SHOW)),
-        "cat_company": {c: dict(m.most_common(6)) for c, m in cat_company.items()},
+        "cat_company": {c: dict(m) for c, m in cat_company.items()},
         "tree": {c: {s: dict(v.most_common(SUB_SKILL_SHOW)) for s, v in subs.items()}
                  for c, subs in tree.items()},
         "sub_jd": {c: dict(subs.most_common()) for c, subs in sub_jd.items()},
         "cat_skills": {c: dict(m.most_common()) for c, m in cat_skills.items()},
-        "cooc": {"skills": top, "matrix": mat,
-                 "n_dev": len(dev)},
         "city_cat": {c: dict(city_cat[c]) for c in cities_sorted},
-        "sankey": {"links": links, "skills": top15},
-        "upset": {"skills": top, "combos": combos},
         "records": records,
     }
 
 
-# ── 数据键裁剪：两份页面各自只内嵌所需字段（records 是体积大头，skill-map 不带；
-#    tree/roadmaps 是技能页专属，jobs 不带）。cooc 只进 md 报告，两份页面都不带。──
-SKILL_MAP_KEYS = ("total", "n_skills", "cat_n", "tree", "sub_jd", "cat_skills", "sankey", "upset")
+# ── 数据键裁剪：两类页面各自只内嵌所需字段（records 是体积大头，skill-map 不带；
+#    tree/roadmaps 是技能页专属，jobs 不带）。技能共现只在 md 报告（skill-tree*.md）。──
+SKILL_MAP_KEYS = ("total", "n_skills", "cat_n", "tree", "sub_jd", "cat_skills")
 JOBS_KEYS = ("total", "n_firms", "cat_n", "companies", "cat_company", "city_cat", "records")
 
 
@@ -161,7 +209,7 @@ def pick(d: dict, keys) -> dict:
 
 
 # 页脚来源行按数据实时生成，数据更新不脱节
-PLAT_NAMES = {"官网": "12 家公司官网/官方 ATS（华为、百度无公开数据）", "HN": "HN「Who is hiring」",
+PLAT_NAMES = {"官网": "公司官网/官方 ATS", "HN": "HN「Who is hiring」",
               "猎聘快照": "猎聘快照", "BOSS快照": "BOSS快照", "脉脉快照": "脉脉快照",
               "文章": "公开文章",
               "Ashby": "海外 Ashby（OpenAI 等 7 家）", "Greenhouse": "海外 Greenhouse（Anthropic 等 3 家）"}
@@ -169,7 +217,11 @@ PLAT_NAMES = {"官网": "12 家公司官网/官方 ATS（华为、百度无公�
 
 def _src_line(recs: list) -> str:
     plat = Counter(r.get("source_platform", "") for r in recs)
-    return "、".join(f"{PLAT_NAMES.get(k, k)} {v} 条" for k, v in plat.most_common() if k)
+    # 公司数按当前子集实算（社招 12 家、校招 11 家，各自如实）
+    n_firms = len({(r.get("company") or "").strip() for r in recs} - {""})
+    names = dict(PLAT_NAMES)
+    names["官网"] = f"{n_firms} 家公司官网/官方 ATS（华为、百度无公开数据）"
+    return "、".join(f"{names.get(k, k)} {v} 条" for k, v in plat.most_common() if k)
 
 def _page_head(title: str) -> str:
     return ('<!DOCTYPE html>\n<html lang="zh-CN">\n<head>\n'
@@ -292,8 +344,55 @@ __FAM_CSS__
 .heatmap .s-cell.z{background:rgba(43,43,43,.04)}
 .heatmap .h-col{font-weight:600;text-align:center;padding:4px}
 .heatmap .h-sum{color:var(--ink-soft)}
+.heatmap .s-row .row-tag{font-weight:400;color:var(--ink-soft);font-size:11px;margin-left:5px;white-space:nowrap}
 .heat-legend{display:flex;align-items:center;gap:8px;margin-top:10px;font-size:12.5px;color:var(--ink-soft)}
 .heat-legend .sw{width:22px;height:14px;border:1px solid var(--line)}
+
+/* ── kind 徽标（主题黄 / 技术蓝 / 工作红，谱系树与三视角共用色系）── */
+.kd{display:inline-block;font-size:10.5px;line-height:1;padding:2px 5px;border-radius:2px;
+  vertical-align:1.5px;margin-right:5px;font-weight:600;letter-spacing:.05em}
+.kd-topic{background:var(--yellow);color:var(--ink)}
+.kd-technique{background:var(--blue);color:#fff}
+.kd-work{background:var(--red);color:#fff}
+
+/* ── 谱系树 kind/scope 过滤条 ── */
+.tree-filter{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:18px 0 4px;font-size:13px}
+.tree-filter .tf-label{color:var(--ink-soft);margin-right:2px}
+.tf-btn{padding:3px 12px;border:1.5px solid var(--ink);background:transparent;cursor:pointer;
+  font-size:12.5px;color:var(--ink);font-family:inherit}
+.tf-btn.on{background:var(--ink);color:var(--paper)}
+.tf-btn:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.tf-sub{display:none;align-items:center;gap:6px}
+.tf-sub.show{display:flex}
+.skill-row.hidden{display:none}
+
+/* ── 三视角总览 ── */
+.kv-tabs{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.kv-tab{padding:5px 14px;border:1.5px solid var(--ink);cursor:pointer;font-size:13px;background:transparent;color:var(--ink);font-family:inherit}
+.kv-tab.on{background:var(--ink);color:var(--paper)}
+.kv-tab:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.kv-view{margin-top:12px}
+.kv-h{font-size:14px;font-weight:700;margin-bottom:8px;color:var(--ink)}
+.kv-base{border:1.5px solid var(--ink);background:rgba(247,209,84,.16);padding:10px 14px;
+  margin-bottom:12px;font-size:13.5px}
+.kv-base b{font-size:15px}
+.kv-base .n{color:var(--blue);font-weight:600;font-variant-numeric:tabular-nums}
+.kv-base .note{color:var(--ink-soft);font-size:12.5px;margin-left:8px}
+.kv-row{display:grid;grid-template-columns:160px 1fr 64px;gap:8px;align-items:center;padding:3px 0}
+.kv-name{font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.kv-bar{height:14px;background:var(--bar);position:relative}
+.kv-bar .kv-fill{position:absolute;inset:0 auto 0 0;background:var(--blue);transition:width .5s cubic-bezier(.6,0,.2,1)}
+.kv-num{text-align:right;color:var(--blue);font-variant-numeric:tabular-nums;font-weight:600}
+.kv-block{margin-top:14px;padding:12px;border:1.5px solid var(--line);background:rgba(43,43,43,.02)}
+.kv-block-h{font-size:13px;font-weight:700;margin-bottom:6px;color:var(--ink)}
+.kv-scope-row{display:flex;gap:10px;align-items:baseline;margin:5px 0;flex-wrap:wrap}
+.kv-scope-label{flex:none;width:78px;font-size:12px;color:var(--ink-soft);font-weight:600}
+.kv-scope-row .kv-chips{flex:1;min-width:0}
+.kv-chips{display:flex;flex-wrap:wrap;gap:4px}
+.kv-chip{display:inline-flex;align-items:center;gap:3px;padding:2px 8px;border:1px solid var(--line);
+  border-radius:3px;font-size:12.5px;background:var(--paper)}
+.kv-chip b{font-weight:600;color:var(--ink)}
+.kv-chip .kv-chip-n{color:var(--blue);font-variant-numeric:tabular-nums;font-size:11.5px}
 
 """
 
@@ -359,6 +458,11 @@ table.jd-table .t{font-weight:600}
 table.jd-table a{color:var(--blue)}
 table.jd-table .sk span{display:inline-block;border:1px solid var(--line);padding:1px 7px;
   margin:1px 4px 1px 0;font-size:12px;border-radius:9px;white-space:nowrap}
+/* 技能 chip 的 kind 色点（与技能地图徽标同色系） */
+.sk-dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:5px;vertical-align:0}
+.sk-dot.k-topic{background:#E7B93A}
+.sk-dot.k-technique{background:var(--blue)}
+.sk-dot.k-work{background:var(--red)}
 table.jd-table .sub{color:var(--ink-soft);font-size:12.5px}
 table.jd-table tbody tr:hover{background:rgba(61,109,181,.06)}
 
@@ -382,10 +486,16 @@ _SKILL_MAP_BODY = r"""<div class="wrap">
 </header>
 
 <section class="sec">
+  <div class="sec-head"><span class="sec-title">〇、三视角总览</span>
+    <span class="sec-note">主题覆盖率 / 技术栈 / 工作内容分布——三视角各自成榜，不互相比较</span></div>
+  <div id="kind-views"></div>
+</section>
+
+<section class="sec">
   <div class="sec-head"><span class="sec-title">一、技能谱系树</span>
-    <span class="sec-note">点线名展开；叶长 = JD 条数</span></div>
+    <span class="sec-note">点线名展开；叶长 = JD 条数；徽标 = 主题 / 技术 / 工作，支持按性质与应用域过滤</span></div>
   <div class="tree" id="tree"></div>
-  <p class="hint">技能名做过归一化（Kubernetes/K8s 合并、LLM 与大模型合并等）；每方向展示前 18 个技能，完整清单见分析报告 skill-tree.md（本地 analysis/ 目录）。</p>
+  <p class="hint">技能名做过归一化（Kubernetes/K8s 合并、LLM 与大模型合并等）；徽标标注技能性质：主题（黄）/ 技术（蓝）/ 工作（红）。每方向展示前 18 个技能，全量清单与计数基准见本地分析报告 skill-tree.md 及分渠道 skill-tree-society.md / skill-tree-campus.md（analysis/ 目录，本页计数为当前渠道口径）。</p>
 </section>
 
 <section class="sec">
@@ -393,14 +503,14 @@ _SKILL_MAP_BODY = r"""<div class="wrap">
     <span class="sec-note">块色 = 技能家族（见下方图例）；块上数字 = 要求该技能的 JD 条数</span></div>
   <div class="path-tabs" id="path-tabs"></div>
   <div id="path-view"></div>
-  <p class="hint">路线的先后顺序是编辑判断：依据 JD 频次（数字大小）与技能间的依赖关系（底层语言先于框架，框架先于调优），JD 原文本身没有顺序。技能共现分析见本地分析报告 skill-tree.md（analysis/ 目录）。计数口径：方向 JD 提及的技能按方向计，其余按整条线计。</p>
+  <p class="hint">路线的先后顺序是编辑判断：以技能间的依赖关系为主（底层语言先于框架，框架先于调优）、JD 频次为参考，个别低频技能按岗位常识排序，JD 原文本身没有顺序。技能共现分析见本地分析报告 skill-tree.md（analysis/ 目录）。计数口径：方向 JD 提及的技能按方向计，其余按整条线计。</p>
 </section>
 
 <section class="sec">
-  <div class="sec-head"><span class="sec-title">三、技能 × 岗位类别</span>
-    <span class="sec-note">格色深浅 = 要求该技能的 JD 条数</span></div>
+  <div class="sec-head"><span class="sec-title">三、技术栈 × 岗位类别</span>
+    <span class="sec-note">格色深浅 = 要求该技术栈词的 JD 条数；仅统计 technique 词</span></div>
   <div id="skill-heat"></div>
-  <p class="hint">技能取本渠道要求频次 Top 25，横轴按类别展开（一条 JD 多技能分别计入）。同一技能在不同类别中的位次差异，就是岗位对它要求程度的直接对比。</p>
+  <p class="hint">技术栈词取本渠道要求频次 Top 25（主题词与工作内容词不进本表，见三视角总览），行名旁小字为学习单元类型与应用域，横轴按类别展开（一条 JD 多技能分别计入）。同一技术栈词在不同类别中的位次差异，就是岗位对它要求程度的直接对比。</p>
 </section>
 
 <footer><div class="cols">
@@ -421,8 +531,140 @@ document.getElementById('k-total').textContent = D.total;
 /* ── 大类清单（技能树与路线计数共用）── */
 const CATS = CAT_DISPLAY_ORDER.filter(c => D.cat_n[c]);
 
-/* ── 一、技能谱系树 ── */
+/* ── 〇、三视角总览（topic / technique / work 三榜不互相比较）── */
+const KV = __KIND_VIEWS__;
+const TAX = __TAX__;
+const TYPE_CN = {language: '语言', framework: '框架', 'platform-tool': '工具', 'hardware-interface': '硬件', 'data-system': '数据', 'method': '方法'};
+const SCOPE_CN = {'ai-infra': 'AI Infra', 'agent-infra': 'Agent Infra', 'general': '通用底座'};
+const WORK_CN = {action: '岗位动作', role: '角色', metric: '指标', capability: '能力保障'};
+(function renderKindViews() {
+  const root = document.getElementById('kind-views');
+  if (!root || !KV) return;
+  const KIND_LABEL = {topic: '主题覆盖率', technique: '技术栈', work: '工作内容分布'};
+  const KIND_DESC = {
+    topic: 'JD 中提及该主题的占比（分母 = 全部 JD）。行业默认词置顶单列，不参与下方排名',
+    technique: '按学习单元类型分组，组内按应用域分块，块内按提及 JD 数排名，组间不比较',
+    work: '按岗位动作 / 角色 / 指标 / 能力保障分组，组内按提及 JD 数排名，组间不比较',
+  };
+  const tabs = ['topic', 'technique', 'work'];
+  const bar = document.createElement('div'); bar.className = 'kv-tabs';
+  const view = document.createElement('div'); view.className = 'kv-view';
+  let active = 'topic';
+  const btns = {};
+  tabs.forEach(t => {
+    const b = document.createElement('button');
+    b.className = 'kv-tab'; b.textContent = KIND_LABEL[t];
+    b.setAttribute('role', 'tab');
+    b.onclick = () => {
+      active = t;
+      tabs.forEach(x => btns[x].classList.toggle('on', x === t));
+      render();
+    };
+    btns[t] = b; bar.appendChild(b);
+  });
+  btns.topic.classList.add('on');
+  root.appendChild(bar); root.appendChild(view);
+  const maxOf = arr => Math.max(1, ...arr.map(x => x.count));
+  const barRow = (x, mx) =>
+    `<div class="kv-row"><span class="kv-name">${x.name}</span>` +
+    `<span class="kv-bar"><span class="kv-fill" style="width:${(x.count / mx * 100).toFixed(1)}%"></span></span>` +
+    `<span class="kv-num">${x.count}</span></div>`;
+  function render() {
+    view.innerHTML = '';
+    const h = document.createElement('div'); h.className = 'kv-h';
+    h.textContent = KIND_DESC[active] || '';
+    view.appendChild(h);
+    if (active === 'topic') {
+      (KV.topic.base || []).forEach(x => {
+        const card = document.createElement('div'); card.className = 'kv-base';
+        card.innerHTML = `行业默认词：<b>${x.name}</b> <span class="n num">${x.count}</span>` +
+          `<span class="note">覆盖率 ${x.pct}%——绝大多数 JD 默认提及，只说明「这是 AI 行业」，不参与下方排名</span>`;
+        view.appendChild(card);
+      });
+      const mx = maxOf(KV.topic.items);
+      KV.topic.items.forEach(x => { view.insertAdjacentHTML('beforeend', barRow(x, mx)); });
+    } else if (active === 'technique') {
+      KV.technique.forEach(g => {
+        const blk = document.createElement('div'); blk.className = 'kv-block';
+        blk.innerHTML = `<div class="kv-block-h">${g.label}</div>`;
+        g.scope_blocks.forEach(sb => {
+          const chips = sb.items.map(it =>
+            `<span class="kv-chip"><b>${it.name}</b><span class="kv-chip-n">${it.count}</span></span>`).join('');
+          blk.insertAdjacentHTML('beforeend',
+            `<div class="kv-scope-row"><span class="kv-scope-label">${sb.label}</span><span class="kv-chips">${chips}</span></div>`);
+        });
+        view.appendChild(blk);
+      });
+    } else {
+      KV.work.forEach(g => {
+        const blk = document.createElement('div'); blk.className = 'kv-block';
+        blk.innerHTML = `<div class="kv-block-h">${g.label}</div>`;
+        const mx = maxOf(g.items);
+        g.items.forEach(x => { blk.insertAdjacentHTML('beforeend', barRow(x, mx)); });
+        view.appendChild(blk);
+      });
+    }
+  }
+  render();
+})();
+
+/* ── 一、技能谱系树（kind 徽标 + 性质/应用域过滤；子树保留全部词，作索引）── */
 const tree = document.getElementById('tree');
+const KIND_META = {
+  topic:     {label: '主题', cls: 'kd-topic'},
+  technique: {label: '技术', cls: 'kd-technique'},
+  work:      {label: '工作', cls: 'kd-work'},
+};
+const kindOf = s => (TAX[s] || {}).kind || '';
+const scopeOf = s => (TAX[s] || {}).scope || '';
+
+// 过滤条：性质（kind）× 应用域（scope，仅在技术栈时生效）
+let fKind = '', fScope = '';
+const tfBar = document.createElement('div'); tfBar.className = 'tree-filter';
+tfBar.innerHTML = '<span class="tf-label">按性质过滤：</span>';
+[['', '全部'], ['topic', '主题'], ['technique', '技术栈'], ['work', '工作内容']].forEach(([k, label]) => {
+  const b = document.createElement('button'); b.type = 'button';
+  b.className = 'tf-btn' + (k === '' ? ' on' : ''); b.textContent = label;
+  b.onclick = () => {
+    fKind = k;
+    if (fKind !== 'technique') fScope = '';
+    tfBar.querySelectorAll(':scope > .tf-btn').forEach(x => x.classList.toggle('on', x.textContent === label));
+    subBar.classList.toggle('show', fKind === 'technique');
+    if (fKind !== 'technique') subBar.querySelectorAll('.tf-btn').forEach((x, i) => x.classList.toggle('on', i === 0));
+    applyFilter();
+  };
+  tfBar.appendChild(b);
+});
+const subBar = document.createElement('div'); subBar.className = 'tf-sub';
+subBar.innerHTML = '<span class="tf-label">应用域：</span>';
+[['', '全部'], ['ai-infra', 'AI Infra'], ['agent-infra', 'Agent Infra'], ['general', '通用底座']].forEach(([k, label]) => {
+  const b = document.createElement('button'); b.type = 'button';
+  b.className = 'tf-btn' + (k === '' ? ' on' : ''); b.textContent = label;
+  b.onclick = () => {
+    fScope = k;
+    subBar.querySelectorAll('.tf-btn').forEach(x => x.classList.toggle('on', x.textContent === label));
+    applyFilter();
+  };
+  subBar.appendChild(b);
+});
+tfBar.appendChild(subBar);
+tree.parentNode.insertBefore(tfBar, tree);
+
+function applyFilter() {
+  document.querySelectorAll('#tree .dir').forEach(dir => {
+    let vis = 0, tot = 0;
+    dir.querySelectorAll('.skill-row').forEach(row => {
+      tot++;
+      const ok = (!fKind || row.dataset.kind === fKind) &&
+                 (!fScope || fKind !== 'technique' || row.dataset.scope === fScope);
+      row.classList.toggle('hidden', !ok);
+      if (ok) vis++;
+    });
+    const cnt = dir.querySelector('.dir-h .cnt');
+    if (cnt && cnt.dataset.base) cnt.textContent = cnt.dataset.base + (vis < tot ? ` · 匹配 ${vis}/${tot}` : '');
+  });
+}
+
 const LINES = CATS.filter(c => (D.sub_jd[c] && Object.keys(D.sub_jd[c]).length));
 LINES.forEach((c, li) => {
   const line = document.createElement('div');
@@ -445,11 +687,15 @@ LINES.forEach((c, li) => {
     dir.className = 'dir';
     dir.innerHTML = `<div class="dir-h" role="button" tabindex="0" aria-expanded="false">
         <span class="caret">▶</span><span class="dir-name">${sub}</span>
-        <span class="cnt num">${nSub} 条</span></div>
-      <div class="skills">${Object.entries(skills).map(([s,n]) =>
-        `<div class="skill-row"><span class="nm">${s}</span>
+        <span class="cnt num" data-base="${nSub} 条">${nSub} 条</span></div>
+      <div class="skills">${Object.entries(skills).map(([s,n]) => {
+        const k = kindOf(s), km = KIND_META[k];
+        const badge = km ? `<span class="kd ${km.cls}">${km.label}</span>` : '';
+        return `<div class="skill-row" data-kind="${k}" data-scope="${scopeOf(s)}">
+         <span class="nm">${badge}${s}</span>
          <span class="track"><span class="fill" data-w="${(n/mx*100).toFixed(1)}" style="width:0"></span></span>
-         <span class="v num">${n}</span></div>`).join('')}</div>`;
+         <span class="v num">${n}</span></div>`;
+      }).join('')}</div>`;
     const dh = dir.querySelector('.dir-h');
     const toggleDir = () => {
       const on = dir.classList.toggle('open');
@@ -561,15 +807,17 @@ LINE_NAMES.forEach(line => {
   tabs.appendChild(b);
 });
 if (LINE_NAMES.length) tabs.firstChild.click();
-/* ── 三、技能 × 岗位类别热力矩阵 ── */
+/* ── 三、技术栈 × 岗位类别热力矩阵（仅 technique 词）── */
 (function () {
   const box = document.getElementById('skill-heat');
   const cats = CAT_DISPLAY_ORDER.filter(c => D.cat_n[c]);
   const skCats = D.cat_skills || {};
-  const skills = Object.entries(Object.values(skCats).reduce((acc, m) => {
-    Object.entries(m).forEach(([s, n]) => acc[s] = (acc[s] || 0) + n);
-    return acc;
-  }, {})).sort((a, b) => b[1] - a[1]).slice(0, 25).map(x => x[0]);
+  // 只取 technique 词，按全类别合计提及数取 Top N（主题词与工作内容词不进本表）
+  const merged = {};
+  Object.values(skCats).forEach(m => Object.entries(m).forEach(([s, n]) => merged[s] = (merged[s] || 0) + n));
+  const skills = Object.entries(merged)
+    .filter(([s]) => kindOf(s) === 'technique')
+    .sort((a, b) => b[1] - a[1]).slice(0, __HEAT_TOP__).map(x => x[0]);
   if (!skills.length) { box.textContent = '（无数据）'; return; }
   const grid = document.createElement('div');
   grid.className = 'heatmap';
@@ -582,7 +830,10 @@ if (LINE_NAMES.length) tabs.firstChild.click();
   const cellVal = (s, c) => ((skCats[c] || {})[s] || 0);
   skills.forEach(s => cats.forEach(c => { const v = cellVal(s, c); if (v > max) max = v; }));
   skills.forEach(s => {
-    grid.appendChild(mk('s-row', s));
+    const tx = TAX[s] || {};
+    const rowHead = mk('s-row', '');
+    rowHead.innerHTML = `${s}<span class="row-tag">${TYPE_CN[tx.type] || ''} · ${SCOPE_CN[tx.scope] || ''}</span>`;
+    grid.appendChild(rowHead);
     let sum = 0;
     cats.forEach(c => {
       const v = cellVal(s, c);
@@ -651,11 +902,13 @@ _JOBS_BODY = r"""<div class="wrap">
 
 <section class="sec">
   <div class="sec-head"><span class="sec-title">三、JD 明细</span>
-    <span class="sec-note">全部记录逐条可查；从上面任意一幕点击元素会联动过滤到此表</span></div>
+    <span class="sec-note">全部记录逐条可查；技能色点 = 主题（黄）/ 技术（蓝）/ 工作（红），悬停看完整归属；从上面任意一幕点击元素会联动过滤到此表</span></div>
   <div class="jd-filters" id="jd-filters">
     <label>类别 <select id="f-cat"><option value="">全部</option></select></label>
     <label>城市 <select id="f-city"><option value="">全部</option></select></label>
     <label>类型 <select id="f-ty"><option value="">全部</option></select></label>
+    <label>性质 <select id="f-kind"><option value="">全部</option><option value="topic">主题</option><option value="technique">技术栈</option><option value="work">工作内容</option></select></label>
+    <label>应用域 <select id="f-scope" disabled><option value="">全部</option><option value="ai-infra">AI Infra</option><option value="agent-infra">Agent Infra</option><option value="general">通用底座</option></select></label>
     <label>技能 <input id="f-skill" type="search" placeholder="如 CUDA / vLLM"></label>
     <label>公司 <input id="f-co" type="search" placeholder="如 字节 / DeepSeek"></label>
     <button id="f-reset" type="button">重置</button>
@@ -679,6 +932,10 @@ _JOBS_BODY = r"""<div class="wrap">
 <script>
 const D = __DATA__;
 const CAT_DISPLAY_ORDER = __CAT_ORDER__;
+const TAX = __TAX__;
+const TYPE_CN = {language: '语言', framework: '框架', 'platform-tool': '工具', 'hardware-interface': '硬件', 'data-system': '数据', 'method': '方法'};
+const SCOPE_CN = {'ai-infra': 'AI Infra', 'agent-infra': 'Agent Infra', 'general': '通用底座'};
+const WORK_CN = {action: '岗位动作', role: '角色', metric: '指标', capability: '能力保障'};
 
 /* ── KPI ── */
 document.getElementById('k-total').textContent = D.total;
@@ -764,13 +1021,25 @@ Object.entries(D.companies).forEach(([k,v]) => {
   wrap.appendChild(lg);
 })();
 
-/* ── 三、JD 明细表 ── */
+/* ── 三、JD 明细表（性质 / 应用域筛选；技能检索仅作查询，不做跨 kind 排名）── */
 (function () {
   const REC = D.records || [];
   const $ = id => document.getElementById(id);
   const fCat = $('f-cat'), fCity = $('f-city'), fTy = $('f-ty'),
+        fKind = $('f-kind'), fScope = $('f-scope'),
         fSkill = $('f-skill'), fCo = $('f-co'), fReset = $('f-reset');
-  const state = { cat: '', city: '', ty: '', skill: '', co: '' };
+  const state = { cat: '', city: '', ty: '', kind: '', scope: '', skill: '', co: '' };
+
+  // 技能 chip：色点标注性质 + tooltip 完整归属（kind/type/scope 或 work_type）
+  function chipHTML(s) {
+    const x = TAX[s] || {};
+    const kc = x.kind === 'topic' ? 'k-topic' : x.kind === 'work' ? 'k-work' : 'k-technique';
+    const tip = x.kind === 'technique'
+      ? `技术栈 · ${TYPE_CN[x.type] || x.type || ''} · ${SCOPE_CN[x.scope] || x.scope || ''}`
+      : x.kind === 'work' ? `工作内容 · ${WORK_CN[x.wt] || x.wt || ''}`
+      : (x.base ? '主题 · 行业默认词' : '主题');
+    return `<span title="${tip}"><span class="sk-dot ${kc}"></span>${s}</span>`;
+  }
 
   // 下拉选项
   CAT_DISPLAY_ORDER.filter(c => D.cat_n[c]).forEach(c => fCat.appendChild(new Option(c, c)));
@@ -782,7 +1051,12 @@ Object.entries(D.companies).forEach(([k,v]) => {
 
   function syncControls() {
     fCat.value = state.cat; fCity.value = state.city; fTy.value = state.ty;
+    fKind.value = state.kind; fScope.value = state.scope;
     fSkill.value = state.skill; fCo.value = state.co;
+    // 应用域只对技术栈（technique）有意义：未选技术栈时禁用并清空
+    const scopeOn = !state.kind || state.kind === 'technique';
+    fScope.disabled = !scopeOn;
+    if (!scopeOn && state.scope) { state.scope = ''; fScope.value = ''; }
   }
   function apply() {
     const q = { skill: state.skill.trim().toLowerCase(), co: state.co.trim().toLowerCase() };
@@ -790,6 +1064,8 @@ Object.entries(D.companies).forEach(([k,v]) => {
       (!state.cat || r.c === state.cat) &&
       (!state.city || (r.loc || '').replace(/ /g, '').split(/[/,，、]/).includes(state.city)) &&
       (!state.ty || r.ty === state.ty) &&
+      (!state.kind || r.sk.some(s => (TAX[s] || {}).kind === state.kind)) &&
+      (!state.scope || r.sk.some(s => (TAX[s] || {}).scope === state.scope)) &&
       (!q.skill || r.sk.some(s => s.toLowerCase().includes(q.skill))) &&
       (!q.co || (r.co + ' ' + r.t).toLowerCase().includes(q.co)));
     const tb = $('jd-table').querySelector('tbody');
@@ -803,16 +1079,16 @@ Object.entries(D.companies).forEach(([k,v]) => {
         `<td>${r.c}<span class="sub">${r.s ? ' · ' + r.s : ''}</span></td>` +
         `<td class="n">${r.loc || '—'}</td>` +
         `<td class="n">${r.ty || '—'}</td>` +
-        `<td class="sk">${(r.sk || []).map(s => `<span>${s}</span>`).join('')}</td>`;
+        `<td class="sk">${(r.sk || []).map(chipHTML).join('')}</td>`;
       frag.appendChild(tr);
     });
     tb.appendChild(frag);
-    $('jd-count').textContent = `筛选后 ${rows.length} 条 / 全部 ${REC.length} 条`;
+    $('jd-count').textContent = `筛选后 ${rows.length} 条 / 全部 ${REC.length} 条（性质/应用域按「JD 技能集合中至少含一个匹配词」过滤）`;
   }
-  [fCat, fCity, fTy].forEach(s => s.addEventListener('change', () => { state[s.id.slice(2).toLowerCase()] = s.value; apply(); }));
+  [fCat, fCity, fTy, fKind, fScope].forEach(s => s.addEventListener('change', () => { state[s.id.slice(2).toLowerCase()] = s.value; syncControls(); apply(); }));
   fSkill.addEventListener('input', () => { state.skill = fSkill.value; apply(); });
   fCo.addEventListener('input', () => { state.co = fCo.value; apply(); });
-  fReset.addEventListener('click', () => { Object.assign(state, { cat: '', city: '', ty: '', skill: '', co: '' }); syncControls(); apply(); });
+  fReset.addEventListener('click', () => { Object.assign(state, { cat: '', city: '', ty: '', kind: '', scope: '', skill: '', co: '' }); syncControls(); apply(); });
   // 联动入口：其他幕的点击 → jdFilter({cat, city, ...})，滚动到明细
   window.jdFilter = function (patch) {
     Object.assign(state, patch);
@@ -829,6 +1105,8 @@ SKILL_MAP_TEMPLATE = (_page_head("AI Infra 技能地图") + _CSS_BASE + _CSS_SKI
 JOBS_TEMPLATE = (_page_head("AI Infra 岗位版图") + _CSS_BASE + _CSS_JOBS
                  + _HEAD_CLOSE + _JOBS_BODY + _TAIL)
 
+TAX_JSON = json.dumps(build_tax(), ensure_ascii=False)
+
 
 def build_skill_map(d: dict, recs: list, ch_name: str) -> str:
     data_json = json.dumps(pick(d, SKILL_MAP_KEYS), ensure_ascii=False)
@@ -837,6 +1115,7 @@ def build_skill_map(d: dict, recs: list, ch_name: str) -> str:
         {k: {"label": v.get("label", k), "skills": sorted(v["skills"])} for k, v in FAMILY_DEF.items()},
         ensure_ascii=False)
     order_json = json.dumps(CAT_ORDER, ensure_ascii=False)
+    kind_views_json = json.dumps(compute_kind_views(recs), ensure_ascii=False)
     # 家族色板：由 catalog 的 skill_family.items[*].color 生成（节点块与图例色样共用一条规则）
     fam_css = "\n".join(
         f".node.f-{k},.fam-legend .sw.{k}{{background:{v['color']}}}"
@@ -846,6 +1125,9 @@ def build_skill_map(d: dict, recs: list, ch_name: str) -> str:
             .replace("__ROADMAPS__", roadmaps_json)
             .replace("__FAMILIES__", family_json)
             .replace("__CAT_ORDER__", order_json)
+            .replace("__KIND_VIEWS__", kind_views_json)
+            .replace("__HEAT_TOP__", str(HEAT_TOP))
+            .replace("__TAX__", TAX_JSON)
             .replace("__DATA__", data_json)
             .replace("__SRCLINE__", _src_line(recs))
             .replace("__CH_NAME__", ch_name))
@@ -856,6 +1138,7 @@ def build_jobs(d: dict, recs: list, ch_name: str) -> str:
     order_json = json.dumps(CAT_ORDER, ensure_ascii=False)
     return (JOBS_TEMPLATE
             .replace("__CAT_ORDER__", order_json)
+            .replace("__TAX__", TAX_JSON)
             .replace("__DATA__", data_json)
             .replace("__SRCLINE__", _src_line(recs))
             .replace("__CH_NAME__", ch_name))

@@ -1,8 +1,57 @@
 {
-  "generated_at": "2026-11-19T22:00:05Z",
+  "generated_at": "2026-11-20T05:43:16Z",
   "window_days": 30,
   "count": 300,
   "items": [
+    {
+      "title": "6819 条 JD 里的 AI Infra 技能版图",
+      "url": "/99_misc/ai_infra_jd_survey/01-岗位技能版图.html",
+      "date": "2026-11-20",
+      "status": "new",
+      "module": "杂项"
+    },
+    {
+      "title": "AI Infra 校招版图：3412 条校招 JD 的岗位与技能",
+      "url": "/99_misc/ai_infra_jd_survey/02-校招岗位与技能.html",
+      "date": "2026-11-20",
+      "status": "new",
+      "module": "杂项"
+    },
+    {
+      "title": "技能分类体系设计（skill kind 体系）",
+      "url": "/99_misc/ai_infra_jd_survey/docs/技能分类体系设计.html",
+      "date": "2026-11-20",
+      "status": "new",
+      "module": "杂项"
+    },
+    {
+      "title": "jobs campus",
+      "url": "/99_misc/ai_infra_jd_survey/jobs-campus.html",
+      "date": "2026-11-20",
+      "status": "new",
+      "module": "杂项"
+    },
+    {
+      "title": "jobs society",
+      "url": "/99_misc/ai_infra_jd_survey/jobs-society.html",
+      "date": "2026-11-20",
+      "status": "new",
+      "module": "杂项"
+    },
+    {
+      "title": "skill map campus",
+      "url": "/99_misc/ai_infra_jd_survey/skill-map-campus.html",
+      "date": "2026-11-20",
+      "status": "new",
+      "module": "杂项"
+    },
+    {
+      "title": "skill map society",
+      "url": "/99_misc/ai_infra_jd_survey/skill-map-society.html",
+      "date": "2026-11-20",
+      "status": "new",
+      "module": "杂项"
+    },
     {
       "title": "AI Agents for Beginners 课程之 AI Agent及使用场景简介",
       "url": "/10_ai_related_course/AI Agents for Beginners 课程之 AI Agent及使用场景简介.html",
@@ -72,13 +121,6 @@
       "date": "2026-11-18",
       "status": "new",
       "module": "智能体"
-    },
-    {
-      "title": "6740 条 JD 里的 AI Infra 技能版图",
-      "url": "/99_misc/ai_infra_jd_survey/01-岗位技能版图.html",
-      "date": "2026-11-18",
-      "status": "new",
-      "module": "杂项"
     },
     {
       "title": "四分之一的 Agent Skill 有漏洞：NVIDIA 把安装前的扫描器开源了",
@@ -1547,7 +1589,7 @@
       "title": "当记忆成为模型状态：MemT-1.0 的架构、训练与边界",
       "url": "/06_llm_theory_and_fundamentals/llm_basic_concepts/memory_native/memt_1_0_memory_native.html",
       "date": "2026-11-05",
-      "status": "new",
+      "status": "updated",
       "module": "LLM 理论"
     },
     {
@@ -2060,48 +2102,6 @@
       "date": "2026-11-05",
       "status": "updated",
       "module": "推理系统"
-    },
-    {
-      "title": "MLA 的 TP 切分：为什么 8 张 GPU 存了同一份 KV cache",
-      "url": "/09_inference_system/vllm/module_analysis/mla_tp_kv_redundancy.html",
-      "date": "2026-11-05",
-      "status": "updated",
-      "module": "推理系统"
-    },
-    {
-      "title": "vLLM 内置 KV Cache Offloading 模块解析",
-      "url": "/09_inference_system/vllm/module_analysis/native_kv_offloading.html",
-      "date": "2026-11-05",
-      "status": "updated",
-      "module": "推理系统"
-    },
-    {
-      "title": "PagedAttention 这个让 vLLM 成名的技术，为什么走到了尽头？",
-      "url": "/09_inference_system/vllm/module_analysis/pagedattention_retirement.html",
-      "date": "2026-11-05",
-      "status": "updated",
-      "module": "推理系统"
-    },
-    {
-      "title": "vLLM Router：高性能 LLM 推理网关",
-      "url": "/09_inference_system/vllm/routing/router.html",
-      "date": "2026-11-05",
-      "status": "updated",
-      "module": "推理系统"
-    },
-    {
-      "title": "vLLM Semantic Router 深度剖析",
-      "url": "/09_inference_system/vllm/routing/semantic_router_deep_dive.html",
-      "date": "2026-11-05",
-      "status": "updated",
-      "module": "推理系统"
-    },
-    {
-      "title": "Ascend 950 微架构速查：来自 FlashMLA 算子报告的硬件信息整理",
-      "url": "/01_hardware_architecture/ascend/Ascend950_微架构速查.html",
-      "date": "2026-11-05",
-      "status": "updated",
-      "module": "硬件架构"
     }
   ]
 }

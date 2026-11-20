@@ -3224,16 +3224,32 @@
     "url": "/99_misc/ai_infra_jd_survey/"
   },
   {
-    "title": "6740 条 JD 里的 AI Infra 技能版图",
+    "title": "6819 条 JD 里的 AI Infra 技能版图",
     "url": "/99_misc/ai_infra_jd_survey/01-岗位技能版图.html"
+  },
+  {
+    "title": "AI Infra 校招版图：3412 条校招 JD 的岗位与技能",
+    "url": "/99_misc/ai_infra_jd_survey/02-校招岗位与技能.html"
   },
   {
     "title": "JD 分类报告",
     "url": "/99_misc/ai_infra_jd_survey/analysis/classification.html"
   },
   {
-    "title": "AI Infra / Agent 岗位技能树",
+    "title": "AI Infra / Agent 岗位技能树（校招）",
+    "url": "/99_misc/ai_infra_jd_survey/analysis/skill-tree-campus.html"
+  },
+  {
+    "title": "AI Infra / Agent 岗位技能树（社招）",
+    "url": "/99_misc/ai_infra_jd_survey/analysis/skill-tree-society.html"
+  },
+  {
+    "title": "AI Infra / Agent 岗位技能树（全库）",
     "url": "/99_misc/ai_infra_jd_survey/analysis/skill-tree.html"
+  },
+  {
+    "title": "技能分类体系设计（skill kind 体系）",
+    "url": "/99_misc/ai_infra_jd_survey/docs/技能分类体系设计.html"
   },
   {
     "title": "jobs campus",

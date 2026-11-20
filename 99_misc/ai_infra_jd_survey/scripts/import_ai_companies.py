@@ -12,14 +12,13 @@
   直接剔除（不看正文）；两类信号皆无时看正文是否有训练/推理证据。非算法类岗位
   （如「测试开发工程师-算法评测」）不受此闸门影响
 - location：cities（字符串化 list）解析后 `/` 连接
-- employment_type：直接取源文件 employment_type 字段（全职/实习，含 inferred 标注）
+- employment_type：直接取源文件 employment_type 字段（已归一为全职/实习两值）
 - responsibilities：description 全文按编号条目拆分为数组；requirements 留空
   （来源无独立的 requirement 字段，职责与要求合并在 description）
-- skills：description+title 匹配技能词表（catalog skill.aliases 变体集 + skill.items
-  规范名；ASCII 词加非字母数字环视边界、CJK 串按原文、「量化」排除非 ML 语境），
-  每条 ≤12 个
+- skills：description+title 匹配技能词表（方法唯一实现在 scripts/extract_skills.py，
+  词表与语境规则来自 catalog；全部命中保留、不设上限）
 - level/salary：来源无可靠字段，留空
-- source_platform：官网（14 家均为官网/官方 ATS 渠道）
+- source_platform：官网（12 家均为官网/官方 ATS 渠道）
 - captured_at：2026-11-19
 - completeness：full
 
@@ -39,14 +38,13 @@ OUT = BASE / "data" / "jd_2026-11-19.jsonl"
 
 CAPTURED = "2026-11-19"
 
+# ── 人工剔除清单：与 AI Infra 无关的岗位（逐条审定的 source_url 级排除，可审计）──
+_EXCLUDE_FILE = BASE / "data" / "manual_exclusions.json"
+_EXCLUDED_URLS = ({x["source_url"] for x in json.loads(_EXCLUDE_FILE.read_text(encoding="utf-8"))}
+                  if _EXCLUDE_FILE.exists() else set())
+
 # ── 分类与词表定义：唯一来源是 data/skill_catalog.json ──
 _CATALOG = json.loads((BASE / "data" / "skill_catalog.json").read_text(encoding="utf-8"))
-_SUB_ITEMS = _CATALOG["sub_category"]["items"]
-_SUB_FALLBACK = _CATALOG["sub_category"]["fallback"]
-_SUB_RULES = [(re.compile(r["pattern"], re.I), r["sub"])
-              for r in _CATALOG["sub_category"]["rules"]]
-
-# ── 分类定义：唯一来源是 data/skill_catalog.json ──
 _SUB_ITEMS = _CATALOG["sub_category"]["items"]
 _SUB_FALLBACK = _CATALOG["sub_category"]["fallback"]
 _SUB_RULES = [(re.compile(r["pattern"], re.I), r["sub"])
@@ -78,27 +76,11 @@ def admitted(title: str, desc: str = "") -> bool:
     return bool(ALGO_TRAIN_RE.search(f"{title} {desc or ''}"))
 
 
-# ── 技能词表：catalog skill.aliases 变体集 + skill.items 规范名（小写匹配）──
-SKILL_VARIANTS = {}
-for alt, std in _CATALOG["skill"]["aliases"].items():
-    SKILL_VARIANTS[alt.lower()] = std
-    SKILL_VARIANTS.setdefault(std.lower(), std)
-for _name in _CATALOG["skill"]["items"]:
-    SKILL_VARIANTS.setdefault(_name.lower(), _name)
+# ── 技能提取：唯一实现是 extract_skills.py（词表与语境规则读 catalog）──
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from extract_skills import SkillExtractor  # noqa: E402
 
-
-def _key_pattern(k: str) -> str:
-    """匹配策略：ASCII 词用非字母数字环视边界（不用 \\b——CJK 字符属 \\w，
-    「使用Go」这类紧邻写法会漏）；CJK 串按原文；「量化」排除非 ML 语境。"""
-    if k == "量化":
-        return "量化(?!交易|分析|指标|研究)"
-    if all(ord(c) < 128 for c in k):
-        return r"(?<![A-Za-z0-9])" + re.escape(k) + r"(?![A-Za-z0-9])"
-    return re.escape(k)
-
-
-_SKILL_RE = re.compile(
-    "|" .join(sorted((_key_pattern(k) for k in SKILL_VARIANTS), key=len, reverse=True)), re.I)
+_EXTRACTOR = SkillExtractor()
 
 
 def normalize_city(p: str) -> list:
@@ -128,18 +110,6 @@ def normalize_location(loc: str) -> str:
         out.extend(normalize_city(p))
     seen = set()
     return "/".join(x for x in out if not (x in seen or seen.add(x)))
-
-
-def extract_skills(title: str, desc: str) -> list:
-    # 全文扫描（工程技能词常出现在任职要求段，截断会丢失）；边界策略见 _key_pattern
-    hits = {SKILL_VARIANTS[m.group(0).lower()] for m in _SKILL_RE.finditer(f"{title} {desc}")}
-    ordered = sorted(hits, key=lambda s: (-len(s), s))  # 双键排序：等长技能顺序确定，保证幂等
-    out, low = [], set()
-    for s in ordered:
-        if s.lower() not in low:
-            out.append(s)
-            low.add(s.lower())
-    return out[:12]
 
 
 def parse_list_field(v) -> list:
@@ -183,6 +153,9 @@ def main():
             stats["去重"] += 1
             continue
         seen.add(key)
+        if url in _EXCLUDED_URLS:
+            stats["人工剔除（见 manual_exclusions.json）"] += 1
+            continue
         desc = j.get("description") or ""
         sub_category, category = classify(title)
         if "算法" in title and category == "算法" and not admitted(title, desc):
@@ -207,7 +180,7 @@ def main():
             "salary": "",
             "responsibilities": split_numbered(desc),
             "requirements": [],
-            "skills": extract_skills(title, desc),
+            "skills": _EXTRACTOR.extract_jd(title, desc),
             "source_url": url,
             "source_platform": "官网",
             "captured_at": CAPTURED,
