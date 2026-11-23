@@ -1464,6 +1464,10 @@
     "url": "/09_inference_system/agent_serving/04_constrained-decoding-engines.html"
   },
   {
+    "title": "引擎之上的那一层：SGLang Gateway 与 vLLM Router 源码对照",
+    "url": "/09_inference_system/agent_serving/05_gateway-routing.html"
+  },
+  {
     "title": "CloudMatrix384 与 CloudMatrix-Infer",
     "url": "/09_inference_system/cloudmatrix_infer/"
   },
@@ -2048,6 +2052,10 @@
     "url": "/09_inference_system/kv_cache/08_methodology/01_kv-cache-perf-methodology.html"
   },
   {
+    "title": "从 TTFT 到 goodput：官方基准工具的口径与六个陷阱",
+    "url": "/09_inference_system/kv_cache/08_methodology/02_inference-benchmark-methodology.html"
+  },
+  {
     "title": "线性注意力与推理系统",
     "url": "/09_inference_system/linear_attention/"
   },
@@ -2094,6 +2102,10 @@
   {
     "title": "推理量化技术基础：FP8、INT8 与 FP4 的格式、粒度与算法",
     "url": "/09_inference_system/model_optimization/inference_quantization.html"
+  },
+  {
+    "title": "Loop Transformer：当「多想一轮」的边际成本趋近零——智谱 GLM-5.4 机制与成本拆解",
+    "url": "/09_inference_system/model_optimization/loop-transformer-glm54.html"
   },
   {
     "title": "MTP 深度解析：把投机能力训进模型里",
@@ -3292,6 +3304,14 @@
     "url": "/99_misc/token_factory_talk/cluster-capacity-measurement.html"
   },
   {
+    "title": "Token Factory 2.0 PPT 制作稿(逐页上稿文案)",
+    "url": "/99_misc/token_factory_talk/deck-spec-2.0.html"
+  },
+  {
+    "title": "《Token Factory 2.0:词元工厂的四条路线》演讲提纲(可排练版)",
+    "url": "/99_misc/token_factory_talk/outline-2.0.html"
+  },
+  {
     "title": "《Token Factory: AI 推理的成本革命》演讲提纲（可排练版）",
     "url": "/99_misc/token_factory_talk/outline.html"
   },
@@ -3342,6 +3362,18 @@
   {
     "title": "素材：Silicon Data LLM Token 支出指数——全市场平均支付价跌破 1 美元",
     "url": "/99_misc/token_factory_talk/references/12-silicon-data-token-index.html"
+  },
+  {
+    "title": "硅基流动港股 IPO 进展与最新运营数据（2026-11）",
+    "url": "/99_misc/token_factory_talk/references/13-siliconflow-ipo-progress.html"
+  },
+  {
+    "title": "《词元（Token）经济发展研究报告（2026 年）》——信通院读图提炼版",
+    "url": "/99_misc/token_factory_talk/references/14-token-economy-report-2026.html"
+  },
+  {
+    "title": "词元工厂的四条路线——行业真方案盘点素材（2.0）",
+    "url": "/99_misc/token_factory_talk/references/15-token-factory-landscape.html"
   },
   {
     "title": "《Token Factory：AI 推理的成本革命》图文讲解",

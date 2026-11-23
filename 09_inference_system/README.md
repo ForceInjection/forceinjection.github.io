@@ -8,7 +8,7 @@
 
 > **KV 压缩推到极限**：DeepSeek-V4 与 Kimi K3 从架构层面重写了 attention，1M 上下文下 KV 从 250GB 量级降到个位数 GB，旧叙事随之作废；一个月后 V4.1-Flash 又把全局 KV 压到 V4-Flash 的 1/4，并推翻前篇三处判断。但压缩只是把问题换了位置：单层的绝对量小到极点之后，杠杆从「每层压多少」转向「几层共用一份」，而一个 token 的状态不再是连续张量，变成了一组异构池，其中还混着不是 KV 的压缩器状态。系列入口：**[KV 压缩推到极限：从架构改造到分层缓存](kv_cache/07_kv_compression/README.md)**（体积账 → 报告精读 → 分层缓存三篇深挖；核对口径各不相同：源码验证、报告章节与 `config.json` 对照、`文件:行号` 逐条复验）。
 >
-> **新负载**：Agent 流量正在取代 Chat 成为主要负载——KV 生命周期错配、调度语义失真、会话粘性、容量公式失效四个连锁问题，两引擎源码级现状，以及基础设施侧的回应：Evolving Infra 论文精读（branch count 目录、在线 PD split、对称引擎 6.2 秒换相）与四连锁映射、PD 适配方案对照地图、SGLang role-switch 源码核对。系列入口：**[Agent 推理服务](agent_serving/README.md)**（vLLM `43d691ec6b` / SGLang `f7101b0ae6` 源码验证）。
+> **新负载**：Agent 流量正在取代 Chat 成为主要负载——KV 生命周期错配、调度语义失真、会话粘性、容量公式失效四个连锁问题，两引擎源码级现状，以及基础设施侧的回应：Evolving Infra 论文精读（branch count 目录、在线 PD split、对称引擎 6.2 秒换相）与四连锁映射、PD 适配方案对照地图、SGLang role-switch 源码核对；集群路由层另有 [SGLang Gateway 与 vLLM Router 源码对照](agent_serving/05_gateway-routing.md)（阈值门控趋同、前缀树两代、会话状态三放法、PD 双发）。系列入口：**[Agent 推理服务](agent_serving/README.md)**（vLLM `43d691ec6b` / SGLang `f7101b0ae6` 源码验证）。
 >
 > **输出合法性税**：同系列姊妹篇——[约束解码的性能账单：vLLM 与 SGLang 的结构化输出实现拆解](agent_serving/04_constrained-decoding-engines.md)，编译/每步/交互三笔账单 + 双引擎逐项对照 + jump-forward 重分词差异。
 >
@@ -23,6 +23,8 @@
 > **双栈开源**：DeepSeek 把生产栈搬上了昇腾——六个组件（TileLang/DeepGEMM/DeepEP/TileKernels/FlashMLA/DeepSelect）与英伟达版一一对应，TileLang 昇腾后端合入主线 0.1.15，全线绑定 Ascend 950（`dav-3510`），910 存量卡不支持；GEMM 自报 99%+ 硬件上限，复现依赖 10 月中才公开的商用 HDK。逐仓拆解见 **[DeepSeek 昇腾开源栈](deepseek_ascend/README.md)**（六个组件、三种双端模式与 950 微架构要点；硬件信息另整理有 [Ascend950 微架构速查](../01_hardware_architecture/ascend/Ascend950_微架构速查.md)）。
 >
 > **SOSP 2026 论文精读**：OS 顶会怎么收 AI 系统——本届约 65 篇中选 13 篇全文精读（AI 相关 9 篇 + CXL 内存介质层 4 篇），四条线：推理服务（Janus 多 LLM 双时间尺度调度、Bedrock 全球多区域 WLM、LLM-42 按请求计费的确定性推理、ACDC 离线推理刻画与在离线混合调度）、GPU 系统（StreamEP 无屏障 MoE 解码、CrystalLLM 少卡仿真万卡训练、Ave 用数据流不变量做 agent 优化内核的过程奖励）、Agent × OS（YoloFS 的 290 份事故研究与 Agent 原生文件系统、Skill VM 把技能当源码编译）、CXL 与内存（与 AI 负载无关的介质层：Borges 共享日志、Disk-Based LSMs 可更新表面积、StarfishOS 状态分区单系统映像、XTRA 一致性域缩到有界目录）。综述入口：**[从推理调度到 CXL 一致性](sosp2026/sosp2026-systems-review.md)**（负载假设 → 四条线综述 → 四条主线与折扣清单；分篇笔记与 PDF 归档见 [目录门户](sosp2026/README.md)，生产系统数字均标厂商口径）。
+>
+> **循环深度**：模型优化的第三条轴出现——GLM-5.4 把基座中间 28 层改成共享权重跑两轮，750B 参数宣称 2-3T 级智能，配套门控渐进更新、KV 全局共享 + 滑窗独立、稀疏索引复用，把多一轮循环的显存、检索、输出三笔账压到接近零，输出长度反降 10–14%。详见 **[Loop Transformer:当「多想一轮」的边际成本趋近零——智谱 GLM-5.4 机制与成本拆解](model_optimization/loop-transformer-glm54.md)**（发布文与官方英文博客逐段核对，厂商口径逐条标注，权重开源前六条折扣清单）。
 
 ---
 
@@ -30,7 +32,7 @@
 
 在讨论任何优化之前，先理解推理的两阶段（Prefill/Decode）、KV Cache 为什么存在、以及并行策略如何把大模型塞进多张 GPU。
 
-- **[KV Cache 技术体系](kv_cache/README.md)** — 从 KV Cache 基础到分布式管理的完整导航；含五个专题精读：FAST'26「KV Cache × 存储」（五场景）、内存层级（四种内存账）、安全（三种泄露面）、复用（四条路线与引擎落地现状）、压缩（三种二次决策）；另有实践方法论一篇——真机排查总结的性能分析框架（[TTFT 多了 15 毫秒之后](kv_cache/08_methodology/01_kv-cache-perf-methodology.md)）。
+- **[KV Cache 技术体系](kv_cache/README.md)** — 从 KV Cache 基础到分布式管理的完整导航；含五个专题精读：FAST'26「KV Cache × 存储」（五场景）、内存层级（四种内存账）、安全（三种泄露面）、复用（四条路线与引擎落地现状）、压缩（三种二次决策）；另有实践方法论两篇——真机排查总结的性能分析框架（[TTFT 多了 15 毫秒之后](kv_cache/08_methodology/01_kv-cache-perf-methodology.md)），与官方基准工具的口径对照和六个测错点（[从 TTFT 到 goodput](kv_cache/08_methodology/02_inference-benchmark-methodology.md)）。
   - 基础：KV Cache 原理、PagedAttention、五种注意力存储格式
   - 优化：Prefix Caching、跨模型复用、压缩量化、淘汰策略、Chunked Prefill、PD 分离传输、Prefetching、CUDA Graph
   - 系统：LMCache、Mooncake、KVBM、HiCache、Tair KVCache

@@ -1,8 +1,92 @@
 {
-  "generated_at": "2026-11-22T22:00:07Z",
+  "generated_at": "2026-11-23T22:00:03Z",
   "window_days": 30,
   "count": 300,
   "items": [
+    {
+      "title": "Loop Transformer：当「多想一轮」的边际成本趋近零——智谱 GLM-5.4 机制与成本拆解",
+      "url": "/09_inference_system/model_optimization/loop-transformer-glm54.html",
+      "date": "2026-11-23",
+      "status": "new",
+      "module": "推理系统"
+    },
+    {
+      "title": "Token Factory 2.0 PPT 制作稿(逐页上稿文案)",
+      "url": "/99_misc/token_factory_talk/deck-spec-2.0.html",
+      "date": "2026-11-23",
+      "status": "new",
+      "module": "杂项"
+    },
+    {
+      "title": "《Token Factory 2.0:词元工厂的四条路线》演讲提纲(可排练版)",
+      "url": "/99_misc/token_factory_talk/outline-2.0.html",
+      "date": "2026-11-23",
+      "status": "new",
+      "module": "杂项"
+    },
+    {
+      "title": "《Token Factory: AI 推理的成本革命》演讲提纲（可排练版）",
+      "url": "/99_misc/token_factory_talk/outline.html",
+      "date": "2026-11-23",
+      "status": "updated",
+      "module": "杂项"
+    },
+    {
+      "title": "素材：上市公司与 IPO 公司的 Token 财报数据",
+      "url": "/99_misc/token_factory_talk/references/06-listed-companies.html",
+      "date": "2026-11-23",
+      "status": "updated",
+      "module": "杂项"
+    },
+    {
+      "title": "素材：Silicon Data LLM Token 支出指数——全市场平均支付价跌破 1 美元",
+      "url": "/99_misc/token_factory_talk/references/12-silicon-data-token-index.html",
+      "date": "2026-11-23",
+      "status": "updated",
+      "module": "杂项"
+    },
+    {
+      "title": "硅基流动港股 IPO 进展与最新运营数据（2026-11）",
+      "url": "/99_misc/token_factory_talk/references/13-siliconflow-ipo-progress.html",
+      "date": "2026-11-23",
+      "status": "new",
+      "module": "杂项"
+    },
+    {
+      "title": "《词元（Token）经济发展研究报告（2026 年）》——信通院读图提炼版",
+      "url": "/99_misc/token_factory_talk/references/14-token-economy-report-2026.html",
+      "date": "2026-11-23",
+      "status": "new",
+      "module": "杂项"
+    },
+    {
+      "title": "词元工厂的四条路线——行业真方案盘点素材（2.0）",
+      "url": "/99_misc/token_factory_talk/references/15-token-factory-landscape.html",
+      "date": "2026-11-23",
+      "status": "new",
+      "module": "杂项"
+    },
+    {
+      "title": "引擎之上的那一层：SGLang Gateway 与 vLLM Router 源码对照",
+      "url": "/09_inference_system/agent_serving/05_gateway-routing.html",
+      "date": "2026-11-23",
+      "status": "new",
+      "module": "推理系统"
+    },
+    {
+      "title": "从 TTFT 到 goodput：官方基准工具的口径与六个陷阱",
+      "url": "/09_inference_system/kv_cache/08_methodology/02_inference-benchmark-methodology.html",
+      "date": "2026-11-23",
+      "status": "new",
+      "module": "推理系统"
+    },
+    {
+      "title": "CMU 11-868 · Large Language Model Systems",
+      "url": "/10_ai_related_course/university_courses/cmu-11-868.html",
+      "date": "2026-11-23",
+      "status": "new",
+      "module": "课程"
+    },
     {
       "title": "visualization",
       "url": "/99_misc/ai_infra_jd_survey/visualization.html",
@@ -69,13 +153,6 @@
     {
       "title": "UC Berkeley · LLM Agents（MOOC）",
       "url": "/10_ai_related_course/university_courses/berkeley-llm-agents.html",
-      "date": "2026-11-19",
-      "status": "new",
-      "module": "课程"
-    },
-    {
-      "title": "CMU 11-868 · Large Language Model Systems",
-      "url": "/10_ai_related_course/university_courses/cmu-11-868.html",
       "date": "2026-11-19",
       "status": "new",
       "module": "课程"
@@ -2022,83 +2099,6 @@
     {
       "title": "SGLang Chunked Prefill — 原理与代码实现",
       "url": "/09_inference_system/sglang/chunked_prefill.html",
-      "date": "2026-11-05",
-      "status": "updated",
-      "module": "推理系统"
-    },
-    {
-      "title": "HiCache 深入详解",
-      "url": "/09_inference_system/sglang/hicache_deep_dive.html",
-      "date": "2026-11-05",
-      "status": "updated",
-      "module": "推理系统"
-    },
-    {
-      "title": "SGLang 0.5.16 解读：一棵 Radix Tree 统一四种 Attention，DSpark 让投机解码不再一刀切",
-      "url": "/09_inference_system/sglang/sglang-0.5.16-release.html",
-      "date": "2026-11-05",
-      "status": "updated",
-      "module": "推理系统"
-    },
-    {
-      "title": "KV Cache L1↔L2 数据流深度分析",
-      "url": "/09_inference_system/sglang/sglang-kv-cache-dataflow-analysis.html",
-      "date": "2026-11-05",
-      "status": "updated",
-      "module": "推理系统"
-    },
-    {
-      "title": "SGLang Overlap Scheduling 深度解析：CPU 与 GPU 的双流水线",
-      "url": "/09_inference_system/sglang/sglang-overlap-scheduling.html",
-      "date": "2026-11-05",
-      "status": "updated",
-      "module": "推理系统"
-    },
-    {
-      "title": "SGLang UnifiedRadixTree：一棵树，四种注意力",
-      "url": "/09_inference_system/sglang/sglang-unified-radix-tree.html",
-      "date": "2026-11-05",
-      "status": "updated",
-      "module": "推理系统"
-    },
-    {
-      "title": "vLLM 注意力机制演进与支持全景：从 MHA 到 MLA 及其稀疏变体的架构解析",
-      "url": "/09_inference_system/vllm/module_analysis/attention_mha_mla_nsa.html",
-      "date": "2026-11-05",
-      "status": "updated",
-      "module": "推理系统"
-    },
-    {
-      "title": "从 MLA 到 CSA + HCA：DeepSeek 注意力架构的进化之路",
-      "url": "/09_inference_system/vllm/module_analysis/deepseek_attention_evolution_mla_to_csa_hca.html",
-      "date": "2026-11-05",
-      "status": "updated",
-      "module": "推理系统"
-    },
-    {
-      "title": "DeepSeek-V3 端到端推理 Pipeline 走读：一个 Token 的 61 层旅程",
-      "url": "/09_inference_system/vllm/module_analysis/deepseek_v3_inference_pipeline.html",
-      "date": "2026-11-05",
-      "status": "updated",
-      "module": "推理系统"
-    },
-    {
-      "title": "DeepSeek-V4 端到端推理 Pipeline 走读：多流残差、MQA 压缩与哈希路由",
-      "url": "/09_inference_system/vllm/module_analysis/deepseek_v4_inference_pipeline.html",
-      "date": "2026-11-05",
-      "status": "updated",
-      "module": "推理系统"
-    },
-    {
-      "title": "FlashAttention 深度解析：从 IO-Aware Tiling 到 Hopper 异步计算",
-      "url": "/09_inference_system/vllm/module_analysis/flashattention_deep_dive.html",
-      "date": "2026-11-05",
-      "status": "updated",
-      "module": "推理系统"
-    },
-    {
-      "title": "gpu-memory-utilization 的谢幕：vLLM 如何用「实测」替代「估算」",
-      "url": "/09_inference_system/vllm/module_analysis/gpu-memory-utilization-retirement.html",
       "date": "2026-11-05",
       "status": "updated",
       "module": "推理系统"
