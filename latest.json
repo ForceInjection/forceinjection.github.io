@@ -1,14 +1,322 @@
 {
-  "generated_at": "2026-11-23T22:00:03Z",
+  "generated_at": "2026-11-24T22:00:06Z",
   "window_days": 30,
   "count": 300,
   "items": [
     {
       "title": "Loop Transformer：当「多想一轮」的边际成本趋近零——智谱 GLM-5.4 机制与成本拆解",
       "url": "/09_inference_system/model_optimization/loop-transformer-glm54.html",
-      "date": "2026-11-23",
+      "date": "2026-11-24",
       "status": "new",
       "module": "推理系统"
+    },
+    {
+      "title": "第 1 讲课堂实验",
+      "url": "/10_ai_related_course/vllm_course/01-engine-architecture/hands-on-exercise.html",
+      "date": "2026-11-24",
+      "status": "new",
+      "module": "课程"
+    },
+    {
+      "title": "第 1 讲课后作业",
+      "url": "/10_ai_related_course/vllm_course/01-engine-architecture/homework.html",
+      "date": "2026-11-24",
+      "status": "new",
+      "module": "课程"
+    },
+    {
+      "title": "第 1 讲：引擎总架构 — PPT 大纲",
+      "url": "/10_ai_related_course/vllm_course/01-engine-architecture/ppt-outline.html",
+      "date": "2026-11-24",
+      "status": "new",
+      "module": "课程"
+    },
+    {
+      "title": "第 1 讲教学大纲：引擎总架构",
+      "url": "/10_ai_related_course/vllm_course/01-engine-architecture/syllabus.html",
+      "date": "2026-11-24",
+      "status": "new",
+      "module": "课程"
+    },
+    {
+      "title": "第 2 讲课堂实验",
+      "url": "/10_ai_related_course/vllm_course/02-scheduler/hands-on-exercise.html",
+      "date": "2026-11-24",
+      "status": "new",
+      "module": "课程"
+    },
+    {
+      "title": "第 2 讲课后作业",
+      "url": "/10_ai_related_course/vllm_course/02-scheduler/homework.html",
+      "date": "2026-11-24",
+      "status": "new",
+      "module": "课程"
+    },
+    {
+      "title": "第 2 讲：调度器 — PPT 大纲",
+      "url": "/10_ai_related_course/vllm_course/02-scheduler/ppt-outline.html",
+      "date": "2026-11-24",
+      "status": "new",
+      "module": "课程"
+    },
+    {
+      "title": "第 2 讲教学大纲：调度器",
+      "url": "/10_ai_related_course/vllm_course/02-scheduler/syllabus.html",
+      "date": "2026-11-24",
+      "status": "new",
+      "module": "课程"
+    },
+    {
+      "title": "第 3 讲课堂实验",
+      "url": "/10_ai_related_course/vllm_course/03-kv-cache-evolution/hands-on-exercise.html",
+      "date": "2026-11-24",
+      "status": "new",
+      "module": "课程"
+    },
+    {
+      "title": "第 3 讲课后作业",
+      "url": "/10_ai_related_course/vllm_course/03-kv-cache-evolution/homework.html",
+      "date": "2026-11-24",
+      "status": "new",
+      "module": "课程"
+    },
+    {
+      "title": "第 3 讲：KV cache 管理 — PPT 大纲",
+      "url": "/10_ai_related_course/vllm_course/03-kv-cache-evolution/ppt-outline.html",
+      "date": "2026-11-24",
+      "status": "new",
+      "module": "课程"
+    },
+    {
+      "title": "第 3 讲教学大纲：KV cache 管理",
+      "url": "/10_ai_related_course/vllm_course/03-kv-cache-evolution/syllabus.html",
+      "date": "2026-11-24",
+      "status": "new",
+      "module": "课程"
+    },
+    {
+      "title": "第 4 讲课堂实验",
+      "url": "/10_ai_related_course/vllm_course/04-attention-backends/hands-on-exercise.html",
+      "date": "2026-11-24",
+      "status": "new",
+      "module": "课程"
+    },
+    {
+      "title": "第 4 讲课后作业",
+      "url": "/10_ai_related_course/vllm_course/04-attention-backends/homework.html",
+      "date": "2026-11-24",
+      "status": "new",
+      "module": "课程"
+    },
+    {
+      "title": "第 4 讲：注意力后端 — PPT 大纲",
+      "url": "/10_ai_related_course/vllm_course/04-attention-backends/ppt-outline.html",
+      "date": "2026-11-24",
+      "status": "new",
+      "module": "课程"
+    },
+    {
+      "title": "第 4 讲教学大纲：注意力后端",
+      "url": "/10_ai_related_course/vllm_course/04-attention-backends/syllabus.html",
+      "date": "2026-11-24",
+      "status": "new",
+      "module": "课程"
+    },
+    {
+      "title": "第 5 讲课堂实验",
+      "url": "/10_ai_related_course/vllm_course/05-cuda-graph-compile/hands-on-exercise.html",
+      "date": "2026-11-24",
+      "status": "new",
+      "module": "课程"
+    },
+    {
+      "title": "第 5 讲课后作业",
+      "url": "/10_ai_related_course/vllm_course/05-cuda-graph-compile/homework.html",
+      "date": "2026-11-24",
+      "status": "new",
+      "module": "课程"
+    },
+    {
+      "title": "第 5 讲：CUDA Graph 与编译 — PPT 大纲",
+      "url": "/10_ai_related_course/vllm_course/05-cuda-graph-compile/ppt-outline.html",
+      "date": "2026-11-24",
+      "status": "new",
+      "module": "课程"
+    },
+    {
+      "title": "第 5 讲教学大纲：CUDA Graph 与编译",
+      "url": "/10_ai_related_course/vllm_course/05-cuda-graph-compile/syllabus.html",
+      "date": "2026-11-24",
+      "status": "new",
+      "module": "课程"
+    },
+    {
+      "title": "第 6 讲课堂实验",
+      "url": "/10_ai_related_course/vllm_course/06-parallelism-ep/hands-on-exercise.html",
+      "date": "2026-11-24",
+      "status": "new",
+      "module": "课程"
+    },
+    {
+      "title": "第 6 讲课后作业",
+      "url": "/10_ai_related_course/vllm_course/06-parallelism-ep/homework.html",
+      "date": "2026-11-24",
+      "status": "new",
+      "module": "课程"
+    },
+    {
+      "title": "第 6 讲：并行 TP 到 EP — PPT 大纲",
+      "url": "/10_ai_related_course/vllm_course/06-parallelism-ep/ppt-outline.html",
+      "date": "2026-11-24",
+      "status": "new",
+      "module": "课程"
+    },
+    {
+      "title": "第 6 讲教学大纲：并行：TP 到 EP",
+      "url": "/10_ai_related_course/vllm_course/06-parallelism-ep/syllabus.html",
+      "date": "2026-11-24",
+      "status": "new",
+      "module": "课程"
+    },
+    {
+      "title": "第 7 讲课堂实验",
+      "url": "/10_ai_related_course/vllm_course/07-speculative-decoding/hands-on-exercise.html",
+      "date": "2026-11-24",
+      "status": "new",
+      "module": "课程"
+    },
+    {
+      "title": "第 7 讲课后作业",
+      "url": "/10_ai_related_course/vllm_course/07-speculative-decoding/homework.html",
+      "date": "2026-11-24",
+      "status": "new",
+      "module": "课程"
+    },
+    {
+      "title": "第 7 讲：投机解码 — PPT 大纲",
+      "url": "/10_ai_related_course/vllm_course/07-speculative-decoding/ppt-outline.html",
+      "date": "2026-11-24",
+      "status": "new",
+      "module": "课程"
+    },
+    {
+      "title": "第 7 讲教学大纲：投机解码",
+      "url": "/10_ai_related_course/vllm_course/07-speculative-decoding/syllabus.html",
+      "date": "2026-11-24",
+      "status": "new",
+      "module": "课程"
+    },
+    {
+      "title": "第 8 讲课堂实验",
+      "url": "/10_ai_related_course/vllm_course/08-quantization/hands-on-exercise.html",
+      "date": "2026-11-24",
+      "status": "new",
+      "module": "课程"
+    },
+    {
+      "title": "第 8 讲课后作业",
+      "url": "/10_ai_related_course/vllm_course/08-quantization/homework.html",
+      "date": "2026-11-24",
+      "status": "new",
+      "module": "课程"
+    },
+    {
+      "title": "第 8 讲：量化 — PPT 大纲",
+      "url": "/10_ai_related_course/vllm_course/08-quantization/ppt-outline.html",
+      "date": "2026-11-24",
+      "status": "new",
+      "module": "课程"
+    },
+    {
+      "title": "第 8 讲教学大纲：量化",
+      "url": "/10_ai_related_course/vllm_course/08-quantization/syllabus.html",
+      "date": "2026-11-24",
+      "status": "new",
+      "module": "课程"
+    },
+    {
+      "title": "第 9 讲课堂实验",
+      "url": "/10_ai_related_course/vllm_course/09-kv-offload-disagg/hands-on-exercise.html",
+      "date": "2026-11-24",
+      "status": "new",
+      "module": "课程"
+    },
+    {
+      "title": "第 9 讲课后作业",
+      "url": "/10_ai_related_course/vllm_course/09-kv-offload-disagg/homework.html",
+      "date": "2026-11-24",
+      "status": "new",
+      "module": "课程"
+    },
+    {
+      "title": "第 9 讲：KV 分载与 PD 分离 — PPT 大纲",
+      "url": "/10_ai_related_course/vllm_course/09-kv-offload-disagg/ppt-outline.html",
+      "date": "2026-11-24",
+      "status": "new",
+      "module": "课程"
+    },
+    {
+      "title": "第 9 讲教学大纲：KV 分载与 PD 分离",
+      "url": "/10_ai_related_course/vllm_course/09-kv-offload-disagg/syllabus.html",
+      "date": "2026-11-24",
+      "status": "new",
+      "module": "课程"
+    },
+    {
+      "title": "第 10 讲课堂实验",
+      "url": "/10_ai_related_course/vllm_course/10-production-ops/hands-on-exercise.html",
+      "date": "2026-11-24",
+      "status": "new",
+      "module": "课程"
+    },
+    {
+      "title": "第 10 讲课后作业",
+      "url": "/10_ai_related_course/vllm_course/10-production-ops/homework.html",
+      "date": "2026-11-24",
+      "status": "new",
+      "module": "课程"
+    },
+    {
+      "title": "第 10 讲：生产运维与生态 — PPT 大纲",
+      "url": "/10_ai_related_course/vllm_course/10-production-ops/ppt-outline.html",
+      "date": "2026-11-24",
+      "status": "new",
+      "module": "课程"
+    },
+    {
+      "title": "第 10 讲教学大纲：生产运维与生态",
+      "url": "/10_ai_related_course/vllm_course/10-production-ops/syllabus.html",
+      "date": "2026-11-24",
+      "status": "new",
+      "module": "课程"
+    },
+    {
+      "title": "术语表",
+      "url": "/10_ai_related_course/vllm_course/glossary.html",
+      "date": "2026-11-24",
+      "status": "new",
+      "module": "课程"
+    },
+    {
+      "title": "共用实验环境",
+      "url": "/10_ai_related_course/vllm_course/lab-environment.html",
+      "date": "2026-11-24",
+      "status": "new",
+      "module": "课程"
+    },
+    {
+      "title": "课程总纲",
+      "url": "/10_ai_related_course/vllm_course/syllabus.html",
+      "date": "2026-11-24",
+      "status": "new",
+      "module": "课程"
+    },
+    {
+      "title": "可复用配图索引",
+      "url": "/10_ai_related_course/vllm_course/visuals.html",
+      "date": "2026-11-24",
+      "status": "new",
+      "module": "课程"
     },
     {
       "title": "Token Factory 2.0 PPT 制作稿(逐页上稿文案)",
@@ -1794,314 +2102,6 @@
       "date": "2026-11-05",
       "status": "updated",
       "module": "云原生 AI"
-    },
-    {
-      "title": "NVIDIA Container Toolkit 原理分析与代码深度解析",
-      "url": "/04_cloud_native_ai_platform/k8s/01_nvidia_container_toolkit_analysis.html",
-      "date": "2026-11-05",
-      "status": "updated",
-      "module": "云原生 AI"
-    },
-    {
-      "title": "Nvidia K8s Device Plugin 原理解析和源码分析",
-      "url": "/04_cloud_native_ai_platform/k8s/02_nvidia_k8s_device_plugin_analysis.html",
-      "date": "2026-11-05",
-      "status": "updated",
-      "module": "云原生 AI"
-    },
-    {
-      "title": "Kueue + HAMi：Kubernetes 原生的 AI 工作负载管理与 GPU 虚拟化解决方案",
-      "url": "/04_cloud_native_ai_platform/k8s/03_kueue_hami_integration.html",
-      "date": "2026-11-05",
-      "status": "updated",
-      "module": "云原生 AI"
-    },
-    {
-      "title": "vLLM + LWS：Kubernetes 上的多机多卡推理方案",
-      "url": "/04_cloud_native_ai_platform/k8s/04_lws_intro.html",
-      "date": "2026-11-05",
-      "status": "updated",
-      "module": "云原生 AI"
-    },
-    {
-      "title": "容易被忽略的 containerd 运行时日志",
-      "url": "/04_cloud_native_ai_platform/k8s/06_containerd_log_analysis.html",
-      "date": "2026-11-05",
-      "status": "updated",
-      "module": "云原生 AI"
-    },
-    {
-      "title": "设计笔记",
-      "url": "/04_cloud_native_ai_platform/storage/deepseek_3fs/01_deepseek_3fs_design_notes.html",
-      "date": "2026-11-05",
-      "status": "updated",
-      "module": "云原生 AI"
-    },
-    {
-      "title": "NVIDIA Inference Context Memory Storage：为长上下文与 Agentic AI 推理打造的 G3.5 上下文存储层",
-      "url": "/04_cloud_native_ai_platform/storage/inference_context_memory_storage/01_icms_architecture.html",
-      "date": "2026-11-05",
-      "status": "updated",
-      "module": "云原生 AI"
-    },
-    {
-      "title": "JuiceFS 文件修改时 chunk/slice/block 更新机制分析",
-      "url": "/04_cloud_native_ai_platform/storage/juicefs/01_juicefs_file_modification_mechanism_analysis.html",
-      "date": "2026-11-05",
-      "status": "updated",
-      "module": "云原生 AI"
-    },
-    {
-      "title": "JuiceFS 后端存储迁移指南",
-      "url": "/04_cloud_native_ai_platform/storage/juicefs/02_juicefs_backend_storage_migration_guide.html",
-      "date": "2026-11-05",
-      "status": "updated",
-      "module": "云原生 AI"
-    },
-    {
-      "title": "每月花多少才不冤？2026 年国内外 11 款 Coding Plan 深度对比与避坑指南",
-      "url": "/09_inference_system/cost_analysis/coding_plan/coding_plan_report.html",
-      "date": "2026-11-05",
-      "status": "updated",
-      "module": "推理系统"
-    },
-    {
-      "title": "pricing table",
-      "url": "/09_inference_system/cost_analysis/coding_plan/data/pricing_table.html",
-      "date": "2026-11-05",
-      "status": "updated",
-      "module": "推理系统"
-    },
-    {
-      "title": "附录：2026 年国内外主流 Coding Plan 真实数据看板",
-      "url": "/09_inference_system/cost_analysis/coding_plan/objective_pricing_comparison.html",
-      "date": "2026-11-05",
-      "status": "updated",
-      "module": "推理系统"
-    },
-    {
-      "title": "155 万亿 tokens/天，单卡运营利润率 93%：token 生意可以做成暴利",
-      "url": "/09_inference_system/cost_analysis/deepseek_inference_cluster_unit_economics.html",
-      "date": "2026-11-05",
-      "status": "updated",
-      "module": "推理系统"
-    },
-    {
-      "title": "大模型 API 定价策略定量分析框架",
-      "url": "/09_inference_system/cost_analysis/llm_api_pricing_analysis.html",
-      "date": "2026-11-05",
-      "status": "updated",
-      "module": "推理系统"
-    },
-    {
-      "title": "155 万亿 tokens/天背后的引擎：DeepInfer 源码拆解",
-      "url": "/09_inference_system/deepinfer/deepinfer-source-deep-dive.html",
-      "date": "2026-11-05",
-      "status": "updated",
-      "module": "推理系统"
-    },
-    {
-      "title": "DeepSeek-V3 H20 推理优化：基于 vLLM 源码的深度分析",
-      "url": "/09_inference_system/deployment/deepseek_v3_h20_vllm_deep_dive.html",
-      "date": "2026-11-05",
-      "status": "updated",
-      "module": "推理系统"
-    },
-    {
-      "title": "输出差了一点点？用 logprobs 分清「噪声」还是「bug」",
-      "url": "/09_inference_system/deployment/logprobs-precision-diagnosis.html",
-      "date": "2026-11-05",
-      "status": "updated",
-      "module": "推理系统"
-    },
-    {
-      "title": "Qwen2-VL-7B-Instruct 昇腾部署指南",
-      "url": "/09_inference_system/deployment/qwen2_vl_7b_huawei.html",
-      "date": "2026-11-05",
-      "status": "updated",
-      "module": "推理系统"
-    },
-    {
-      "title": "AITURBO 精读报告（FAST'26）",
-      "url": "/09_inference_system/kv_cache/03_fast26/references/aiturbo-report.html",
-      "date": "2026-11-05",
-      "status": "updated",
-      "module": "推理系统"
-    },
-    {
-      "title": "Bidaw 精读报告（FAST'26）",
-      "url": "/09_inference_system/kv_cache/03_fast26/references/bidaw-report.html",
-      "date": "2026-11-05",
-      "status": "updated",
-      "module": "推理系统"
-    },
-    {
-      "title": "CacheSlide 精读报告（FAST'26）",
-      "url": "/09_inference_system/kv_cache/03_fast26/references/cacheslide-report.html",
-      "date": "2026-11-05",
-      "status": "updated",
-      "module": "推理系统"
-    },
-    {
-      "title": "D 线：KV Cache 复用 / 共享 / 安全类论文调研报告（2025–2026）",
-      "url": "/09_inference_system/kv_cache/05_kv_security/references/reuse-security-report.html",
-      "date": "2026-11-05",
-      "status": "updated",
-      "module": "推理系统"
-    },
-    {
-      "title": "LLM 模型推理显存占用深度的分析",
-      "url": "/09_inference_system/memory_calc/memory_analysis.html",
-      "date": "2026-11-05",
-      "status": "updated",
-      "module": "推理系统"
-    },
-    {
-      "title": "DFlash 2 块扩散投机解码技术详解",
-      "url": "/09_inference_system/model_optimization/dflash-block-diffusion-speculative-decoding.html",
-      "date": "2026-11-05",
-      "status": "updated",
-      "module": "推理系统"
-    },
-    {
-      "title": "图解投机解码",
-      "url": "/09_inference_system/model_optimization/illustrated-speculative-decoding.html",
-      "date": "2026-11-05",
-      "status": "updated",
-      "module": "推理系统"
-    },
-    {
-      "title": "NVIDIA Model Optimizer 技术详解：功能、原理与实现",
-      "url": "/09_inference_system/model_optimization/nvidia_model_optimizer.html",
-      "date": "2026-11-05",
-      "status": "updated",
-      "module": "推理系统"
-    },
-    {
-      "title": "专家并行（EP）深度解析——MoE 时代的第五种并行维度",
-      "url": "/09_inference_system/parallelism/expert_parallelism_deep_dive.html",
-      "date": "2026-11-05",
-      "status": "updated",
-      "module": "推理系统"
-    },
-    {
-      "title": "Continuous Batching 深度解析：从静态批处理到迭代级调度",
-      "url": "/09_inference_system/prefill_decode/continuous_batching.html",
-      "date": "2026-11-05",
-      "status": "updated",
-      "module": "推理系统"
-    },
-    {
-      "title": "一、大模型推理优化：背景与目标",
-      "url": "/09_inference_system/reference_design/01-背景与目标.html",
-      "date": "2026-11-05",
-      "status": "updated",
-      "module": "推理系统"
-    },
-    {
-      "title": "二、大模型推理优化：集群规模分类与特征分析",
-      "url": "/09_inference_system/reference_design/02-集群规模分类与特征分析.html",
-      "date": "2026-11-05",
-      "status": "updated",
-      "module": "推理系统"
-    },
-    {
-      "title": "三、核心推理优化技术深度解析",
-      "url": "/09_inference_system/reference_design/03-核心推理优化技术深度解析.html",
-      "date": "2026-11-05",
-      "status": "updated",
-      "module": "推理系统"
-    },
-    {
-      "title": "四、不同集群规模的技术选型策略",
-      "url": "/09_inference_system/reference_design/04-不同集群规模的技术选型策略.html",
-      "date": "2026-11-05",
-      "status": "updated",
-      "module": "推理系统"
-    },
-    {
-      "title": "五、性能评估指标体系",
-      "url": "/09_inference_system/reference_design/05-性能评估指标体系.html",
-      "date": "2026-11-05",
-      "status": "updated",
-      "module": "推理系统"
-    },
-    {
-      "title": "六、推理服务架构设计",
-      "url": "/09_inference_system/reference_design/06-推理服务架构设计.html",
-      "date": "2026-11-05",
-      "status": "updated",
-      "module": "推理系统"
-    },
-    {
-      "title": "七、实施建议与最佳实践",
-      "url": "/09_inference_system/reference_design/07-实施建议与最佳实践.html",
-      "date": "2026-11-05",
-      "status": "updated",
-      "module": "推理系统"
-    },
-    {
-      "title": "八、参考资料与延伸阅读",
-      "url": "/09_inference_system/reference_design/08-参考资料与延伸阅读.html",
-      "date": "2026-11-05",
-      "status": "updated",
-      "module": "推理系统"
-    },
-    {
-      "title": "九、安全性与合规性",
-      "url": "/09_inference_system/reference_design/09-安全性与合规性.html",
-      "date": "2026-11-05",
-      "status": "updated",
-      "module": "推理系统"
-    },
-    {
-      "title": "十、多模态推理优化",
-      "url": "/09_inference_system/reference_design/10-多模态推理优化.html",
-      "date": "2026-11-05",
-      "status": "updated",
-      "module": "推理系统"
-    },
-    {
-      "title": "十一、边缘推理优化",
-      "url": "/09_inference_system/reference_design/11-边缘推理优化.html",
-      "date": "2026-11-05",
-      "status": "updated",
-      "module": "推理系统"
-    },
-    {
-      "title": "十二、常见问题解答 (FAQ)",
-      "url": "/09_inference_system/reference_design/12-常见问题解答.html",
-      "date": "2026-11-05",
-      "status": "updated",
-      "module": "推理系统"
-    },
-    {
-      "title": "十三、实施检查清单",
-      "url": "/09_inference_system/reference_design/13-实施检查清单.html",
-      "date": "2026-11-05",
-      "status": "updated",
-      "module": "推理系统"
-    },
-    {
-      "title": "十四、总结与展望",
-      "url": "/09_inference_system/reference_design/14-总结与展望.html",
-      "date": "2026-11-05",
-      "status": "updated",
-      "module": "推理系统"
-    },
-    {
-      "title": "十五、面向推理执行图的异构调度系统架构设计",
-      "url": "/09_inference_system/reference_design/15-异构调度系统架构设计.html",
-      "date": "2026-11-05",
-      "status": "updated",
-      "module": "推理系统"
-    },
-    {
-      "title": "SGLang Chunked Prefill — 原理与代码实现",
-      "url": "/09_inference_system/sglang/chunked_prefill.html",
-      "date": "2026-11-05",
-      "status": "updated",
-      "module": "推理系统"
     }
   ]
 }

@@ -188,6 +188,10 @@
     "url": "/01_hardware_architecture/tpu/tpu_101.html"
   },
   {
+    "title": "UCIe 4.0 与 PCIe、NVLink：芯粒互连的三层版图",
+    "url": "/01_hardware_architecture/ucie/"
+  },
+  {
     "title": "DPU 编程",
     "url": "/02_dpu_programming/"
   },
@@ -2878,6 +2882,246 @@
   {
     "title": "Stanford CS336 · Language Modeling from Scratch",
     "url": "/10_ai_related_course/university_courses/stanford-cs336.html"
+  },
+  {
+    "title": "vLLM 十讲：从 nano-vllm 到生产推理引擎",
+    "url": "/10_ai_related_course/vllm_course/"
+  },
+  {
+    "title": "第 1 讲 · 引擎总架构：从单进程到三进程",
+    "url": "/10_ai_related_course/vllm_course/01-engine-architecture/"
+  },
+  {
+    "title": "第 1 讲实验脚本",
+    "url": "/10_ai_related_course/vllm_course/01-engine-architecture/code/"
+  },
+  {
+    "title": "第 1 讲课堂实验",
+    "url": "/10_ai_related_course/vllm_course/01-engine-architecture/hands-on-exercise.html"
+  },
+  {
+    "title": "第 1 讲课后作业",
+    "url": "/10_ai_related_course/vllm_course/01-engine-architecture/homework.html"
+  },
+  {
+    "title": "第 1 讲：引擎总架构 — PPT 大纲",
+    "url": "/10_ai_related_course/vllm_course/01-engine-architecture/ppt-outline.html"
+  },
+  {
+    "title": "第 1 讲教学大纲：引擎总架构",
+    "url": "/10_ai_related_course/vllm_course/01-engine-architecture/syllabus.html"
+  },
+  {
+    "title": "第 2 讲 · 调度器：从 FIFO 到策略化",
+    "url": "/10_ai_related_course/vllm_course/02-scheduler/"
+  },
+  {
+    "title": "第 2 讲实验脚本",
+    "url": "/10_ai_related_course/vllm_course/02-scheduler/code/"
+  },
+  {
+    "title": "第 2 讲课堂实验",
+    "url": "/10_ai_related_course/vllm_course/02-scheduler/hands-on-exercise.html"
+  },
+  {
+    "title": "第 2 讲课后作业",
+    "url": "/10_ai_related_course/vllm_course/02-scheduler/homework.html"
+  },
+  {
+    "title": "第 2 讲：调度器 — PPT 大纲",
+    "url": "/10_ai_related_course/vllm_course/02-scheduler/ppt-outline.html"
+  },
+  {
+    "title": "第 2 讲教学大纲：调度器",
+    "url": "/10_ai_related_course/vllm_course/02-scheduler/syllabus.html"
+  },
+  {
+    "title": "第 3 讲 · KV cache 管理：PagedAttention 的生与死",
+    "url": "/10_ai_related_course/vllm_course/03-kv-cache-evolution/"
+  },
+  {
+    "title": "第 3 讲实验脚本",
+    "url": "/10_ai_related_course/vllm_course/03-kv-cache-evolution/code/"
+  },
+  {
+    "title": "第 3 讲课堂实验",
+    "url": "/10_ai_related_course/vllm_course/03-kv-cache-evolution/hands-on-exercise.html"
+  },
+  {
+    "title": "第 3 讲课后作业",
+    "url": "/10_ai_related_course/vllm_course/03-kv-cache-evolution/homework.html"
+  },
+  {
+    "title": "第 3 讲：KV cache 管理 — PPT 大纲",
+    "url": "/10_ai_related_course/vllm_course/03-kv-cache-evolution/ppt-outline.html"
+  },
+  {
+    "title": "第 3 讲教学大纲：KV cache 管理",
+    "url": "/10_ai_related_course/vllm_course/03-kv-cache-evolution/syllabus.html"
+  },
+  {
+    "title": "第 4 讲 · 注意力后端：从 if-else 到后端矩阵",
+    "url": "/10_ai_related_course/vllm_course/04-attention-backends/"
+  },
+  {
+    "title": "第 4 讲课堂实验",
+    "url": "/10_ai_related_course/vllm_course/04-attention-backends/hands-on-exercise.html"
+  },
+  {
+    "title": "第 4 讲课后作业",
+    "url": "/10_ai_related_course/vllm_course/04-attention-backends/homework.html"
+  },
+  {
+    "title": "第 4 讲：注意力后端 — PPT 大纲",
+    "url": "/10_ai_related_course/vllm_course/04-attention-backends/ppt-outline.html"
+  },
+  {
+    "title": "第 4 讲教学大纲：注意力后端",
+    "url": "/10_ai_related_course/vllm_course/04-attention-backends/syllabus.html"
+  },
+  {
+    "title": "第 5 讲 · CUDA Graph 与编译",
+    "url": "/10_ai_related_course/vllm_course/05-cuda-graph-compile/"
+  },
+  {
+    "title": "第 5 讲实验脚本",
+    "url": "/10_ai_related_course/vllm_course/05-cuda-graph-compile/code/"
+  },
+  {
+    "title": "第 5 讲课堂实验",
+    "url": "/10_ai_related_course/vllm_course/05-cuda-graph-compile/hands-on-exercise.html"
+  },
+  {
+    "title": "第 5 讲课后作业",
+    "url": "/10_ai_related_course/vllm_course/05-cuda-graph-compile/homework.html"
+  },
+  {
+    "title": "第 5 讲：CUDA Graph 与编译 — PPT 大纲",
+    "url": "/10_ai_related_course/vllm_course/05-cuda-graph-compile/ppt-outline.html"
+  },
+  {
+    "title": "第 5 讲教学大纲：CUDA Graph 与编译",
+    "url": "/10_ai_related_course/vllm_course/05-cuda-graph-compile/syllabus.html"
+  },
+  {
+    "title": "第 6 讲 · 并行：TP 到 EP",
+    "url": "/10_ai_related_course/vllm_course/06-parallelism-ep/"
+  },
+  {
+    "title": "第 6 讲课堂实验",
+    "url": "/10_ai_related_course/vllm_course/06-parallelism-ep/hands-on-exercise.html"
+  },
+  {
+    "title": "第 6 讲课后作业",
+    "url": "/10_ai_related_course/vllm_course/06-parallelism-ep/homework.html"
+  },
+  {
+    "title": "第 6 讲：并行 TP 到 EP — PPT 大纲",
+    "url": "/10_ai_related_course/vllm_course/06-parallelism-ep/ppt-outline.html"
+  },
+  {
+    "title": "第 6 讲教学大纲：并行：TP 到 EP",
+    "url": "/10_ai_related_course/vllm_course/06-parallelism-ep/syllabus.html"
+  },
+  {
+    "title": "第 7 讲 · 投机解码",
+    "url": "/10_ai_related_course/vllm_course/07-speculative-decoding/"
+  },
+  {
+    "title": "第 7 讲课堂实验",
+    "url": "/10_ai_related_course/vllm_course/07-speculative-decoding/hands-on-exercise.html"
+  },
+  {
+    "title": "第 7 讲课后作业",
+    "url": "/10_ai_related_course/vllm_course/07-speculative-decoding/homework.html"
+  },
+  {
+    "title": "第 7 讲：投机解码 — PPT 大纲",
+    "url": "/10_ai_related_course/vllm_course/07-speculative-decoding/ppt-outline.html"
+  },
+  {
+    "title": "第 7 讲教学大纲：投机解码",
+    "url": "/10_ai_related_course/vllm_course/07-speculative-decoding/syllabus.html"
+  },
+  {
+    "title": "第 8 讲 · 量化",
+    "url": "/10_ai_related_course/vllm_course/08-quantization/"
+  },
+  {
+    "title": "第 8 讲课堂实验",
+    "url": "/10_ai_related_course/vllm_course/08-quantization/hands-on-exercise.html"
+  },
+  {
+    "title": "第 8 讲课后作业",
+    "url": "/10_ai_related_course/vllm_course/08-quantization/homework.html"
+  },
+  {
+    "title": "第 8 讲：量化 — PPT 大纲",
+    "url": "/10_ai_related_course/vllm_course/08-quantization/ppt-outline.html"
+  },
+  {
+    "title": "第 8 讲教学大纲：量化",
+    "url": "/10_ai_related_course/vllm_course/08-quantization/syllabus.html"
+  },
+  {
+    "title": "第 9 讲 · KV 分载与 PD 分离",
+    "url": "/10_ai_related_course/vllm_course/09-kv-offload-disagg/"
+  },
+  {
+    "title": "第 9 讲课堂实验",
+    "url": "/10_ai_related_course/vllm_course/09-kv-offload-disagg/hands-on-exercise.html"
+  },
+  {
+    "title": "第 9 讲课后作业",
+    "url": "/10_ai_related_course/vllm_course/09-kv-offload-disagg/homework.html"
+  },
+  {
+    "title": "第 9 讲：KV 分载与 PD 分离 — PPT 大纲",
+    "url": "/10_ai_related_course/vllm_course/09-kv-offload-disagg/ppt-outline.html"
+  },
+  {
+    "title": "第 9 讲教学大纲：KV 分载与 PD 分离",
+    "url": "/10_ai_related_course/vllm_course/09-kv-offload-disagg/syllabus.html"
+  },
+  {
+    "title": "第 10 讲 · 生产运维与生态",
+    "url": "/10_ai_related_course/vllm_course/10-production-ops/"
+  },
+  {
+    "title": "第 10 讲实验脚本",
+    "url": "/10_ai_related_course/vllm_course/10-production-ops/code/"
+  },
+  {
+    "title": "第 10 讲课堂实验",
+    "url": "/10_ai_related_course/vllm_course/10-production-ops/hands-on-exercise.html"
+  },
+  {
+    "title": "第 10 讲课后作业",
+    "url": "/10_ai_related_course/vllm_course/10-production-ops/homework.html"
+  },
+  {
+    "title": "第 10 讲：生产运维与生态 — PPT 大纲",
+    "url": "/10_ai_related_course/vllm_course/10-production-ops/ppt-outline.html"
+  },
+  {
+    "title": "第 10 讲教学大纲：生产运维与生态",
+    "url": "/10_ai_related_course/vllm_course/10-production-ops/syllabus.html"
+  },
+  {
+    "title": "术语表",
+    "url": "/10_ai_related_course/vllm_course/glossary.html"
+  },
+  {
+    "title": "共用实验环境",
+    "url": "/10_ai_related_course/vllm_course/lab-environment.html"
+  },
+  {
+    "title": "课程总纲",
+    "url": "/10_ai_related_course/vllm_course/syllabus.html"
+  },
+  {
+    "title": "可复用配图索引",
+    "url": "/10_ai_related_course/vllm_course/visuals.html"
   },
   {
     "title": "AI Native 全栈实践",
