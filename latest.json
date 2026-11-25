@@ -1,322 +1,399 @@
 {
-  "generated_at": "2026-11-24T22:00:06Z",
+  "generated_at": "2026-11-25T22:00:07Z",
   "window_days": 30,
   "count": 300,
   "items": [
     {
-      "title": "Loop Transformer：当「多想一轮」的边际成本趋近零——智谱 GLM-5.4 机制与成本拆解",
-      "url": "/09_inference_system/model_optimization/loop-transformer-glm54.html",
-      "date": "2026-11-24",
-      "status": "new",
-      "module": "推理系统"
-    },
-    {
-      "title": "第 1 讲课堂实验",
-      "url": "/10_ai_related_course/vllm_course/01-engine-architecture/hands-on-exercise.html",
-      "date": "2026-11-24",
+      "title": "第 4 讲：对照 vLLM 的 KV 生命周期",
+      "url": "/10_ai_related_course/kv_cache_course/04-vllm-kv-cache/hands-on-exercise.html",
+      "date": "2026-11-25",
       "status": "new",
       "module": "课程"
     },
     {
-      "title": "第 1 讲课后作业",
-      "url": "/10_ai_related_course/vllm_course/01-engine-architecture/homework.html",
-      "date": "2026-11-24",
+      "title": "第 4 讲：课后作业",
+      "url": "/10_ai_related_course/kv_cache_course/04-vllm-kv-cache/homework.html",
+      "date": "2026-11-25",
       "status": "new",
       "module": "课程"
     },
     {
-      "title": "第 1 讲：引擎总架构 — PPT 大纲",
-      "url": "/10_ai_related_course/vllm_course/01-engine-architecture/ppt-outline.html",
-      "date": "2026-11-24",
+      "title": "第 4 讲：实验环境",
+      "url": "/10_ai_related_course/kv_cache_course/04-vllm-kv-cache/lab-environment.html",
+      "date": "2026-11-25",
       "status": "new",
       "module": "课程"
     },
     {
-      "title": "第 1 讲教学大纲：引擎总架构",
-      "url": "/10_ai_related_course/vllm_course/01-engine-architecture/syllabus.html",
-      "date": "2026-11-24",
+      "title": "第 4 讲：KV Cache 在 vLLM 里怎么调度与回收 — PPT 大纲",
+      "url": "/10_ai_related_course/kv_cache_course/04-vllm-kv-cache/ppt-outline.html",
+      "date": "2026-11-25",
       "status": "new",
       "module": "课程"
     },
     {
-      "title": "第 2 讲课堂实验",
-      "url": "/10_ai_related_course/vllm_course/02-scheduler/hands-on-exercise.html",
-      "date": "2026-11-24",
+      "title": "第 4 讲：KV Cache 在 vLLM 里怎么调度与回收 — 教学大纲",
+      "url": "/10_ai_related_course/kv_cache_course/04-vllm-kv-cache/syllabus.html",
+      "date": "2026-11-25",
       "status": "new",
       "module": "课程"
     },
     {
-      "title": "第 2 讲课后作业",
-      "url": "/10_ai_related_course/vllm_course/02-scheduler/homework.html",
-      "date": "2026-11-24",
+      "title": "第 7 讲：课后作业",
+      "url": "/10_ai_related_course/kv_cache_course/07-deepseek-v41-kv-cache/homework.html",
+      "date": "2026-11-25",
       "status": "new",
       "module": "课程"
     },
     {
-      "title": "第 2 讲：调度器 — PPT 大纲",
-      "url": "/10_ai_related_course/vllm_course/02-scheduler/ppt-outline.html",
-      "date": "2026-11-24",
+      "title": "第 7 讲：实验环境",
+      "url": "/10_ai_related_course/kv_cache_course/07-deepseek-v41-kv-cache/lab-environment.html",
+      "date": "2026-11-25",
       "status": "new",
       "module": "课程"
     },
     {
-      "title": "第 2 讲教学大纲：调度器",
-      "url": "/10_ai_related_course/vllm_course/02-scheduler/syllabus.html",
-      "date": "2026-11-24",
+      "title": "第 7 讲：KV Cache 在 DeepSeek-V4.1-Flash 里怎么压缩 — 教学大纲",
+      "url": "/10_ai_related_course/kv_cache_course/07-deepseek-v41-kv-cache/syllabus.html",
+      "date": "2026-11-25",
       "status": "new",
       "module": "课程"
     },
     {
-      "title": "第 3 讲课堂实验",
-      "url": "/10_ai_related_course/vllm_course/03-kv-cache-evolution/hands-on-exercise.html",
-      "date": "2026-11-24",
-      "status": "new",
-      "module": "课程"
-    },
-    {
-      "title": "第 3 讲课后作业",
-      "url": "/10_ai_related_course/vllm_course/03-kv-cache-evolution/homework.html",
-      "date": "2026-11-24",
+      "title": "KV Cache 八讲 — 实验环境",
+      "url": "/10_ai_related_course/kv_cache_course/lab-environment.html",
+      "date": "2026-11-25",
       "status": "new",
       "module": "课程"
     },
     {
       "title": "第 3 讲：KV cache 管理 — PPT 大纲",
       "url": "/10_ai_related_course/vllm_course/03-kv-cache-evolution/ppt-outline.html",
-      "date": "2026-11-24",
+      "date": "2026-11-25",
       "status": "new",
       "module": "课程"
     },
     {
       "title": "第 3 讲教学大纲：KV cache 管理",
       "url": "/10_ai_related_course/vllm_course/03-kv-cache-evolution/syllabus.html",
-      "date": "2026-11-24",
-      "status": "new",
-      "module": "课程"
-    },
-    {
-      "title": "第 4 讲课堂实验",
-      "url": "/10_ai_related_course/vllm_course/04-attention-backends/hands-on-exercise.html",
-      "date": "2026-11-24",
-      "status": "new",
-      "module": "课程"
-    },
-    {
-      "title": "第 4 讲课后作业",
-      "url": "/10_ai_related_course/vllm_course/04-attention-backends/homework.html",
-      "date": "2026-11-24",
-      "status": "new",
-      "module": "课程"
-    },
-    {
-      "title": "第 4 讲：注意力后端 — PPT 大纲",
-      "url": "/10_ai_related_course/vllm_course/04-attention-backends/ppt-outline.html",
-      "date": "2026-11-24",
-      "status": "new",
-      "module": "课程"
-    },
-    {
-      "title": "第 4 讲教学大纲：注意力后端",
-      "url": "/10_ai_related_course/vllm_course/04-attention-backends/syllabus.html",
-      "date": "2026-11-24",
-      "status": "new",
-      "module": "课程"
-    },
-    {
-      "title": "第 5 讲课堂实验",
-      "url": "/10_ai_related_course/vllm_course/05-cuda-graph-compile/hands-on-exercise.html",
-      "date": "2026-11-24",
-      "status": "new",
-      "module": "课程"
-    },
-    {
-      "title": "第 5 讲课后作业",
-      "url": "/10_ai_related_course/vllm_course/05-cuda-graph-compile/homework.html",
-      "date": "2026-11-24",
-      "status": "new",
-      "module": "课程"
-    },
-    {
-      "title": "第 5 讲：CUDA Graph 与编译 — PPT 大纲",
-      "url": "/10_ai_related_course/vllm_course/05-cuda-graph-compile/ppt-outline.html",
-      "date": "2026-11-24",
-      "status": "new",
-      "module": "课程"
-    },
-    {
-      "title": "第 5 讲教学大纲：CUDA Graph 与编译",
-      "url": "/10_ai_related_course/vllm_course/05-cuda-graph-compile/syllabus.html",
-      "date": "2026-11-24",
-      "status": "new",
-      "module": "课程"
-    },
-    {
-      "title": "第 6 讲课堂实验",
-      "url": "/10_ai_related_course/vllm_course/06-parallelism-ep/hands-on-exercise.html",
-      "date": "2026-11-24",
-      "status": "new",
-      "module": "课程"
-    },
-    {
-      "title": "第 6 讲课后作业",
-      "url": "/10_ai_related_course/vllm_course/06-parallelism-ep/homework.html",
-      "date": "2026-11-24",
-      "status": "new",
-      "module": "课程"
-    },
-    {
-      "title": "第 6 讲：并行 TP 到 EP — PPT 大纲",
-      "url": "/10_ai_related_course/vllm_course/06-parallelism-ep/ppt-outline.html",
-      "date": "2026-11-24",
-      "status": "new",
-      "module": "课程"
-    },
-    {
-      "title": "第 6 讲教学大纲：并行：TP 到 EP",
-      "url": "/10_ai_related_course/vllm_course/06-parallelism-ep/syllabus.html",
-      "date": "2026-11-24",
-      "status": "new",
-      "module": "课程"
-    },
-    {
-      "title": "第 7 讲课堂实验",
-      "url": "/10_ai_related_course/vllm_course/07-speculative-decoding/hands-on-exercise.html",
-      "date": "2026-11-24",
-      "status": "new",
-      "module": "课程"
-    },
-    {
-      "title": "第 7 讲课后作业",
-      "url": "/10_ai_related_course/vllm_course/07-speculative-decoding/homework.html",
-      "date": "2026-11-24",
-      "status": "new",
-      "module": "课程"
-    },
-    {
-      "title": "第 7 讲：投机解码 — PPT 大纲",
-      "url": "/10_ai_related_course/vllm_course/07-speculative-decoding/ppt-outline.html",
-      "date": "2026-11-24",
-      "status": "new",
-      "module": "课程"
-    },
-    {
-      "title": "第 7 讲教学大纲：投机解码",
-      "url": "/10_ai_related_course/vllm_course/07-speculative-decoding/syllabus.html",
-      "date": "2026-11-24",
-      "status": "new",
-      "module": "课程"
-    },
-    {
-      "title": "第 8 讲课堂实验",
-      "url": "/10_ai_related_course/vllm_course/08-quantization/hands-on-exercise.html",
-      "date": "2026-11-24",
-      "status": "new",
-      "module": "课程"
-    },
-    {
-      "title": "第 8 讲课后作业",
-      "url": "/10_ai_related_course/vllm_course/08-quantization/homework.html",
-      "date": "2026-11-24",
-      "status": "new",
-      "module": "课程"
-    },
-    {
-      "title": "第 8 讲：量化 — PPT 大纲",
-      "url": "/10_ai_related_course/vllm_course/08-quantization/ppt-outline.html",
-      "date": "2026-11-24",
-      "status": "new",
-      "module": "课程"
-    },
-    {
-      "title": "第 8 讲教学大纲：量化",
-      "url": "/10_ai_related_course/vllm_course/08-quantization/syllabus.html",
-      "date": "2026-11-24",
-      "status": "new",
-      "module": "课程"
-    },
-    {
-      "title": "第 9 讲课堂实验",
-      "url": "/10_ai_related_course/vllm_course/09-kv-offload-disagg/hands-on-exercise.html",
-      "date": "2026-11-24",
-      "status": "new",
-      "module": "课程"
-    },
-    {
-      "title": "第 9 讲课后作业",
-      "url": "/10_ai_related_course/vllm_course/09-kv-offload-disagg/homework.html",
-      "date": "2026-11-24",
-      "status": "new",
-      "module": "课程"
-    },
-    {
-      "title": "第 9 讲：KV 分载与 PD 分离 — PPT 大纲",
-      "url": "/10_ai_related_course/vllm_course/09-kv-offload-disagg/ppt-outline.html",
-      "date": "2026-11-24",
-      "status": "new",
-      "module": "课程"
-    },
-    {
-      "title": "第 9 讲教学大纲：KV 分载与 PD 分离",
-      "url": "/10_ai_related_course/vllm_course/09-kv-offload-disagg/syllabus.html",
-      "date": "2026-11-24",
-      "status": "new",
-      "module": "课程"
-    },
-    {
-      "title": "第 10 讲课堂实验",
-      "url": "/10_ai_related_course/vllm_course/10-production-ops/hands-on-exercise.html",
-      "date": "2026-11-24",
-      "status": "new",
-      "module": "课程"
-    },
-    {
-      "title": "第 10 讲课后作业",
-      "url": "/10_ai_related_course/vllm_course/10-production-ops/homework.html",
-      "date": "2026-11-24",
-      "status": "new",
-      "module": "课程"
-    },
-    {
-      "title": "第 10 讲：生产运维与生态 — PPT 大纲",
-      "url": "/10_ai_related_course/vllm_course/10-production-ops/ppt-outline.html",
-      "date": "2026-11-24",
-      "status": "new",
-      "module": "课程"
-    },
-    {
-      "title": "第 10 讲教学大纲：生产运维与生态",
-      "url": "/10_ai_related_course/vllm_course/10-production-ops/syllabus.html",
-      "date": "2026-11-24",
-      "status": "new",
-      "module": "课程"
-    },
-    {
-      "title": "术语表",
-      "url": "/10_ai_related_course/vllm_course/glossary.html",
-      "date": "2026-11-24",
-      "status": "new",
-      "module": "课程"
-    },
-    {
-      "title": "共用实验环境",
-      "url": "/10_ai_related_course/vllm_course/lab-environment.html",
-      "date": "2026-11-24",
+      "date": "2026-11-25",
       "status": "new",
       "module": "课程"
     },
     {
       "title": "课程总纲",
       "url": "/10_ai_related_course/vllm_course/syllabus.html",
-      "date": "2026-11-24",
+      "date": "2026-11-25",
+      "status": "new",
+      "module": "课程"
+    },
+    {
+      "title": "第 1 讲课堂实验",
+      "url": "/10_ai_related_course/vllm_course/01-engine-architecture/hands-on-exercise.html",
+      "date": "2026-11-25",
+      "status": "new",
+      "module": "课程"
+    },
+    {
+      "title": "第 1 讲课后作业",
+      "url": "/10_ai_related_course/vllm_course/01-engine-architecture/homework.html",
+      "date": "2026-11-25",
+      "status": "new",
+      "module": "课程"
+    },
+    {
+      "title": "第 1 讲：引擎总架构 — PPT 大纲",
+      "url": "/10_ai_related_course/vllm_course/01-engine-architecture/ppt-outline.html",
+      "date": "2026-11-25",
+      "status": "new",
+      "module": "课程"
+    },
+    {
+      "title": "第 1 讲教学大纲：引擎总架构",
+      "url": "/10_ai_related_course/vllm_course/01-engine-architecture/syllabus.html",
+      "date": "2026-11-25",
+      "status": "new",
+      "module": "课程"
+    },
+    {
+      "title": "第 2 讲课堂实验",
+      "url": "/10_ai_related_course/vllm_course/02-scheduler/hands-on-exercise.html",
+      "date": "2026-11-25",
+      "status": "new",
+      "module": "课程"
+    },
+    {
+      "title": "第 2 讲课后作业",
+      "url": "/10_ai_related_course/vllm_course/02-scheduler/homework.html",
+      "date": "2026-11-25",
+      "status": "new",
+      "module": "课程"
+    },
+    {
+      "title": "第 2 讲：调度器 — PPT 大纲",
+      "url": "/10_ai_related_course/vllm_course/02-scheduler/ppt-outline.html",
+      "date": "2026-11-25",
+      "status": "new",
+      "module": "课程"
+    },
+    {
+      "title": "第 2 讲教学大纲：调度器",
+      "url": "/10_ai_related_course/vllm_course/02-scheduler/syllabus.html",
+      "date": "2026-11-25",
+      "status": "new",
+      "module": "课程"
+    },
+    {
+      "title": "第 3 讲课堂实验",
+      "url": "/10_ai_related_course/vllm_course/03-kv-cache-evolution/hands-on-exercise.html",
+      "date": "2026-11-25",
+      "status": "new",
+      "module": "课程"
+    },
+    {
+      "title": "第 3 讲课后作业",
+      "url": "/10_ai_related_course/vllm_course/03-kv-cache-evolution/homework.html",
+      "date": "2026-11-25",
+      "status": "new",
+      "module": "课程"
+    },
+    {
+      "title": "第 4 讲课堂实验",
+      "url": "/10_ai_related_course/vllm_course/04-attention-backends/hands-on-exercise.html",
+      "date": "2026-11-25",
+      "status": "new",
+      "module": "课程"
+    },
+    {
+      "title": "第 4 讲课后作业",
+      "url": "/10_ai_related_course/vllm_course/04-attention-backends/homework.html",
+      "date": "2026-11-25",
+      "status": "new",
+      "module": "课程"
+    },
+    {
+      "title": "第 4 讲：注意力后端 — PPT 大纲",
+      "url": "/10_ai_related_course/vllm_course/04-attention-backends/ppt-outline.html",
+      "date": "2026-11-25",
+      "status": "new",
+      "module": "课程"
+    },
+    {
+      "title": "第 4 讲教学大纲：注意力后端",
+      "url": "/10_ai_related_course/vllm_course/04-attention-backends/syllabus.html",
+      "date": "2026-11-25",
+      "status": "new",
+      "module": "课程"
+    },
+    {
+      "title": "第 5 讲课堂实验",
+      "url": "/10_ai_related_course/vllm_course/05-cuda-graph-compile/hands-on-exercise.html",
+      "date": "2026-11-25",
+      "status": "new",
+      "module": "课程"
+    },
+    {
+      "title": "第 5 讲课后作业",
+      "url": "/10_ai_related_course/vllm_course/05-cuda-graph-compile/homework.html",
+      "date": "2026-11-25",
+      "status": "new",
+      "module": "课程"
+    },
+    {
+      "title": "第 5 讲：CUDA Graph 与编译 — PPT 大纲",
+      "url": "/10_ai_related_course/vllm_course/05-cuda-graph-compile/ppt-outline.html",
+      "date": "2026-11-25",
+      "status": "new",
+      "module": "课程"
+    },
+    {
+      "title": "第 5 讲教学大纲：CUDA Graph 与编译",
+      "url": "/10_ai_related_course/vllm_course/05-cuda-graph-compile/syllabus.html",
+      "date": "2026-11-25",
+      "status": "new",
+      "module": "课程"
+    },
+    {
+      "title": "第 6 讲课堂实验",
+      "url": "/10_ai_related_course/vllm_course/06-parallelism-ep/hands-on-exercise.html",
+      "date": "2026-11-25",
+      "status": "new",
+      "module": "课程"
+    },
+    {
+      "title": "第 6 讲课后作业",
+      "url": "/10_ai_related_course/vllm_course/06-parallelism-ep/homework.html",
+      "date": "2026-11-25",
+      "status": "new",
+      "module": "课程"
+    },
+    {
+      "title": "第 6 讲：并行 TP 到 EP — PPT 大纲",
+      "url": "/10_ai_related_course/vllm_course/06-parallelism-ep/ppt-outline.html",
+      "date": "2026-11-25",
+      "status": "new",
+      "module": "课程"
+    },
+    {
+      "title": "第 6 讲教学大纲：并行：TP 到 EP",
+      "url": "/10_ai_related_course/vllm_course/06-parallelism-ep/syllabus.html",
+      "date": "2026-11-25",
+      "status": "new",
+      "module": "课程"
+    },
+    {
+      "title": "第 7 讲课堂实验",
+      "url": "/10_ai_related_course/vllm_course/07-speculative-decoding/hands-on-exercise.html",
+      "date": "2026-11-25",
+      "status": "new",
+      "module": "课程"
+    },
+    {
+      "title": "第 7 讲课后作业",
+      "url": "/10_ai_related_course/vllm_course/07-speculative-decoding/homework.html",
+      "date": "2026-11-25",
+      "status": "new",
+      "module": "课程"
+    },
+    {
+      "title": "第 7 讲：投机解码 — PPT 大纲",
+      "url": "/10_ai_related_course/vllm_course/07-speculative-decoding/ppt-outline.html",
+      "date": "2026-11-25",
+      "status": "new",
+      "module": "课程"
+    },
+    {
+      "title": "第 7 讲教学大纲：投机解码",
+      "url": "/10_ai_related_course/vllm_course/07-speculative-decoding/syllabus.html",
+      "date": "2026-11-25",
+      "status": "new",
+      "module": "课程"
+    },
+    {
+      "title": "第 8 讲课堂实验",
+      "url": "/10_ai_related_course/vllm_course/08-quantization/hands-on-exercise.html",
+      "date": "2026-11-25",
+      "status": "new",
+      "module": "课程"
+    },
+    {
+      "title": "第 8 讲课后作业",
+      "url": "/10_ai_related_course/vllm_course/08-quantization/homework.html",
+      "date": "2026-11-25",
+      "status": "new",
+      "module": "课程"
+    },
+    {
+      "title": "第 8 讲：量化 — PPT 大纲",
+      "url": "/10_ai_related_course/vllm_course/08-quantization/ppt-outline.html",
+      "date": "2026-11-25",
+      "status": "new",
+      "module": "课程"
+    },
+    {
+      "title": "第 8 讲教学大纲：量化",
+      "url": "/10_ai_related_course/vllm_course/08-quantization/syllabus.html",
+      "date": "2026-11-25",
+      "status": "new",
+      "module": "课程"
+    },
+    {
+      "title": "第 9 讲课堂实验",
+      "url": "/10_ai_related_course/vllm_course/09-kv-offload-disagg/hands-on-exercise.html",
+      "date": "2026-11-25",
+      "status": "new",
+      "module": "课程"
+    },
+    {
+      "title": "第 9 讲课后作业",
+      "url": "/10_ai_related_course/vllm_course/09-kv-offload-disagg/homework.html",
+      "date": "2026-11-25",
+      "status": "new",
+      "module": "课程"
+    },
+    {
+      "title": "第 9 讲：KV 分载与 PD 分离 — PPT 大纲",
+      "url": "/10_ai_related_course/vllm_course/09-kv-offload-disagg/ppt-outline.html",
+      "date": "2026-11-25",
+      "status": "new",
+      "module": "课程"
+    },
+    {
+      "title": "第 9 讲教学大纲：KV 分载与 PD 分离",
+      "url": "/10_ai_related_course/vllm_course/09-kv-offload-disagg/syllabus.html",
+      "date": "2026-11-25",
+      "status": "new",
+      "module": "课程"
+    },
+    {
+      "title": "第 10 讲课堂实验",
+      "url": "/10_ai_related_course/vllm_course/10-production-ops/hands-on-exercise.html",
+      "date": "2026-11-25",
+      "status": "new",
+      "module": "课程"
+    },
+    {
+      "title": "第 10 讲课后作业",
+      "url": "/10_ai_related_course/vllm_course/10-production-ops/homework.html",
+      "date": "2026-11-25",
+      "status": "new",
+      "module": "课程"
+    },
+    {
+      "title": "第 10 讲：生产运维与生态 — PPT 大纲",
+      "url": "/10_ai_related_course/vllm_course/10-production-ops/ppt-outline.html",
+      "date": "2026-11-25",
+      "status": "new",
+      "module": "课程"
+    },
+    {
+      "title": "第 10 讲教学大纲：生产运维与生态",
+      "url": "/10_ai_related_course/vllm_course/10-production-ops/syllabus.html",
+      "date": "2026-11-25",
+      "status": "new",
+      "module": "课程"
+    },
+    {
+      "title": "结课考试卷 · 参考答案与评分标准",
+      "url": "/10_ai_related_course/vllm_course/exam/answers.html",
+      "date": "2026-11-25",
+      "status": "new",
+      "module": "课程"
+    },
+    {
+      "title": "vLLM 推理系统课程 · 结课考试卷",
+      "url": "/10_ai_related_course/vllm_course/exam/final-exam.html",
+      "date": "2026-11-25",
+      "status": "new",
+      "module": "课程"
+    },
+    {
+      "title": "术语表",
+      "url": "/10_ai_related_course/vllm_course/glossary.html",
+      "date": "2026-11-25",
+      "status": "new",
+      "module": "课程"
+    },
+    {
+      "title": "共用实验环境",
+      "url": "/10_ai_related_course/vllm_course/lab-environment.html",
+      "date": "2026-11-25",
       "status": "new",
       "module": "课程"
     },
     {
       "title": "可复用配图索引",
       "url": "/10_ai_related_course/vllm_course/visuals.html",
-      "date": "2026-11-24",
+      "date": "2026-11-25",
       "status": "new",
       "module": "课程"
+    },
+    {
+      "title": "Loop Transformer：当「多想一轮」的边际成本趋近零——智谱 GLM-5.4 机制与成本拆解",
+      "url": "/09_inference_system/model_optimization/loop-transformer-glm54.html",
+      "date": "2026-11-24",
+      "status": "new",
+      "module": "推理系统"
     },
     {
       "title": "Token Factory 2.0 PPT 制作稿(逐页上稿文案)",
@@ -1789,20 +1866,6 @@
       "module": "课程"
     },
     {
-      "title": "第 7 讲：实验环境",
-      "url": "/10_ai_related_course/kv_cache_course/07-deepseek-v41-kv-cache/lab-environment.html",
-      "date": "2026-11-06",
-      "status": "new",
-      "module": "课程"
-    },
-    {
-      "title": "第 7 讲：KV Cache 在 DeepSeek-V4.1-Flash 里怎么压缩 — 教学大纲",
-      "url": "/10_ai_related_course/kv_cache_course/07-deepseek-v41-kv-cache/syllabus.html",
-      "date": "2026-11-06",
-      "status": "new",
-      "module": "课程"
-    },
-    {
       "title": "第 8 讲：KV Cache 怎么算容量、怎么选引擎 — 教学大纲",
       "url": "/10_ai_related_course/kv_cache_course/08-kv-capacity-planning/syllabus.html",
       "date": "2026-11-06",
@@ -2039,69 +2102,6 @@
       "date": "2026-11-05",
       "status": "updated",
       "module": "LLM 理论"
-    },
-    {
-      "title": "开源大模型应用编排平台：Dify、AnythingLLM、RAGFlow、n8n 与 Coze Studio 的功能与商用许可对比分析",
-      "url": "/06_llm_theory_and_fundamentals/workflow/open_source_llm_orchestration_platforms_comparison.html",
-      "date": "2026-11-05",
-      "status": "updated",
-      "module": "LLM 理论"
-    },
-    {
-      "title": "NVIDIA GPU 容器环境：原理与构建指南",
-      "url": "/02_gpu_programming/01_environment/01_nvidia_container_setup.html",
-      "date": "2026-11-05",
-      "status": "updated",
-      "module": "GPU 编程"
-    },
-    {
-      "title": "GPU 虚拟化与资源管理技术深度解析 - 第一部分：基础理论篇",
-      "url": "/04_cloud_native_ai_platform/gpu_manager/01_basic_theory.html",
-      "date": "2026-11-05",
-      "status": "updated",
-      "module": "云原生 AI"
-    },
-    {
-      "title": "GPU 虚拟化与资源管理技术深度解析 - 第二部分：虚拟化技术篇",
-      "url": "/04_cloud_native_ai_platform/gpu_manager/02_virtualization.html",
-      "date": "2026-11-05",
-      "status": "updated",
-      "module": "云原生 AI"
-    },
-    {
-      "title": "GPU 虚拟化与资源管理技术深度解析 - 第三部分：资源管理与优化篇",
-      "url": "/04_cloud_native_ai_platform/gpu_manager/03_resource_management.html",
-      "date": "2026-11-05",
-      "status": "updated",
-      "module": "云原生 AI"
-    },
-    {
-      "title": "GPU 虚拟化与资源管理技术深度解析 - 第四部分：实践应用篇",
-      "url": "/04_cloud_native_ai_platform/gpu_manager/04_practice.html",
-      "date": "2026-11-05",
-      "status": "updated",
-      "module": "云原生 AI"
-    },
-    {
-      "title": "Nvidia KAI Scheduler 功能架构解析",
-      "url": "/04_cloud_native_ai_platform/gpu_manager/hami/KAI_vs_HAMi_Comparison.html",
-      "date": "2026-11-05",
-      "status": "updated",
-      "module": "云原生 AI"
-    },
-    {
-      "title": "GPU-Virtual-Service 深度剖析：CUDA 劫持机制、全链路流程与 HAMi-Core 对比",
-      "url": "/04_cloud_native_ai_platform/gpu_manager/hami/flex_ai_intro.html",
-      "date": "2026-11-05",
-      "status": "updated",
-      "module": "云原生 AI"
-    },
-    {
-      "title": "HAMi GPU 资源管理完整指南",
-      "url": "/04_cloud_native_ai_platform/gpu_manager/hami/hami-gpu-resources-guide.html",
-      "date": "2026-11-05",
-      "status": "updated",
-      "module": "云原生 AI"
     }
   ]
 }

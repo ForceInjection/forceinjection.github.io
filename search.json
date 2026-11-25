@@ -3108,6 +3108,18 @@
     "url": "/10_ai_related_course/vllm_course/10-production-ops/syllabus.html"
   },
   {
+    "title": "结课考试卷",
+    "url": "/10_ai_related_course/vllm_course/exam/"
+  },
+  {
+    "title": "结课考试卷 · 参考答案与评分标准",
+    "url": "/10_ai_related_course/vllm_course/exam/answers.html"
+  },
+  {
+    "title": "vLLM 推理系统课程 · 结课考试卷",
+    "url": "/10_ai_related_course/vllm_course/exam/final-exam.html"
+  },
+  {
     "title": "术语表",
     "url": "/10_ai_related_course/vllm_course/glossary.html"
   },
