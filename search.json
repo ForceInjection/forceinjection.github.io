@@ -8,6 +8,14 @@
     "url": "/01_hardware_architecture/"
   },
   {
+    "title": "AI 工厂的物理极限",
+    "url": "/01_hardware_architecture/ai_factory_limits/"
+  },
+  {
+    "title": "AI 工厂的物理极限：CPO 光互连、CXL 解耦内存与冷存储",
+    "url": "/01_hardware_architecture/ai_factory_limits/01_cpo_cxl_cold_storage.html"
+  },
+  {
     "title": "Ascend 950 微架构速查：来自 FlashMLA 算子报告的硬件信息整理",
     "url": "/01_hardware_architecture/ascend/Ascend950_微架构速查.html"
   },
@@ -1854,6 +1862,54 @@
   {
     "title": "CacheGen 技术详解：KV Cache 的高效压缩与流式传输",
     "url": "/09_inference_system/kv_cache/02_systems/01_lmcache/15_cachegen.html"
+  },
+  {
+    "title": "LMCache v0.5.8：MultiProcess 架构与迁移指南",
+    "url": "/09_inference_system/kv_cache/02_systems/02_lmcache_v058/"
+  },
+  {
+    "title": "LMCache v0.5.8 · MP 总架构",
+    "url": "/09_inference_system/kv_cache/02_systems/02_lmcache_v058/01_mp_architecture.html"
+  },
+  {
+    "title": "LMCache v0.5.8 · vLLM 集成（MP Connector）",
+    "url": "/09_inference_system/kv_cache/02_systems/02_lmcache_v058/02_lmcache_mp_connector.html"
+  },
+  {
+    "title": "LMCache v0.5.8 · MPCacheServer 与控制平面",
+    "url": "/09_inference_system/kv_cache/02_systems/02_lmcache_v058/03_mp_server.html"
+  },
+  {
+    "title": "LMCache v0.5.8 · 两级存储(L1/L2)",
+    "url": "/09_inference_system/kv_cache/02_systems/02_lmcache_v058/04_storage_l1_l2.html"
+  },
+  {
+    "title": "LMCache v0.5.8 · P2P 重设计：gRPC 控制面",
+    "url": "/09_inference_system/kv_cache/02_systems/02_lmcache_v058/05_p2p_grpc.html"
+  },
+  {
+    "title": "LMCache v0.5.8 · CacheBlend 的 MP 模块组实现",
+    "url": "/09_inference_system/kv_cache/02_systems/02_lmcache_v058/06_blend_mp.html"
+  },
+  {
+    "title": "LMCache v0.5.8 · 可观测体系",
+    "url": "/09_inference_system/kv_cache/02_systems/02_lmcache_v058/07_observability.html"
+  },
+  {
+    "title": "LMCache v0.5.8 · 序列化选项与 CacheGen 外移",
+    "url": "/09_inference_system/kv_cache/02_systems/02_lmcache_v058/08_serde_and_cachegen.html"
+  },
+  {
+    "title": "LMCache v0.5.8 · `lmcache` CLI",
+    "url": "/09_inference_system/kv_cache/02_systems/02_lmcache_v058/09_cli.html"
+  },
+  {
+    "title": "LMCache v0.5.8 · MPCacheServer 内部深读",
+    "url": "/09_inference_system/kv_cache/02_systems/02_lmcache_v058/10_mp_server_internals.html"
+  },
+  {
+    "title": "LMCache v0.5.8 · Client 传输机制深读(SHM / ZMQ / gRPC)",
+    "url": "/09_inference_system/kv_cache/02_systems/02_lmcache_v058/11_client_transfer.html"
   },
   {
     "title": "Tair KVCache 架构与设计深度分析",

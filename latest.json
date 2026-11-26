@@ -1,8 +1,218 @@
 {
-  "generated_at": "2026-11-25T22:00:07Z",
+  "generated_at": "2026-11-26T22:00:05Z",
   "window_days": 30,
   "count": 300,
   "items": [
+    {
+      "title": "AI 工厂的物理极限：CPO 光互连、CXL 解耦内存与冷存储",
+      "url": "/01_hardware_architecture/ai_factory_limits/01_cpo_cxl_cold_storage.html",
+      "date": "2026-11-26",
+      "status": "new",
+      "module": "硬件架构"
+    },
+    {
+      "title": "AI 基础设施延迟金字塔",
+      "url": "/01_hardware_architecture/performance/ai_latency_pyramid.html",
+      "date": "2026-11-26",
+      "status": "updated",
+      "module": "硬件架构"
+    },
+    {
+      "title": "LMCache v0.5.8 · MP 总架构",
+      "url": "/09_inference_system/kv_cache/02_systems/02_lmcache_v058/01_mp_architecture.html",
+      "date": "2026-11-26",
+      "status": "new",
+      "module": "推理系统"
+    },
+    {
+      "title": "LMCache v0.5.8 · vLLM 集成（MP Connector）",
+      "url": "/09_inference_system/kv_cache/02_systems/02_lmcache_v058/02_lmcache_mp_connector.html",
+      "date": "2026-11-26",
+      "status": "new",
+      "module": "推理系统"
+    },
+    {
+      "title": "LMCache v0.5.8 · MPCacheServer 与控制平面",
+      "url": "/09_inference_system/kv_cache/02_systems/02_lmcache_v058/03_mp_server.html",
+      "date": "2026-11-26",
+      "status": "new",
+      "module": "推理系统"
+    },
+    {
+      "title": "LMCache v0.5.8 · 两级存储(L1/L2)",
+      "url": "/09_inference_system/kv_cache/02_systems/02_lmcache_v058/04_storage_l1_l2.html",
+      "date": "2026-11-26",
+      "status": "new",
+      "module": "推理系统"
+    },
+    {
+      "title": "LMCache v0.5.8 · P2P 重设计：gRPC 控制面",
+      "url": "/09_inference_system/kv_cache/02_systems/02_lmcache_v058/05_p2p_grpc.html",
+      "date": "2026-11-26",
+      "status": "new",
+      "module": "推理系统"
+    },
+    {
+      "title": "LMCache v0.5.8 · CacheBlend 的 MP 模块组实现",
+      "url": "/09_inference_system/kv_cache/02_systems/02_lmcache_v058/06_blend_mp.html",
+      "date": "2026-11-26",
+      "status": "new",
+      "module": "推理系统"
+    },
+    {
+      "title": "LMCache v0.5.8 · 可观测体系",
+      "url": "/09_inference_system/kv_cache/02_systems/02_lmcache_v058/07_observability.html",
+      "date": "2026-11-26",
+      "status": "new",
+      "module": "推理系统"
+    },
+    {
+      "title": "LMCache v0.5.8 · 序列化选项与 CacheGen 外移",
+      "url": "/09_inference_system/kv_cache/02_systems/02_lmcache_v058/08_serde_and_cachegen.html",
+      "date": "2026-11-26",
+      "status": "new",
+      "module": "推理系统"
+    },
+    {
+      "title": "LMCache v0.5.8 · `lmcache` CLI",
+      "url": "/09_inference_system/kv_cache/02_systems/02_lmcache_v058/09_cli.html",
+      "date": "2026-11-26",
+      "status": "new",
+      "module": "推理系统"
+    },
+    {
+      "title": "LMCache v0.5.8 · MPCacheServer 内部深读",
+      "url": "/09_inference_system/kv_cache/02_systems/02_lmcache_v058/10_mp_server_internals.html",
+      "date": "2026-11-26",
+      "status": "new",
+      "module": "推理系统"
+    },
+    {
+      "title": "LMCache v0.5.8 · Client 传输机制深读(SHM / ZMQ / gRPC)",
+      "url": "/09_inference_system/kv_cache/02_systems/02_lmcache_v058/11_client_transfer.html",
+      "date": "2026-11-26",
+      "status": "new",
+      "module": "推理系统"
+    },
+    {
+      "title": "LMCache 架构概览",
+      "url": "/09_inference_system/kv_cache/02_systems/01_lmcache/01_lmcache_overview.html",
+      "date": "2026-11-26",
+      "status": "updated",
+      "module": "推理系统"
+    },
+    {
+      "title": "LMCacheConnector (vLLM 集成) 代码分析",
+      "url": "/09_inference_system/kv_cache/02_systems/01_lmcache/02_lmcache_connector.html",
+      "date": "2026-11-26",
+      "status": "updated",
+      "module": "推理系统"
+    },
+    {
+      "title": "LMCacheEngine 核心引擎代码分析",
+      "url": "/09_inference_system/kv_cache/02_systems/01_lmcache/03_lmcache_engine.html",
+      "date": "2026-11-26",
+      "status": "updated",
+      "module": "推理系统"
+    },
+    {
+      "title": "LMCache Controller (控制平面) 架构剖析",
+      "url": "/09_inference_system/kv_cache/02_systems/01_lmcache/04_lmcache_controller.html",
+      "date": "2026-11-26",
+      "status": "updated",
+      "module": "推理系统"
+    },
+    {
+      "title": "LMCache 分层存储架构与调度机制详解",
+      "url": "/09_inference_system/kv_cache/02_systems/01_lmcache/05_lmcache_storage_overview.html",
+      "date": "2026-11-26",
+      "status": "updated",
+      "module": "推理系统"
+    },
+    {
+      "title": "LocalCPUBackend 源码分析",
+      "url": "/09_inference_system/kv_cache/02_systems/01_lmcache/06_local_cpu_backend.html",
+      "date": "2026-11-26",
+      "status": "updated",
+      "module": "推理系统"
+    },
+    {
+      "title": "P2PBackend 源码分析",
+      "url": "/09_inference_system/kv_cache/02_systems/01_lmcache/07_p2p_backend.html",
+      "date": "2026-11-26",
+      "status": "updated",
+      "module": "推理系统"
+    },
+    {
+      "title": "PDBackend (预填充-解码分离后端) 源码分析",
+      "url": "/09_inference_system/kv_cache/02_systems/01_lmcache/08_pd_backend.html",
+      "date": "2026-11-26",
+      "status": "updated",
+      "module": "推理系统"
+    },
+    {
+      "title": "LocalDiskBackend 源码分析",
+      "url": "/09_inference_system/kv_cache/02_systems/01_lmcache/09_local_disk_backend.html",
+      "date": "2026-11-26",
+      "status": "updated",
+      "module": "推理系统"
+    },
+    {
+      "title": "GdsBackend 源码分析",
+      "url": "/09_inference_system/kv_cache/02_systems/01_lmcache/10_gds_backend.html",
+      "date": "2026-11-26",
+      "status": "updated",
+      "module": "推理系统"
+    },
+    {
+      "title": "NixlStorageBackend 源码分析",
+      "url": "/09_inference_system/kv_cache/02_systems/01_lmcache/11_nixl_backend.html",
+      "date": "2026-11-26",
+      "status": "updated",
+      "module": "推理系统"
+    },
+    {
+      "title": "Remote Connector (远程连接器) 源码分析",
+      "url": "/09_inference_system/kv_cache/02_systems/01_lmcache/12_remote_connector.html",
+      "date": "2026-11-26",
+      "status": "updated",
+      "module": "推理系统"
+    },
+    {
+      "title": "LMCache Server 源码分析",
+      "url": "/09_inference_system/kv_cache/02_systems/01_lmcache/13_lmcache_server.html",
+      "date": "2026-11-26",
+      "status": "updated",
+      "module": "推理系统"
+    },
+    {
+      "title": "CacheBlend 技术详解：RAG 场景下的 KV Cache 动态融合机制与源码剖析",
+      "url": "/09_inference_system/kv_cache/02_systems/01_lmcache/14_cache_blend.html",
+      "date": "2026-11-26",
+      "status": "updated",
+      "module": "推理系统"
+    },
+    {
+      "title": "CacheGen 技术详解：KV Cache 的高效压缩与流式传输",
+      "url": "/09_inference_system/kv_cache/02_systems/01_lmcache/15_cachegen.html",
+      "date": "2026-11-26",
+      "status": "updated",
+      "module": "推理系统"
+    },
+    {
+      "title": "第 1 讲：引擎总架构 — PPT 大纲",
+      "url": "/10_ai_related_course/vllm_course/01-engine-architecture/ppt-outline.html",
+      "date": "2026-11-26",
+      "status": "new",
+      "module": "课程"
+    },
+    {
+      "title": "第 3 讲：KV cache 管理 — PPT 大纲",
+      "url": "/10_ai_related_course/vllm_course/03-kv-cache-evolution/ppt-outline.html",
+      "date": "2026-11-26",
+      "status": "new",
+      "module": "课程"
+    },
     {
       "title": "第 4 讲：对照 vLLM 的 KV 生命周期",
       "url": "/10_ai_related_course/kv_cache_course/04-vllm-kv-cache/hands-on-exercise.html",
@@ -67,13 +277,6 @@
       "module": "课程"
     },
     {
-      "title": "第 3 讲：KV cache 管理 — PPT 大纲",
-      "url": "/10_ai_related_course/vllm_course/03-kv-cache-evolution/ppt-outline.html",
-      "date": "2026-11-25",
-      "status": "new",
-      "module": "课程"
-    },
-    {
       "title": "第 3 讲教学大纲：KV cache 管理",
       "url": "/10_ai_related_course/vllm_course/03-kv-cache-evolution/syllabus.html",
       "date": "2026-11-25",
@@ -97,13 +300,6 @@
     {
       "title": "第 1 讲课后作业",
       "url": "/10_ai_related_course/vllm_course/01-engine-architecture/homework.html",
-      "date": "2026-11-25",
-      "status": "new",
-      "module": "课程"
-    },
-    {
-      "title": "第 1 讲：引擎总架构 — PPT 大纲",
-      "url": "/10_ai_related_course/vllm_course/01-engine-architecture/ppt-outline.html",
       "date": "2026-11-25",
       "status": "new",
       "module": "课程"
@@ -1411,111 +1607,6 @@
       "module": "推理系统"
     },
     {
-      "title": "LMCache 架构概览",
-      "url": "/09_inference_system/kv_cache/02_systems/01_lmcache/01_lmcache_overview.html",
-      "date": "2026-11-06",
-      "status": "updated",
-      "module": "推理系统"
-    },
-    {
-      "title": "LMCacheConnector (vLLM 集成) 代码分析",
-      "url": "/09_inference_system/kv_cache/02_systems/01_lmcache/02_lmcache_connector.html",
-      "date": "2026-11-06",
-      "status": "updated",
-      "module": "推理系统"
-    },
-    {
-      "title": "LMCacheEngine 核心引擎代码分析",
-      "url": "/09_inference_system/kv_cache/02_systems/01_lmcache/03_lmcache_engine.html",
-      "date": "2026-11-06",
-      "status": "updated",
-      "module": "推理系统"
-    },
-    {
-      "title": "LMCache Controller (控制平面) 架构剖析",
-      "url": "/09_inference_system/kv_cache/02_systems/01_lmcache/04_lmcache_controller.html",
-      "date": "2026-11-06",
-      "status": "updated",
-      "module": "推理系统"
-    },
-    {
-      "title": "LMCache 分层存储架构与调度机制详解",
-      "url": "/09_inference_system/kv_cache/02_systems/01_lmcache/05_lmcache_storage_overview.html",
-      "date": "2026-11-06",
-      "status": "updated",
-      "module": "推理系统"
-    },
-    {
-      "title": "LocalCPUBackend 源码分析",
-      "url": "/09_inference_system/kv_cache/02_systems/01_lmcache/06_local_cpu_backend.html",
-      "date": "2026-11-06",
-      "status": "updated",
-      "module": "推理系统"
-    },
-    {
-      "title": "P2PBackend 源码分析",
-      "url": "/09_inference_system/kv_cache/02_systems/01_lmcache/07_p2p_backend.html",
-      "date": "2026-11-06",
-      "status": "updated",
-      "module": "推理系统"
-    },
-    {
-      "title": "PDBackend (预填充-解码分离后端) 源码分析",
-      "url": "/09_inference_system/kv_cache/02_systems/01_lmcache/08_pd_backend.html",
-      "date": "2026-11-06",
-      "status": "updated",
-      "module": "推理系统"
-    },
-    {
-      "title": "LocalDiskBackend 源码分析",
-      "url": "/09_inference_system/kv_cache/02_systems/01_lmcache/09_local_disk_backend.html",
-      "date": "2026-11-06",
-      "status": "updated",
-      "module": "推理系统"
-    },
-    {
-      "title": "GdsBackend 源码分析",
-      "url": "/09_inference_system/kv_cache/02_systems/01_lmcache/10_gds_backend.html",
-      "date": "2026-11-06",
-      "status": "updated",
-      "module": "推理系统"
-    },
-    {
-      "title": "NixlStorageBackend 源码分析",
-      "url": "/09_inference_system/kv_cache/02_systems/01_lmcache/11_nixl_backend.html",
-      "date": "2026-11-06",
-      "status": "updated",
-      "module": "推理系统"
-    },
-    {
-      "title": "Remote Connector (远程连接器) 源码分析",
-      "url": "/09_inference_system/kv_cache/02_systems/01_lmcache/12_remote_connector.html",
-      "date": "2026-11-06",
-      "status": "updated",
-      "module": "推理系统"
-    },
-    {
-      "title": "LMCache Server 源码分析",
-      "url": "/09_inference_system/kv_cache/02_systems/01_lmcache/13_lmcache_server.html",
-      "date": "2026-11-06",
-      "status": "updated",
-      "module": "推理系统"
-    },
-    {
-      "title": "CacheBlend 技术详解：RAG 场景下的 KV Cache 动态融合机制与源码剖析",
-      "url": "/09_inference_system/kv_cache/02_systems/01_lmcache/14_cache_blend.html",
-      "date": "2026-11-06",
-      "status": "updated",
-      "module": "推理系统"
-    },
-    {
-      "title": "CacheGen 技术详解：KV Cache 的高效压缩与流式传输",
-      "url": "/09_inference_system/kv_cache/02_systems/01_lmcache/15_cachegen.html",
-      "date": "2026-11-06",
-      "status": "updated",
-      "module": "推理系统"
-    },
-    {
       "title": "Tair KVCache 架构与设计深度分析",
       "url": "/09_inference_system/kv_cache/02_systems/02_tair_kvcache/01_tair-kvcache-architecture-design.html",
       "date": "2026-11-06",
@@ -2008,97 +2099,6 @@
     {
       "title": "大模型文件格式完整指南",
       "url": "/06_llm_theory_and_fundamentals/llm_basic_concepts/file_formats/llm_file_formats_complete_guide.html",
-      "date": "2026-11-05",
-      "status": "updated",
-      "module": "LLM 理论"
-    },
-    {
-      "title": "大模型的幻觉及其应对措施",
-      "url": "/06_llm_theory_and_fundamentals/llm_basic_concepts/hallucination/llm_hallucination_and_mitigation.html",
-      "date": "2026-11-05",
-      "status": "updated",
-      "module": "LLM 理论"
-    },
-    {
-      "title": "让用户\"说半句\"话也能懂：ChatBox 的意图识别与语义理解机制解析",
-      "url": "/06_llm_theory_and_fundamentals/llm_basic_concepts/intent_detection/chatbox_intent_recognition_and_semantic_understanding.html",
-      "date": "2026-11-05",
-      "status": "updated",
-      "module": "LLM 理论"
-    },
-    {
-      "title": "基于大型语言模型的意图检测",
-      "url": "/06_llm_theory_and_fundamentals/llm_basic_concepts/intent_detection/intent_detection_using_llm.zh-CN.html",
-      "date": "2026-11-05",
-      "status": "updated",
-      "module": "LLM 理论"
-    },
-    {
-      "title": "EdgeRock-4B 拆解：把 KV Cache 变成固定容量记忆",
-      "url": "/06_llm_theory_and_fundamentals/llm_basic_concepts/memory_native/edgerock-4b-constant-memory.html",
-      "date": "2026-11-05",
-      "status": "updated",
-      "module": "LLM 理论"
-    },
-    {
-      "title": "当记忆成为模型状态：MemT-1.0 的架构、训练与边界",
-      "url": "/06_llm_theory_and_fundamentals/llm_basic_concepts/memory_native/memt_1_0_memory_native.html",
-      "date": "2026-11-05",
-      "status": "updated",
-      "module": "LLM 理论"
-    },
-    {
-      "title": "混合专家系统（MoE）图解指南",
-      "url": "/06_llm_theory_and_fundamentals/llm_basic_concepts/moe/mixture_of_experts_moe_visual_guide.zh-CN.html",
-      "date": "2026-11-05",
-      "status": "updated",
-      "module": "LLM 理论"
-    },
-    {
-      "title": "量化技术可视化指南",
-      "url": "/06_llm_theory_and_fundamentals/llm_basic_concepts/quantization/visual_guide_to_quantization.html",
-      "date": "2026-11-05",
-      "status": "updated",
-      "module": "LLM 理论"
-    },
-    {
-      "title": "Scaling Laws——参数、数据、算力的三角博弈",
-      "url": "/06_llm_theory_and_fundamentals/llm_basic_concepts/scaling_laws/scaling_laws.html",
-      "date": "2026-11-05",
-      "status": "updated",
-      "module": "LLM 理论"
-    },
-    {
-      "title": "解密 LLM 中的 Tokens",
-      "url": "/06_llm_theory_and_fundamentals/llm_basic_concepts/token/llm_token_intro.html",
-      "date": "2026-11-05",
-      "status": "updated",
-      "module": "LLM 理论"
-    },
-    {
-      "title": "Transformer 架构详解——从自注意力到完整解码器",
-      "url": "/06_llm_theory_and_fundamentals/llm_basic_concepts/transformer/transformer_architecture.html",
-      "date": "2026-11-05",
-      "status": "updated",
-      "module": "LLM 理论"
-    },
-    {
-      "title": "AI 水印：道高一尺，魔高一丈",
-      "url": "/06_llm_theory_and_fundamentals/llm_basic_concepts/watermark/ai_watermark_attack_and_defense.html",
-      "date": "2026-11-05",
-      "status": "updated",
-      "module": "LLM 理论"
-    },
-    {
-      "title": "Coze 部署和配置手册",
-      "url": "/06_llm_theory_and_fundamentals/workflow/coze_deployment_and_configuration_guide.html",
-      "date": "2026-11-05",
-      "status": "updated",
-      "module": "LLM 理论"
-    },
-    {
-      "title": "使用 n8n 构建多智能体系统的实践指南",
-      "url": "/06_llm_theory_and_fundamentals/workflow/n8n_multi_agent_guide.html",
       "date": "2026-11-05",
       "status": "updated",
       "module": "LLM 理论"
