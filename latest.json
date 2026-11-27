@@ -1,8 +1,15 @@
 {
-  "generated_at": "2026-11-26T22:00:05Z",
+  "generated_at": "2026-11-27T22:00:07Z",
   "window_days": 30,
   "count": 300,
   "items": [
+    {
+      "title": "FreeCodeCamp CUDA 课 · 从 C/C++ 基础到亲手写神经网络",
+      "url": "/02_gpu_programming/02_cuda/references/cuda-course.html",
+      "date": "2026-11-27",
+      "status": "new",
+      "module": "GPU 编程"
+    },
     {
       "title": "AI 工厂的物理极限：CPO 光互连、CXL 解耦内存与冷存储",
       "url": "/01_hardware_architecture/ai_factory_limits/01_cpo_cxl_cold_storage.html",
@@ -2092,13 +2099,6 @@
     {
       "title": "LLM 评估体系——方法、基准与判断力",
       "url": "/06_llm_theory_and_fundamentals/llm_basic_concepts/evaluation/llm_evaluation.html",
-      "date": "2026-11-05",
-      "status": "updated",
-      "module": "LLM 理论"
-    },
-    {
-      "title": "大模型文件格式完整指南",
-      "url": "/06_llm_theory_and_fundamentals/llm_basic_concepts/file_formats/llm_file_formats_complete_guide.html",
       "date": "2026-11-05",
       "status": "updated",
       "module": "LLM 理论"

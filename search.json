@@ -328,6 +328,10 @@
     "url": "/02_gpu_programming/02_cuda/gpu-memory-visual.html"
   },
   {
+    "title": "FreeCodeCamp CUDA 课 · 从 C/C++ 基础到亲手写神经网络",
+    "url": "/02_gpu_programming/02_cuda/references/cuda-course.html"
+  },
+  {
     "title": "TileLang 与 Tile-Based 编程",
     "url": "/02_gpu_programming/03_tilelang/"
   },
@@ -1786,6 +1790,10 @@
   {
     "title": "把 14B 的 KV 交给 32B：跨模型复用的可能与代价",
     "url": "/09_inference_system/kv_cache/01_concepts/09_cross_model/01_cross_model_kv_transfer.html"
+  },
+  {
+    "title": "模型升级了，KV Cache 还能接着用吗：DeepSeek-V4-Flash 跨版本复用实测",
+    "url": "/09_inference_system/kv_cache/01_concepts/09_cross_model/02_cross_version_kv_reuse.html"
   },
   {
     "title": "L2 还有大半空着，TTFT 为什么先崩了？L1 KV Pool 才是系统并发的上限",
